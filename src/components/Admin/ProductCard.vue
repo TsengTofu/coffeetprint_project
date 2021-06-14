@@ -15,7 +15,7 @@
           <div class="left">
             <p>{{ status === 'post' ? '新增產品' : '編輯產品' }}</p>
             <span data-bs-dismiss="modal" aria-label="Close">
-              <md-icon class="round">clear</md-icon>
+              <span class="material-icons-round">clear</span>
             </span>
           </div>
           <span>
@@ -119,7 +119,7 @@
                   <label for="product_main_pic">主要圖片</label>
                 </li>
                 <li>
-                  <p><md-icon class="round">collections</md-icon>多圖新增</p>
+                  <p><span class="material-icons-round">collections</span>多圖新增</p>
                   <button class="add_new_pic_button" @click="addNewPic">新增圖片</button>
                 </li>
                 <template v-if="tempProduct.imagesUrl !== undefined
@@ -128,7 +128,10 @@
                     <img
                       v-if="tempProduct.imagesUrl[key]"
                       :src="tempProduct.imagesUrl[key]" alt="" width="150" height="150" />
-                    <img v-else src="/default_img.png" alt="" width="150" height="150" />
+                    <img v-else
+                      src="../../assets/images/default_img.png"
+                      alt="" width="150" height="150"
+                    />
                     <div class="edit_part">
                       <input
                         :id="`product_images_` + key"
@@ -138,7 +141,7 @@
                       />
                       <label :for="`product_images_` + key">圖片網址</label>
                       <button class="remove_pic_button" @click="removeCurrentPic(key)">
-                        <md-icon class="round">delete</md-icon>
+                        <span class="material-icons-round">delete</span>
                       </button>
                     </div>
                   </li>
@@ -187,7 +190,7 @@ export default {
           this.tempProduct.imagesUrl.push('');
         }
       } else {
-        this.$set(this.tempProduct, 'imagesUrl', []);
+        this.tempProduct.imagesUrl = [];
         this.tempProduct.imagesUrl.push('');
       }
       return false;
@@ -200,9 +203,9 @@ export default {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/product`;
       this.axios
         .post(requestUrl, { data: this.tempProduct }, {
-          headers: {
-            Authorization: `${this.token}`, // 這邊要補上 cookie 取出來的 token
-          },
+          // headers: {
+          //   Authorization: `${this.token}`, // 這邊要補上 cookie 取出來的 token
+          // },
         })
         .then((response) => {
           if (response.data.success) {
@@ -221,9 +224,9 @@ export default {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
       this.axios
         .put(requestUrl, { data: this.tempProduct }, {
-          headers: {
-            Authorization: `${this.token}`, // 這邊要補上 cookie 取出來的 token
-          },
+          // headers: {
+          //   Authorization: `${this.token}`, // 這邊要補上 cookie 取出來的 token
+          // },
         })
         .then((response) => {
           if (response.data.success) {
@@ -240,6 +243,9 @@ export default {
   },
   mounted() {
     this.modal = new Modal(this.$refs.modal);
+    // 從 cookie 取得 token
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)HexSchoolAPIToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    this.axios.defaults.headers.common.Authorization = token;
   },
 };
 </script>
@@ -313,6 +319,8 @@ export default {
               margin: 0 0 8px
               align-items: flex-start
               justify-content: space-between
+              p
+                display: flex
               &.single
                 flex-direction: column-reverse
                 .edit_part

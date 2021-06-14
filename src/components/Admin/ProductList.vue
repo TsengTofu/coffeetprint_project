@@ -3,7 +3,7 @@
     <div class="header">
       <div class="left">
         <p>產品清單</p>
-        <span><md-icon class="round">view_list</md-icon></span>
+        <span><span class="material-icons-round">view_list</span></span>
       </div>
       <div class="right">
           <!-- 新增產品 -->
@@ -12,12 +12,12 @@
           data-bs-target="#myModal"
           @click="setStatus('post', {})"
         >
-          <md-icon class="round" style="font-size: 16px">add</md-icon>新增產品
+          <span class="material-icons-round">add</span> 新增產品
         </button>
         <!-- 移除全部產品 -->
         <button class="clear_all_product_button"
         >
-          <md-icon class="round">clear</md-icon>清空
+          <span class="material-icons-round">clear</span>清空
         </button>
       </div>
     </div>
@@ -35,7 +35,7 @@
       <!-- 搜尋 -->
       <div class="search_part">
         <input type="text" placeholder="請輸入關鍵字">
-        <button><md-icon class="round">search</md-icon></button>
+        <button><span class="material-icons-round">search</span></button>
       </div>
     </div>
     <div class="table_wrapper">
@@ -74,7 +74,7 @@
                 data-bs-toggle="modal"
                 data-bs-target="#myModal"
               >
-                <md-icon class="round">edit</md-icon>
+                <span class="material-icons-round">edit</span>
               </button>
             </td>
             <td>
@@ -83,7 +83,7 @@
                 data-bs-target="#confirmModal"
                 @click="targetItem = item"
               >
-                <md-icon class="round">delete</md-icon>
+                <span class="material-icons-round">delete</span>
               </button>
             </td>
           </tr>
@@ -145,12 +145,13 @@ export default {
     },
     getData(queryPage = 1 /* 預設值 */) {
       //  TODO  待查：這邊寫小駝峰會報錯，為何？
+      console.log('getData');
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/products?page=${queryPage}`;
       this.axios
         .get(requestUrl, {
-          headers: {
-            Authorization: this.token, // 這邊要補上 cookie 取出來的 token
-          },
+          // headers: {
+          //   Authorization: this.token, // 這邊要補上 cookie 取出來的 token
+          // },
         })
         // .then((response)=>  // 這樣居然可以正常
         .then((response) => {
@@ -201,11 +202,11 @@ export default {
     },
   },
   mounted() {
-    console.log(this.token);
-    if (this.token) {
-      console.log('測試一下有沒有 token');
-      this.getData();
-    }
+    // console.log(this.token);
+    // if (this.token) {
+    console.log('測試一下有沒有 token');
+    this.getData();
+    // }
   },
 };
 </script>

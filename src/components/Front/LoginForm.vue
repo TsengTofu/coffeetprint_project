@@ -5,7 +5,7 @@
         <div class="content"></div>
         <div class="welcome_text">
           <p>WELCOME!</p>
-          <span>Please Login <md-icon class="round">double_arrow</md-icon></span>
+          <span>Please Login <span class="material-icons-round">double_arrow</span></span>
         </div>
       </div>
       <!-- Form 表單 -->
@@ -18,14 +18,14 @@
               type="email" placeholder="請輸入帳號"
               v-model="userEmailAccount" />
             <label for="email_account">
-              <md-icon class="round">account_circle</md-icon>帳號
+              <span class="material-icons-round">account_circle</span>帳號
               <p class="error_msg"></p>
             </label>
           </li>
           <li>
             <input id="password_value" type="password" v-model="userPassword" placeholder="請輸入密碼" />
             <label for="password_value">
-              <md-icon class="round">lock</md-icon> 密碼
+              <span class="material-icons-round">lock</span> 密碼
             </label>
           </li>
           <li class="remember_me">
@@ -47,6 +47,8 @@
 
 export default {
   name: 'LoginFormComponent',
+  components: {
+  },
   data() {
     return {
       userEmailAccount: '',

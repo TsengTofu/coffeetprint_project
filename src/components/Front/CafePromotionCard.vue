@@ -9,7 +9,7 @@
               <img src="../../assets/images/cafe_default/cafe_default.jpg" alt="" />
             </div>
             <div class="cafe_info">
-              <p class="cafe_title"><md-icon class="round">schedule</md-icon>不限時咖啡廳</p>
+              <p class="cafe_title"><span class="material-icons-round">schedule</span>不限時咖啡廳</p>
               <div class="tags">
                 <ul>
                   <li>#工作去處</li>
@@ -26,7 +26,7 @@
               <img src="../../assets/images/cafe_default/cafe_default_2.jpg" alt="" />
             </div>
             <div class="cafe_info">
-              <p class="cafe_title"><md-icon class="round">pets</md-icon>寵物咖啡廳</p>
+              <p class="cafe_title"><span class="material-icons-round">pets</span>寵物咖啡廳</p>
               <div class="tags">
                 <ul>
                   <li>#放鬆去處</li>
@@ -43,7 +43,7 @@
               <img src="../../assets/images/cafe_default/cafe_default_3.jpg" alt="" />
             </div>
             <div class="cafe_info">
-              <p class="cafe_title"><md-icon class="round">auto_awesome</md-icon>熱門咖啡廳</p>
+              <p class="cafe_title"><span class="material-icons-round">auto_awesome</span>熱門咖啡廳</p>
               <div class="tags">
                 <ul>
                   <li>#時下最夯</li>
@@ -62,15 +62,12 @@
 </template>
 
 <script>
-// 咖啡廳卡片的寫法，每一個產品
 
 export default {
   name: 'CafePromotionCardComponent', // 都要加上後綴
   // props: {
   //     msg: String,
   // },
-  components: {
-  },
   data() {
     return {};
   },
@@ -162,6 +159,8 @@ export default {
                         height: 180px
                         overflow: hidden
                         img
+                            width: 100%
+                            height: auto
                             transform: scale(1)
                             filter: saturate(.2)
                             transition: transform .5s
@@ -226,6 +225,7 @@ export default {
                                 width: 100%
                                 flex-wrap: wrap
                                 justify-content: flex-start
+                                padding: 0px
                                 li
                                     font-size: 12px
                                     letter-spacing: 1px

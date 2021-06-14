@@ -8,8 +8,11 @@
       <li><router-link to="/">關於我們</router-link></li>
       <li><router-link to="/">常見問題</router-link></li>
       <li><router-link to="/login">後台登入</router-link></li>
-      <!-- <li><router-link to="/cart">
-      <md-icon class="round">shopping_cart</md-icon></router-link></li> -->
+      <li>
+        <router-link to="/cart">
+          <span class="material-icons-round">shopping_cart</span>
+        </router-link>
+      </li>
     </ul>
    </div>
   </div>

@@ -17,18 +17,25 @@ const routes = [
         name: 'Entry',
         component: () => import('../views/Front/Entry.vue'),
       },
-      // 產品區塊
+      // 產品列表頁
       {
         path: 'products',
         name: 'Products',
         component: () => import('../views/Front/Products.vue'),
-        children: [
-          {
-            path: 'detail/:id',
-            name: 'ProductName',
-            component: () => import('../views/Front/ProductDetail.vue'),
-          },
-        ],
+        //  TODO  還是蠻好奇為什麼不能這樣寫 products/detail/id
+        // 如果想要上面的格式
+        // children: [
+        //   {
+        //     path: 'detail/:id',
+        //     name: 'ProductDetail',
+        //     component: () => import('../views/Front/ProductDetail.vue'),
+        //   },
+        // ],
+      },
+      {
+        path: 'detail/:id',
+        name: 'ProductDetail',
+        component: () => import('../views/Front/ProductDetail.vue'),
       },
     ],
   },
