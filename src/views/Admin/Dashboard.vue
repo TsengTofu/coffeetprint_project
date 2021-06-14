@@ -5,7 +5,7 @@
   <button @click="signOut" class="sign_out_button">
     <md-icon class="round">logout</md-icon>登出
   </button>
-  <router-view :token="hexSchoolAPIToken"></router-view>
+  <router-view></router-view>
 </template>
 
 <script>
@@ -15,21 +15,14 @@ export default {
   },
   data() {
     return {
-      hexSchoolAPIToken: '',
     };
   },
   methods: {
     verifyToken() {
       const cookieValue = document.cookie;
+      console.log('有執行到 verifyToken', cookieValue);
       if (cookieValue === '') {
         this.$router.push('/');
-      } else {
-        const cookie = cookieValue
-          .split('; ')
-          .find((row) => row.startsWith('HexSchoolAPIToken='))
-          .split('=');
-        const [, value] = cookie;
-        this.hexSchoolAPIToken = value;
       }
     },
     signOut() {
