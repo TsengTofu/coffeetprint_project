@@ -62,7 +62,7 @@
               <div class="switch">
                 <input
                   type="checkbox"
-                  :checked="item.is_enable ? 'checked' : ''"
+                  :checked="item.is_enable"
                   disabled
                 />
                 <span class="slider"></span>
