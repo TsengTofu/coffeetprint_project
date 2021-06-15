@@ -27,6 +27,8 @@
           <div class="container">
             <div class="content">
               <ul>
+                <!--  TODO  新增一塊是給折價券名字的，例如：xxx 雙人優惠券 -->
+                <!-- 這邊會是咖啡廳的名稱 -->
                 <li class="single">
                   <input
                     id="product_title"
@@ -55,6 +57,37 @@
                     />
                     <label for="product_unit">單位<span>*</span></label>
                   </div>
+                </li>
+                <!-- 新增的部分 -->
+                <li>
+                  <div class="half">
+                    <input
+                      id="product_area"
+                      type="text"
+                      placeholder="請輸入地區"
+                      v-model="tempProduct.area"
+                    />
+                    <label for="product_area">地區<span>*</span></label>
+                  </div>
+                  <!-- 電話、地址、價位、營業時間、社群、幾顆星、定位 -->
+                  <div class="half">
+                    <input
+                      id="product_phone"
+                      type="text"
+                      placeholder="請輸入電話"
+                      v-model="tempProduct.phone"
+                    />
+                    <label for="product_phone">電話<span>*</span></label>
+                  </div>
+                </li>
+                <li class="single">
+                  <input
+                    id="product_address"
+                    type="text"
+                    placeholder="請輸入地址"
+                    v-model="tempProduct.address"
+                  />
+                  <label for="product_address" class="text">地址<span>*</span></label>
                 </li>
                 <li>
                   <div class="half">

@@ -14,11 +14,6 @@
         >
           <span class="material-icons-round">add</span> 新增產品
         </button>
-        <!-- 移除全部產品 -->
-        <button class="clear_all_product_button"
-        >
-          <span class="material-icons-round">clear</span>清空
-        </button>
       </div>
     </div>
     <!-- 搜尋與篩選 -->
@@ -43,6 +38,7 @@
         <thead>
           <tr>
             <td width="150">分類</td>
+            <td width="100">地區</td>
             <td width="400">產品名稱</td>
             <td width="150">原價</td>
             <td width="150">售價</td>
@@ -55,6 +51,7 @@
           productData.length > 0">
           <tr v-for="(item, key) in productData" :key="key">
             <td>{{ item.category }}</td>
+            <td>{{ item.area }}</td>
             <td>{{ item.title }}</td>
             <td><span>NT$</span> {{ item.origin_price.toLocaleString() }}</td>
             <td><span>NT$</span> {{ item.price.toLocaleString() }}</td>
@@ -185,9 +182,9 @@ export default {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.targetId}`;
       this.axios
         .delete(requestUrl, {
-          headers: {
-            Authorization: `${this.token}`, // 這邊要補上 cookie 取出來的 token
-          },
+          // headers: {
+          //   Authorization: `${this.token}`, // 這邊要補上 cookie 取出來的 token
+          // },
         })
         .then((response) => {
           if (response.data.success) {
@@ -272,12 +269,6 @@ export default {
           color: #fff
         &:hover
           background: #a97f4a
-      .clear_all_product_button
-        border: 1px solid #4c443a
-        background: none
-        color: #4c443a
-        i
-          color: #4c443a
   .tool_wrapper
     display: flex
     align-items: center

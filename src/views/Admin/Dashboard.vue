@@ -18,12 +18,26 @@ export default {
     };
   },
   methods: {
+    //  TODO  驗證登入
     verifyToken() {
+      // console.log('verifyToken');
+      const requestUrl = `${process.env.VUE_APP_API}/api/user/check`;
+      this.axios
+        .post(requestUrl).then((res) => {
+          console.log(res);
+          if (res.data.success) {
+            console.log('驗證成功');
+          } else {
+            this.$router.push('/');
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
       const cookieValue = document.cookie;
       console.log('有執行到 verifyToken', cookieValue);
-      if (cookieValue === '') {
-        this.$router.push('/');
-      }
+      // if (cookieValue === '') {
+      //   this.$router.push('/');
+      // }
     },
     signOut() {
       const requestUrl = `${process.env.VUE_APP_API}/logout`;
