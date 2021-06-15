@@ -100,7 +100,7 @@
                   <div class="switch">
                     <input
                       type="checkbox"
-                      v-model="tempProduct.is_enable"
+                      v-model="tempProduct.is_enabled"
                     />
                     <span class="slider"></span>
                   </div>
