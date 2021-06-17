@@ -277,8 +277,9 @@ export default {
   mounted() {
     this.modal = new Modal(this.$refs.modal);
     // 從 cookie 取得 token
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)HexSchoolAPIToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-    this.axios.defaults.headers.common.Authorization = token;
+    // const token =
+    // document.cookie.replace(/(?:(?:^|.*;\s*)HexSchoolAPIToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    // this.axios.defaults.headers.common.Authorization = token;
   },
 };
 </script>

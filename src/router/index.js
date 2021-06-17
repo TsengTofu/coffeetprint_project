@@ -70,7 +70,8 @@ const routes = [
       {
         path: 'products',
         name: '', //  TODO  name 這個參數是做什麼用的？
-        // component: () => import(''),
+        component: () => import('../views/Admin/Products.vue'),
+        // 如果下面這個是空的，但有這個參數，原本的 component 會被取代掉
         components: {
           // 影片關鍵字：具名視圖
           // 這可以用來處理 Sidebar

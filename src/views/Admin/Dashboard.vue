@@ -5,7 +5,7 @@
   <button @click="signOut" class="sign_out_button">
     <span class="material-icons-round">logout</span>登出
   </button>
-  <router-view></router-view>
+  <router-view v-if="isCheckPass"></router-view>
 </template>
 
 <script>
@@ -15,6 +15,7 @@ export default {
   },
   data() {
     return {
+      isCheckPass: false,
     };
   },
   methods: {
@@ -22,22 +23,20 @@ export default {
     verifyToken() {
       // console.log('verifyToken');
       const requestUrl = `${process.env.VUE_APP_API}/api/user/check`;
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)HexSchoolAPIToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+      this.axios.defaults.headers.common.Authorization = token;
       this.axios
         .post(requestUrl).then((res) => {
           console.log(res);
           if (res.data.success) {
             console.log('驗證成功');
+            this.isCheckPass = true;
           } else {
             this.$router.push('/');
           }
         }).catch((error) => {
           console.log(error);
         });
-      const cookieValue = document.cookie;
-      console.log('有執行到 verifyToken', cookieValue);
-      // if (cookieValue === '') {
-      //   this.$router.push('/');
-      // }
     },
     signOut() {
       const requestUrl = `${process.env.VUE_APP_API}/logout`;
