@@ -32,10 +32,17 @@ const routes = [
         //   },
         // ],
       },
+      // 產品詳細頁
       {
         path: 'detail/:id',
         name: 'ProductDetail',
         component: () => import('../views/Front/ProductDetail.vue'),
+      },
+      // 購物車頁
+      {
+        path: 'cart',
+        name: '',
+        component: () => import('../views/Front/Cart.vue'),
       },
     ],
   },
