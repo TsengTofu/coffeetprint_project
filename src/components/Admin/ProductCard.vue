@@ -173,7 +173,8 @@
                         v-model="tempProduct.imagesUrl[key]"
                       />
                       <label :for="`product_images_` + key">圖片網址</label>
-                      <button class="remove_pic_button" type="button" @click="removeCurrentPic(key)">
+                      <button class="remove_pic_button"
+                        type="button" @click="removeCurrentPic(key)">
                         <span class="material-icons-round">delete</span>
                       </button>
                     </div>

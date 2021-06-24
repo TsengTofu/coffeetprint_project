@@ -35,7 +35,7 @@
               </label>
           </li>
         </ul>
-        <button class="login_btn" type="button">登入</button>
+        <button class="login_btn">登入</button>
         <p class="error_msg" v-html="errorMsg"></p>
       </form>
     </div>

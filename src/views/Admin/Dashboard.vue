@@ -44,6 +44,7 @@ export default {
         .post(requestUrl)
         .then((response) => {
           console.log(response, '已登出');
+          document.cookie = 'HexSchoolAPIToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
           this.$router.push('/login');
         })
         .catch((error) => {
