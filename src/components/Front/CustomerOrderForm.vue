@@ -34,7 +34,7 @@
           </select>
         </li> -->
       </ul>
-      <button class="send_user_order_info">送出預訂資料</button>
+      <button class="send_user_order_info" type="button">送出預訂資料</button>
     </v-form>
   </div>
 </template>

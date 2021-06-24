@@ -8,6 +8,7 @@
       <div class="right">
           <!-- 新增產品 -->
         <button class="add_new_product_button"
+          type="button"
           data-bs-toggle="modal"
           data-bs-target="#myModal"
           @click="setStatus('post', {})"
@@ -30,7 +31,7 @@
       <!-- 搜尋 -->
       <div class="search_part">
         <input type="text" placeholder="請輸入關鍵字">
-        <button><span class="material-icons-round">search</span></button>
+        <button type="button"><span class="material-icons-round">search</span></button>
       </div>
     </div>
     <div class="table_wrapper">
@@ -67,6 +68,7 @@
             </td>
             <td>
               <button class="icon_btn"
+                type="button"
                 @click="setStatus('put', item)"
                 data-bs-toggle="modal"
                 data-bs-target="#myModal"
@@ -76,6 +78,7 @@
             </td>
             <td>
               <button class="icon_btn"
+                type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#confirmModal"
                 @click="targetItem = item"

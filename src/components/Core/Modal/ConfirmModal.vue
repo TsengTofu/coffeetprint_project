@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">確定刪除此品項：{{ target_item.title }}嗎？</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>品項相關資訊</p>
@@ -27,8 +27,8 @@
       </div>
       <div class="modal-footer">
         <button
-          type="button"
           class="btn btn-secondary"
+          type="button"
           data-bs-dismiss="modal"
           @click="confirm(false)">取消</button>
         <button

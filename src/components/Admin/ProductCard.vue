@@ -153,7 +153,7 @@
                 </li>
                 <li>
                   <p><span class="material-icons-round">collections</span>多圖新增</p>
-                  <button class="add_new_pic_button" @click="addNewPic">新增圖片</button>
+                  <button class="add_new_pic_button" @click="addNewPic" type="button">新增圖片</button>
                 </li>
                 <template v-if="tempProduct.imagesUrl !== undefined
                   && tempProduct.imagesUrl.length > 0">
@@ -173,7 +173,7 @@
                         v-model="tempProduct.imagesUrl[key]"
                       />
                       <label :for="`product_images_` + key">圖片網址</label>
-                      <button class="remove_pic_button" @click="removeCurrentPic(key)">
+                      <button class="remove_pic_button" type="button" @click="removeCurrentPic(key)">
                         <span class="material-icons-round">delete</span>
                       </button>
                     </div>
@@ -184,9 +184,9 @@
           </div>
         </div>
         <div class="modal-footer button_block">
-          <button class="cancel" data-bs-dismiss="modal">取消</button>
-          <button v-if="status === 'post'" @click="addNewProduct">確認</button>
-          <button v-else @click="editProduct">確認</button>
+          <button class="cancel" data-bs-dismiss="modal" type="button">取消</button>
+          <button v-if="status === 'post'" @click="addNewProduct" type="button">確認</button>
+          <button v-else @click="editProduct" type="button">確認</button>
         </div>
       </div>
     </div>

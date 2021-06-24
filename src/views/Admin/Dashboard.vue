@@ -2,7 +2,7 @@
 <!-- 在驗證有沒有登入、登出，token 這塊都是在這裡做 -->
 <template>
   <div>我是後台的主要畫面</div>
-  <button @click="signOut" class="sign_out_button">
+  <button class="sign_out_button" @click="signOut" type="button">
     <span class="material-icons-round">logout</span>登出
   </button>
   <router-view v-if="isCheckPass"></router-view>
