@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li @click="goToCafeDetail(single_cafe.id)">
     <p>咖啡廳名稱：{{ single_cafe.title }}</p>
     <p>地區：{{ single_cafe.area }}</p>
     <p>分類：{{ single_cafe.category }}</p>
@@ -26,7 +26,10 @@ export default {
     };
   },
   methods: {
-
+    goToCafeDetail(id) {
+      console.log('有點到我喔');
+      this.$router.push(`/detail/${id}`);
+    },
   },
   mounted() {
     console.log(this.single_cafe);

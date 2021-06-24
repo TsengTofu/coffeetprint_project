@@ -5,8 +5,7 @@
     <div class="logo"></div>
     <ul>
       <li><router-link to="/products">產品列表</router-link></li>
-      <li><router-link to="/">關於我們</router-link></li>
-      <li><router-link to="/">常見問題</router-link></li>
+      <li><router-link to="/about">關於我們</router-link></li>
       <li><router-link to="/login">後台登入</router-link></li>
       <li>
         <router-link to="/cart">

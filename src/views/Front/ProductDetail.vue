@@ -14,7 +14,7 @@ export default {
   },
   methods: {},
   mounted() {
-    console.log(this.$route.params.id);
+    console.log(this.$route.params);
     this.product_id = this.$route.params.id;
   },
 };
