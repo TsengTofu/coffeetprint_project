@@ -5,6 +5,7 @@
 <style lang="sass">
 // 引入 bootstrap 樣式
 @import './assets/styles/all';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Noto+Sans:ital,wght@1,700&display=swap');
 // TODO  待辦事項
 // 1. 搬移檔案
 // 2. 確認 VueCli 安裝的套件無誤（material-icon & transition）
@@ -18,7 +19,6 @@
 // 10. 確認檔案架構的問題
 
 #app
-  font-family: Avenir, Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   text-align: center
