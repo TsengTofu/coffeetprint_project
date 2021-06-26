@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CustomerOrderFormComponent from '../../components/Front/CustomerOrderForm.vue';
+import CustomerOrderFormComponent from '../../components/Front/Cart/CustomerOrderForm.vue';
 
 export default {
   name: 'Cart',

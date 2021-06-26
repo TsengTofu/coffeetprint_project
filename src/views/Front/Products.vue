@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import CafeListComponent from '../../components/Front/CafeList.vue';
+import CafeListComponent from '../../components/Front/CafeProduct/CafeList.vue';
 
 export default {
   name: '',
