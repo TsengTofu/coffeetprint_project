@@ -1,7 +1,7 @@
 <template>
-  <div class="login_outer">
-    <div class="login_form_wrapper">
-      <div class="img_wrapper">
+  <div class="container d-flex flex-column align-items-center justify-content-center">
+    <div class="row login_form_wrapper">
+      <div class="col-md-6 img_wrapper">
         <div class="content"></div>
         <div class="welcome_text">
           <p>WELCOME!</p>
@@ -9,7 +9,7 @@
         </div>
       </div>
       <!-- Form 表單 -->
-      <form class="login_form" @submit="loginSystem">
+      <form class="col-md-6 login_form" @submit="loginSystem">
         <!-- @submit 同時可以兼顧 @keyup.enter + 按鈕點擊 -->
         <ul>
           <li>
@@ -98,9 +98,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
-.login_outer
-  width: 100%
+.container
   max-width: 800px
+  height: 100vh
   .copyright
     margin: 1rem
     color: #4c443a
@@ -108,6 +108,7 @@ export default {
     font-weight: 400
   .login_form_wrapper
     display: flex
+    width: 100%
     min-height: 400px
     background: #fafafa
     border-radius: 16px
@@ -116,10 +117,12 @@ export default {
     box-shadow: 2px 4px 10px rgba(#4c443a ,0.05)
     overflow: hidden
     .img_wrapper
-      width: 60%
+      // width: 60%
+      height: 400px
       display: block
       overflow: hidden
       position: relative
+      padding: 0px
       .welcome_text
         display: flex
         flex-direction: column
@@ -145,7 +148,7 @@ export default {
         display: block
         width: 100%
         height: 100%
-        background: url('../../assets/images/login_bg.jpg')
+        background: url('../../../assets/images/login_bg.jpg')
         background-size: cover
         transition: all .5s
         &::after
@@ -164,7 +167,7 @@ export default {
           &::after
             opacity: .5
     .login_form
-      width: 40%
+      // width: 40%
       padding: 2rem 2rem 0
       box-sizing: border-box
       ul

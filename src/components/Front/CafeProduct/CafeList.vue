@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import CafeCardComponent from './CafeCard.vue';
+import CafeCardComponent from '../CafeProduct/CafeCard.vue';
 
 export default {
   name: 'CafeListComponent',
