@@ -1,20 +1,41 @@
 <template>
-  <div class="header_wrapper">
-   <div class="content">
-      <!-- Logo 連結做成首頁 -->
-    <div class="logo"></div>
-    <ul>
-      <li><router-link to="/products">產品列表</router-link></li>
-      <li><router-link to="/about">關於我們</router-link></li>
-      <li><router-link to="/login">後台登入</router-link></li>
-      <li>
-        <router-link to="/cart">
-          <span class="material-icons-round">shopping_cart</span>
-        </router-link>
-      </li>
-    </ul>
-   </div>
-  </div>
+  <nav class="navbar navbar-expand-lg navbar-light header_wrapper" ref="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand logo" href="#"></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <router-link to="/products" class="nav-link active" aria-current="page"
+              >產品列表</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <!--  TODO  這邊跟寫 a 有什麼不一樣嗎？ -->
+            <router-link to="/about" class="nav-link">關於我們</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/favorite" class="nav-link">收藏清單</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/cart" class="nav-link">
+              <span class="material-icons-round">shopping_cart</span>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -27,19 +48,32 @@ export default {
     return {};
   },
   methods: {},
+  mounted() {},
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 .header_wrapper
+  background: #88664D
   color: #fff
   width: 100%
+  border-radius: 45px
   position: fixed
+  margin: 24px 0
   top: 0px
   z-index: 100
-  // background: rgb(0,0,0)
-  // background: linear-gradient(360deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%)
+.logo
+  width: 225px
+  height: 40px
+  display: block
+  background-position: center
+  background-image: url('../../../assets/images/logo_coffeetprint.svg')
+  background-size: contain
+  background-repeat: no-repeat
+.nav-item
+  font-weight: bold
+// 這邊以下沒有用到
   .content
     display: flex
     width: 100%
@@ -47,14 +81,6 @@ export default {
     margin: 0 auto
     align-items: center
     justify-content: space-between
-    .logo
-      width: 200px
-      height: 80px
-      display: block
-      background-position: center
-      background-image: url('../../../assets/images/logo_coffeetprint.svg')
-      background-size: contain
-      background-repeat: no-repeat
     ul
       display: flex
       li
