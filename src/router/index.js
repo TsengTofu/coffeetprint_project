@@ -89,32 +89,11 @@ const routes = [
       },
     ],
   },
-  // 動態路由
-  {
-    path: '/:id', // 到頁面之後會透過 this.$route.params 取得網址帶的參數
-    name: '',
-    // component: () => import(''),
-  },
-  // 動態路由 by props
-  {
-    path: '/:id',
-    name: '',
-    // component: () => import(''),
-    props: () => ({
-      id: '', // 這寫法是直接指定，也就是說，在元件裡面不需要透過 this.$route.params 拿參數
-    }),
-    // 另外一種寫法
-    // props: (route) => {
-    //   return {
-    //     id: route.params.id,
-    //   };
-    // },
-  },
   // 錯誤頁面的做法 -> 404 頁面
   {
     path: '/:pathMatch(.*)*',
     name: '',
-    // component: () => import(''),
+    component: () => import('../views/Core/NotFound.vue'),
   },
   // 重新導向
   {
@@ -123,6 +102,27 @@ const routes = [
       name: '', // 導回首頁的話就是 'Home'
     },
   },
+  // 動態路由
+  // {
+  //   path: '/:id', // 到頁面之後會透過 this.$route.params 取得網址帶的參數
+  //   name: '',
+  //   // component: () => import(''),
+  // },
+  // 動態路由 by props
+  // {
+  //   path: '/:id',
+  //   name: '',
+  //   // component: () => import(''),
+  //   props: () => ({
+  //     id: '', // 這寫法是直接指定，也就是說，在元件裡面不需要透過 this.$route.params 拿參數
+  //   }),
+  //   // 另外一種寫法
+  //   // props: (route) => {
+  //   //   return {
+  //   //     id: route.params.id,
+  //   //   };
+  //   // },
+  // },
 ];
 
 // 路由設定
