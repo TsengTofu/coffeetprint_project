@@ -1,7 +1,9 @@
 <template>
   <div class="layout">
     <HeaderComponent />
-    <router-view></router-view>
+    <div class="main_content">
+      <router-view></router-view>
+    </div>
     <FooterComponent />
   </div>
 </template>
@@ -16,7 +18,11 @@ export default {
   components: {
     HeaderComponent,
     FooterComponent,
-    // HelloWorld, bind components
   },
 };
 </script>
+
+<style lang="sass" scoped>
+.main_content
+  padding: 120px 0 0 0
+</style>

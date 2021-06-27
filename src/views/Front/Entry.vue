@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO  解決 Layout 造成的問題 -->
   <LandingPageComponent />
   <CafePromotionCarouselComponent />
   <ExploreCafeComponent />
