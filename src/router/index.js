@@ -44,16 +44,13 @@ const routes = [
         name: '',
         component: () => import('../views/Front/Cart.vue'),
       },
+      // 關於我們
+      {
+        path: '/about',
+        name: 'About',
+        component: () => import('../views/Front/About.vue'),
+      },
     ],
-  },
-  // 關於我們
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('../views/Front/About.vue'),
   },
   // 登入頁，不顯示在前台也沒關係
   {
