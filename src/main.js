@@ -11,6 +11,7 @@ import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 // boostrap -  TODO  確認是否還需要引入？
+import 'bootstrap'; // 參考 Yiren 的說法
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.vue';
 import router from './router';
