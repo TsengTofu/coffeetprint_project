@@ -28,19 +28,35 @@
             <router-link to="/favorite" class="nav-link">收藏清單</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/cart" class="nav-link">
+            <!--  TODO  這需要再重新修正 -->
+            <!-- 這是一種連結的方式 -->
+            <!-- <router-link to="/cart" class="nav-link">
               <span class="material-icons-round">shopping_cart</span>
-            </router-link>
+            </router-link> -->
+
+            <button class="btn btn-primary"
+    type="button" data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasRight"
+    aria-controls="offcanvasRight">
+      <span class="material-icons-round">shopping_cart</span>
+    </button>
+
           </li>
         </ul>
       </div>
     </div>
   </nav>
+  <ToggleCartComponent />
 </template>
 
 <script>
+import ToggleCartComponent from '../Modal/ToggleCart.vue';
+
 export default {
   name: 'HeaderComponent',
+  components: {
+    ToggleCartComponent,
+  },
   // props: {
   //     msg: String,
   // },
