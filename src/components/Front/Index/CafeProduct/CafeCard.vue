@@ -35,7 +35,9 @@
           </p>
         </div>
       </div>
-      <a href="#" class="btn btn-primary d-flex justify-content-center add_to_cart">
+      <a href="#"
+        class="btn btn-primary d-flex justify-content-center add_to_cart"
+        @click="addToCart(single_cafe.id)">
           <span class="material-icons-round">shopping_cart</span>加入購物車
         </a>
     </div>
@@ -55,7 +57,33 @@ export default {
   methods: {
     goToCafeDetail(id) {
       console.log('有點到我喔');
+      // 頁面倒轉
       this.$router.push(`/detail/${id}`);
+    },
+    //  TODO  加到購物車的功能，這段之後要回來檢查
+    addToCart(id) {
+      // 要加入的產品資料
+      // { product_id, qty}
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
+      this.axios
+        .post(requestUrl, {
+          data: {
+            product_id: id, qty: 1,
+          },
+        })
+        // .then((response)=>  // 這樣居然可以正常
+        .then((response) => {
+          // 觀察一下為什麼這呼喚不到另一個函式
+          // response.data.products -> array
+          if (response.data.success) {
+            console.log('測試', response.data);
+          } else {
+            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+          }
+        })
+        .catch((error) => {
+          console.log(error, 'getDataError');
+        });
     },
   },
   mounted() {},
