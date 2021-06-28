@@ -1,13 +1,22 @@
 <template>
-  <li>
+  <li @click="goToCafeDetail(single_cafe.id)">
     <div class="card">
-      <img src="../../../../assets/images/cafe_list/PIEPAI.jpeg" class="card-img-top" alt="..." />
+      <div class="cafe_image">
+        <img :src="single_cafe.imageUrl" class="card-img-top" alt="咖啡廳圖片" />
+        <button class="btn-primary" type="button">
+          <span class="material-icons-round">favorite_border</span>
+        </button>
+      </div>
       <div class="card-body">
-        <span class="material-icons-round">favorite_border</span>
-        <h5 class="card-title">日暖咖啡雙人套餐</h5>
+        <h5 class="card-title">
+          <p class="category">
+            {{ single_cafe.category }}
+          </p>
+          {{ single_cafe.title }}
+        </h5>
         <!-- 星星跟地點 -->
         <div class="location_stars">
-          <p><span class="material-icons-round">place</span>台北｜台灣</p>
+          <p><span class="material-icons-round">place</span>{{ single_cafe.area }}｜台灣</p>
           <span class="material-icons-round">star</span>
           <span class="material-icons-round">star_border</span>
         </div>
@@ -18,11 +27,11 @@
         <div class="d-flex justify-content-between bottom_block">
           <!-- 剩下幾張 -->
           <p class="rest_num">
-            剩下 <span>10</span> 張
+            剩下 <span>{{ single_cafe.num }}</span> 張
           </p>
           <!-- 價格 -->
           <p class="price">
-            NT$<span>1580</span>
+            NT$<span>{{ single_cafe.price }}</span>
           </p>
         </div>
       </div>
@@ -35,11 +44,20 @@
 <script>
 export default {
   name: 'CafeCardComponent',
-  props: {},
-  data() {
-    return {};
+  props: {
+    singleCafe: Object,
   },
-  methods: {},
+  data() {
+    return {
+      single_cafe: this.singleCafe,
+    };
+  },
+  methods: {
+    goToCafeDetail(id) {
+      console.log('有點到我喔');
+      this.$router.push(`/detail/${id}`);
+    },
+  },
   mounted() {},
 };
 </script>

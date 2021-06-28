@@ -6,9 +6,13 @@
     <p>一起看看哪些咖啡廳有提供優惠券吧！</p>
     <!-- 產品列表清單 -->
     <div class="list_wrap">
+      <span class="material-icons-round">view_list</span>
+      <span class="material-icons-round">grid_view</span>
       <ul class="list-unstyled d-flex flex-wrap">
         <!-- 放卡片元件 -->
-        <CafeCardComponent v-for="index in 7" :key="index" />
+        <template v-for="(cafe, key) in productData" :key="'cafe_'+ key">
+          <CafeCardComponent :singleCafe="cafe" :order="key" />
+        </template>
       </ul>
     </div>
   </div>
@@ -23,10 +27,37 @@ export default {
     CafeCardComponent,
   },
   data() {
-    return {};
+    return {
+      // 拿資料
+      productData: [],
+      pagination: {},
+    };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    // 拿咖啡廳的資料
+    getCafeListData(/* queryPage */) {
+      // ${queryPage}
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products?page=1`;
+      this.axios
+        .get(requestUrl)
+        .then((response) => {
+          console.log(response.data, 'response.data');
+          if (response.data.success) {
+            const { products, pagination } = response.data;
+            this.productData = products;
+            this.pagination = pagination;
+          } else {
+            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+          }
+        })
+        .catch((error) => {
+          console.log(error, 'getDataError');
+        });
+    },
+  },
+  mounted() {
+    this.getCafeListData();
+  },
 };
 </script>
 
