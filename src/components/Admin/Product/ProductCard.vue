@@ -162,7 +162,7 @@
                       v-if="tempProduct.imagesUrl[key]"
                       :src="tempProduct.imagesUrl[key]" alt="" width="150" height="150" />
                     <img v-else
-                      src="../../assets/images/default_img.png"
+                      src="../../../assets/images/default_img.png"
                       alt="" width="150" height="150"
                     />
                     <div class="edit_part">

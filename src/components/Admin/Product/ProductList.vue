@@ -112,8 +112,8 @@
 </template>
 <script>
 import ProductCardComponent from './ProductCard.vue';
-import ConfirmModalComponent from '../Core/Modal/ConfirmModal.vue';
-import PaginationComponent from '../Core/Modal/Pagination.vue';
+import ConfirmModalComponent from '../../Core/Modal/ConfirmModal.vue';
+import PaginationComponent from '../../Core/Modal/Pagination.vue';
 
 export default {
   name: 'ProductListComponent', // 都要加上後綴
