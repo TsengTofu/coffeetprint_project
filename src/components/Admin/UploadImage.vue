@@ -3,11 +3,10 @@
     <p>上傳圖片區塊</p>
     <form enctype="multipart/form-data" method="post">
       <input type="file" name="file-to-upload" @change="uploadImage" />
-      <input type="submit" value="Upload" />
     </form>
     <p>網址位置</p>
-    <p>{{ url }}</p>
-    <!--  TODO  這邊需要再加上一段 Copy 的功能 -->
+    <input type="text" v-model="url" ref="imageUrl">
+    <button type="button" @click="copyImageUrl">點我複製得到網址</button>
   </div>
 </template>
 
@@ -32,8 +31,9 @@ export default {
         .then((response) => {
           console.log(response.data, 'response.data');
           if (response.data.success) {
-            console.log('成功上傳', response.data.imagesUrl);
-            this.url = response.data.imagesUrl;
+            console.log('成功上傳', response.data);
+            this.url = response.data.imageUrl;
+            console.log(this.url, '產生的網址');
           } else {
             console.log('出了點錯誤，請稍後再嘗試，謝謝。');
           }
@@ -41,6 +41,11 @@ export default {
         .catch((error) => {
           console.log(error, 'getDataError');
         });
+    },
+    copyImageUrl() {
+      this.$refs.imageUrl.select();
+      this.$refs.imageUrl.setSelectionRange(0, 99999);
+      document.execCommand('copy');
     },
   },
   mounted() {},
