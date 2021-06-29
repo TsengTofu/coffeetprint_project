@@ -17,8 +17,12 @@
         <!-- 星星跟地點 -->
         <div class="location_stars">
           <p><span class="material-icons-round">place</span>{{ single_cafe.area }}｜台灣</p>
-          <span class="material-icons-round">star</span>
-          <span class="material-icons-round">star_border</span>
+          <p class="d-flex">
+            <span v-for="(n, index) in parseInt(single_cafe.star_rate)"
+              :key="'star_' + index" class="material-icons-round">star</span>
+              <span v-for="(n, index) in (5 - parseInt(single_cafe.star_rate))"
+              :key="'star_' + index" class="material-icons-round">star_border</span>
+          </p>
         </div>
         <p class="card-text">
           主打企鵝飯糰的日式早午餐店，票券內容包含：雙份企鵝飯糰早午餐，套餐包含飲料與蛋糕⋯
