@@ -1,21 +1,47 @@
 <template>
-  <p>我是產品詳細頁面</p>
-  <span>目前的產品是 id {{ product_id }}</span>
+  <CafeInfoComponent :detail_data="productDetail" />
 </template>
 <script>
+import CafeInfoComponent from '../../components/Front/CafeDetail/CafeInfo.vue';
+
 export default {
   name: '',
   props: [],
+  components: {
+    CafeInfoComponent,
+  },
   data() {
     return {
       // 測試用抓產品頁的 id
       product_id: '',
+      productDetail: {},
     };
   },
-  methods: {},
+  methods: {
+    // 取得現在的產品詳細內容
+    getCurrentCafeData() {
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/product/${this.product_id}`;
+      this.axios
+        .get(requestUrl)
+        .then((response) => {
+          console.log(response.data.product, 'response.data, 回傳的單筆資料');
+          if (response.data.success) {
+            console.log('成功', response.data);
+            this.productDetail = response.data.product;
+          } else {
+            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+          }
+        })
+        .catch((error) => {
+          console.log(error, 'getDataError');
+        });
+    },
+  },
   mounted() {
+    // 這邊的資料是從路由 router 來的
     console.log(this.$route.params);
     this.product_id = this.$route.params.id;
+    this.getCurrentCafeData();
   },
 };
 </script>
