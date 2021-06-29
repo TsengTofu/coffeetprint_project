@@ -58,7 +58,30 @@
                     <label for="product_unit">單位<span>*</span></label>
                   </div>
                 </li>
-                <!-- 新增的部分 -->
+                <!--  NOTE  新增的區域 -->
+                <li>
+                  <div class="half">
+                    <input
+                      id="product_rate"
+                      type="number"
+                      min="1"
+                      placeholder="請輸入星級評等"
+                      v-model="tempProduct.star_rate"
+                    />
+                    <label for="product_rate">星級評等<span>*</span></label>
+                  </div>
+                  <!-- 價位、營業時間、定位 -->
+                  <div class="half">
+                    <input
+                      id="product_website"
+                      type="text"
+                      placeholder="請輸入官方網站網址"
+                      v-model="tempProduct.website"
+                    />
+                    <label for="product_website">官方網站<span>*</span></label>
+                  </div>
+                </li>
+                <!-- 新增結束 -->
                 <li>
                   <div class="half">
                     <input
@@ -118,7 +141,7 @@
                     placeholder="請輸入說明內容"
                     v-model="tempProduct.description"
                   ></textarea>
-                  <label for="product_description">產品描述</label>
+                  <label for="product_description">咖啡廳描述</label>
                 </li>
                 <li class="single">
                   <textarea
@@ -127,7 +150,7 @@
                     placeholder="請輸入說明內容"
                     v-model="tempProduct.content"
                   ></textarea>
-                  <label for="product_content">說明內容</label>
+                  <label for="product_content">折價券內容</label>
                 </li>
                 <li class="checkbox">
                   <div class="switch">
