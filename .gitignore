@@ -4,7 +4,7 @@
 
 
 # local env files
-.env
+# .env
 .env.production
 .env.local
 .env.*.local
