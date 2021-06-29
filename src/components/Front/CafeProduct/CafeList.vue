@@ -1,5 +1,6 @@
 <template>
   <!-- 單純給產品列表使用 -->
+  <!--  TODO  基本上這也可以換掉囉！ -->
   <div class="cafe_list_wrapper">
     <ul>
       <!--  TODO  思考一下要不要把 productData 換掉 -->
@@ -11,7 +12,7 @@
 </template>
 
 <script>
-import CafeCardComponent from '../CafeProduct/CafeCard.vue';
+import CafeCardComponent from './CafeCard.vue';
 
 export default {
   name: 'CafeListComponent',
