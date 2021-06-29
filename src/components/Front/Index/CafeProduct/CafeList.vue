@@ -11,7 +11,10 @@
       <ul class="list-unstyled d-flex flex-wrap">
         <!-- 放卡片元件 -->
         <template v-for="(cafe, key) in productData" :key="'cafe_'+ key">
-          <CafeCardComponent :singleCafe="cafe" :order="key" />
+          <CafeCardComponent
+            v-if="key <= 7"
+            :singleCafe="cafe"
+            :order="key" />
         </template>
       </ul>
     </div>
