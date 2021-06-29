@@ -45,6 +45,11 @@ export default {
         console.log('抓到錯誤囉！', error);
       });
     },
+    //  FIXME  更新購物車
+    // [API]: /api/:api_path/cart/:id
+    // [方法]: put
+    // [說明]: product_id(String)、qty(Number) 為必填欄位
+    // [參數]: { "data": { "product_id":"-L9tH8jxVb2Ka_DYPwng","qty":1 } }
   },
   mounted() {
   },
