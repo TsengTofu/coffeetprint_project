@@ -3,4 +3,8 @@ module.exports = {
   publicPath: './',
   // 影音教學檔案是這樣設定：/dist/
   // publicPath: process.env.NODE_ENV === 'production' ? '/coffeetprint_project/dist/' : '/',
+  //  TODO  暫時用來處理 reload 問題
+  devServer: {
+    host: 'localhost',
+  },
 };

@@ -11,7 +11,7 @@
     <!-- <p>{{ single_cafe.description }}</p> -->
     <!-- <p>{{ single_cafe.origin_price }}</p> -->
     <!-- <p>{{ single_cafe.price }}</p> -->
-  </li>
+  <!-- </li> -->
 </template>
 
 <script>
