@@ -10,8 +10,24 @@
     </td>
     <td ><p v-html="cart_item.product.description"></p></td>
     <td>{{ cart_item.product.price }}</td>
-    <td>{{ cart_item.qty }}</td>
-    <td>{{ cart_item.qty * cart_item.product.price }}</td>
+    <!--  NOTE  數量 -->
+    <td>
+      <button
+        type="button"
+        @click="modifyNum('minus', cart_item.id)"
+        >
+        <span class="material-icons-round">remove</span>
+      </button>
+      <!--  TODO  props 不能改 -->
+      <p>{{ item_qty }}</p>
+      <button
+        type="button"
+        @click="modifyNum('add', cart_item.id)"
+        >
+        <span class="material-icons-round">add</span>
+      </button>
+    </td>
+    <td>{{ item_qty * cart_item.product.price }}</td>
     <!--  TODO  刪除的功能是做在這裡 -->
     <td>
       <button type="button" @click="deleteCurrentCartItem(cart_item.id)">
@@ -30,10 +46,12 @@ export default {
   },
   components: {},
   data() {
-    return {};
+    return {
+      item_qty: '',
+    };
   },
   methods: {
-    // 刪除購物車其中一個元件
+    // 刪除購物車其中一個
     deleteCurrentCartItem(cartItemId) {
       console.log('有刪除到我的意思');
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${cartItemId}`;
@@ -45,13 +63,46 @@ export default {
         console.log('抓到錯誤囉！', error);
       });
     },
-    //  FIXME  更新購物車
-    // [API]: /api/:api_path/cart/:id
-    // [方法]: put
-    // [說明]: product_id(String)、qty(Number) 為必填欄位
-    // [參數]: { "data": { "product_id":"-L9tH8jxVb2Ka_DYPwng","qty":1 } }
+    modifyNum(operation, cartItemId) {
+      // operation
+      console.log(operation);
+      if (operation === 'add') {
+        this.item_qty += 1;
+      } else {
+        this.item_qty -= 1;
+        if (this.item_qty === 0) {
+          //  TODO  先跳出 confirm 的視窗，然後再刪除，退出的話就不處理
+          this.deleteCurrentCartItem(cartItemId);
+        }
+      }
+      this.updateCartItemNum(cartItemId);
+      //  NOTE  接著才處理 put api
+    },
+    updateCartItemNum(cartItemId) {
+      console.log('更新購物車');
+      // [說明]: product_id(String)、qty(Number) 為必填欄位
+      // [參數]: { "data": { "product_id":"-L9tH8jxVb2Ka_DYPwng","qty":1 } }
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${cartItemId}`;
+      const data = { product_id: cartItemId, qty: this.item_qty };
+      this.axios
+        .put(requestUrl, { data })
+        .then((response) => {
+          if (response.data.success) {
+            console.log('更新成功', response.data.data);
+            //  TODO  單就購物車的列表，不包含總金額 total, final_total
+            this.cart_list = response.data.data.carts;
+          } else {
+            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+          }
+        })
+        .catch((error) => {
+          console.log(error, 'getDataError');
+        });
+    },
   },
   mounted() {
+    // 先把初始值帶到畫面上
+    this.item_qty = this.cart_item.qty;
   },
 };
 </script>
