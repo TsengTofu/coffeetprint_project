@@ -7,6 +7,7 @@
       <OrderSummaryComponent />
     </div>
     <button type="button"
+      :disabled="isEmpty === true"
       @click="directToFormPage"
     >填寫訂購資料</button>
   </div>
@@ -34,10 +35,9 @@ export default {
   methods: {
     directToFormPage() {
       console.log('有喔');
-      this.isEmpty = true;
-      if (!this.isEmpty) {
-        this.$router.push('/cart/form');
-      }
+      // if (!this.isEmpty) {
+      this.$router.push('/cart/form');
+      // }
     },
   },
   mounted() {},
