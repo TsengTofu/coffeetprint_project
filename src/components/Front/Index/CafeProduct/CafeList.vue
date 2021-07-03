@@ -6,8 +6,11 @@
     <p>一起看看哪些咖啡廳有提供優惠券吧！</p>
     <!-- 產品列表清單 -->
     <div class="list_wrap">
-      <span class="material-icons-round">view_list</span>
-      <span class="material-icons-round">grid_view</span>
+      <!-- 改變顯示方式 -->
+      <div class="change_layout">
+        <button type="button"><span class="material-icons-round">view_list</span></button>
+        <button type="button"><span class="material-icons-round">grid_view</span></button>
+      </div>
       <ul class="list-unstyled d-flex flex-wrap">
         <!-- 放卡片元件 -->
         <template v-for="(cafe, key) in productData" :key="'cafe_'+ key">

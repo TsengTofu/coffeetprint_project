@@ -24,9 +24,7 @@
               :key="'star_' + index" class="material-icons-round">star_border</span>
           </p>
         </div>
-        <p class="card-text">
-          主打企鵝飯糰的日式早午餐店，票券內容包含：雙份企鵝飯糰早午餐，套餐包含飲料與蛋糕⋯
-        </p>
+        <p class="card-text" v-html="single_cafe.description"></p>
         <!-- 剩下幾張與價格 -->
         <div class="d-flex justify-content-between bottom_block">
           <!-- 剩下幾張 -->

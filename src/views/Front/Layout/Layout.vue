@@ -24,5 +24,5 @@ export default {
 
 <style lang="sass" scoped>
 .main_content
-  padding: 120px 0 0 0
+  // padding: 120px 0 0 0
 </style>

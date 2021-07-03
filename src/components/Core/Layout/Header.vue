@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link to="/products" class="nav-link active" aria-current="page"
+            <router-link to="/products" class="nav-link" aria-current="page"
               >產品列表</router-link
             >
           </li>
@@ -74,9 +74,9 @@ export default {
   background: #88664D
   color: #fff
   width: 100%
-  border-radius: 45px
+  // border-radius: 45px
   position: fixed
-  margin: 24px 0
+  // margin: 24px 0
   top: 0px
   z-index: 100
 .logo

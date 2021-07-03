@@ -16,7 +16,6 @@
         />
         <error-message name="姓名" class="invalid-feedback"></error-message>
       </div>
-      <!-- Email -->
       <div class="mb-3">
         <label for="email" class="form-label">信箱</label>
         <Field
@@ -31,7 +30,6 @@
         />
         <error-message name="信箱" class="invalid-feedback"></error-message>
       </div>
-      <!-- 電話 -->
       <div class="mb-3">
         <label for="tel" class="form-label">手機號碼</label>
         <Field
@@ -46,7 +44,6 @@
         />
         <error-message name="手機號碼" class="invalid-feedback"></error-message>
       </div>
-      <!-- 地址 -->
       <div class="mb-3">
         <label for="address" class="form-label">地址</label>
         <Field
@@ -61,7 +58,6 @@
         />
         <error-message name="地址" class="invalid-feedback"></error-message>
       </div>
-      <!-- 留言 -->
       <div class="mb-3">
         <label for="message">留言</label>
         <textarea
@@ -109,17 +105,19 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('onSubmit', this.form.user);
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order`;
       const data = this.form;
       console.log(data);
       this.axios
         .post(requestUrl, { data })
         .then((response) => {
-          console.log(response.data);
-          //  FIXME  看起來這個 getData 是沒有被綁定到
-          this.$emit('getData');
-          //  TODO  成功拿到資料之後，應該要可以把購物車清掉
+          if (response.data.success) {
+            const { orderId } = response.data;
+            console.log(`/order/${orderId}`);
+            //  TODO  成功拿到資料之後，應該要可以把購物車清掉
+            // this.$router.push({ path: 'order', params: { data: response.data } });
+            this.$router.push(`/order/${orderId}`);
+          }
         })
         .catch((error) => {
           console.log(error);

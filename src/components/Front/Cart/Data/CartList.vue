@@ -72,6 +72,10 @@ export default {
             console.log('成功抓到購物車列表的資料', response.data.data);
             //  TODO  單就購物車的列表，不包含總金額 total, final_total
             this.cart_list = response.data.data.carts;
+            if (this.cart_list.length === 0) {
+              console.log('xxx');
+              this.$emit('disabledNextStep');
+            }
           } else {
             console.log('出了點錯誤，請稍後再嘗試，謝謝。');
           }

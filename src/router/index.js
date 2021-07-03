@@ -42,13 +42,38 @@ const routes = [
       {
         path: 'cart',
         name: '',
-        component: () => import('../views/Front/Cart.vue'),
+        component: () => import('../views/Front/Cart/Cart.vue'),
+      },
+      // 填寫購物的人的資料
+      {
+        //  FIXME  其實這邊我是希望 cart/form
+        path: 'cart/form',
+        name: '',
+        component: () => import('../views/Front/Cart/OrderForm.vue'),
+      },
+      // 回傳的訂單資料，連結點了之後會往下付款
+      {
+        path: 'order/:id',
+        name: 'Order',
+        component: () => import('../views/Front/Cart/OrderPayment.vue'),
+      },
+      // 訂單完成
+      {
+        path: 'order/complete',
+        name: '',
+        component: () => import('../views/Front/Cart/OrderComplete.vue'),
       },
       // 關於我們
       {
         path: '/about',
         name: 'About',
         component: () => import('../views/Front/About.vue'),
+      },
+      // 收藏列表頁
+      {
+        path: '/favorite',
+        name: 'Favorite',
+        // component: () => import(),
       },
     ],
   },
