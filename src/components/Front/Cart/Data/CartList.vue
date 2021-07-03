@@ -30,7 +30,8 @@
             <CartItemComponent
               :cart_item="item"
               :order="parseInt(key) + 1"
-              @get-data="getCartList" />
+              @get-data="getCartList"
+            />
           </tr>
         </template>
         <!-- 如果 = 0 的情況 -->
@@ -41,6 +42,7 @@
     </table>
     <!-- FIXME  目前購物車裡面有多少個東西 -->
     <p>購物車目前有 <span>{{ cart_list.length }}</span> 個產品</p>
+    <!--  TODO  預備結帳 -->
   </div>
 </template>
 

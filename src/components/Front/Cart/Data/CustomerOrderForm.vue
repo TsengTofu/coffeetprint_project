@@ -1,51 +1,130 @@
 <template>
-   <div class="user_order_info_wrapper">
+  <div class="user_order_info_wrapper">
     <h4>填寫預訂資料</h4>
-    <v-form @submit="onSubmit" class="container">
-      <ul>
-        <li class="name">
-          <v-field name="email" type="email" :rules="validateEmail" />
-          <label for="name">姓名</label>
-          <input type="text" id="name" placeholder="請輸入姓名" />
-          <span class="alert_msg"></span>
-        </li>
-        <li class="tel">
-          <label for="tel">電話</label>
-          <input type="text" id="tel" placeholder="請輸入電話" />
-          <span class="alert_msg"></span>
-        </li>
-        <li class="email">
-          <label for="email">Email</label>
-          <input type="text" id="email" placeholder="請輸入Email" />
-          <span class="alert_msg"></span>
-        </li>
-        <li class="address">
-          <label for="address">寄送地址</label>
-          <input type="text" id="address" placeholder="請輸入寄送地址" />
-          <span class="alert_msg"></span>
-        </li>
-        <!--  TODO  這個先不要 -->
-        <!-- <li>
-          <label for="payment">交易方式</label>
-          <select name="payment" id="payment">
-            <option value="atm">ATM</option>
-            <option value="credit_card">信用卡</option>
-            <option value="convenience_store">超商付款</option>
-          </select>
-        </li> -->
-      </ul>
-      <button class="send_user_order_info" type="button">送出預訂資料</button>
-    </v-form>
+    <Form v-slot="{ errors }" @submit="onSubmit">
+      <div class="mb-3">
+        <label for="name" class="form-label">姓名</label>
+        <Field
+          id="name"
+          name="姓名"
+          type="name"
+          class="form-control"
+          :class="{ 'is-invalid': errors['姓名'] }"
+          placeholder="請輸入姓名"
+          rules="required"
+          v-model="form.user.name"
+        />
+        <error-message name="姓名" class="invalid-feedback"></error-message>
+      </div>
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">信箱</label>
+        <Field
+          id="email"
+          name="信箱"
+          type="email"
+          class="form-control"
+          :class="{ 'is-invalid': errors['信箱'] }"
+          placeholder="請輸入信箱"
+          rules="email|required"
+          v-model="form.user.email"
+        />
+        <error-message name="信箱" class="invalid-feedback"></error-message>
+      </div>
+      <!-- 電話 -->
+      <div class="mb-3">
+        <label for="tel" class="form-label">手機號碼</label>
+        <Field
+          id="tel"
+          name="手機號碼"
+          type="tel"
+          class="form-control"
+          :class="{ 'is-invalid': errors['手機號碼'] }"
+          placeholder="請輸入手機號碼"
+          :rules="{ regex: /^(09)[0-9]{8}$/ }"
+          v-model="form.user.tel"
+        />
+        <error-message name="手機號碼" class="invalid-feedback"></error-message>
+      </div>
+      <!-- 地址 -->
+      <div class="mb-3">
+        <label for="address" class="form-label">地址</label>
+        <Field
+          id="address"
+          name="地址"
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': errors['地址'] }"
+          placeholder="請輸入地址"
+          rules="required"
+          v-model="form.user.address"
+        />
+        <error-message name="地址" class="invalid-feedback"></error-message>
+      </div>
+      <!-- 留言 -->
+      <div class="mb-3">
+        <label for="message">留言</label>
+        <textarea
+          id="product_description"
+          type="text"
+          class="form-control"
+          rows="3"
+          placeholder="請輸入說明內容"
+          v-model="form.message"
+        ></textarea>
+      </div>
+      <button
+        class="btn me-2 btn-outline-primary"
+        :disabled="Object.keys(errors).length !== 0"
+        type="submit">
+        送出預定資料</button>
+    </Form>
+    <!-- <label for="payment">交易方式</label>
+    <select name="payment" id="payment">
+      <option value="atm">ATM</option>
+      <option value="credit_card">信用卡</option>
+      <option value="convenience_store">超商付款</option>
+    </select> -->
   </div>
 </template>
 
 <script>
 export default {
   name: 'CustomerOrderFormComponent',
+  // emits: [''],
+  props: {},
+  components: {},
   data() {
     return {
-      //
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: '',
+        },
+        message: '',
+      },
     };
+  },
+  methods: {
+    onSubmit() {
+      console.log('onSubmit', this.form.user);
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order`;
+      const data = this.form;
+      console.log(data);
+      this.axios
+        .post(requestUrl, { data })
+        .then((response) => {
+          console.log(response.data);
+          //  FIXME  看起來這個 getData 是沒有被綁定到
+          this.$emit('getData');
+          //  TODO  成功拿到資料之後，應該要可以把購物車清掉
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

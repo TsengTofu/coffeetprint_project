@@ -6,7 +6,8 @@
     <td>
       <p>{{ cart_item.product.title }}</p>
       <!--  FIXME  導到產品詳細頁，另開分頁，或是 popupModal？ -->
-      <button type="button" class="btn-primary">詳細內容</button>
+      <button type="button" class="btn-primary"
+        @click="showCafeDetail(cart_item.product.id)">詳細內容</button>
     </td>
     <td ><p v-html="cart_item.product.description"></p></td>
     <td>{{ cart_item.product.price }}</td>
@@ -44,6 +45,8 @@ export default {
     cart_item: Object,
     order: Number,
   },
+  //  TODO  但這行我不理解原因
+  emits: ['getData'],
   components: {},
   data() {
     return {
@@ -98,6 +101,10 @@ export default {
         .catch((error) => {
           console.log(error, 'getDataError');
         });
+    },
+    //  TODO  這邊還沒撰寫，應該會改成 popup 或是另開分頁的形式
+    showCafeDetail(productId) {
+      console.log('呈現卡片內容', productId);
     },
   },
   mounted() {

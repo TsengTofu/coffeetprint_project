@@ -2,7 +2,7 @@
   <!-- 單純給產品列表使用 -->
   <!--  TODO  基本上這也可以換掉囉！ -->
   <div class="cafe_list_wrapper">
-    <ul>
+    <ul class="list-unstyled">
       <!--  TODO  思考一下要不要把 productData 換掉 -->
       <template v-for="(cafe, key) in productData" :key="'cafe_'+ key">
         <CafeCardComponent :singleCafe="cafe" :order="key" />
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import CafeCardComponent from './CafeCard.vue';
+import CafeCardComponent from '../Index/CafeProduct/CafeCard.vue';
 
 export default {
   name: 'CafeListComponent',
