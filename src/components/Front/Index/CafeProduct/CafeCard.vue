@@ -1,47 +1,51 @@
 <template>
-  <li @click="goToCafeDetail(single_cafe.id)">
+  <li class="col" @click="goToCafeDetail(singleCafe.id)">
     <div class="card">
       <div class="cafe_image">
-        <img :src="single_cafe.imageUrl" class="card-img-top" alt="咖啡廳圖片" />
-        <button class="btn-primary" type="button">
+        <!--  TODO  這邊要改成 bg image -->
+        <img :src="singleCafe.imageUrl" class="card-img-top" alt="咖啡廳圖片" />
+        <button class="btn btn-primary" type="button">
           <span class="material-icons-round">favorite_border</span>
         </button>
       </div>
       <div class="card-body">
-        <h5 class="card-title">
-          <p class="category">
-            {{ single_cafe.category }}
-          </p>
-          {{ single_cafe.title }}
-        </h5>
+        <div
+          class="card-title d-flex align-items-start flex-wrap flex-column justify-content-start">
+          <b class="category">{{ singleCafe.category }}</b>
+          <h5>
+            {{ singleCafe.title }}
+          </h5>
+        </div>
         <!-- 星星跟地點 -->
         <div class="location_stars">
-          <p><span class="material-icons-round">place</span>{{ single_cafe.area }}｜台灣</p>
-          <p class="d-flex">
-            <span v-for="(n, index) in parseInt(single_cafe.star_rate)"
+          <p class="d-flex stars">
+            <span v-for="(n, index) in parseInt(singleCafe.star_rate)"
               :key="'star_' + index" class="material-icons-round">star</span>
-              <span v-for="(n, index) in (5 - parseInt(single_cafe.star_rate))"
+              <span v-for="(n, index) in (5 - parseInt(singleCafe.star_rate))"
               :key="'star_' + index" class="material-icons-round">star_border</span>
           </p>
+          <p class="location">
+            <span class="material-icons-round">place</span>
+            <b class="nearby">{{ singleCafe.nearby }}</b> {{ singleCafe.area }}｜台灣</p>
         </div>
-        <p class="card-text" v-html="single_cafe.description"></p>
+        <p class="card-text" v-html="singleCafe.description"></p>
         <!-- 剩下幾張與價格 -->
         <div class="d-flex justify-content-between bottom_block">
           <!-- 剩下幾張 -->
           <p class="rest_num">
-            剩下 <span>{{ single_cafe.num }}</span> 張
+            剩下 <span>{{ singleCafe.num }}</span> 張
           </p>
           <!-- 價格 -->
           <p class="price">
-            NT$<span>{{ single_cafe.price }}</span>
+            NT$<span>{{ singleCafe.price }}</span>
           </p>
         </div>
       </div>
       <a href="#"
         class="btn btn-primary d-flex justify-content-center add_to_cart"
-        @click="addToCart(single_cafe.id)">
+        @click="addToCart(singleCafe.id)">
           <span class="material-icons-round">shopping_cart</span>加入購物車
-        </a>
+      </a>
     </div>
   </li>
 </template>
@@ -53,19 +57,13 @@ export default {
   },
   data() {
     return {
-      single_cafe: this.singleCafe,
     };
   },
   methods: {
     goToCafeDetail(id) {
-      console.log('有點到我喔');
-      // 頁面倒轉
       this.$router.push(`/detail/${id}`);
     },
-    //  TODO  加到購物車的功能，這段之後要回來檢查
     addToCart(id) {
-      // 要加入的產品資料
-      // { product_id, qty}
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
       this.axios
         .post(requestUrl, {
@@ -73,12 +71,9 @@ export default {
             product_id: id, qty: 1,
           },
         })
-        // .then((response)=>  // 這樣居然可以正常
         .then((response) => {
-          // 觀察一下為什麼這呼喚不到另一個函式
-          // response.data.products -> array
           if (response.data.success) {
-            console.log('測試', response.data);
+            this.emitter.emit('updateCartList');
           } else {
             console.log('出了點錯誤，請稍後再嘗試，謝謝。');
           }
@@ -93,10 +88,47 @@ export default {
 </script>
 <style scoped lang="sass">
 li
-  width: 25%
+  // width: 25%
   .card
     margin: 1rem
     border-radius: 16px
+    .cafe_image
+      position: relative
+      button
+        position: absolute
+        top: 10px
+        right: 10px
+    .card-body
+      .card-title
+        h5
+          text-align: left
+          margin: 0px
+        .category
+          padding: .2rem .5rem
+          font-size: 12px
+          background: #000
+          margin: 0px
+          border-radius: 16px
+          color: #fff
+      .location_stars
+        font-size: 12px
+        .stars
+          margin: 0px
+        .location
+          .nearby
+            padding: 4px 8px
+            border-radius: 20px
+            border: 1px solid #000
+          .material-icons-round
+            font-size: 12px
+      .card-text
+        text-align: justify
+        overflow: hidden
+        text-overflow: ellipsis
+        display: -webkit-box
+        -webkit-line-clamp: 3
+        -webkit-box-orient: vertical
+
     .add_to_cart
       width: 100%
       position: relative
