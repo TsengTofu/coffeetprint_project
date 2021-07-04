@@ -1,21 +1,15 @@
 <template>
   <p>後台的入口位置</p>
-  <ProductListComponent />
-  <UploadImageComponent />
+  <!--  TODO  這邊預計會放上圖表之類的 -->
 </template>
 <script>
-// 產品列表
-import ProductListComponent from '../../components/Admin/Product/ProductList.vue';
-// 上傳圖片
-import UploadImageComponent from '../../components/Admin/UploadImage.vue';
 
 export default {
-  name: '',
+  // 這是後台的入口位置
+  name: 'Entry',
   props: {
   },
   components: {
-    ProductListComponent,
-    UploadImageComponent,
   },
   mounted() {
   },

@@ -1,17 +1,20 @@
 <!-- 後台主要畫面，這邊會放後台固定會出現的東西 -->
-<!-- 在驗證有沒有登入、登出，token 這塊都是在這裡做 -->
 <template>
-  <div>我是後台的主要畫面</div>
-  <button class="sign_out_button" @click="signOut" type="button">
-    <span class="material-icons-round">logout</span>登出
-  </button>
+  <AdminNavComponent @sign-out="signOut" />
   <router-view v-if="isCheckPass"></router-view>
+  <FooterComponent/>
 </template>
 
 <script>
+// 引入後台共用的 Navbar
+import AdminNavComponent from '../../components/Admin/AdminNav.vue';
+import FooterComponent from '../../components/Core/Layout/Footer.vue';
+
 export default {
   name: 'Dashboard',
   components: {
+    AdminNavComponent,
+    FooterComponent,
   },
   data() {
     return {
@@ -19,7 +22,6 @@ export default {
     };
   },
   methods: {
-    //  TODO  驗證登入
     verifyToken() {
       // console.log('verifyToken');
       const requestUrl = `${process.env.VUE_APP_API}/api/user/check`;

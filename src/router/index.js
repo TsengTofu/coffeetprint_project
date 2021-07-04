@@ -58,6 +58,7 @@ const routes = [
         component: () => import('../views/Front/Cart/OrderPayment.vue'),
       },
       // 訂單完成
+      //  TODO  這邊是不是也要帶一下 id
       {
         path: 'order/complete',
         name: '',
@@ -91,23 +92,43 @@ const routes = [
     // 加入 Children 路由
     children: [
       // 子層不需要加上 /，直接指定路徑名稱
+      //  FIXME  這支檔案要抽出來，我要在這邊放圖表
       {
         path: '',
         name: 'Admin_Entry',
         component: () => import('../views/Admin/Entry.vue'),
       },
+      // 產品
       {
         path: 'products',
         name: '', //  TODO  name 這個參數是做什麼用的？
-        component: () => import('../views/Admin/Products.vue'),
+        component: () => import('../views/Admin/AdminProducts.vue'),
         // 如果下面這個是空的，但有這個參數，原本的 component 會被取代掉
-        components: {
-          // 影片關鍵字：具名視圖
-          // 這可以用來處理 Sidebar
-          // 也可以放多個 router-view
-          // 對應的會是 router view name 的屬性
-          // [name]: () => import(''),
-        },
+        // components: {
+        // 影片關鍵字：具名視圖
+        // 這可以用來處理 Sidebar
+        // 也可以放多個 router-view
+        // 對應的會是 router view name 的屬性
+        // [name]: () => import(''),
+        // },
+      },
+      // 訂單列表頁
+      {
+        path: 'orders',
+        name: '',
+        component: () => import('../views/Admin/AdminOrders.vue'),
+      },
+      // 優惠券
+      {
+        path: 'coupons',
+        name: '',
+        component: () => import('../views/Admin/AdminCoupons.vue'),
+      },
+      // 文章列表
+      {
+        path: 'posts',
+        name: '',
+        component: () => import('../views/Admin/AdminPosts.vue'),
       },
     ],
   },
