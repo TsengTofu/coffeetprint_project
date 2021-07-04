@@ -55,39 +55,18 @@ import CartItemComponent from './CartItem.vue';
 
 export default {
   name: 'CartListComponent',
-  props: {},
+  props: {
+    cart_list: Array,
+    getCartList: Function,
+  },
   components: {
     CartItemComponent,
   },
   data() {
     return {
-      // 購物車全部的資料
-      cart_list: '',
     };
   },
   methods: {
-    // 取得購物車列表
-    getCartList() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
-      this.axios
-        .get(requestUrl)
-        .then((response) => {
-          if (response.data.success) {
-            console.log('成功抓到購物車列表的資料', response.data.data);
-            //  TODO  單就購物車的列表，不包含總金額 total, final_total
-            this.cart_list = response.data.data.carts;
-            if (this.cart_list.length === 0) {
-              console.log('xxx');
-              this.$emit('disabledNextStep');
-            }
-          } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
-          }
-        })
-        .catch((error) => {
-          console.log(error, 'getDataError');
-        });
-    },
     // 清除全部購物車列表
     clearAllCartList() {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/carts`;
@@ -110,12 +89,13 @@ export default {
   },
   mounted() {
     // 剛開始渲染的時候
-    this.getCartList();
+    console.log(this.cart_list, this.getCartList);
+    // this.getCartList();
   },
 };
 </script>
 
 <style scoped lang="sass">
 .cart_list_wrapper
-  width: 80%
+  // width: 80%
 </style>
