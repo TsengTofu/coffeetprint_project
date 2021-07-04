@@ -11,7 +11,7 @@
         <button type="button"><span class="material-icons-round">view_list</span></button>
         <button type="button"><span class="material-icons-round">grid_view</span></button>
       </div>
-      <ul class="list-unstyled d-flex flex-wrap">
+      <ul class="list-unstyled row row-cols-1 row-cols-md-4 g-4">
         <!-- 放卡片元件 -->
         <template v-for="(cafe, key) in productData" :key="'cafe_'+ key">
           <CafeCardComponent
