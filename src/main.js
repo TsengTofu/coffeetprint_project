@@ -10,11 +10,13 @@ import { localize, setLocale } from '@vee-validate/i18n';
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-// boostrap -  TODO  確認是否還需要引入？
+import mitt from 'mitt';
 import 'bootstrap'; // 參考 Yiren 的說法
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.vue';
 import router from './router';
+
+const emitter = mitt();
 
 // 定義驗證規則
 defineRule('required', required);
@@ -40,5 +42,7 @@ app.use(VueAxios, axios);
 app.component('Form', Form);
 app.component('Field', Field);
 app.component('ErrorMessage', ErrorMessage);
+// emitter
+app.config.globalProperties.emitter = emitter;
 
 app.mount('#app');
