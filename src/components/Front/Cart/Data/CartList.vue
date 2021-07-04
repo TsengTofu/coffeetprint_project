@@ -36,9 +36,9 @@
         <template v-else>
           <tr>
             <td colspan="8">
-            <p>現在購物車裡面沒有任何東西喔！</p>
-            <img src="../../../../assets/images/empty_cart.svg" alt="">
-            <button type="button" class="btn btn-primary">繼續購物</button>
+              <p>現在購物車裡面沒有任何東西喔！</p>
+              <img src="../../../../assets/images/empty_cart.svg" alt="">
+              <button type="button" class="btn btn-primary">繼續購物</button>
             </td>
           </tr>
         </template>

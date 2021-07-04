@@ -9,16 +9,22 @@
       </template>
     </ul>
   </div>
+  <PaginationComponent
+      :pagination_object="pagination"
+      @emit-change-page="getCafeListData"
+    />
 </template>
 
 <script>
 import CafeCardComponent from '../Index/CafeProduct/CafeCard.vue';
+import PaginationComponent from '../../Core/Modal/Pagination.vue';
 
 export default {
   name: 'CafeListComponent',
   // 產品列表頁
   components: {
     CafeCardComponent,
+    PaginationComponent,
   },
   data() {
     return {
@@ -28,13 +34,11 @@ export default {
     };
   },
   methods: {
-    getCafeListData(/* queryPage */) {
-      // ${queryPage}
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products?page=1`;
+    getCafeListData(queryPage) {
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products?page=${queryPage}`;
       this.axios
         .get(requestUrl)
         .then((response) => {
-          console.log(response.data, 'response.data');
           if (response.data.success) {
             const { products, pagination } = response.data;
             this.productData = products;

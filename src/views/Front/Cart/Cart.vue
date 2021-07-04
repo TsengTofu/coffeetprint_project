@@ -3,11 +3,14 @@
   <div class="cart_wrapper">
     <CheckoutStepComponent />
     <div class="container d-flex cart_container">
-      <CartListComponent @disabled-next-step="isEmpty = true" />
+      <CartListComponent
+        :cart_list="cart_list"
+        :getCartList="getCartList"
+      />
       <OrderSummaryComponent />
     </div>
     <button type="button"
-      :disabled="isEmpty === true"
+      :disabled="cart_list.length === 0"
       class="btn btn-primary"
       @click="directToFormPage"
     >填寫訂購資料</button>
@@ -31,17 +34,34 @@ export default {
   data() {
     return {
       isEmpty: '',
+      cart_list: '',
     };
   },
   methods: {
     directToFormPage() {
-      console.log('有喔');
-      // if (!this.isEmpty) {
       this.$router.push('/cart/form');
-      // }
+    },
+    getCartList() {
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
+      this.axios
+        .get(requestUrl)
+        .then((response) => {
+          if (response.data.success) {
+            console.log('成功抓到購物車列表的資料', response.data.data);
+            //  TODO  單就購物車的列表，不包含總金額 total, final_total
+            this.cart_list = response.data.data.carts;
+          } else {
+            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+          }
+        })
+        .catch((error) => {
+          console.log(error, 'getDataError');
+        });
     },
   },
-  mounted() {},
+  mounted() {
+    this.getCartList();
+  },
 };
 </script>
 <style lang="sass" scoped>
