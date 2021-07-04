@@ -1,7 +1,7 @@
 <template>
   <div class="modal fade" id="myModal" ref="modal" tabindex="-1">
     <div
-      class="modal-lg
+      class="modal-xl
         modal-dialog
         modal-dialog-centered
         modal-dialog-scrollable
