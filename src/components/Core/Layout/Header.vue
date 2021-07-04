@@ -16,9 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link to="/products" class="nav-link" aria-current="page"
-              >產品列表</router-link
-            >
+            <router-link to="/products" class="nav-link" aria-current="page">產品列表</router-link>
           </li>
           <li class="nav-item">
             <!--  TODO  這邊跟寫 a 有什麼不一樣嗎？ -->
@@ -28,19 +26,15 @@
             <router-link to="/favorite" class="nav-link">收藏清單</router-link>
           </li>
           <li class="nav-item">
-            <!--  TODO  這需要再重新修正 -->
-            <!-- 這是一種連結的方式 -->
-            <!-- <router-link to="/cart" class="nav-link">
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasRight"
+              aria-controls="offcanvasRight"
+            >
               <span class="material-icons-round">shopping_cart</span>
-            </router-link> -->
-
-            <button class="btn btn-primary"
-    type="button" data-bs-toggle="offcanvas"
-    data-bs-target="#offcanvasRight"
-    aria-controls="offcanvasRight">
-      <span class="material-icons-round">shopping_cart</span>
-    </button>
-
+            </button>
           </li>
         </ul>
       </div>
