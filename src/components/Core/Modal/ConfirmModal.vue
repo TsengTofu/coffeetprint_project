@@ -4,7 +4,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">確定刪除此品項：{{ target_item.title }}嗎？</h5>
+        <h5 class="modal-title" id="exampleModalLabel">
+          確定刪除此品項：{{ target_item.title }}嗎？
+          <!--  NOTE  這樣寫還可以從外面傳值近來欸 -->
+          <slot name="delete_item"></slot>
+        </h5>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -13,6 +17,7 @@
         <div class="product_info_container">
           <div class="img_part"></div>
           <div class="info_detail">
+            <!--  TODO  這邊也可以改成 slot -->
             標題名稱：<p>{{ target_item.title }}</p>
             分類：<p>{{ target_item.category }}</p>
             說明內容：<p>{{ target_item.content }}</p>
