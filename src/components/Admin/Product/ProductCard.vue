@@ -38,6 +38,15 @@
                   />
                   <label for="product_title" class="text">產品標題<span>*</span></label>
                 </li>
+                <li class="single">
+                  <input
+                    id="product_nearby"
+                    type="text"
+                    placeholder="請輸入鄰近的地標"
+                    v-model="tempProduct.nearby"
+                  />
+                  <label for="product_nearby" class="text">鄰近地標<span>*</span></label>
+                </li>
                 <li>
                   <div class="half">
                     <input

@@ -2,7 +2,7 @@
   <div class="cart_list_wrapper">
     <!-- 加上刪除全部購物車的按鈕 -->
     <button type="button"
-      class="btn-primary"
+      class="btn btn-primary"
       @click="clearAllCartList">
       清空購物車
     </button>
@@ -17,7 +17,6 @@
           <!-- 分類跟品名放一起 -->
           <th scope="col">品名</th>
           <!-- 搭配 Modal，到期日放在產品詳細裡面 -->
-          <th scope="col">產品詳細</th>
           <th scope="col">單價</th>
           <th scope="col">數量</th>
           <th scope="col">金額</th>
@@ -34,9 +33,14 @@
             />
           </tr>
         </template>
-        <!-- 如果 = 0 的情況 -->
         <template v-else>
-          <p>現在購物車裡面沒有任何東西喔！</p>
+          <tr>
+            <td colspan="8">
+            <p>現在購物車裡面沒有任何東西喔！</p>
+            <img src="../../../../assets/images/empty_cart.svg" alt="">
+            <button type="button" class="btn btn-primary">繼續購物</button>
+            </td>
+          </tr>
         </template>
       </tbody>
     </table>

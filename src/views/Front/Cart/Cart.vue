@@ -8,6 +8,7 @@
     </div>
     <button type="button"
       :disabled="isEmpty === true"
+      class="btn btn-primary"
       @click="directToFormPage"
     >填寫訂購資料</button>
   </div>
