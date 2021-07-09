@@ -23,10 +23,11 @@
       <p class="summary_text">此頁有 <span>{{ productData.length }}</span> 項產品</p>
       <div class="filter_dropdown">
         <label for="category_filter">分類篩選：</label>
+        <!--  TODO  分類篩選的資料 -->
         <select name="" id="category_filter">
-          <option value="">放假的</option>
-          <option value="">放假的</option>
-          <option value="">放假的</option>
+          <template v-for="(item, key) in category_list" :key="'item' + key">
+            <option :value="item">{{ item }}</option>
+          </template>
         </select>
       </div>
       <!-- 搜尋 -->
@@ -101,14 +102,27 @@
     <ConfirmModalComponent
       ref="confirm_modal"
       id="confirmModal"
-      :target_item="targetItem"
       @emit-delete="deleteCurrentProduct(targetId)"
     >
-      <!-- FIXME  這邊的 slot 測試要改掉 -->
       <!-- 參考文章： https://medium.com/itsems-frontend/vue-slot-21e1ec9968f8 -->
       <!-- https://medium.com/unalai/%E8%A4%87%E7%94%A8%E5%85%83%E4%BB%B6%E7%9A%84%E5%A5%BD%E5%B9%AB%E6%89%8B-vue-slot-v-slot-scoped-slots-5364a0048ab7 -->
       <!-- 或是考慮用 is 處理 -->
-      <template v-slot:delete_item>Hello!!!!!</template>
+      <template v-slot:delete_item>產品：{{ targetItem.title }}</template>
+      <template v-slot:delete_content>
+        <!-- TODO  這邊的版面要重新寫過 -->
+        <div class="img_part"></div>
+          <div class="info_detail">
+            標題名稱：<p>{{ targetItem.title }}</p>
+            分類：<p>{{ targetItem.category }}</p>
+            說明內容：<p>{{ targetItem.content }}</p>
+            產品描述：<p>{{ targetItem.description }}</p>
+            單位：<p>{{ targetItem.unit }}</p>
+            原價：<p>{{ targetItem.origin_price }}</p>
+            售價：<p>{{ targetItem.price }}</p>
+            數量：<p>{{ targetItem.num }}</p>
+            是否啟用：<p>{{ targetItem.is_enable }}</p>
+          </div>
+      </template>
     </ConfirmModalComponent>
     <!-- Pagination -->
     <PaginationComponent
@@ -123,7 +137,7 @@ import ConfirmModalComponent from '../../Core/Modal/ConfirmModal.vue';
 import PaginationComponent from '../../Core/Modal/Pagination.vue';
 
 export default {
-  name: 'ProductListComponent', // 都要加上後綴
+  name: 'ProductListComponent',
   props: {
     token: String,
   },
@@ -141,6 +155,11 @@ export default {
       targetItem: {},
       status: '',
       pagination: {},
+      //  TODO  這邊還沒有做完
+      // 分類的資料
+      category_list: [],
+      // 篩選之後要呈現的資料
+      filterCafeData: [],
     };
   },
   methods: {
@@ -150,20 +169,31 @@ export default {
       // 為什麼可以這樣寫？
       this.$refs.modal.tempProduct = JSON.parse(JSON.stringify(data));
     },
+    // 取得所有產品的資料
+    getAllCafeData() {
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products/all`;
+      this.axios.get(requestUrl).then((response) => {
+        const { success, products } = response.data;
+        // 如果成功
+        if (success) {
+          // 處理分類要顯示的項目
+          products.forEach((cafe) => {
+            if (this.category_list.indexOf(cafe.category) === -1) {
+              this.category_list.push(cafe.category);
+            }
+          });
+          console.log(this.category_list);
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
     getData(queryPage = 1 /* 預設值 */) {
       //  TODO  待查：這邊寫小駝峰會報錯，為何？
-      console.log('getData');
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/products?page=${queryPage}`;
       this.axios
-        .get(requestUrl, {
-          // headers: {
-          //   Authorization: this.token, // 這邊要補上 cookie 取出來的 token
-          // },
-        })
-        // .then((response)=>  // 這樣居然可以正常
+        .get(requestUrl)
         .then((response) => {
-          // 觀察一下為什麼這呼喚不到另一個函式
-          // response.data.products -> array
           if (response.data.success) {
             const { products, pagination } = response.data;
             this.productData = products;
@@ -191,11 +221,7 @@ export default {
     deleteProductAPI() {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.targetId}`;
       this.axios
-        .delete(requestUrl, {
-          // headers: {
-          //   Authorization: `${this.token}`, // 這邊要補上 cookie 取出來的 token
-          // },
-        })
+        .delete(requestUrl)
         .then((response) => {
           if (response.data.success) {
             console.log('有正常刪除啦');
@@ -209,16 +235,12 @@ export default {
     },
   },
   mounted() {
-    // console.log(this.token);
-    // if (this.token) {
-    console.log('測試一下有沒有 token');
+    this.getAllCafeData();
     this.getData();
-    // }
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 @use '../theme.sass' as *
 .product_list_wrapper

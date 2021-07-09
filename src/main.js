@@ -11,6 +11,7 @@ import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import mitt from 'mitt';
+import dayjs from 'dayjs';
 import 'bootstrap'; // 參考 Yiren 的說法
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.vue';
@@ -37,6 +38,7 @@ setLocale('zh_TW');
 const app = createApp(App);
 app.use(router);
 app.use(VueAxios, axios);
+app.config.globalProperties.$dayjs = dayjs;
 
 // 註冊 vee-validate 三個全域元件
 app.component('Form', Form);

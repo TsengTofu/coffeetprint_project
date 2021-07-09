@@ -5,30 +5,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          確定刪除此品項：{{ target_item.title }}嗎？
-          <!--  NOTE  這樣寫還可以從外面傳值近來欸 -->
-          <slot name="delete_item"></slot>
+          確定要刪除此項<slot name="delete_item"></slot>嗎？
         </h5>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>品項相關資訊</p>
-        <!-- TODO  如果有更新能加入的項目，也要跟著連動，樣式待修 -->
-        <div class="product_info_container">
-          <div class="img_part"></div>
-          <div class="info_detail">
-            <!--  TODO  這邊也可以改成 slot -->
-            標題名稱：<p>{{ target_item.title }}</p>
-            分類：<p>{{ target_item.category }}</p>
-            說明內容：<p>{{ target_item.content }}</p>
-            產品描述：<p>{{ target_item.description }}</p>
-            單位：<p>{{ target_item.unit }}</p>
-            原價：<p>{{ target_item.origin_price }}</p>
-            售價：<p>{{ target_item.price }}</p>
-            數量：<p>{{ target_item.num }}</p>
-            是否啟用：<p>{{ target_item.is_enable }}</p>
-          </div>
-        </div>
+        <slot name="delete_content"></slot>
       </div>
       <div class="modal-footer">
         <button
