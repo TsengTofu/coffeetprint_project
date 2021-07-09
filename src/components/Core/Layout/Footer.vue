@@ -5,11 +5,14 @@
       <p>Copyright © 2020 CoffeetPrint. 僅個人作品練習，無商業用途。</p>
       <div class="detail">
         <ul class="list-unstyled d-flex link">
-          <li>
-            <p><span class="material-icons-round">account_circle</span>後台登入</p>
+          <li class="admin_login">
+            <router-link to="/login" target="_blank">
+              <span class="material-icons-round">account_circle</span>
+              後台登入
+            </router-link>
           </li>
           <li>
-            <a href="">
+            <a href="https://github.com/TsengTofu" target="_blank">
               <img src="../../../assets/images/icon/github.svg" alt="" />
             </a>
           </li>
@@ -26,7 +29,7 @@
 
 <script>
 export default {
-  name: 'FooterComponent', // 都要加上後綴
+  name: 'FooterComponent',
   // props: {
   //     msg: String,
   // },
@@ -36,8 +39,6 @@ export default {
   methods: {},
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 .footer_wrapper
   background: #535252
@@ -69,6 +70,11 @@ export default {
       margin: .5rem 0
       .link
         li
+          &.admin_login
+            a
+              display: flex
+              width: fit-content
+              text-decoration: none
           a
             width: 20px
             height: 20px

@@ -87,7 +87,6 @@ export default {
     // 取得要拿訂單資料的 id
     console.log(this.$route.params.id);
     this.getOrderDetail();
-    console.log(dayjs);
   },
 };
 </script>
