@@ -14,6 +14,9 @@ import mitt from 'mitt';
 import dayjs from 'dayjs';
 import 'bootstrap'; // 參考 Yiren 的說法
 import 'bootstrap/dist/css/bootstrap.min.css';
+// sweetalert2
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 import App from './App.vue';
 import router from './router';
 
@@ -38,6 +41,7 @@ setLocale('zh_TW');
 const app = createApp(App);
 app.use(router);
 app.use(VueAxios, axios);
+app.use(VueSweetalert2);
 app.config.globalProperties.$dayjs = dayjs;
 
 // 註冊 vee-validate 三個全域元件
