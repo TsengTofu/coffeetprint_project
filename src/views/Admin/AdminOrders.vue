@@ -3,6 +3,7 @@
     <p>哈囉我是後台訂單列表頁</p>
     <OrderListComponent
       :order_list="order_list"
+      :pagination="pagination"
       @get-order-list="getOrderList"
     />
   </div>
