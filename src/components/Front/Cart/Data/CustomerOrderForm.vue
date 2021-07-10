@@ -107,11 +107,12 @@ export default {
     onSubmit() {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order`;
       const data = this.form;
-      console.log(data);
       this.axios
         .post(requestUrl, { data })
         .then((response) => {
           if (response.data.success) {
+            // 成功之後，就要告訴購物車的 Modal 要清空
+            this.emitter.emit('updateCartList');
             const { orderId } = response.data;
             console.log(`/order/${orderId}`);
             //  TODO  成功拿到資料之後，應該要可以把購物車清掉
