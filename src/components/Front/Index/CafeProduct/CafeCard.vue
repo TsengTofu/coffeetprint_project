@@ -26,7 +26,7 @@
           </p>
           <p class="location">
             <span class="material-icons-round">place</span>
-            <b class="nearby">{{ singleCafe.nearby }}</b> {{ singleCafe.area }}｜台灣</p>
+            {{ singleCafe.area }}｜台灣<b class="nearby">{{ singleCafe.nearby }}</b></p>
         </div>
         <p class="card-text" v-html="singleCafe.description"></p>
         <!-- 剩下幾張與價格 -->
@@ -41,9 +41,9 @@
           </p>
         </div>
       </div>
-      <a href="#"
+      <a
         class="btn btn-primary d-flex justify-content-center add_to_cart"
-        @click="addToCart(singleCafe.id)">
+        @click.prevent="addToCart(singleCafe.id)">
           <span class="material-icons-round">shopping_cart</span>加入購物車
       </a>
     </div>
@@ -73,6 +73,9 @@ export default {
         })
         .then((response) => {
           if (response.data.success) {
+            //  TODO  options 樣式之後再回來設定
+            this.$swal('成功加入購物車！');
+            // 更新的 modal 的購物車
             this.emitter.emit('updateCartList');
           } else {
             console.log('出了點錯誤，請稍後再嘗試，謝謝。');

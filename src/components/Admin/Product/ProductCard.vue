@@ -228,6 +228,7 @@
 </template>
 
 <script>
+// 這個移除掉還會正常嗎？
 import { Modal } from 'bootstrap';
 
 //  TODO  打開 Modal 的時候要有習慣先清空
@@ -268,11 +269,7 @@ export default {
     addNewProduct() {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/product`;
       this.axios
-        .post(requestUrl, { data: this.tempProduct }, {
-          // headers: {
-          //   Authorization: `${this.token}`, // 這邊要補上 cookie 取出來的 token
-          // },
-        })
+        .post(requestUrl, { data: this.tempProduct })
         .then((response) => {
           if (response.data.success) {
             // 要把資料傳遞出去

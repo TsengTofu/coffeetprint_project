@@ -24,9 +24,7 @@ export default {
       this.axios
         .get(requestUrl)
         .then((response) => {
-          console.log(response.data.product, 'response.data, 回傳的單筆資料');
           if (response.data.success) {
-            console.log('成功', response.data);
             this.productDetail = response.data.product;
           } else {
             console.log('出了點錯誤，請稍後再嘗試，謝謝。');
@@ -45,3 +43,6 @@ export default {
   },
 };
 </script>
+<style scoped lang="sass">
+
+</style>
