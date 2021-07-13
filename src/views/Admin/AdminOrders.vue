@@ -1,6 +1,13 @@
 <template>
   <div>
     <p>哈囉我是後台訂單列表頁</p>
+    <button
+      type="button"
+      class="btn-primary"
+      @click="clearAllOrders"
+    >
+      清除所有訂單
+    </button>
     <OrderListComponent
       :order_list="order_list"
       :pagination="pagination"
@@ -26,6 +33,18 @@ export default {
     };
   },
   methods: {
+    // 刪除全部訂單
+    clearAllOrders() {
+      console.log('clearAllOrders');
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/orders/all`;
+      this.axios.delete(requestUrl)
+        .then((response) => {
+          console.log(response.data.success, '回傳的回應');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     // 取得訂單列表
     getOrderList() {
       //  TODO  page 先給值 1

@@ -1,7 +1,5 @@
 <template>
   <div>
-    <p>這個是給訂單列表頁的元件</p>
-    <!-- {{ order_list }} -->
     <table class="table table-striped table-hover">
        <thead>
          <tr>
@@ -17,9 +15,8 @@
          </tr>
       </thead>
       <tbody>
-        <!-- TODO  如果現在沒有訂單 -->
-        <template v-for="(order, key) in order_list" :key="'order_' + key">
-          <tr>
+        <template v-if="order_list.length > 0">
+          <tr v-for="(order, key) in order_list" :key="'order_' + key">
             <td>{{ order.id }}</td>
             <td v-if="order.is_paid">
               <span class="material-icons-round">check_circle</span>已付款
@@ -27,7 +24,8 @@
             <td v-else>
               <span class="material-icons-round">do_not_disturb_on</span>未付款
             </td>
-            <td>{{ $dayjs.unix(order.paid_date).format('YYYY-MM-DD') }}</td>
+            <td v-if="order.is_paid">{{ $dayjs.unix(order.paid_date).format('YYYY-MM-DD') }}</td>
+            <td v-else>/</td>
             <td>NT$ {{ order.total.toLocaleString() }}</td>
             <td>
               <button type="button">詳細內容</button>
@@ -37,35 +35,34 @@
             <!-- 編輯跟刪除 -->
             <td>
               <!--  FIXME  這邊要再回來改 -->
-              <!-- <button class="icon_btn"
+              <button class="icon_btn"
                 type="button"
-                @click="setStatus('put', item)"
                 data-bs-toggle="modal"
-                data-bs-target="#myModal"
-              > -->
-              <button>
+                data-bs-target="#orderModal"
+                @click="setStatus('put', order)"
+              >
                 <span class="material-icons-round">edit</span>
               </button>
             </td>
             <td>
-                <button class="icon_btn"
+              <button class="icon_btn"
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#confirmModal"
                 @click="targetItem = order"
               >
-                <!-- 刪除的實際功能還沒有寫過 -->
                 <span class="material-icons-round">delete</span>
               </button>
             </td>
           </tr>
         </template>
+        <!-- 如果訂單列表是空的 -->
+        <template v-else>
+          <!-- TODO  這邊要在自己加上是空的圖片 -->
+          目前的訂單列表是空的，請多推廣自己的網站
+        </template>
       </tbody>
     </table>
-    <!-- 這個是 POPUP CARD MODAL 會用的 -->
-    <OrderCardComponent />
-    <!-- 確認的 Modal -->
-    <!--  TODO  試試看用 slot 改寫 -->
     <ConfirmModalComponent
       ref="confirm_modal"
       id="confirmModal"
@@ -74,36 +71,66 @@
        <template v-slot:delete_content>
        <div class="img_part"></div>
           <div class="info_detail">
+            <p>還沒撈資料的部分</p>
+            <br>
             是否已付款：<p>{{ targetItem.is_paid }}</p>
             總金額：<p>{{ targetItem.total }}</p>
             數量：<p>{{ targetItem.num }}</p>
           </div>
        </template>
     </ConfirmModalComponent>
+    <!-- TODO  這邊要放 emit -->
+    <OrderCardComponent
+      ref="order_modal"
+      id="orderModal"
+      :status="status"
+    />
+    <!-- Pagination -->
+    <PaginationComponent
+      :pagination_object="pagination"
+      @emit-change-page="getData"
+    />
   </div>
 </template>
 
 <script>
 import OrderCardComponent from './OrderCard.vue';
 import ConfirmModalComponent from '../../Core/Modal/ConfirmModal.vue';
+import PaginationComponent from '../../Core/Modal/Pagination.vue';
 
 export default {
   name: 'OrderListComponent',
   props: {
     order_list: Array,
+    pagination: Object,
   },
   components: {
     OrderCardComponent,
     ConfirmModalComponent,
+    PaginationComponent,
   },
   data() {
     return {
       targetItem: {},
       targetId: '',
       orderList: this.order_list,
+      // status data
+      status: '',
     };
   },
   methods: {
+    // setStatus for modal
+    setStatus(axiosMethod, data) {
+      this.status = axiosMethod;
+      console.log(data);
+      // 為什麼可以這樣寫？
+      //  TODO  這邊要再改
+      this.$refs.order_modal.tempOrder = JSON.parse(JSON.stringify(data));
+    },
+    //  TODO  這邊可以這樣寫嗎？
+    getData() {
+      this.$emit('getOrderList');
+    },
     // 刪除單筆訂單
     deleteCurrentProduct() {
       let newIndex = 0;
@@ -138,4 +165,11 @@ export default {
   },
 };
 </script>
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+.icon_btn
+  background: none
+  border: none
+  &:hover
+    span
+      color: #a97f4a
+</style>
