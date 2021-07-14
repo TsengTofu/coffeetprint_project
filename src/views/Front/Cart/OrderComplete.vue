@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="wrapper">
     <p>訂購完成的頁面</p>
+    <!-- 這邊後續要去撈資料，撈該筆訂單的資料 -->
   </div>
 </template>
 
@@ -14,4 +15,7 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+.wrapper
+  margin: 120px 0
+</style>

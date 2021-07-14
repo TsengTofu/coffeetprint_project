@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <p>加到最愛頁面</p>
+    <!-- 這部分有考慮接看看 googleAPI，但需要找時間研究 -->
   </div>
 </template>
 
