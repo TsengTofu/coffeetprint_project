@@ -27,8 +27,6 @@
       </div>
       <!-- 按鈕們 -->
       <button type="button" class="btn-primary" @click="directToPage('cart')">訂單結帳</button>
-      <!-- 這個按鈕之後要改掉 -->
-      <button type="button" class="btn-primary" >繼續購物</button>
     </div>
   </div>
 </template>
