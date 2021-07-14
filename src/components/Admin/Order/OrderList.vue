@@ -28,7 +28,13 @@
             <td v-else>/</td>
             <td>NT$ {{ order.total.toLocaleString() }}</td>
             <td>
-              <button type="button">詳細內容</button>
+              <!-- 點開可以看到訂單的詳細內容 -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#orderDetailModal"
+              >詳細內容</button>
             </td>
             <!-- 這段還要重新處理訂購的資料，因為他的 array object 有 key 值，要先把 key 值轉出來 -->
             <td>{{ $dayjs.unix(order.create_at).format('YYYY-MM-DD') }}</td>
@@ -85,6 +91,11 @@
       id="orderModal"
       :status="status"
     />
+    <!-- 這是點開出現詳細的 popup -->
+    <OrderDetailCardComponent
+      ref="order_detail_modal"
+      id="orderDetailModal"
+    />
     <!-- Pagination -->
     <PaginationComponent
       :pagination_object="pagination"
@@ -97,6 +108,7 @@
 import OrderCardComponent from './OrderCard.vue';
 import ConfirmModalComponent from '../../Core/Modal/ConfirmModal.vue';
 import PaginationComponent from '../../Core/Modal/Pagination.vue';
+import OrderDetailCardComponent from './OrderDetailCard.vue';
 
 export default {
   name: 'OrderListComponent',
@@ -108,6 +120,7 @@ export default {
     OrderCardComponent,
     ConfirmModalComponent,
     PaginationComponent,
+    OrderDetailCardComponent,
   },
   data() {
     return {
