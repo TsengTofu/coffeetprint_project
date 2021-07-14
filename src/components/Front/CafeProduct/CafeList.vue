@@ -1,8 +1,6 @@
 <template>
-  <!-- 單純給產品列表使用 -->
-  <!--  TODO  基本上這也可以換掉囉！ -->
   <div class="cafe_list_wrapper">
-    <ul class="list-unstyled">
+    <ul class="list-unstyled row row-cols-1 row-cols-md-4 g-4">
       <!--  TODO  思考一下要不要把 productData 換掉 -->
       <template v-for="(cafe, key) in productData" :key="'cafe_'+ key">
         <CafeCardComponent :singleCafe="cafe" :order="key" />
@@ -61,8 +59,8 @@ export default {
 .cafe_list_wrapper
   display: flex
   width: 100%
+  margin: 120px 0
   ul
     width: 100%
     display: flex
-    flex-wrap: wrap
 </style>
