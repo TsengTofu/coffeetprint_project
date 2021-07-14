@@ -71,10 +71,11 @@ const routes = [
         component: () => import('../views/Front/About.vue'),
       },
       // 收藏列表頁
+      //  TODO  這邊要處理的是 localStorage
       {
         path: '/favorite',
         name: 'Favorite',
-        // component: () => import(),
+        component: () => import('../views/Front/Favorite.vue'),
       },
     ],
   },
