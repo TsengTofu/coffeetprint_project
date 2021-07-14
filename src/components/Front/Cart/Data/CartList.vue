@@ -34,11 +34,15 @@
           </tr>
         </template>
         <template v-else>
-          <tr>
+          <tr class="empty_cart">
             <td colspan="8">
-              <p>現在購物車裡面沒有任何東西喔！</p>
-              <img src="../../../../assets/images/empty_cart.svg" alt="">
-              <button type="button" class="btn btn-primary">繼續購物</button>
+              <div class="content d-flex flex-column align-items-center">
+                <p>現在購物車沒有任何東西喔！</p>
+                <div class="image">
+                  <img src="../../../../assets/images/empty_cart.svg" alt="">
+                </div>
+                <button type="button" class="btn btn-primary">繼續購物</button>
+              </div>
             </td>
           </tr>
         </template>
@@ -97,5 +101,13 @@ export default {
 
 <style scoped lang="sass">
 .cart_list_wrapper
-  // width: 80%
+  .empty_cart
+    td
+      width: 100%
+      .image
+        width: 50%
+        img
+          width: 100%
+          height: auto
+
 </style>
