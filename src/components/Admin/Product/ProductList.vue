@@ -156,7 +156,7 @@ export default {
       status: '',
       pagination: {},
       //  TODO  這邊還沒有做完
-      // 分類的資料
+      // 分類的資料，這邊只做了一遍
       category_list: [],
       // 篩選之後要呈現的資料
       filterCafeData: [],

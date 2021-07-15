@@ -1,8 +1,31 @@
 <template>
-  <div>
-    <p>優惠券的編輯卡片</p>
-    <!--  TODO  之後再來看可以怎麼調整成 Modal -->
-    <div class="content">
+    <div class="modal fade" id="couponModal" ref="modal" tabindex="-1">
+    <div
+      class="modal-xl
+        modal-dialog
+        modal-dialog-centered
+        modal-dialog-scrollable
+        wrapper"
+    >
+      <div
+        class="modal-content
+          product_card_wrapper"
+      >
+        <div class="modal-header header">
+          <div class="left">
+            <p>{{ status === 'post' ? '新增產品' : '編輯產品' }}</p>
+            <span data-bs-dismiss="modal" aria-label="Close">
+              <span class="material-icons-round">clear</span>
+            </span>
+          </div>
+          <span>
+            {{ status === 'post' ?
+              '請輸入產品資訊，並設定產品相關圖片。' : '請編輯產品相關資訊。' }}
+          </span>
+        </div>
+        <div class="modal-body outer">
+          <div class="container">
+            <div class="content">
       <ul class="list-unstyled">
         <!-- 優惠券標題 -->
         <li class="single">
@@ -18,7 +41,7 @@
         <li class="single">
           <input
             id="coupon_percent"
-            type="text"
+            type="number"
             placeholder="請輸入優惠券百分比"
             v-model="tempCoupon.percent"
           />
@@ -33,7 +56,7 @@
             id="coupon_due_date"
             type="date"
             placeholder="請輸入優惠券到期日"
-            v-model="tempCoupon.due_date"
+            v-model="due_date"
           />
           <label for="coupon_due_date" class="text">優惠券到期日<span>*</span></label>
           <span>格式請寫成：YYYY-MM-DD</span>
@@ -70,6 +93,15 @@
         type="button">
         新增優惠券
       </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer button_block">
+          <button class="cancel" data-bs-dismiss="modal" type="button">取消</button>
+          <button v-if="status === 'post'" @click="addNewProduct" type="button">確認</button>
+          <button v-else @click="editProduct" type="button">確認</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -82,6 +114,7 @@ export default {
   data() {
     return {
       // 這邊先暫時放置優惠券的相關資料
+      due_date: '',
       tempCoupon: {
         // 乾脆全部都設定為必填畫面
         title: '',
@@ -95,13 +128,20 @@ export default {
   methods: {
     addNewCouponCode() {
       // 其實應該要先檢查有沒有必填沒填寫的？
+      // percent, is_enabled 型別錯誤
+      console.log(dayjs(this.due_date).unix());
+      this.tempCoupon.due_date = dayjs(this.due_date).unix();
+      this.tempCoupon.percent = Number(this.tempCoupon.percent);
+      this.tempCoupon.is_enabled = Number(this.tempCoupon.is_enabled);
+      console.log(this.tempCoupon);
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupon`;
-      this.axios.post(requestUrl, { data: this.tempProduct })
+      this.axios
+        .post(requestUrl, { data: this.tempCoupon })
         .then((response) => {
-          console.log(response, 'response');
+          console.log(response.data, 'response');
         })
         .catch((error) => {
-          console.log(error, 'error');
+          console.dir(error, 'error');
         });
     },
   },
