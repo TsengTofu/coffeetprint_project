@@ -1,15 +1,15 @@
 <template>
   <div>
     <p>我是優惠券列表「清單」</p>
-    <!-- 這邊加上 1 個按鈕  FIXME  給新增優惠券的部分 -->
     <button
       class="btn btn-primary"
       type="button"
       data-bs-toggle="modal"
       data-bs-target="#couponModal"
+      @click="setStatus('post', {})"
     >
-    <!-- @click="setStatus('post', {})" -->
-    <!--  FIXME  上面這段要再補上去 -->
+    新增優惠券
+    </button>
       <table class="table table-striped table-hover">
        <thead>
          <tr>
@@ -36,6 +36,8 @@
                 <div class="switch">
                   <input
                     type="checkbox"
+                    :checked="coupon.is_enabled"
+                    disabled
                   />
                   <span class="slider"></span>
                 </div>
@@ -50,7 +52,7 @@
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#couponModal"
-                @click="setStatus('put', order)"
+                @click="setStatus('put', coupon)"
               >
                 <span class="material-icons-round">edit</span>
               </button>
@@ -61,7 +63,7 @@
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#confirmModal"
-                @click="targetItem = order"
+                @click="targetItem = coupon"
               >
                 <span class="material-icons-round">delete</span>
               </button>
@@ -73,28 +75,82 @@
         </template> -->
       </tbody>
     </table>
+    <CouponCardComponent
+      ref="modal"
+      :status="status"
+      id="couponModal"
+      :getCouponList="getCouponList"
+    />
+    <ConfirmModalComponent
+      ref="confirm_modal"
+      id="confirmModal"
+      @emit-delete="deleteCurrentCoupon"
+    >
+      <template v-slot:delete_item>
+        <!-- 產品：{{  }} -->
+      </template>
+      <template v-slot:delete_content>
+        <div class="img_part"></div>
+          <div class="info_detail">
+           <!-- 這邊是內容 -->
+          </div>
+      </template>
+    </ConfirmModalComponent>
     <PaginationComponent
       :pagination_object="pagination"
     />
   </div>
 </template>
 <script>
-// 引入 Pagination
 import PaginationComponent from '../../Core/Modal/Pagination.vue';
+import ConfirmModalComponent from '../../Core/Modal/ConfirmModal.vue';
+import CouponCardComponent from './CouponCard.vue';
 
 export default {
   name: 'CouponListComponent',
   props: {
     coupon_list: Array,
     pagination: Object,
+    getCouponList: Function,
   },
   components: {
     PaginationComponent,
+    ConfirmModalComponent,
+    CouponCardComponent,
   },
   data() {
-    return {};
+    return {
+      targetId: '',
+      targetItem: {},
+    };
   },
-  methods: {},
+  methods: {
+    //  TODO  這邊要看一下 SetStatus
+    // 改變傳入 Modal 的 Status
+    setStatus(axiosMethod, data) {
+      this.status = axiosMethod;
+      // 為什麼可以這樣寫？
+      this.$refs.modal.tempCoupon = JSON.parse(JSON.stringify(data));
+    },
+    // FIXME  查一下原本這支 function：deleteCurrentProduct 有必要的話再加回來
+    deleteCurrentCoupon() {
+      this.targetId = this.targetItem.id;
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupon/${this.targetId}`;
+      this.axios.delete(requestUrl)
+        .then((response) => {
+          console.log(response.data, 'response');
+          const { success, message } = response.data;
+          if (success) {
+            this.$swal(message);
+            // 通知外層要更新畫面
+            this.$emit('emit-get-coupons');
+          }
+        })
+        .catch((error) => {
+          console.log(error, 'error');
+        });
+    },
+  },
   mounted() {
     console.log('優惠券列表清單', this.coupon_list);
   },

@@ -14,6 +14,7 @@
         <div class="modal-header header">
           <div class="left">
             <p>{{ status === 'post' ? '新增產品' : '編輯產品' }}</p>
+            {{ tempCoupon.id }}
             <span data-bs-dismiss="modal" aria-label="Close">
               <span class="material-icons-round">clear</span>
             </span>
@@ -52,6 +53,7 @@
         <!-- 或者，考慮用日期選取器 DatePicker？ -->
         <!--  TODO  還是說放在優化？ -->
         <li class="single">
+          <!-- 這邊要寫判斷 -->
           <input
             id="coupon_due_date"
             type="date"
@@ -59,6 +61,7 @@
             v-model="due_date"
           />
           <label for="coupon_due_date" class="text">優惠券到期日<span>*</span></label>
+          {{ due_date }}, {{ tempCoupon.due_date }}
           <span>格式請寫成：YYYY-MM-DD</span>
         </li>
         <!-- Code 折價券的填寫號碼 -->
@@ -77,6 +80,7 @@
           <div class="switch">
             <input
               type="checkbox"
+              :checked="tempCoupon.is_enabled"
               v-model="tempCoupon.is_enabled"
             />
             <span class="slider"></span>
@@ -84,22 +88,13 @@
           <span>是否啟用此張優惠券</span>
         </li>
       </ul>
-      <!-- 新增優惠券的按鈕 -->
-      <!-- 這邊要綁定事件 -->
-      <!--  TODO  研究一下 submit 跟 form 表單的檢查 -->
-      <button
-        class="btn btn-primary"
-        @click="addNewCouponCode"
-        type="button">
-        新增優惠券
-      </button>
             </div>
           </div>
         </div>
         <div class="modal-footer button_block">
           <button class="cancel" data-bs-dismiss="modal" type="button">取消</button>
-          <button v-if="status === 'post'" @click="addNewProduct" type="button">確認</button>
-          <button v-else @click="editProduct" type="button">確認</button>
+          <button v-if="status === 'post'" @click="addNewCoupon" type="button">確認</button>
+          <button v-else @click="editCoupon" type="button">確認</button>
         </div>
       </div>
     </div>
@@ -107,13 +102,17 @@
 </template>
 <script>
 import dayjs from 'dayjs';
+import { Modal } from 'bootstrap';
 
 export default {
   name: 'CouponCardComponent',
-  props: {},
+  props: {
+    status: String,
+    getCouponList: Function,
+  },
   data() {
     return {
-      // 這邊先暫時放置優惠券的相關資料
+      // 為了要做日期的轉換
       due_date: '',
       tempCoupon: {
         // 乾脆全部都設定為必填畫面
@@ -126,10 +125,7 @@ export default {
     };
   },
   methods: {
-    addNewCouponCode() {
-      // 其實應該要先檢查有沒有必填沒填寫的？
-      // percent, is_enabled 型別錯誤
-      console.log(dayjs(this.due_date).unix());
+    addNewCoupon() {
       this.tempCoupon.due_date = dayjs(this.due_date).unix();
       this.tempCoupon.percent = Number(this.tempCoupon.percent);
       this.tempCoupon.is_enabled = Number(this.tempCoupon.is_enabled);
@@ -144,11 +140,34 @@ export default {
           console.dir(error, 'error');
         });
     },
+    // 編輯優惠券的部分
+    editCoupon() {
+      // id 的部分還沒找到
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupon/${this.tempCoupon.id}`;
+      this.axios
+        .put(requestUrl, { data: this.tempCoupon })
+        .then((response) => {
+          console.log(response, 'response');
+          const { success } = response.data;
+          if (success) {
+            this.$swal('成功編輯該張優惠券！');
+            this.getCouponList();
+            this.modal.hide();
+          }
+        })
+        .catch((error) => {
+          console.log(error, 'error');
+        });
+    },
+  },
+  watch: {
+    tempCoupon() {
+      this.due_date = dayjs.unix(this.tempCoupon.due_date).format('YYYY-MM-DD');
+    },
   },
   mounted() {
     // 這樣可以正常，但是 this.$dayjs 不會正常是為啥？
-    console.log('不寫 newDate 的版本', dayjs().unix());
-    console.log(dayjs.unix(1626268982).format('YYYY-MM-DD'));
+    this.modal = new Modal(this.$refs.modal);
   },
 };
 </script>
