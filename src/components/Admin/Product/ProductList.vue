@@ -106,7 +106,6 @@
     >
       <!-- 參考文章： https://medium.com/itsems-frontend/vue-slot-21e1ec9968f8 -->
       <!-- https://medium.com/unalai/%E8%A4%87%E7%94%A8%E5%85%83%E4%BB%B6%E7%9A%84%E5%A5%BD%E5%B9%AB%E6%89%8B-vue-slot-v-slot-scoped-slots-5364a0048ab7 -->
-      <!-- 或是考慮用 is 處理 -->
       <template v-slot:delete_item>產品：{{ targetItem.title }}</template>
       <template v-slot:delete_content>
         <!-- TODO  這邊的版面要重新寫過 -->
