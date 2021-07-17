@@ -15,7 +15,6 @@
       <p>NT$ {{ detail_data.price }}</p>
       <!-- 加入購物車、數量 -->
       <p>剩餘數量：{{ detail_data.num }}</p>
-
       <!-- 數量的 input -->
       <!-- 如果可購買量大於 0 才顯示 -->
       <template v-if="parseInt(detail_data.num) > 0">
@@ -111,8 +110,6 @@ export default {
     },
   },
   mounted() {
-    // 測試
-    console.log(this.detail_data);
   },
 };
 </script>

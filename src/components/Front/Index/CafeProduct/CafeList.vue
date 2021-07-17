@@ -1,8 +1,9 @@
 <template>
-  <!-- TODO  這塊可能會有重複，記得跟 Front 那邊比對，如果可以共用就放在 Core -->
-  <!-- NOTE  是首頁喔！ -->
   <div class="container-fluid cafe_list_block">
-    <h4><span class="material-icons-round">coffee</span>發現咖啡廳</h4>
+    <TitleComponent
+      title="＃發現咖啡廳"
+    />
+    <span class="material-icons-round">coffee</span>
     <p>一起看看哪些咖啡廳有提供優惠券吧！</p>
     <!-- 產品列表清單 -->
     <div class="list_wrap">
@@ -26,10 +27,12 @@
 
 <script>
 import CafeCardComponent from './CafeCard.vue';
+import TitleComponent from '../../../Core/Layout/Title/Title.vue';
 
 export default {
   name: 'CafeListComponent',
   components: {
+    TitleComponent,
     CafeCardComponent,
   },
   data() {

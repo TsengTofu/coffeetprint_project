@@ -1,8 +1,10 @@
 <template>
     <div class="container-fluid promotion_block">
       <div class="content">
-        <h4>編輯嚴選</h4>
-        <!-- 下面這個是 bootstrap 的輪播 -->
+        <TitleComponent
+          title="＃編輯嚴選"
+        />
+        <!-- bootstrap 的輪播 -->
         <div id="carouselExampleIndicators"
           class="carousel slide" data-bs-ride="carousel" ref="carousel">
           <div class="carousel-indicators">
@@ -100,13 +102,12 @@
 <script>
 import { Carousel } from 'bootstrap';
 import CafePromotionComponent from './CafePromotionCard.vue';
+import TitleComponent from '../../../Core/Layout/Title/Title.vue';
 
 export default {
-  name: 'CafePromotionCarouselComponent', // 都要加上後綴
-  // props: {
-  //     msg: String,
-  // },
+  name: 'CafePromotionCarouselComponent',
   components: {
+    TitleComponent,
     CafePromotionComponent,
   },
   data() {

@@ -61,23 +61,8 @@ export default {
     return {};
   },
   methods: {
-    getLocationDetail() {
-      const apiKey = 'AIzaSyCbpSIzbqpOjgsr9hmBcc9xvowFhCenqew';
-      const name = '品都';
-      // 透過搜索字串拿 ID
-      const requestUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${name}&inputtype=textquery&key=${apiKey}`;
-      // const requestUrl = `https://maps.googleapis.com/maps/api/place/details/json?input=${name}&inputtype=textquery&key=${apiKey}`;
-      this.axios.get(requestUrl)
-        .then((response) => {
-          console.log('hello', response);
-        })
-        .catch((error) => {
-          console.dir(error);
-        });
-    },
   },
   mounted() {
-    this.getLocationDetail();
   },
 };
 </script>

@@ -161,6 +161,17 @@
                   ></textarea>
                   <label for="product_content">折價券內容</label>
                 </li>
+                <!-- 這邊加上一個存放 json 格式的檔案 -->
+                <li class="single">
+                  <textarea
+                    id="product_place_api"
+                    type="text"
+                    placeholder="請輸入 GooglePlaceAPI json 資料"
+                    v-model="tempProduct.place_json"
+                  ></textarea>
+                  <label for="product_place_api">GooglePlaceAPI 的資料</label>
+                </li>
+                <!--  TODO  記得回來修正 -->
                 <li class="checkbox">
                   <div class="switch">
                     <input

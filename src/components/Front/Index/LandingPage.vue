@@ -3,11 +3,12 @@
     <div class="d-flex flex-column align-items-start title_block">
       <p class="main_title"><span class="material-icons-round">near_me</span>尋找你的咖啡廳</p>
       <p class="vice_title">還在煩惱要去哪發呆、聚餐、放鬆嗎？</p>
-      <div class="input-group searchbar">
-        <input type="text" class="form-control"
-          placeholder="請輸入欲搜索地區" aria-label="請輸入欲搜索地區" aria-describedby="button-addon2">
-        <button class="btn btn-primary" type="button" id="button-addon2">搜尋</button>
-      </div>
+      <button
+        type="button"
+        class="btn btn-primary"
+      >
+        探索咖啡廳
+      </button>
     </div>
   </div>
 </template>
@@ -30,7 +31,7 @@ export default {
   top: 0px
   z-index: 3
   background-position: center
-  background-image: url('../../../assets/images/index_bg.png')
+  background-image: url('../../../../public/index_bg.png')
   background-size: cover
   background-attachment: fixed
   display: block

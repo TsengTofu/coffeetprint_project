@@ -1,6 +1,9 @@
 <template>
   <div class="container-fluid explore_cafe_wrapper">
-    <h4><span class="material-icons-round">place</span>探索城市</h4>
+    <TitleComponent
+      title="＃探索城市"
+    />
+    <span class="material-icons-round">place</span>
     <p>一起探索各地的咖啡廳吧！</p>
     <!-- 區域選擇的清單 -->
     <div class="area_block">
@@ -13,6 +16,7 @@
 
 <script>
 import CityCafeCardComponent from './CityCafeCard.vue';
+import TitleComponent from '../../../Core/Layout/Title/Title.vue';
 
 // 專門給探索區塊用的
 export default {
@@ -20,6 +24,7 @@ export default {
   props: {},
   components: {
     CityCafeCardComponent,
+    TitleComponent,
   },
   data() {
     return {};

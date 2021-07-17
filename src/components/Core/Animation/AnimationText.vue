@@ -50,7 +50,7 @@ export default {
         opacity: 1,
         duration: 0.5,
         rotation: 0,
-        delay: el.dataset.index * 0.05,
+        delay: el.dataset.index * 0.08,
         ease: 'test',
         // ease: 'bounce', // 這邊可以自定義，但要額外上官網登入會員之後重新 npm install
         onComplete: done, // 告訴他結束
