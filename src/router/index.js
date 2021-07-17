@@ -33,6 +33,7 @@ const routes = [
         // ],
       },
       // 產品詳細頁
+      //  TODO  這邊是不是要改掉？
       {
         path: 'detail/:id',
         name: 'ProductDetail',
@@ -76,6 +77,18 @@ const routes = [
         path: '/favorite',
         name: 'Favorite',
         component: () => import('../views/Front/Favorite.vue'),
+      },
+      // 文章列表頁
+      {
+        path: '/posts',
+        name: 'Posts',
+        component: () => import('../views/Front/Post/Posts.vue'),
+      },
+      // 文章單頁面
+      {
+        path: '/post/detail/:id',
+        name: 'PostDetail',
+        component: () => import('../views/Front/Post/PostDetail.vue'),
       },
     ],
   },

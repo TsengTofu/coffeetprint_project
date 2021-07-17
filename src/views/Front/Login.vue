@@ -1,4 +1,3 @@
-<!-- 登入的畫面 -->
 <!-- 處理 cookie 會碰到的參考：https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie -->
 <template>
   <div>

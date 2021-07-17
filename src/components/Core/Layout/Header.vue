@@ -26,6 +26,9 @@
             <router-link to="/favorite" class="nav-link">收藏清單</router-link>
           </li>
           <li class="nav-item">
+            <router-link to="/posts" class="nav-link">文章列表</router-link>
+          </li>
+          <li class="nav-item">
             <button
               class="btn btn-primary"
               type="button"
