@@ -1,14 +1,17 @@
 <template>
   <CafeInfoComponent :detail_data="productDetail" />
+  <CafeContentComponent :detail_data="productDetail" />
 </template>
 <script>
 import CafeInfoComponent from '../../components/Front/CafeDetail/CafeInfo.vue';
+import CafeContentComponent from '../../components/Front/CafeDetail/CafeContent.vue';
 
 export default {
   name: '',
   props: [],
   components: {
     CafeInfoComponent,
+    CafeContentComponent,
   },
   data() {
     return {
