@@ -3,21 +3,20 @@
     <p>哈囉我是後台優惠券列表頁</p>
     <CouponListComponent
       :coupon_list="coupon_list"
-      :pagination="pagination" />
-    <!-- 這邊下面是編輯的區域 -->
-    <CouponCardComponent />
+      :pagination="pagination"
+      :getCouponList="getCouponList"
+      @emit-get-coupons="getCouponList"
+    />
   </div>
 </template>
 <script>
 import CouponListComponent from '../../components/Admin/Coupon/CouponList.vue';
-import CouponCardComponent from '../../components/Admin/Coupon/CouponCard.vue';
 
 export default {
   name: 'AdminCoupons',
   props: {},
   components: {
     CouponListComponent,
-    CouponCardComponent,
   },
   data() {
     return {
