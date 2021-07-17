@@ -1,10 +1,15 @@
 <template>
   <CafeInfoComponent :detail_data="productDetail" />
   <CafeContentComponent :detail_data="productDetail" />
+  <!-- 隨機的產品列表 -->
+  <!-- 不過他的資料要從哪裡來是個問題 -->
+  <RandomCafeListComponent />
+  <!--  TODO  需要有使用說明嗎？ -->
 </template>
 <script>
 import CafeInfoComponent from '../../components/Front/CafeDetail/CafeInfo.vue';
 import CafeContentComponent from '../../components/Front/CafeDetail/CafeContent.vue';
+import RandomCafeListComponent from '../../components/Front/RandomCafe/RandomCafeList.vue';
 
 export default {
   name: '',
@@ -12,6 +17,7 @@ export default {
   components: {
     CafeInfoComponent,
     CafeContentComponent,
+    RandomCafeListComponent,
   },
   data() {
     return {

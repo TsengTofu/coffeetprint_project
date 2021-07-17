@@ -53,7 +53,6 @@
         <!-- 或者，考慮用日期選取器 DatePicker？ -->
         <!--  TODO  還是說放在優化？ -->
         <li class="single">
-          <!-- 這邊要寫判斷 -->
           <input
             id="coupon_due_date"
             type="date"
@@ -61,7 +60,6 @@
             v-model="due_date"
           />
           <label for="coupon_due_date" class="text">優惠券到期日<span>*</span></label>
-          {{ due_date }}, {{ tempCoupon.due_date }}
           <span>格式請寫成：YYYY-MM-DD</span>
         </li>
         <!-- Code 折價券的填寫號碼 -->
