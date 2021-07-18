@@ -1,55 +1,88 @@
 <template>
-  <li class="col" @click="goToCafeDetail(singleCafe.id)">
+  <!-- 這是共用的 CafeCardComponent -->
+  <li class="col">
     <div class="card">
-      <div class="cafe_image">
-        <!--  TODO  這邊要改成 bg image -->
-        <img :src="singleCafe.imageUrl" class="card-img-top" alt="咖啡廳圖片" />
-        <button class="btn btn-primary" type="button">
-          <span class="material-icons-round">favorite_border</span>
+      <div
+        class="cafe_image"
+      >
+        <div
+          class="cafe_cover"
+          :style="{ backgroundImage: 'url(' + singleCafe.imageUrl + ')' }"
+        ></div>
+        <button
+          class="btn btn-primary d-flex"
+          type="button"
+          @click="toggleFavorite(singleCafe.id)"
+        >
+          <span
+            v-if="favorite_list.includes(singleCafe.id)"
+            class="material-icons-round">
+            favorite
+          </span>
+          <span
+            v-else
+            class="material-icons-round">
+            favorite_border
+          </span>
         </button>
       </div>
-      <div class="card-body">
+      <div class="card-body" @click="goToCafeDetail(singleCafe.id)">
         <div
-          class="card-title d-flex align-items-start flex-wrap flex-column justify-content-start">
-          <b class="category">{{ singleCafe.category }}</b>
-          <h5>
+          class="card-title d-flex align-items-start flex-wrap justify-content-start">
+          <b class="category">
+            <span
+              v-if="singleCafe.category === '餐廳'"
+              class="material-icons-round">restaurant</span>
+              <span
+                v-else
+                class="material-icons-round">
+                free_breakfast
+              </span>
+          </b>
+          <div class="right_title">
+            <h5>
             {{ singleCafe.title }}
-          </h5>
+            </h5>
+            <p class="d-flex stars">
+              <span v-for="(n, index) in parseInt(singleCafe.star_rate)"
+                :key="'star_' + index" class="material-icons-round">star</span>
+                <span v-for="(n, index) in (5 - parseInt(singleCafe.star_rate))"
+                :key="'star_' + index" class="material-icons-round">star_border</span>
+            </p>
+          </div>
         </div>
         <!-- 星星跟地點 -->
-        <div class="location_stars">
-          <p class="d-flex stars">
-            <span v-for="(n, index) in parseInt(singleCafe.star_rate)"
-              :key="'star_' + index" class="material-icons-round">star</span>
-              <span v-for="(n, index) in (5 - parseInt(singleCafe.star_rate))"
-              :key="'star_' + index" class="material-icons-round">star_border</span>
-          </p>
-          <p class="location">
-            <span class="material-icons-round">place</span>
-            {{ singleCafe.area }}｜台灣<b class="nearby">{{ singleCafe.nearby }}</b></p>
-        </div>
-        <p class="card-text" v-html="singleCafe.description"></p>
-        <!-- 剩下幾張與價格 -->
+        <p class="location d-flex align-items-center">
+          <span class="material-icons-round">place</span>
+          台灣｜{{ singleCafe.area }}<b class="nearby">{{ singleCafe.nearby }}</b></p>
         <div class="d-flex justify-content-between bottom_block">
-          <!-- 剩下幾張 -->
           <p class="rest_num">
             剩下 <span>{{ singleCafe.num }}</span> 張
           </p>
-          <!-- 價格 -->
           <p class="price">
-            NT$<span>{{ singleCafe.price }}</span>
+            NT$<span>{{ singleCafe.price.toLocaleString() }}</span>
           </p>
         </div>
-      </div>
-      <a
+        <a
         class="btn btn-primary d-flex justify-content-center add_to_cart"
         @click.prevent="addToCart(singleCafe.id)">
           <span class="material-icons-round">shopping_cart</span>加入購物車
-      </a>
+        </a>
+      </div>
     </div>
   </li>
 </template>
 <script>
+const localStorageMethods = {
+  save(favorite) {
+    const favoriteString = JSON.stringify(favorite);
+    localStorage.setItem('CoffeetPrintFavorite', favoriteString);
+  },
+  get() {
+    return JSON.parse(localStorage.getItem('CoffeetPrintFavorite'));
+  },
+};
+
 export default {
   name: 'CafeCardComponent',
   props: {
@@ -57,6 +90,7 @@ export default {
   },
   data() {
     return {
+      favorite_list: localStorageMethods.get() || [],
     };
   },
   methods: {
@@ -85,18 +119,44 @@ export default {
           console.log(error, 'getDataError');
         });
     },
+    // 加到我的最愛
+    toggleFavorite(id) {
+      if (this.favorite_list.includes(id)) {
+        this.favorite_list.splice(this.favorite_list.indexOf(id), 1);
+        this.$swal('已成功移除我的最愛！');
+      } else {
+        this.favorite_list.push(id);
+        this.$swal('已成功加入我的最愛！');
+      }
+      localStorageMethods.save(this.favorite_list);
+    },
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 <style scoped lang="sass">
 li
   // width: 25%
+  padding: .5rem
+  margin: .5rem 0
   .card
-    margin: 1rem
     border-radius: 16px
     .cafe_image
       position: relative
+      width: 100%
+      height: 200px
+      overflow: hidden
+      border-radius: 16px 16px 0 0
+      .cafe_cover
+        width: 100%
+        height: 200px
+        background-position: top
+        background-size: cover
+        transform: scale(1)
+        transition: all .5s
+        &:hover
+          transform: scale(1.15)
       button
         position: absolute
         top: 10px
@@ -106,30 +166,45 @@ li
         h5
           text-align: left
           margin: 0px
+          font-size: 16px
+          font-weight: bold
         .category
           padding: .2rem .5rem
           font-size: 12px
-          background: #000
+          background: #212529
           margin: 0px
-          border-radius: 16px
+          border-radius: 50%
           color: #fff
-      .location_stars
-        font-size: 12px
+          width: 38px
+          height: 38px
+          display: flex
+          justify-content: center
+          align-items: center
+          margin: 0 8px 0 0
+          span
+            font-size: 18px
         .stars
           margin: 0px
-        .location
-          .nearby
-            padding: 4px 8px
-            border-radius: 20px
-            border: 1px solid #000
           .material-icons-round
-            font-size: 12px
+            font-size: 18px
+      .location
+        font-size: 14px
+        margin: 0px
+        .nearby
+          padding: 1px 8px
+          border-radius: 20px
+          border: 1px solid #000
+          font-size: 12%
+          font-weight: normal
+          margin: 0 0 0 8px
+        .material-icons-round
+          font-size: 12px
       .card-text
         text-align: justify
         overflow: hidden
         text-overflow: ellipsis
         display: -webkit-box
-        -webkit-line-clamp: 3
+        -webkit-line-clamp: 2
         -webkit-box-orient: vertical
 
     .add_to_cart
@@ -137,5 +212,12 @@ li
       position: relative
       bottom: 0px
       left: 0px
-      border-radius: 0px 0px 16px 16px
+.bottom_block
+  font-size: 12px
+  p
+    margin: .5rem
+    span
+      font-weight: bold
+      font-size: 16px
+      color: #88664D
 </style>
