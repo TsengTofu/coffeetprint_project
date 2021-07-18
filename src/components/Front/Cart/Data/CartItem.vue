@@ -6,7 +6,6 @@
     <td>
       <p>{{ cart_item.product.title }}</p>
       <!--  FIXME  導到產品詳細頁，另開分頁，或是 popupModal？ -->
-      <p v-html="cart_item.product.description"></p>
       <button type="button" class="btn-primary"
         @click="showCafeDetail(cart_item.product.id)">詳細內容</button>
     </td>
