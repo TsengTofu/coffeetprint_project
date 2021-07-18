@@ -1,4 +1,5 @@
 <template>
+  <!-- 首頁的 cafe_list -->
   <div class="container-fluid cafe_list_block">
     <TitleComponent
       title="＃發現咖啡廳"
@@ -6,34 +7,21 @@
     <span class="material-icons-round">coffee</span>
     <p>一起看看哪些咖啡廳有提供優惠券吧！</p>
     <!-- 產品列表清單 -->
-    <div class="list_wrap">
-      <!-- 改變顯示方式 -->
-      <div class="change_layout">
-        <button type="button"><span class="material-icons-round">view_list</span></button>
-        <button type="button"><span class="material-icons-round">grid_view</span></button>
-      </div>
-      <ul class="list-unstyled row row-cols-1 row-cols-md-4 g-4">
-        <!-- 放卡片元件 -->
-        <template v-for="(cafe, key) in productData" :key="'cafe_'+ key">
-          <CafeCardComponent
-            v-if="key <= 7"
-            :singleCafe="cafe"
-            :order="key" />
-        </template>
-      </ul>
-    </div>
+    <!-- 改成從這邊倒進去 Data -->
+    <!-- 考慮一下這邊要不要用 Swiper -->
+    <CafeListComponent />
   </div>
 </template>
 
 <script>
-import CafeCardComponent from './CafeCard.vue';
 import TitleComponent from '../../../Core/Layout/Title/Title.vue';
+import CafeListComponent from '../../CafeProduct/CafeList.vue';
 
 export default {
-  name: 'CafeListComponent',
+  name: 'CafeListWrapperComponent',
   components: {
     TitleComponent,
-    CafeCardComponent,
+    CafeListComponent,
   },
   data() {
     return {
