@@ -29,13 +29,17 @@
       >
         <!-- 這邊的 template 不知道有沒有更好的寫法 -->
         <template v-slot:cafe_basic_info>
-          <!--  FIXME  不確定這裡能不能放 component -->
           餐廳基礎資訊
+          <BasicInfoComponent
+            :basic_info="basic_info"
+          />
         </template>
         <template v-slot:cafe_menu>
+          <!--  FIXME  餐廳菜單還沒處理 -->
           餐廳菜單
         </template>
         <template v-slot:coupon_content>
+          <!--  FIXME  折價券還沒處理 -->
           折價券的內容
         </template>
         <template v-slot:cafe_reviews>
@@ -51,22 +55,24 @@
 
 <script>
 import TabContentComponent from './TabContent.vue';
-// 先試試看引入元件
+import BasicInfoComponent from '../BasicInfo.vue';
 import ReviewListComponent from '../Reviews/ReviewList.vue';
 
 export default {
   name: 'TabWrapperComponent',
   props: {
     reviews: Array,
+    basic_info: Object,
   },
   components: {
     TabContentComponent,
+    BasicInfoComponent,
     ReviewListComponent,
   },
   data() {
     return {
       // 目前點擊到的
-      tab_name: '',
+      tab_name: 'cafe_basic_info',
       // 產品詳細頁會有的所有 tab
       tab_config_list: [
         {
