@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!-- 查一下怎麼改顏色，現在只有 active 會出現-->
+  <div class="tab_wrapper">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li
         class="nav-item" role="presentation"
@@ -107,3 +106,10 @@ export default {
   mounted() {},
 };
 </script>
+
+<style lang="sass" scoped>
+.tab_wrapper
+  width: 100%
+  max-width: 1200px
+  margin: 0 auto
+</style>

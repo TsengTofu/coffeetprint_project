@@ -49,7 +49,7 @@
 
       <button
         type="button"
-        class="btn-primary"
+        class="btn btn-primary"
         @click="addToCart(detail_data.id)"
       >
         <span class="material-icons-round">shopping_cart</span>
