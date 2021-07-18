@@ -92,12 +92,13 @@
         </tbody>
       </table>
     </div>
+    <!-- pagination 是為了要處理當下的頁面更新的問題 -->
     <ProductCardComponent
       ref="modal"
       id="myModal"
       :token="token"
       :status="status"
-      @emit-data="getData"
+      @emit-data="getData(current_page)"
     />
     <ConfirmModalComponent
       ref="confirm_modal"
@@ -154,6 +155,7 @@ export default {
       targetItem: {},
       status: '',
       pagination: {},
+      current_page: '',
       //  TODO  這邊還沒有做完
       // 分類的資料，這邊只做了一遍
       category_list: [],
@@ -197,6 +199,7 @@ export default {
             const { products, pagination } = response.data;
             this.productData = products;
             this.pagination = pagination;
+            this.current_page = this.pagination.current_page;
           } else {
             console.log('出了點錯誤，請稍後再嘗試，謝謝。');
           }
@@ -236,6 +239,7 @@ export default {
   mounted() {
     this.getAllCafeData();
     this.getData();
+    console.log('檢查一下 Token', this.token);
   },
 };
 </script>
