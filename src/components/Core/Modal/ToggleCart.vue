@@ -25,8 +25,12 @@
           :getCartList="getCartList"
         />
       </div>
-      <!-- 按鈕們 -->
-      <button type="button" class="btn-primary" @click="directToPage('cart')">訂單結帳</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        @click="directToPage('cart')">
+        訂單結帳
+      </button>
     </div>
   </div>
 </template>

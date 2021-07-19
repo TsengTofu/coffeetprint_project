@@ -1,14 +1,15 @@
 <!-- 購物車的畫面 -->
 <template>
-  <div class="cart_wrapper">
+  <div class="container cart_wrapper">
     <CheckoutStepComponent />
-    <div class="container d-flex cart_container">
+    <div class="d-flex cart_container">
       <CartListComponent
         :cart_list="cart_list"
         :getCartList="getCartList"
       />
-      <OrderSummaryComponent />
     </div>
+
+    <OrderSummaryComponent />
     <button type="button"
       :disabled="cart_list.length === 0"
       class="btn btn-primary"

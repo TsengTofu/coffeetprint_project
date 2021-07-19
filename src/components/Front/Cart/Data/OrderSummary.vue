@@ -12,15 +12,19 @@
         <p>其他折抵</p>
       </li>
     </ul>
+    <!-- 這邊放那個使用折扣的部分 -->
+    <UseCouponComponent />
   </div>
 </template>
 
 <script>
+import UseCouponComponent from '../UseCoupon.vue';
 
 export default {
   name: 'OrderSummaryComponent',
   props: {},
   components: {
+    UseCouponComponent,
   },
   data() {
     return {};

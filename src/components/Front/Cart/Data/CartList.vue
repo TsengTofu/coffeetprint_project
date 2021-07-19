@@ -1,31 +1,26 @@
 <template>
+  <!-- TODO  toggleCart 的部分改成其他版型好了，明天優先處理這個 -->
   <div class="cart_list_wrapper">
-    <!-- 加上刪除全部購物車的按鈕 -->
-    <button type="button"
-      class="btn btn-primary"
-      @click="clearAllCartList">
-      清空購物車
-    </button>
     <!-- 表格開始 -->
     <table class="table table-striped table-hover">
       <!-- 表頭 -->
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <!-- <th scope="col">分類</th> -->
-          <th scope="col">縮圖</th>
-          <!-- 分類跟品名放一起 -->
-          <th scope="col">品名</th>
+          <th width="60" scope="col">#</th>
+          <th width="400" scope="col">品名</th>
           <!-- 搭配 Modal，到期日放在產品詳細裡面 -->
-          <th scope="col">單價</th>
-          <th scope="col">數量</th>
-          <th scope="col">金額</th>
-          <th scope="col">刪除</th>
+          <th width="200" scope="col">單價</th>
+          <th width="200" scope="col">數量</th>
+          <th width="200" scope="col">金額</th>
+          <th width="200" scope="col">刪除</th>
         </tr>
       </thead>
       <tbody>
         <template v-if="cart_list.length > 0">
-          <tr v-for="(item, key) in cart_list" :key="'cart_' + key">
+          <tr
+            v-for="(item, key) in cart_list"
+            :key="'cart_' + key"
+          >
             <CartItemComponent
               :cart_item="item"
               :order="parseInt(key) + 1"
@@ -50,12 +45,18 @@
     </table>
     <!-- FIXME  目前購物車裡面有多少個東西 -->
     <p>購物車目前有 <span>{{ cart_list.length }}</span> 個產品</p>
+    <button type="button"
+      class="btn btn-primary"
+      @click="clearAllCartList">
+      清空購物車
+    </button>
     <!--  TODO  預備結帳 -->
   </div>
 </template>
 
 <script>
 import CartItemComponent from './CartItem.vue';
+// 思考一下要在哪裡放 Coupon 的 input
 
 export default {
   name: 'CartListComponent',
