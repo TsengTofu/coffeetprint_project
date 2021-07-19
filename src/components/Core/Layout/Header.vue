@@ -10,12 +10,23 @@
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        @click="toggleIsShow = true"
       >
+      <!-- FIXME  暫時解 -->
+      <!-- @click="toggleIsShow = true" -->
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- FIXME  暫時解 -->
+      <!-- :class="toggleIsShow ? 'show' : ''" -->
+      <div
+        class="collapse navbar-collapse"
+        :class="toggleIsShow ? 'show' : ''"
+        id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li
+            class="nav-item"
+            @click="toggleIsShow = false"
+          >
             <router-link to="/products" class="nav-link" aria-current="page">產品列表</router-link>
           </li>
           <li class="nav-item">
@@ -58,11 +69,16 @@ export default {
   //     msg: String,
   // },
   data() {
-    return {};
+    return {
+      toggleIsShow: false,
+    };
   },
-  methods: {
-  },
-  mounted() {
+  methods: {},
+  mounted() {},
+  watch: {
+    $route() {
+      this.toggleIsShow = false;
+    },
   },
 };
 </script>

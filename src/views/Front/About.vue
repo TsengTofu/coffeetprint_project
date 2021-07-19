@@ -40,15 +40,18 @@
     <!-- FAQ -->
     <FAQListComponent />
   </div>
+  <SubscribeComponent />
 </template>
 <script>
 // 引入常見問題的區塊
-import FAQListComponent from '../../components/Front/About/FAQList.vue';
+import FAQListComponent from '../../components/Front/About/FAQ/FAQList.vue';
+import SubscribeComponent from '../../components/Front/About/Subscribe/Subscribe.vue';
 
 export default {
   name: '',
   components: {
     FAQListComponent,
+    SubscribeComponent,
   },
   data() {
     return {};
@@ -60,7 +63,7 @@ export default {
 
 <style lang="sass" scoped>
 .about_wrapper
-  padding: 300px 0
+  padding: 300px 0 0
   .bg
     display: block
     width: 100%
