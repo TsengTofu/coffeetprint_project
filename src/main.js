@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 // 匯入 vee-validate 相關規則
 import {
   Field, Form, ErrorMessage, defineRule, configure,
@@ -42,6 +43,7 @@ const app = createApp(App);
 app.use(router);
 app.use(VueAxios, axios);
 app.use(VueSweetalert2);
+app.use(CKEditor);
 app.config.globalProperties.$dayjs = dayjs;
 
 // 註冊 vee-validate 三個全域元件
