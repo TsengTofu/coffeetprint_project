@@ -87,7 +87,7 @@ export default {
   width: 100%
   height: 400px
   display: block
-  background-image: url('../../../../../public/subscribe_bg.png')
+  background-image: url('../../../../../public/subscribe_bg.jpg')
   background-position: 0% 26%
   background-size: cover
   background-repeat: no-repeat

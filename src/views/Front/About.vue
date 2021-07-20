@@ -37,12 +37,14 @@
       </div>
     </div>
     <!--  TODO  拆元件結尾 -->
+    <FeatureIntroComponent />
     <!-- FAQ -->
     <FAQListComponent />
   </div>
   <SubscribeComponent />
 </template>
 <script>
+import FeatureIntroComponent from '../../components/Front/About/Feature/FeatureIntro.vue';
 // 引入常見問題的區塊
 import FAQListComponent from '../../components/Front/About/FAQ/FAQList.vue';
 import SubscribeComponent from '../../components/Front/About/Subscribe/Subscribe.vue';
@@ -50,6 +52,7 @@ import SubscribeComponent from '../../components/Front/About/Subscribe/Subscribe
 export default {
   name: '',
   components: {
+    FeatureIntroComponent,
     FAQListComponent,
     SubscribeComponent,
   },
@@ -67,7 +70,7 @@ export default {
   .bg
     display: block
     width: 100%
-    height: 800px
+    height: 620px
     background: #EBEBEB
     position: relative
     z-index: -1
@@ -75,7 +78,7 @@ export default {
       display: block
       background-size: cover
       background-position: center
-      background-image: url('../../../public/about_us_bg.png')
+      background-image: url('../../../public/about_us_bg.jpg')
       width: 1000px
       height: 500px
       position: absolute
