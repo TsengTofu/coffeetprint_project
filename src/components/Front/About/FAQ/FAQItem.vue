@@ -1,22 +1,32 @@
 <template>
-  <div>
-    <li>
+    <div class="card border-0">
+      <div
+        class="card-header py-4 bg-white border border-bottom-0
+          border-top border-start-0 border-end-0"
+        :id="'headingTwo_' + order"
+        data-bs-toggle="collapse"
+        :data-bs-target="'#collapseTwo_' + order"
+      >
         <div
-          class="question_block"
-          :class="isOpen ? 'active' : ''"
+          class="d-flex justify-content-between align-items-center pe-1 question_block"
           @click="toggleQuestion"
+          :class="isOpen ? 'active' : ''"
         >
-          <p>
-            Q{{order + 1}}. {{ faq_data.question }}
-            <span class="material-icons-round">expand_more</span>
-          </p>
+          <h4 class="mb-0">Q{{ order + 1 }}. {{ faq_data.question }}</h4>
+          <span class="material-icons-round">expand_more</span>
         </div>
-        <!-- 回答區塊 -->
-        <div class="answer_block" v-if="isOpen">
-          <p>{{ faq_data.answer }}</p>
+      </div>
+      <div
+        :id="'collapseTwo_' + order"
+        class="collapse"
+        :aria-labelledby="'headingTwo_' + order"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="card-body pb-5">
+          {{ faq_data.answer }}
         </div>
-      </li>
-  </div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -45,12 +55,10 @@ export default {
 
 <style lang="sass" scoped>
 .question_block
-  border-bottom: 1px solid #000
   .material-icons-round
     transform: rotate(0deg)
     transition: all .5s
   &.active
     .material-icons-round
       transform: rotate(180deg)
-
 </style>
