@@ -1,102 +1,70 @@
 <template>
-    <div class="container-fluid promotion_block">
-      <div class="content">
-        <TitleComponent
-          title="＃編輯嚴選"
-        />
-        <!-- bootstrap 的輪播 -->
-        <div id="carouselExampleIndicators"
-          class="carousel slide" data-bs-ride="carousel" ref="carousel">
-          <div class="carousel-indicators">
-            <button type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner">
-            <!-- 這段之後要改成 v-for -->
-            <div class="carousel-item active">
-              <CafePromotionComponent />
-            </div>
-            <div class="carousel-item">
-              <CafePromotionComponent />
-            </div>
-            <div class="carousel-item">
-              <CafePromotionComponent />
-            </div>
-          </div>
-          <button class="carousel-control-prev"
-            type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next"
-            type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+  <div class="container-fluid promotion_block">
+    <div class="content">
+      <TitleComponent title="＃編輯嚴選" />
+      <!-- bootstrap 的輪播 -->
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-bs-ride="carousel"
+        ref="carousel"
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
         </div>
-        <!--  TODO  插入輪播卡片 -->
-        <!-- <ul>
-          <li>
-            <div class="cafe_image">
-              <img src="../../assets/images/cafe_default/cafe_default.jpg" alt="" />
-            </div>
-            <div class="cafe_info">
-              <p class="cafe_title"><span class="material-icons-round">schedule</span>不限時咖啡廳</p>
-              <div class="tags">
-                <ul>
-                  <li>#工作去處</li>
-                  <li>#躲避同事</li>
-                  <li>#食物美味</li>
-                </ul>
-              </div>
-              <p class="describle">找朋友瞎聊卻找不到好地點嗎？</p>
-              <button>more ></button>
-            </div>
-          </li>
-          <li>
-            <div class="cafe_image">
-              <img src="../../assets/images/cafe_default/cafe_default_2.jpg" alt="" />
-            </div>
-            <div class="cafe_info">
-              <p class="cafe_title"><span class="material-icons-round">pets</span>寵物咖啡廳</p>
-              <div class="tags">
-                <ul>
-                  <li>#放鬆去處</li>
-                  <li>#療癒可愛</li>
-                  <li>#坐擁貓狗</li>
-                </ul>
-              </div>
-              <p class="describle">上班壓力大？去寵物咖啡廳療癒身心</p>
-              <button>more ></button>
-            </div>
-          </li>
-          <li>
-            <div class="cafe_image">
-              <img src="../../assets/images/cafe_default/cafe_default_3.jpg" alt="" />
-            </div>
-            <div class="cafe_info">
-              <p class="cafe_title"><span class="material-icons-round">auto_awesome</span>熱門咖啡廳</p>
-              <div class="tags">
-                <ul>
-                  <li>#時下最夯</li>
-                  <li>#打卡熱點</li>
-                  <li>#饕客推推</li>
-                </ul>
-              </div>
-              <p class="describle">讓人想跟風一探究竟！</p>
-              <button>more ></button>
-            </div>
-          </li>
-        </ul> -->
+        <div class="carousel-inner">
+          <!-- item 要記得加上 active -->
+          <div
+            class="carousel-item"
+            v-for="(post, key) in post_list"
+            :class="key === 0 ? 'active' : ''"
+            :key="'post_' + key"
+          >
+            <CafePromotionComponent
+              :post_data="post"
+            />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -111,11 +79,31 @@ export default {
     CafePromotionComponent,
   },
   data() {
-    return {};
+    return {
+      // 貼文的資料
+      post_list: [],
+    };
   },
-  methods: {},
+  methods: {
+    //  FIXME  取得文章列表資料
+    // 有必要的話，再把這支 function 放到外層，從外面傳資料進來
+    getPostList() {
+      // page 參數要記得加進來
+      console.log('有執行到我');
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/articles?page=1`;
+      this.axios.get(requestUrl)
+        .then((response) => {
+          console.log(response, 'response');
+          this.post_list = response.data.articles;
+        })
+        .catch((error) => {
+          console.log(error, 'error');
+        });
+    },
+  },
   mounted() {
     this.carousel = new Carousel(this.$refs.carousel);
+    this.getPostList();
   },
 };
 </script>
@@ -288,5 +276,4 @@ export default {
                               padding: 6px 8px
                               &:hover
                                   transform: translateY(0px)
-
 </style>

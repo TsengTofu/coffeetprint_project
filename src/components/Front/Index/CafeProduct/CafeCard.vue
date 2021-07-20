@@ -73,6 +73,7 @@
   </li>
 </template>
 <script>
+//  TODO  這段之後要抽出來處理 LocalStorage 的部分
 const localStorageMethods = {
   save(favorite) {
     const favoriteString = JSON.stringify(favorite);
