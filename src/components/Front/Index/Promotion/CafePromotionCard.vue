@@ -1,11 +1,11 @@
 <template>
   <!-- 這段要改用資料的方式傳遞 -->
-  <div class="d-flex cafe_promotion_card_wrapper">
-    <div class="image"
+  <div class="d-flex cafe_promotion_card_wrapper row">
+    <div class="image col-xxl-5 col-sm-12"
       :style="{ backgroundImage: 'url(' + post_data.imageUrl + ')' }"
     >
     </div>
-    <div class="info_block">
+    <div class="info_block col-xxl-5 col-sm-12">
       <!-- 上半部 -->
       <div class="top_block d-flex flex-column align-items-start">
         <p class="main_title" v-html="post_data.title"></p>
@@ -65,12 +65,11 @@ export default {
 .cafe_promotion_card_wrapper
   .image
     display: block
-    width: 100%
-    max-width: 562px
-    // background-attachment: fixed
-    background-position: center
+    // width: 100%
+    width: 562px
+    height: 425px
+    background-position: 0% 80%
     background-size: cover
-    // overflow: hidden
     border-radius: 16px
     img
       width: 100%
