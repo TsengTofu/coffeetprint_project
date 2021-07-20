@@ -142,7 +142,13 @@ const routes = [
       {
         path: 'posts',
         name: '',
-        component: () => import('../views/Admin/AdminPosts.vue'),
+        component: () => import('../views/Admin/AdminPost/AdminPosts.vue'),
+      },
+      // 文章編輯頁面
+      {
+        path: 'post/detail/:id',
+        name: '',
+        component: () => import('../views/Admin/AdminPost/AdminPostDetail.vue'),
       },
     ],
   },

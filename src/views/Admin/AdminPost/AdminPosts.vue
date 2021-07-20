@@ -3,19 +3,16 @@
   <div>
     <p>哈囉我是後台貼文頁面</p>
     <PostListComponent />
-    <PostCardComponent />
   </div>
 </template>
 <script>
-import PostListComponent from '../../components/Admin/Post/PostList.vue';
-import PostCardComponent from '../../components/Admin/Post/PostCard.vue';
+import PostListComponent from '../../../components/Admin/Post/PostList.vue';
 
 export default {
   name: 'AdminPosts',
   props: {},
   components: {
     PostListComponent,
-    PostCardComponent,
   },
   data() {
     return {};
