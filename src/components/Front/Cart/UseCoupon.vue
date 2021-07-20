@@ -18,7 +18,7 @@
           class="btn btn-secondary"
           type="button"
           id="button-addon2"
-          :disabled="subscribe_email === ''"
+          :disabled="coupon_code === ''"
           @click="getDiscount"
         >
           套用
@@ -42,21 +42,20 @@ export default {
   },
   methods: {
     getDiscount() {
-      console.log('有套用優惠券喔', this.coupon_code);
-      // const requestUrl = ``;
-      // this.axios.post()
-      // 寫一下
-      // 相關的 API
-      //       percent 會轉數字格式
-      // [API]: /api/:api_path/coupon
-      // [方法]: post
-      // [說明]: Coupon 套用時，全部統一套用
-      // [參數]: @api_path: 'thisismycourse2'
-      // {
-      //     "data": {
-      //       "code": "testCode"
-      //     }
-      //   }
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/coupon`;
+      this.axios.post(requestUrl, { data: { code: this.coupon_code } })
+        .then((response) => {
+          const { success, message } = response.data;
+          if (success) {
+            this.$swal(message);
+            // 通知外層更新資料
+            this.emitter.emit('updateCartList');
+          } else {
+            this.$swal(message);
+          }
+        }).catch((error) => {
+          console.log(error, 'error');
+        });
     },
   },
   mounted() {},

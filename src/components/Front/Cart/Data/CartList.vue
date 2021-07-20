@@ -93,9 +93,7 @@ export default {
     },
   },
   mounted() {
-    // 剛開始渲染的時候
-    console.log(this.cart_list, this.getCartList);
-    // this.getCartList();
+    console.log(this.cart_list);
   },
 };
 </script>

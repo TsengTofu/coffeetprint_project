@@ -4,16 +4,18 @@
     <ul class="list-unstyled">
       <li>
         <p>商品總計</p>
+        <p>NT$ <span>{{ total }}</span></p>
       </li>
       <li>
-        <p>運費總計</p>
+        <p>使用折價券折抵</p>
+         <UseCouponComponent />
+         <!--  TODO  這邊是否要顯示相關優惠券資訊呢？ -->
       </li>
       <li>
-        <p>其他折抵</p>
+        <p>結帳總金額</p>
+        <p>NT$ <span>{{ final_total }}</span></p>
       </li>
     </ul>
-    <!-- 這邊放那個使用折扣的部分 -->
-    <UseCouponComponent />
   </div>
 </template>
 
@@ -22,7 +24,10 @@ import UseCouponComponent from '../UseCoupon.vue';
 
 export default {
   name: 'OrderSummaryComponent',
-  props: {},
+  props: {
+    final_total: Number,
+    total: Number,
+  },
   components: {
     UseCouponComponent,
   },
@@ -34,7 +39,6 @@ export default {
 
 <style scoped lang="sass">
 .order_summary_wrapper
-  width: 20%
   border-radius: 16px
   background: #F7F5F4
   overflow: hidden
