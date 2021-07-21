@@ -79,9 +79,7 @@ export default {
         .delete(requestUrl)
         .then((response) => {
           if (response.data.success) {
-            //  FIXME  這邊之後要加上提示文字
-            console.log('成功抓到購物車列表的資料', response.data.data);
-            alert('已清空購物車');
+            this.$swal('已清空購物車');
             this.getCartList();
           } else {
             console.log('出了點錯誤，請稍後再嘗試，謝謝。');

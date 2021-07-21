@@ -24,8 +24,11 @@
         <p>網友評論</p>
         <div class="d-flex comment_block">
           <!-- 頭像 -->
-          <div class="avatar_image">
-            <img :src="post_data.avatar" alt="">
+          <div class="user">
+            <div class="avatar_image">
+              <img :src="post_data.avatar" alt="">
+            </div>
+            <p>{{ post_data.author }}</p>
           </div>
           <!-- 咖啡廳相關資訊介紹 -->
           <div class="comment_detail">
@@ -38,10 +41,16 @@
               <p>{{ post_data.nearby }}</p>
             </div>
             <p>{{ post_data.suggestion }}</p>
+            <!--  TODO  建立時間要轉成日期 -->
+            <figcaption>{{ $dayjs.unix(post_data.create_at).format('YYYY-MM-DD') }}</figcaption>
           </div>
         </div>
-        <button class="btn btn-primary" type="button">
-          點我看更多<span class="material-icons-round">keyboard_arrow_right</span></button>
+        <button
+          class="btn btn-primary d-flex" type="button"
+        >
+          點我看更多
+          <span class="material-icons-round">keyboard_arrow_right</span>
+        </button>
       </div>
     </div>
   </div>

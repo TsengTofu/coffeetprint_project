@@ -3,7 +3,13 @@
   <div class="container-fluid">
     <!-- <img src="../../assets/images/404/error.svg" alt=""> -->
     <div class="error_image"></div>
-    <button class="btn btn-primary">回首頁</button>
+    <button
+      class="btn btn-primary"
+      type="button"
+      @click="directToPage()"
+    >
+      回首頁
+    </button>
   </div>
   <FooterComponent/>
 </template>
@@ -18,6 +24,11 @@ export default {
   components: {
     HeaderComponent,
     FooterComponent,
+  },
+  methods: {
+    directToPage() {
+      this.$router.push('/');
+    },
   },
   mounted() {
   },

@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="container">
+    <!-- detail_data 也要一起傳進來嗎？ -->
     <TabWrapperComponent
       :reviews="reviews"
       :basic_info="basic_info"
+      :detail_data="detail_data"
     />
     <p>折價券使用須知</p>
     <iframe
@@ -68,7 +70,11 @@ export default {
       this.basic_info.photos = photos;
       this.basic_info.price_level = priceLevel;
       this.basic_info.rating = rating;
-      this.basic_info.opening_hours = openingHours;
+      // 這邊型別怪怪的
+      this.basic_info.opening_hours = openingHours.weekday_text.map((element) => {
+        const openingData = element.replace(':', ' ').split('  ');
+        return { days: openingData[0], time: openingData[1] };
+      });
       this.basic_info.website = website;
       this.basic_info.formatted_address = formattedAddress;
       this.basic_info.formatted_phone_number = formattedPhoneNumber;

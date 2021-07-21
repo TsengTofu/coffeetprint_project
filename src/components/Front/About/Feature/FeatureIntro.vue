@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid feature_wrapper">
-    <ul class="list-unstyled d-flex flex-column">
+    <ul class="list-unstyled">
       <!-- 第一組 -->
-      <li class="d-flex">
-        <div class="feature_image img-fluid"></div>
-        <div class="feature_describe">
+      <li class="row">
+        <div class="feature_image img-fluid col-5"></div>
+        <div class="feature_describe col-5">
           <p class="title">走！一起去咖啡廳吃早餐呀！</p>
           <p
             class="describe"
@@ -22,8 +22,8 @@
         </div>
       </li>
       <!-- 第二組 -->
-      <li class="d-flex">
-        <div class="feature_describe">
+      <li class="row">
+        <div class="feature_describe col-6">
           <p class="title">還沒睡醒嗎？那來份早午餐吧！</p>
           <p
             class="describe"
@@ -39,7 +39,7 @@
             約朋友一起吃早餐
           </button>
         </div>
-        <div class="feature_image_second img-fluid"></div>
+        <div class="feature_image_second img-fluid col-6"></div>
       </li>
     </ul>
     <!-- <img src="" class="rounded float-start" alt="..."> -->
@@ -74,10 +74,7 @@ export default {
       height: 150px
       position: absolute
       top: -130px
-      z-index: -1
-ul
-  li
-    width: 100%
+      z-index: 1
 .feature_describe
   width: 50%
   padding: 4rem

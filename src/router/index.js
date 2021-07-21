@@ -204,7 +204,8 @@ const router = createRouter({
     // savedPosition 可為空
     // 可以在這裡判斷在某些特定的頁面要 scroll 到特定位置
     return {
-      // top: ,
+      top: 0,
+      behavior: 'smooth',
     };
   },
 });

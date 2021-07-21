@@ -1,18 +1,20 @@
 <template>
-  <div class="container-fluid d-flex info_wrapper">
+  <div class="container info_wrapper row">
     <!-- 我是產品詳細頁上半部的卡片 -->
-    <div class="left_image">
-      <img :src="detail_data.imageUrl" alt="咖啡廳主圖" />
-    </div>
-    <div class="right_info">
-      <h3>{{ detail_data.title }}</h3>
-      <p>{{ detail_data.id }}</p>
+    <SwiperModalComponent
+      class="col-7"
+      :pic_list="cafe_image_list"
+    />
+    <div class="right_info col-5">
+      <h3>
+        <span>{{ detail_data.category }}</span>
+        {{ detail_data.title }}
+      </h3>
+      <small>{{ detail_data.id }}</small>
       <p><span class="material-icons-round">place</span>{{ detail_data.area }}｜台灣</p>
-      <p>{{ detail_data.category }}</p>
       <p v-html="detail_data.content"></p>
-      <p v-html="detail_data.description"></p>
-      <p>NT$ {{ detail_data.origin_price }}</p>
-      <p>NT$ {{ detail_data.price }}</p>
+      <p>NT$ {{ detail_data.origin_price.toLocaleString() }}</p>
+      <p>NT$ {{ detail_data.price.toLocaleString() }}</p>
       <!-- 加入購物車、數量 -->
       <p>剩餘數量：{{ detail_data.num }}</p>
       <!-- 數量的 input -->
@@ -22,16 +24,18 @@
           <button
             type="button"
             class="btn btn-outline-secondary"
-            :class="item_qty === 1 ? 'disabled': ''"
-            @click="modifyNum('minus')">
+            :class="item_qty === 1 ? 'disabled' : ''"
+            @click="modifyNum('minus')"
+          >
             <span class="material-icons-round">remove</span>
           </button>
           <input type="text" class="form-control" :value="item_qty" aria-label="數量" />
           <button
             class="btn btn-outline-secondary"
-            :class="item_qty === parseInt(detail_data.num) ? 'disabled': ''"
+            :class="item_qty === parseInt(detail_data.num) ? 'disabled' : ''"
             type="button"
-            @click="modifyNum('add')">
+            @click="modifyNum('add')"
+          >
             <span class="material-icons-round">add</span>
           </button>
         </div>
@@ -47,11 +51,7 @@
         </div>
       </template>
 
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click="addToCart(detail_data.id)"
-      >
+      <button type="button" class="btn btn-primary" @click="addToCart(detail_data.id)">
         <span class="material-icons-round">shopping_cart</span>
         加入購物車
       </button>
@@ -60,14 +60,21 @@
 </template>
 
 <script>
+import SwiperModalComponent from '../../Core/Swiper/SwiperModal.vue';
+
 export default {
   name: 'CafeInfoComponent',
   props: {
     detail_data: Object,
   },
+  components: {
+    SwiperModalComponent,
+  },
   data() {
     return {
       item_qty: 1,
+      // 設定最後的圖片傳入
+      cafe_image_list: [],
     };
   },
   methods: {
@@ -111,15 +118,17 @@ export default {
   },
   mounted() {
   },
+  watch: {
+    detail_data() {
+      this.cafe_image_list.push(this.detail_data.imageUrl);
+      if (this.detail_data.imagesUrl) {
+        this.cafe_image_list.concat(this.detail_data.imagesUrl);
+      }
+    },
+  },
 };
 </script>
 <style scoped lang="sass">
-.info_wrapper
-  margin: 120px 0
-.left_image
-  width: 35%
-  img
-    width: 100%
-    height: auto
 .right_info
+  width: 40%
 </style>

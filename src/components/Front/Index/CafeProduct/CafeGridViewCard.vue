@@ -1,6 +1,8 @@
 <template>
   <li>
-    <div class="card" style="max-width: 540px;">
+    <div class="card"
+    @click="goToCafeDetail(singleCafe.id)"
+      style="max-width: 540px;">
       <div class="row g-0">
         <div class="col-md-6 image">
           <div
@@ -10,7 +12,7 @@
           <button
             class="btn btn-primary add_to_favorite d-flex"
             type="button"
-            @click="toggleFavorite(singleCafe.id)"
+            @click.stop="toggleFavorite(singleCafe.id)"
           >
             <span v-if="favorite_list.includes(singleCafe.id)" class="material-icons-round">
               favorite
@@ -63,9 +65,10 @@
               </div>
               <button
                 class="btn btn-primary d-flex justify-content-center align-items-center add_to_cart"
-                @click.prevent="addToCart(singleCafe.id)"
+                @click.stop="addToCart(singleCafe.id)"
               >
-                <span class="material-icons-round">shopping_cart</span>我要購買
+                <span class="material-icons-round">shopping_cart</span>
+                我要購買
               </button>
             </div>
           </div>

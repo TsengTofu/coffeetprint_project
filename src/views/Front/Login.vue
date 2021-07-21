@@ -10,8 +10,18 @@ import LoginFormComponent from '../../components/Front/Login/LoginForm.vue';
 
 export default {
   name: 'Login',
+  props: {},
   components: {
     LoginFormComponent,
+  },
+  data() {
+    return {};
+  },
+  mounted() {
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)HexSchoolAPIToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    if (token) {
+      this.$router.push('/admin');
+    }
   },
 };
 </script>

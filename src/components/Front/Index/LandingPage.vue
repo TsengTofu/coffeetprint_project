@@ -6,6 +6,7 @@
       <button
         type="button"
         class="btn btn-primary"
+        @click="directToPage('products')"
       >
         探索咖啡廳
       </button>
@@ -21,7 +22,11 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    directToPage(pageName) {
+      this.$router.push(`/${pageName}`);
+    },
+  },
 };
 </script>
 

@@ -28,9 +28,9 @@
       >
         <!-- 這邊的 template 不知道有沒有更好的寫法 -->
         <template v-slot:cafe_basic_info>
-          餐廳基礎資訊
           <BasicInfoComponent
             :basic_info="basic_info"
+            :detail_data="detail_data"
           />
         </template>
         <template v-slot:cafe_menu>
@@ -62,6 +62,7 @@ export default {
   props: {
     reviews: Array,
     basic_info: Object,
+    detail_data: Object,
   },
   components: {
     TabContentComponent,
@@ -109,7 +110,7 @@ export default {
 
 <style lang="sass" scoped>
 .tab_wrapper
-  width: 100%
-  max-width: 1200px
-  margin: 0 auto
+  // width: 100%
+  // max-width: 1200px
+  // margin: 0 auto
 </style>

@@ -12,7 +12,7 @@
         <!--  FIXME  導到產品詳細頁，另開分頁，或是 popupModal？ -->
         <button
           type="button"
-          class="btn-primary"
+          class="btn btn-primary"
           @click="showCafeDetail(cart_item.product.id)">
           詳細內容
         </button>
@@ -77,8 +77,6 @@ export default {
       });
     },
     modifyNum(operation, cartItemId) {
-      // operation
-      console.log(operation);
       if (operation === 'add') {
         this.item_qty += 1;
       } else {
@@ -90,7 +88,6 @@ export default {
         }
       }
       this.updateCartItemNum(cartItemId);
-      //  NOTE  接著才處理 put api
     },
     updateCartItemNum(cartItemId) {
       console.log('更新購物車');

@@ -1,12 +1,16 @@
 <template>
-  <CafeInfoComponent :detail_data="productDetail" />
-  <CafeContentComponent :detail_data="productDetail" />
-  <!-- 隨機的產品列表 -->
-  <!-- 不過他的資料要從哪裡來是個問題 -->
-  <RandomCafeListComponent />
-  <!--  TODO  需要有使用說明嗎？ -->
+  <div class="container detail_wrapper">
+    <BreadCrumbComponent />
+    <CafeInfoComponent :detail_data="productDetail" />
+    <CafeContentComponent :detail_data="productDetail" />
+    <!-- 隨機的產品列表 -->
+    <!-- 不過他的資料要從哪裡來是個問題 -->
+    <RandomCafeListComponent />
+    <!--  TODO  需要有使用說明嗎？ -->
+  </div>
 </template>
 <script>
+import BreadCrumbComponent from '../../components/Core/BreadCrumb/BreadCrumb.vue';
 import CafeInfoComponent from '../../components/Front/CafeDetail/CafeInfo.vue';
 import CafeContentComponent from '../../components/Front/CafeDetail/CafeContent.vue';
 import RandomCafeListComponent from '../../components/Front/RandomCafe/RandomCafeList.vue';
@@ -15,6 +19,7 @@ export default {
   name: '',
   props: [],
   components: {
+    BreadCrumbComponent,
     CafeInfoComponent,
     CafeContentComponent,
     RandomCafeListComponent,
@@ -53,5 +58,6 @@ export default {
 };
 </script>
 <style scoped lang="sass">
-
+.detail_wrapper
+  padding: 100px 0 0 0
 </style>

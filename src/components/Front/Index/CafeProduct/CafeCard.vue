@@ -1,7 +1,7 @@
 <template>
   <!-- 這是共用的 CafeCardComponent -->
   <li class="col">
-    <div class="card">
+    <div class="card" @click="goToCafeDetail(singleCafe.id)">
       <div
         class="cafe_image"
       >
@@ -12,7 +12,7 @@
         <button
           class="btn btn-primary d-flex"
           type="button"
-          @click="toggleFavorite(singleCafe.id)"
+          @click.stop="toggleFavorite(singleCafe.id)"
         >
           <span
             v-if="favorite_list.includes(singleCafe.id)"
@@ -26,7 +26,7 @@
           </span>
         </button>
       </div>
-      <div class="card-body" @click="goToCafeDetail(singleCafe.id)">
+      <div class="card-body">
         <div
           class="card-title d-flex align-items-start flex-wrap justify-content-start">
           <b class="category">
@@ -63,11 +63,11 @@
             NT$<span>{{ singleCafe.price.toLocaleString() }}</span>
           </p>
         </div>
-        <a
-        class="btn btn-primary d-flex justify-content-center add_to_cart"
-        @click.prevent="addToCart(singleCafe.id)">
+        <button
+          class="btn btn-primary d-flex justify-content-center add_to_cart"
+          @click.stop="addToCart(singleCafe.id)">
           <span class="material-icons-round">shopping_cart</span>加入購物車
-        </a>
+        </button>
       </div>
     </div>
   </li>
