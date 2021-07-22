@@ -33,7 +33,7 @@
             <td colspan="8">
               <div class="content d-flex flex-column align-items-center">
                 <p>現在購物車沒有任何東西喔！</p>
-                <div class="image">
+                <div class="image col-1">
                   <img src="../../../../assets/images/empty_cart.svg" alt="">
                 </div>
                 <button type="button" class="btn btn-primary">繼續購物</button>
@@ -44,12 +44,14 @@
       </tbody>
     </table>
     <!-- FIXME  目前購物車裡面有多少個東西 -->
-    <p>購物車目前有 <span>{{ cart_list.length }}</span> 個產品</p>
+   <div class="summary_block">
+      <p>購物車目前有 <span>{{ cart_list.length }}</span> 個產品</p>
     <button type="button"
       class="btn btn-primary"
       @click="clearAllCartList">
       清空購物車
     </button>
+   </div>
     <!--  TODO  預備結帳 -->
   </div>
 </template>
@@ -102,9 +104,9 @@ export default {
     td
       width: 100%
       .image
-        width: 50%
         img
           width: 100%
           height: auto
-
+  .summary_block
+    text-align: justify
 </style>

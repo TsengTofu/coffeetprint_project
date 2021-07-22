@@ -1,5 +1,6 @@
 <template>
   <div class="user_order_info_wrapper">
+    <CheckoutStepComponent />
     <h4>填寫預訂資料</h4>
     <Form v-slot="{ errors }" @submit="onSubmit">
       <div class="mb-3">
@@ -85,11 +86,15 @@
 </template>
 
 <script>
+import CheckoutStepComponent from '../CheckoutStep.vue';
+
 export default {
   name: 'CustomerOrderFormComponent',
   // emits: [''],
   props: {},
-  components: {},
+  components: {
+    CheckoutStepComponent,
+  },
   data() {
     return {
       form: {

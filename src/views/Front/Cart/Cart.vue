@@ -2,7 +2,7 @@
 <template>
   <div class="container cart_wrapper">
     <CheckoutStepComponent />
-    <div class="d-flex cart_container">
+    <div class="cart_container">
       <CartListComponent
         :cart_list="cart_list"
         :getCartList="getCartList"

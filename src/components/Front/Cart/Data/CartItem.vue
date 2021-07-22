@@ -66,12 +66,13 @@ export default {
   methods: {
     // 刪除購物車其中一個
     deleteCurrentCartItem(cartItemId) {
-      console.log('有刪除到我的意思');
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${cartItemId}`;
       this.axios.delete(requestUrl).then((response) => {
-        console.log(response, '看一下回傳的是什麼');
-        this.$emit('getData');
-        //  TODO  就算成功刪除，也要回去購物車列表頁重新拿一次購物車列表
+        const { success } = response.data;
+        if (success) {
+          this.$swal('已成功刪除！');
+          this.$emit('getData');
+        }
       }).catch((error) => {
         console.log('抓到錯誤囉！', error);
       });

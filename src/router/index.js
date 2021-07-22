@@ -58,13 +58,6 @@ const routes = [
         name: 'Order',
         component: () => import('../views/Front/Cart/OrderPayment.vue'),
       },
-      // 訂單完成
-      //  TODO  這邊是不是也要帶一下 id
-      {
-        path: 'order/complete',
-        name: '',
-        component: () => import('../views/Front/Cart/OrderComplete.vue'),
-      },
       // 關於我們
       {
         path: '/about',

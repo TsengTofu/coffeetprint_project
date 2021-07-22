@@ -39,11 +39,4 @@ export default {
 
 <style scoped lang="sass">
 .order_summary_wrapper
-  border-radius: 16px
-  background: #F7F5F4
-  overflow: hidden
-  > p
-    background: #000
-    color: #FFF
-    padding: 1rem
 </style>

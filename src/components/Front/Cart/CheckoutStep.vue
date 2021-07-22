@@ -1,22 +1,22 @@
 <template>
   <div class="checkout_step_wrapper">
-    <ul>
-      <li>
+    <ul class="row">
+      <li class="col-3">
         <span class="material-icons">shopping_cart</span>
         <span>STEP.1</span>
         <p>確認購物車</p>
       </li>
-      <li>
+      <li class="col-3">
         <span class="material-icons">format_list_bulleted</span>
         <span>STEP.2</span>
         <p>填寫預定資料</p>
       </li>
-      <li>
+      <li class="col-3">
         <span class="material-icons">local_post_office</span>
         <span>STEP.3</span>
         <p>確認結帳</p>
       </li>
-      <li>
+      <li class="col-3">
         <span class="material-icons">done</span>
         <span>STEP.4</span>
         <p>訂購成功</p>
@@ -44,10 +44,10 @@ export default {
     display: flex
     li
       display: flex
-      width: 20%
+      // width: 20%
       flex-direction: column
       align-items: center
-      margin: 0 90px 0 0
+      // margin: 0 90px 0 0
       position: relative
       &:after
         content: ""
@@ -55,7 +55,7 @@ export default {
         top: 49px
         right: -60px
         display: block
-        width: 80px
+        width: 5rem
         height: 2px
         background: #000
       &:last-child
