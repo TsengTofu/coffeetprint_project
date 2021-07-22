@@ -1,22 +1,21 @@
-<template>
-  <div class="container info_wrapper row">
+<template v-if="detail_data">
+  <div class="container info_wrapper">
     <!-- 我是產品詳細頁上半部的卡片 -->
-    <SwiperModalComponent
-      class="col-7"
+    <div class="row">
+      <SwiperModalComponent
+      class="col-sm-6"
       :pic_list="cafe_image_list"
     />
-    <div class="right_info col-5">
-      <h3>
-        <span>{{ detail_data.category }}</span>
-        {{ detail_data.title }}
-      </h3>
+    <div class="right_info col-sm-6">
+      <h3 class="d-flex align-items-center">
+        <p class="category">{{ detail_data.category }}</p>{{ detail_data.title }}</h3>
       <small>{{ detail_data.id }}</small>
       <p><span class="material-icons-round">place</span>{{ detail_data.area }}｜台灣</p>
-      <p v-html="detail_data.content"></p>
-      <p>NT$ {{ detail_data.origin_price.toLocaleString() }}</p>
-      <p>NT$ {{ detail_data.price.toLocaleString() }}</p>
+      <!-- <p v-html="detail_data.content"></p> -->
+      <p>NT$ {{ detail_data.origin_price }}</p>
+      <p>NT$ {{ detail_data.price }}</p>
       <!-- 加入購物車、數量 -->
-      <p>剩餘數量：{{ detail_data.num }}</p>
+      <p>剩餘數量：{{ detail_data.num }} 張</p>
       <!-- 數量的 input -->
       <!-- 如果可購買量大於 0 才顯示 -->
       <template v-if="parseInt(detail_data.num) > 0">
@@ -41,7 +40,6 @@
         </div>
         <!-- 加上補充說明文字 -->
         <p v-if="item_qty === parseInt(detail_data.num)">沒有更多數量囉！</p>
-        <p v-if="item_qty === 1">至少購買一個！</p>
       </template>
       <!-- 如果已經沒有數量了，就要顯示無法購買 -->
       <!-- 樣式要再調整 -->
@@ -50,11 +48,13 @@
           <button type="button">貨到通知</button>
         </div>
       </template>
-
-      <button type="button" class="btn btn-primary" @click="addToCart(detail_data.id)">
+      <button
+        type="button"
+        class="btn btn-primary" @click="addToCart(detail_data.id)">
         <span class="material-icons-round">shopping_cart</span>
         加入購物車
       </button>
+    </div>
     </div>
   </div>
 </template>
@@ -116,19 +116,24 @@ export default {
         });
     },
   },
-  mounted() {
-  },
   watch: {
     detail_data() {
-      this.cafe_image_list.push(this.detail_data.imageUrl);
-      if (this.detail_data.imagesUrl) {
-        this.cafe_image_list.concat(this.detail_data.imagesUrl);
-      }
+      const tempList = this.detail_data.imagesUrl || [];
+      this.cafe_image_list = tempList.concat(this.detail_data.imageUrl);
     },
+  },
+  mounted() {
   },
 };
 </script>
 <style scoped lang="sass">
 .right_info
-  width: 40%
+  text-align: left
+  .category
+    display: block
+    border-radius: 16px
+    border: #000 1px solid
+    width: fit-content
+    padding: .2rem .5rem
+    margin: 0px
 </style>

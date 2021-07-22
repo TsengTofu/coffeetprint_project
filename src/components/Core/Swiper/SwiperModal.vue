@@ -2,6 +2,22 @@
   <div class="wrapper">
       <!-- 第二個 swiper -->
       <swiper
+        :style="{ '--swiper-navigation-color': '#fff', '--swiper-pagination-color': '#fff' }"
+        :spaceBetween="0"
+        :navigation="true"
+        :thumbs="{ swiper: thumbsSwiper }"
+        class="mySwiper2"
+      >
+        <swiper-slide
+          v-for="(pic, key) in pic_list"
+          :key="'pic_' + key"
+        >
+          <div class="main_pic">
+            <img :src="pic" alt="咖啡廳主圖" :style="'width: 100%; height: auto'" />
+          </div>
+        </swiper-slide>
+      </swiper>
+      <swiper
         @swiper="setThumbsSwiper"
         :spaceBetween="10"
         :slidesPerView="4"
@@ -9,21 +25,6 @@
         :watchSlidesVisibility="true"
         :watchSlidesProgress="true"
         class="mySwiper"
-        :direction="'vertical'"
-      >
-        <swiper-slide
-          v-for="(pic, key) in pic_list"
-          :key="'pic_' + key"
-        >
-          <img :src="pic" alt="咖啡廳主圖" :style="'width: 100%; height: auto'" />
-        </swiper-slide>
-      </swiper>
-      <swiper
-        :style="{ '--swiper-navigation-color': '#fff', '--swiper-pagination-color': '#fff' }"
-        :spaceBetween="0"
-        :navigation="true"
-        :thumbs="{ swiper: thumbsSwiper }"
-        class="mySwiper2"
       >
         <swiper-slide
           v-for="(pic, key) in pic_list"
@@ -77,17 +78,20 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.main_pic
+  width: 100%
+  max-height: 480px
+  overflow: hidden
 .wrapper
   // width: 60%
-  display: flex
   .mySwiper2
     border-radius: 16px
-    width: calc( 100% - 120px )
-    height: 480px
-    margin: 0 0 0 10px
+    // width: calc( 100% - 120px )
+    // height: 450px
+    // margin: 0 0 0 10px
   .mySwiper
-    width: 120px
-    height: 480px
+    // width: 120px
+    // height: 480px
     .swiper-slide
       border-radius: 16px
       overflow: hidden

@@ -3,8 +3,8 @@
     <ul class="list-unstyled">
       <!-- 第一組 -->
       <li class="row">
-        <div class="feature_image img-fluid col-5"></div>
-        <div class="feature_describe col-5">
+        <div class="feature_image img-fluid col-sm-6"></div>
+        <div class="feature_describe col-sm-6">
           <p class="title">走！一起去咖啡廳吃早餐呀！</p>
           <p
             class="describe"
@@ -23,7 +23,7 @@
       </li>
       <!-- 第二組 -->
       <li class="row">
-        <div class="feature_describe col-6">
+        <div class="feature_describe col-sm-6">
           <p class="title">還沒睡醒嗎？那來份早午餐吧！</p>
           <p
             class="describe"
@@ -39,7 +39,7 @@
             約朋友一起吃早餐
           </button>
         </div>
-        <div class="feature_image_second img-fluid col-6"></div>
+        <div class="feature_image_second img-fluid col-sm-6"></div>
       </li>
     </ul>
     <!-- <img src="" class="rounded float-start" alt="..."> -->
@@ -62,7 +62,6 @@ export default {
 <style lang="sass" scoped>
 .feature_wrapper
   position: relative
-  padding: 0px
   background: #f7f5f4
   &::before
       content: ''
@@ -75,8 +74,8 @@ export default {
       position: absolute
       top: -130px
       z-index: 1
+      left: 0px
 .feature_describe
-  width: 50%
   padding: 4rem
   .title
     font-size: 1.5rem
@@ -87,13 +86,11 @@ export default {
   background-size: cover
   background-position: center
   background-attachment: fixed
-  width: 50%
   height: 300px
 .feature_image_second
   background-image: url('../../../../../public/about/about_food_2.jpg')
   background-size: cover
   background-position: center
   background-attachment: fixed
-  width: 50%
   height: 300px
 </style>

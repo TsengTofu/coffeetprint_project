@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex">
-    <div class="info">
+  <div class="row">
+    <div class="info col-md-6">
       <h4>
         <a :href="basic_info.website" target="_blank">{{ detail_data.title }}</a>
       </h4>
@@ -58,7 +58,7 @@
       </p> -->
     </div>
     <!--  TODO  先在這邊引入 Swiper-->
-    <div class="reviewer_swiper">
+    <div class="reviewer_swiper col-md-6">
       <!--  NOTE  這邊要注意一下 CallAPI 次數 -->
       <swiper
         :slides-per-view="1"
@@ -137,9 +137,9 @@ export default {
 
 <style lang="sass" scoped>
 th
-  font-size: 14px
+  font-size: 12px
 .reviewer_swiper
-  width: 40%
+  // width: 40%
   .reviewer_image
     background-size: cover
     background-position: center

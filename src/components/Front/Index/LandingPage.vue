@@ -1,7 +1,8 @@
 <template>
   <div class="landing_page">
-    <div class="d-flex flex-column align-items-start title_block">
-      <p class="main_title"><span class="material-icons-round">near_me</span>尋找你的咖啡廳</p>
+    <div class="title_block col-md-auto">
+      <p class="main_title d-flex align-items-center">
+        <span class="material-icons-round">near_me</span>尋找你的咖啡廳</p>
       <p class="vice_title">還在煩惱要去哪發呆、聚餐、放鬆嗎？</p>
       <button
         type="button"
@@ -44,11 +45,13 @@ export default {
   min-height: 100vh
   .title_block
     color: #FFFFFF
-    padding: 200px 0 0 150px
-    width: 50%
+    padding: 200px 0 0 0px
+    // width: 50%
+    text-align: center
     .main_title
       font-size: 2rem
       font-weight: 700
+      justify-content: center
     .vice_title
       font-size: 1rem
 </style>

@@ -72,7 +72,7 @@ export default {
       this.basic_info.rating = rating;
       // 這邊型別怪怪的
       this.basic_info.opening_hours = openingHours.weekday_text.map((element) => {
-        const openingData = element.replace(':', ' ').split('  ');
+        const openingData = element.replace(':', ' ').replace('星期', ' ').split('  ');
         return { days: openingData[0], time: openingData[1] };
       });
       this.basic_info.website = website;

@@ -35,6 +35,7 @@
           <!-- item 要記得加上 active -->
           <div
             class="carousel-item"
+            data-bs-interval="8000"
             v-for="(post, key) in post_list"
             :class="key === 0 ? 'active' : ''"
             :key="'post_' + key"
@@ -154,7 +155,7 @@ export default {
       .carousel-inner
         background: #F0EBE6
         border-radius: 16px
-        padding: 3.5rem
+        padding: 3rem
 //  TODO  這邊以下沒有被用到
       ul
           display: flex
