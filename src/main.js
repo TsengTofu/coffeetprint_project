@@ -1,5 +1,7 @@
 import { createApp } from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 // 匯入 vee-validate 相關規則
 import {
   Field, Form, ErrorMessage, defineRule, configure,
@@ -44,6 +46,7 @@ app.use(router);
 app.use(VueAxios, axios);
 app.use(VueSweetalert2);
 app.use(CKEditor);
+app.use(VueLoading);
 app.config.globalProperties.$dayjs = dayjs;
 
 // 註冊 vee-validate 三個全域元件
