@@ -9,18 +9,17 @@
       <p class="col-auto">Copyright © 2020 CoffeetPrint. 僅個人作品練習，無商業用途。</p>
       <div class="detail col-sm-2">
         <ul class="list-unstyled row link">
-          <li class="admin_login col-8">
-            <router-link to="/login" target="_blank" class="d-flex">
+          <li class="admin_login col-sm-1">
+            <router-link to="/login" target="_blank">
               <span class="material-icons-round">account_circle</span>
-              後台登入
             </router-link>
           </li>
-          <li class="col-sm-2">
+          <li class="col-sm-1">
             <a href="https://github.com/TsengTofu" target="_blank">
               <img src="../../../assets/images/icon/github.svg" alt="" />
             </a>
           </li>
-          <li class="col-sm-2">
+          <li class="col-sm-1">
             <a href="">
               <img src="../../../assets/images/icon/linkedin.svg" alt="" />
             </a>

@@ -1,6 +1,8 @@
 <template>
-  <div class="user_order_info_wrapper">
-    <CheckoutStepComponent />
+  <div class="user_order_info_wrapper container">
+    <CheckoutStepComponent
+      step="order_info"
+    />
     <h4>填寫預訂資料</h4>
     <Form v-slot="{ errors }" @submit="onSubmit">
       <div class="mb-3">
@@ -134,11 +136,11 @@ export default {
 </script>
 <style lang="sass" scoped>
 .user_order_info_wrapper
-  padding: 60px 80px
+  padding: 80px 0px
   .container
-    max-width: 350px
-    width: 100%
-    margin: 0 auto
+    // max-width: 350px
+    // width: 100%
+    // margin: 0 auto
     ul
       display: flex
       flex-direction: column

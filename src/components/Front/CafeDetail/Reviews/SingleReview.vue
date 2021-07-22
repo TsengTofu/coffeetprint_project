@@ -1,9 +1,9 @@
 <template>
-  <div class="d-flex">
+  <div class="row">
     <!-- 作者圖像區塊 -->
     <a
+      class="author_block col-sm-2"
       :href="single_review.author_url"
-      class="author_block"
       target="_blank"
     >
       <div class="author_avatar">
@@ -12,7 +12,7 @@
       <p>{{ single_review.author_name }}</p>
     </a>
     <!-- 右半邊的內容 -->
-    <div>
+    <div class="col-sm-10">
       <p class="d-flex stars">
       <span
         v-for="(n, index) in parseInt(single_review.rating)"
@@ -26,9 +26,9 @@
         class="material-icons-round"
         >star_border</span
       >
-    </p>
-    <p>{{ single_review.text }}</p>
-    <small>評論發表時間：{{ $dayjs.unix(single_review.time).format('YYYY-MM-DD') }}</small>
+      </p>
+      <p>{{ single_review.text }}</p>
+      <small>評論發表時間：{{ $dayjs.unix(single_review.time).format('YYYY-MM-DD') }}</small>
     </div>
   </div>
 </template>

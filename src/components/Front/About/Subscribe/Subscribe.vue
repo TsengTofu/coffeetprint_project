@@ -1,11 +1,12 @@
 <template>
   <!-- 訂閱送出 email -->
   <!--  NOTE  這個在關於我們那部分也用得到 -->
-  <div class="subscribe_wrapper">
-    <div class="content">
+  <div class="subscribe_wrapper d-flex align-items-center">
+    <div class="container-sm row">
+    <div class="content col-xl-4 col-md-4 col-sm-8 ms-auto">
       <p class="title">訂閱最新消息</p>
       <Form v-slot="{ errors }">
-      <div class="input-group mb-3">
+      <div class="input-group mb-5">
         <Field
           id="email"
           name="email"
@@ -37,6 +38,7 @@
       </div>
       </Form>
     </div>
+  </div>
   </div>
 </template>
 
@@ -95,14 +97,15 @@ export default {
   position: relative
   .content
     color: #fff
-    width: 100%
-    max-width: 400px
-    display: flex
-    flex-direction: column
-    align-items: flex-start
-    position: absolute
-    right: 18rem
-    top: 6rem
+    text-align: justify
+    // width: 100%
+    // max-width: 400px
+    // display: flex
+    // flex-direction: column
+    // align-items: flex-start
+    // position: absolute
+    // right: 18rem
+    // top: 6rem
     .title
       font-size: 1.5rem
       font-weight: bold

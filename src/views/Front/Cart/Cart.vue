@@ -1,7 +1,9 @@
 <!-- 購物車的畫面 -->
 <template>
   <div class="container cart_wrapper">
-    <CheckoutStepComponent />
+    <CheckoutStepComponent
+      step="check_cart"
+    />
     <div class="cart_container">
       <CartListComponent
         :cart_list="cart_list"

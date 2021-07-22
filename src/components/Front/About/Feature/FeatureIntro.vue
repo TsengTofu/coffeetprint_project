@@ -1,8 +1,7 @@
 <template>
   <div class="container-fluid feature_wrapper">
     <ul class="list-unstyled">
-      <!-- 第一組 -->
-      <li class="row">
+      <li class="row d-flex  align-items-center">
         <div class="feature_image img-fluid col-sm-6"></div>
         <div class="feature_describe col-sm-6">
           <p class="title">走！一起去咖啡廳吃早餐呀！</p>
@@ -15,28 +14,33 @@
           </figcaption>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn special_button"
+            @click="getCoupon"
           >
             一起逛逛咖啡廳
+            <span class="material-icons-round">chevron_right</span>
           </button>
         </div>
       </li>
       <!-- 第二組 -->
-      <li class="row">
+      <li class="row d-flex align-items-center">
         <div class="feature_describe col-sm-6">
           <p class="title">還沒睡醒嗎？那來份早午餐吧！</p>
           <p
             class="describe"
             v-html="feature_describe_2"
-          ></p>
+          >
+          </p>
           <figcaption class="blockquote-footer">
             CoffeetPrint Author<cite title="Source Title">Tofu Tseng</cite>
           </figcaption>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn special_button"
+            @click="getCoupon"
           >
             約朋友一起吃早餐
+            <span class="material-icons-round">chevron_right</span>
           </button>
         </div>
         <div class="feature_image_second img-fluid col-sm-6"></div>
@@ -55,6 +59,14 @@ export default {
       feature_describe: '用咖啡廳早餐喚醒一天的活力，告訴自己「要準備工作囉」，也是一種儀式感。<br>如何？是不是聽起來不錯？要一起去吃早餐嗎？',
       feature_describe_2: '假日睡到中午也沒關係，伸個懶腰，出門探索販售早午餐的咖啡廳也很不錯！<br>垂涎欲滴的班尼迪克蛋、酥脆的炸薯餅、鬆軟的吐司，搭配一杯紅茶。<br>啊！完美的週末早晨。',
     };
+  },
+  methods: {
+    getCoupon() {
+      // 都先給固定的
+      // ForYouMyLove
+      // HereIsYourCoffee
+      this.$swal('恭喜獲得折扣碼 - CodeWithCoffee');
+    },
   },
 };
 </script>
@@ -75,9 +87,13 @@ export default {
       top: -130px
       z-index: 1
       left: 0px
+  ul
+    padding: 20px 0 0 0
 .feature_describe
-  padding: 4rem
+  // padding: 4rem
+  text-align: justify
   .title
+    font-weight: bold
     font-size: 1.5rem
   .describe
     text-align: justify
@@ -93,4 +109,15 @@ export default {
   background-position: center
   background-attachment: fixed
   height: 300px
+//  TODO  這邊先隨便寫，這要抽出來
+.special_button
+  border: 1px solid #88664D
+  background: none
+  font-weight: bold
+  padding: .5rem 1rem
+  color: #88664D
+  display: flex
+  &:hover
+    background: #88664D
+    color: #fff
 </style>

@@ -2,16 +2,16 @@
   <div class="about_wrapper container-fluid">
     <!--  TODO  看來這邊也得拆元件 -->
     <div class="bg row">
-      <div class="landing_page col-md-auto"></div>
-      <div class="intro_block col-md-auto">
-        <h3 class="">
-          <span class="material-icons-round">near_me</span>
-          找到屬於自己的咖啡廳
-        </h3>
+      <div class="landing_page col-md-8"></div>
+      <div class="intro_block col-md-4">
         <!-- 再包一層 -->
         <div class="intro_description">
           <!-- 這邊再放一個小 tag -->
           <!-- <span>Introduction</span> -->
+          <h3 class="">
+            <span class="material-icons-round">near_me</span>
+            找到屬於自己的咖啡廳
+          </h3>
           <h4>
             不論是工作討論、放鬆閒聊<br>
             擁有自己的小角落是重要的
@@ -29,10 +29,11 @@
           <!-- 探索更多的按鈕 -->
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn special_button"
+            @click="getCoupon"
           >
-            <!-- 這邊要加上 > 的符號 -->
             探索自己的小角落
+            <span class="material-icons-round">chevron_right</span>
           </button>
         </div>
       </div>
@@ -66,24 +67,35 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.special_button
+  border: 1px solid #88664D
+  background: none
+  font-weight: bold
+  padding: .5rem 1rem
+  color: #88664D
+  display: flex
+  &:hover
+    background: #88664D
+    color: #fff
 .about_wrapper
-  padding: 300px 0 0
+  padding: 120px 0 0
+  background: #EBEBEB
   .bg
-    display: block
-    width: 100%
-    margin: 0px
+    // display: block
+    // width: 100%
+    // margin: 0px
     height: 620px
-    background: #EBEBEB
-    position: relative
+    // background: #EBEBEB
+    // position: relative
     .landing_page
       display: block
       background-size: cover
       background-position: center
       background-image: url('../../../public/about_us_bg.jpg')
-      width: 900px
+      // width: 900px
       height: 500px
-      position: absolute
-      top: -140px
+      // position: absolute
+      // top: -140px
     .intro_block
       position: absolute
       right: 0px
