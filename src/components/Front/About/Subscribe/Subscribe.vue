@@ -87,7 +87,7 @@ export default {
     background-position: center
     background-size: cover
     background-repeat: no-repeat
-    // background-attachment: fixed
+    background-attachment: fixed
     top: 0px
     left: 0px
     right: 0px
