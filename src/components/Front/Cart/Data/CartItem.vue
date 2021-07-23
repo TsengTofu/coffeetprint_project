@@ -120,6 +120,11 @@ export default {
     // 先把初始值帶到畫面上
     this.item_qty = this.cart_item.qty;
   },
+  watch: {
+    cart_item() {
+      this.item_qty = this.cart_item.qty;
+    },
+  },
 };
 </script>
 

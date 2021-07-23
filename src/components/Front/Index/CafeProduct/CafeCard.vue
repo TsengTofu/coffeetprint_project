@@ -12,10 +12,10 @@
         <button
           class="btn btn-primary d-flex"
           type="button"
-          @click.stop="toggleFavorite(singleCafe.id)"
+          @click.stop="addToFavorite(singleCafe.id)"
         >
           <span
-            v-if="favorite_list.includes(singleCafe.id)"
+            v-if="myFavorite.includes(singleCafe.id)"
             class="material-icons-round">
             favorite
           </span>
@@ -73,7 +73,6 @@
   </li>
 </template>
 <script>
-//  TODO  這段之後要抽出來處理 LocalStorage 的部分
 const localStorageMethods = {
   save(favorite) {
     const favoriteString = JSON.stringify(favorite);
@@ -91,7 +90,7 @@ export default {
   },
   data() {
     return {
-      favorite_list: localStorageMethods.get() || [],
+      myFavorite: localStorageMethods.get() || [],
     };
   },
   methods: {
@@ -121,18 +120,9 @@ export default {
         });
     },
     // 加到我的最愛
-    toggleFavorite(id) {
-      if (this.favorite_list.includes(id)) {
-        this.favorite_list.splice(this.favorite_list.indexOf(id), 1);
-        this.$swal('已成功移除我的最愛！');
-      } else {
-        this.favorite_list.push(id);
-        this.$swal('已成功加入我的最愛！');
-      }
-      localStorageMethods.save(this.favorite_list);
+    addToFavorite(id) {
+      this.emitter.emit('addToFavoriteList', id);
     },
-  },
-  mounted() {
   },
 };
 </script>

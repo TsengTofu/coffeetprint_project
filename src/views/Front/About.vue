@@ -1,7 +1,6 @@
 <template>
-  <div class="about_wrapper container-fluid">
-    <!--  TODO  看來這邊也得拆元件 -->
-    <div class="bg row">
+  <div class="about_wrapper">
+    <div class="bg  container d-flex align-items-center">
       <div class="landing_page col-md-8"></div>
       <div class="intro_block col-md-4">
         <!-- 再包一層 -->

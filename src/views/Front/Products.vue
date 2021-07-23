@@ -1,7 +1,5 @@
 <template>
-  <!-- <router-view></router-view> 原本這個是要給產品詳細頁使用的 -->
   <div class="cafe_outer">
-    <p>我是產品列表頁</p>
     <CafeListComponent />
   </div>
 </template>
@@ -20,7 +18,5 @@ export default {
 
 <style scoped lang="sass">
 .cafe_outer
-  display: flex
-  width: 100%
-  flex-direction: column
+  padding: 120px 0 0 0
 </style>
