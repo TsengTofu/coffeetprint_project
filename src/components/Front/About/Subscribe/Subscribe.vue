@@ -86,7 +86,7 @@ export default {
 
 <style lang="sass" scoped>
 .subscribe_wrapper
-  width: 100%
+  // width: 100%
   height: 400px
   display: block
   background-image: url('../../../../../public/subscribe_bg.jpg')
