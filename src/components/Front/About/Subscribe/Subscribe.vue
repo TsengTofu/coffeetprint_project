@@ -88,9 +88,8 @@ export default {
 .subscribe_wrapper
   // width: 100%
   height: 400px
-  display: block
   background-image: url('../../../../../public/subscribe_bg.jpg')
-  background-position: center 25%
+  background-position: center
   background-size: cover
   background-repeat: no-repeat
   background-attachment: fixed
