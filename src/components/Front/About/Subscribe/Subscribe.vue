@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="subscribe_wrapper d-flex align-items-center">
+    <div class="d-flex align-items-center bg_cover subscribe_wrapper">
       <div class="container-sm row">
         <div class="content col-xl-4 col-md-4 col-sm-8 ms-auto">
           <p class="title">訂閱最新消息</p>
@@ -40,16 +40,7 @@
 </template>
 
 <script>
-//  FIXME  只是暫時這樣寫
-const localStorageMethods = {
-  save(favorite) {
-    const favoriteString = JSON.stringify(favorite);
-    localStorage.setItem('CoffeetPrintSubscribe', favoriteString);
-  },
-  get() {
-    return JSON.parse(localStorage.getItem('CoffeetPrintSubscribe'));
-  },
-};
+import LocalStorageSupport from '../../../../Support/LocalStorageSupport';
 
 export default {
   name: 'SubscribeComponent',
@@ -58,8 +49,7 @@ export default {
   data() {
     return {
       subscribe_email: '',
-      // 從 localStorage 撈出來的資料
-      subscribe_email_list: localStorageMethods.get() || [],
+      subscribe_email_list: LocalStorageSupport().getItem() || [],
     };
   },
   methods: {
@@ -69,11 +59,12 @@ export default {
       } else {
         this.subscribe_email_list.push(this.subscribe_email);
         this.$swal('已成功加入訂閱！');
-        localStorageMethods.save(this.subscribe_email);
+        LocalStorageSupport().saveItem(this.subscribe_email);
       }
     },
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 
@@ -81,29 +72,12 @@ export default {
 .wrapper
   position: relative
   .subscribe_wrapper
-    // width: 100%
     height: 400px
     background-image: url('../../../../../public/subscribe_bg.jpg')
-    background-position: center
-    background-size: cover
-    background-repeat: no-repeat
-    background-attachment: fixed
-    top: 0px
-    left: 0px
-    right: 0px
-    bottom: 0px
-    position: relative
+    background-position: center 25%
     .content
       color: #fff
       text-align: justify
-      // width: 100%
-      // max-width: 400px
-      // display: flex
-      // flex-direction: column
-      // align-items: flex-start
-      // position: absolute
-      // right: 18rem
-      // top: 6rem
       .title
         font-size: 1.5rem
         font-weight: bold

@@ -1,5 +1,5 @@
 <template>
-  <div class="landing_page">
+  <div class="bg_cover landing_page">
     <div class="title_block col-md-auto">
       <p class="main_title d-flex align-items-center">
         <span class="material-icons-round">near_me</span>尋找你的咖啡廳</p>
@@ -33,13 +33,8 @@ export default {
 
 <style scoped lang="sass">
 .landing_page
-  position: relative
-  top: 0px
   z-index: 3
-  background-position: center
   background-image: url('../../../../public/index_bg.png')
-  background-size: cover
-  background-attachment: fixed
   display: block
   width: 100%
   min-height: 100vh
