@@ -27,21 +27,19 @@ export default {
     };
   },
   methods: {
-    // 先拿全部的優惠券列表
+    // 全部的優惠券列表
     getCouponList() {
-      //  TODO  這邊的頁碼要回來改 ${page};
+      //  TODO  頁碼要改 ${page};
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupons?page=1`;
       this.axios.get(requestUrl).then((response) => {
-        const {
-          success, coupons, pagination,
-        } = response.data;
-        console.log(response.data, 'xxxx');
+        const { success } = response.data;
         if (success) {
+          const { coupons, pagination } = response.data;
           this.coupon_list = coupons;
           this.pagination = pagination;
         }
-      }).catch((error) => {
-        console.log(error, 'error');
+      }).catch(() => {
+        this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
       });
     },
   },

@@ -23,21 +23,21 @@ export default {
   },
   methods: {
     verifyToken() {
-      // console.log('verifyToken');
       const requestUrl = `${process.env.VUE_APP_API}/api/user/check`;
       const token = document.cookie.replace(/(?:(?:^|.*;\s*)HexSchoolAPIToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
       this.axios.defaults.headers.common.Authorization = token;
       this.axios
-        .post(requestUrl).then((res) => {
-          console.log(res);
-          if (res.data.success) {
-            console.log('驗證成功');
+        .post(requestUrl).then((response) => {
+          const { success } = response.data;
+          if (success) {
+            this.$swal('驗證成功');
             this.isCheckPass = true;
           } else {
             this.$router.push('/');
           }
-        }).catch((error) => {
-          console.log(error);
+        }).catch(() => {
+          // error
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     signOut() {
@@ -45,12 +45,15 @@ export default {
       this.axios
         .post(requestUrl)
         .then((response) => {
-          console.log(response, '已登出');
-          document.cookie = 'HexSchoolAPIToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-          this.$router.push('/login');
+          const { success } = response.data;
+          if (success) {
+            document.cookie = 'HexSchoolAPIToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            this.$router.push('/login');
+          }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          // error 之後要回來看錯誤訊息
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

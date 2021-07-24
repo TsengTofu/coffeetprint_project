@@ -87,11 +87,14 @@ export default {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/articles?page=1`;
       this.axios.get(requestUrl)
         .then((response) => {
-          console.log('response', response);
-          this.post_list = response.data.articles;
+          const { success } = response.data;
+          if (success) {
+            const { articles } = response.data;
+            this.post_list = articles;
+          }
         })
-        .catch((error) => {
-          console.log('error', error);
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
       // 注意：文章列表中不包含 content 屬性，請使用單筆文章 API 取得。
     },

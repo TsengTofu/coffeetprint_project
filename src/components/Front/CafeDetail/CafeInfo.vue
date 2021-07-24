@@ -108,11 +108,11 @@ export default {
             // 更新的 modal 的購物車
             this.emitter.emit('updateCartList');
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

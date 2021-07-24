@@ -54,11 +54,9 @@ export default {
   },
   methods: {
     getSubscribe() {
-      console.log(typeof this.subscribe_email_list);
       if (this.subscribe_email_list.includes(this.subscribe_email)) {
         this.$swal('已經加入訂閱，請輸入別的 E-mail');
       } else {
-        console.log(typeof this.subscribe_email_list, this.subscribe_email_list);
         this.subscribe_email_list.push(this.subscribe_email);
         LocalStorageSupport('CoffeetPrintSubscribe').saveItem(this.subscribe_email);
         this.$swal('已成功加入訂閱！');

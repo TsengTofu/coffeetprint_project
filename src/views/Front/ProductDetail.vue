@@ -1,6 +1,6 @@
 <template>
   <div class="container detail_wrapper">
-    <BreadCrumbComponent />
+    <!-- <BreadCrumbComponent /> -->
     <CafeInfoComponent :detail_data="productDetail" />
     <CafeContentComponent :detail_data="productDetail" />
     <!-- 隨機的產品列表 -->
@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import BreadCrumbComponent from '../../components/Core/BreadCrumb/BreadCrumb.vue';
+// import BreadCrumbComponent from '../../components/Core/BreadCrumb/BreadCrumb.vue';
 import CafeInfoComponent from '../../components/Front/CafeDetail/CafeInfo.vue';
 import CafeContentComponent from '../../components/Front/CafeDetail/CafeContent.vue';
 import RandomCafeListComponent from '../../components/Front/RandomCafe/RandomCafeList.vue';
@@ -19,7 +19,7 @@ export default {
   name: '',
   props: [],
   components: {
-    BreadCrumbComponent,
+    // BreadCrumbComponent,
     CafeInfoComponent,
     CafeContentComponent,
     RandomCafeListComponent,
@@ -41,17 +41,15 @@ export default {
           if (response.data.success) {
             this.productDetail = response.data.product;
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },
   mounted() {
-    // 這邊的資料是從路由 router 來的
-    console.log(this.$route.params);
     this.product_id = this.$route.params.id;
     this.getCurrentCafeData();
   },

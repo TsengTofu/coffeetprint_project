@@ -91,8 +91,8 @@
         </div>
         <div class="modal-footer button_block">
           <button class="cancel" data-bs-dismiss="modal" type="button">取消</button>
-          <button v-if="status === 'post'" @click="addNewCoupon" type="button">確認</button>
-          <button v-else @click="editCoupon" type="button">確認</button>
+          <button @click="addNewCoupon" type="button">ADD確認</button>
+          <!-- <button v-else @click="editCoupon" type="button">確認</button> -->
         </div>
       </div>
     </div>
@@ -127,15 +127,19 @@ export default {
       this.tempCoupon.due_date = dayjs(this.due_date).unix();
       this.tempCoupon.percent = Number(this.tempCoupon.percent);
       this.tempCoupon.is_enabled = Number(this.tempCoupon.is_enabled);
-      console.log(this.tempCoupon);
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupon`;
       this.axios
         .post(requestUrl, { data: this.tempCoupon })
         .then((response) => {
-          console.log(response.data, 'response');
+          const { success, message } = response.data;
+          if (success) {
+            this.$swal(message);
+          } else {
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+          }
         })
-        .catch((error) => {
-          console.dir(error, 'error');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     // 編輯優惠券的部分
@@ -145,7 +149,6 @@ export default {
       this.axios
         .put(requestUrl, { data: this.tempCoupon })
         .then((response) => {
-          console.log(response, 'response');
           const { success } = response.data;
           if (success) {
             this.$swal('成功編輯該張優惠券！');
@@ -153,8 +156,8 @@ export default {
             this.modal.hide();
           }
         })
-        .catch((error) => {
-          console.log(error, 'error');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

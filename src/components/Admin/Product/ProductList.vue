@@ -183,10 +183,9 @@ export default {
               this.category_list.push(cafe.category);
             }
           });
-          console.log(this.category_list);
         }
-      }).catch((error) => {
-        console.log(error);
+      }).catch(() => {
+        this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
       });
     },
     getData(queryPage = 1 /* 預設值 */) {
@@ -195,17 +194,19 @@ export default {
       this.axios
         .get(requestUrl)
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             const { products, pagination } = response.data;
             this.productData = products;
             this.pagination = pagination;
             this.current_page = this.pagination.current_page;
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          // getData, error
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     // 刪除功能
@@ -225,21 +226,21 @@ export default {
       this.axios
         .delete(requestUrl)
         .then((response) => {
-          if (response.data.success) {
-            console.log('有正常刪除啦');
+          const { success } = response.data;
+          if (success) {
+            this.$swal('有正常刪除啦');
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'deleteProductAPIError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },
   mounted() {
     this.getAllCafeData();
     this.getData();
-    console.log('檢查一下 Token', this.token);
   },
 };
 </script>

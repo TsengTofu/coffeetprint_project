@@ -184,8 +184,6 @@ export default {
     // 新增一篇文章
     addNewPost() {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/article`;
-      console.log(requestUrl);
-      console.log(this.tempArticle);
       this.axios
         .post(requestUrl, { data: this.tempArticle })
         .then((response) => {
@@ -194,11 +192,11 @@ export default {
             // this.$emit('emit-data', this.tempProduct);
             this.modal.hide();
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'deleteProductAPIError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

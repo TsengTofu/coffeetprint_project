@@ -35,14 +35,19 @@ export default {
   methods: {
     // 刪除全部訂單
     clearAllOrders() {
-      console.log('clearAllOrders');
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/orders/all`;
       this.axios.delete(requestUrl)
         .then((response) => {
-          console.log(response.data.success, '回傳的回應');
+          const { success, message } = response.data;
+          if (success) {
+            this.$swal(message);
+          } else {
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+          }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          // error
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     // 取得訂單列表
@@ -51,14 +56,13 @@ export default {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/orders?page=1`;
       this.axios.get(requestUrl)
         .then((response) => {
-          console.log(response.data, '訂單列表的資料');
           const { success, pagination, orders } = response.data;
           if (success) {
             this.order_list = orders;
             this.pagination = pagination;
           }
-        }).catch((error) => {
-          console.log(error);
+        }).catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

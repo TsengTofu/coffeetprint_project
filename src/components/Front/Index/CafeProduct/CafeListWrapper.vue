@@ -17,17 +17,6 @@
 import TitleComponent from '../../../Core/Layout/Title/Title.vue';
 import CafeListComponent from '../../CafeProduct/CafeList.vue';
 
-//  TODO  這段之後要抽出來處理 LocalStorage 的部分
-const localStorageMethods = {
-  save(favorite) {
-    const favoriteString = JSON.stringify(favorite);
-    localStorage.setItem('CoffeetPrintFavorite', favoriteString);
-  },
-  get() {
-    return JSON.parse(localStorage.getItem('CoffeetPrintFavorite'));
-  },
-};
-
 export default {
   name: 'CafeListWrapperComponent',
   components: {
@@ -39,7 +28,6 @@ export default {
       // 拿資料
       productData: [],
       pagination: {},
-      favorite_list: localStorageMethods.get() || [],
     };
   },
   methods: {
@@ -50,48 +38,22 @@ export default {
       this.axios
         .get(requestUrl)
         .then((response) => {
-          console.log(response.data, 'response.data');
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             const { products, pagination } = response.data;
             this.productData = products;
             this.pagination = pagination;
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
-    // 加到我的最愛
-    // TODO  但這不能用 父子傳遞嗎？？？
-    toggleFavorite(id) {
-      console.log(id);
-      if (this.favorite_list.includes(id)) {
-        this.favorite_list.splice(this.favorite_list.indexOf(id), 1);
-        this.$swal('已成功移除我的最愛！');
-      } else {
-        this.favorite_list.push(id);
-        this.$swal('已成功加入我的最愛！');
-      }
-      // localStorageMethods.save(this.favorite_list);
-    },
-  },
-  created() {
-    this.emitter.on('addToFavoriteList', (id) => {
-      this.toggleFavorite(id);
-    });
   },
   mounted() {
     this.getCafeListData();
-  },
-  watch: {
-    favorite_list: {
-      handler() {
-        localStorageMethods.save(this.favorite_list);
-      },
-      deep: true,
-    },
   },
 };
 </script>

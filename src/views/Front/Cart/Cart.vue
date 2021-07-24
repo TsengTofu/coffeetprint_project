@@ -56,19 +56,19 @@ export default {
       this.axios
         .get(requestUrl)
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             //  FIXME  這邊還要處理去尾數的問題
-            console.log('成功抓到購物車列表的資料', response.data.data);
             const { carts, total, final_total: finalTotal } = response.data.data;
             this.cart_list = carts;
-            this.final_total = finalTotal;
             this.total = total;
+            this.final_total = finalTotal;
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

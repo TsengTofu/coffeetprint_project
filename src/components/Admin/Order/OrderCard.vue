@@ -1,6 +1,5 @@
 <template>
     <!-- NOTE  原來這邊不能多包一層 -->
-    <!-- TODO  詳細內容也會用這個 Card Modal 呈現 -->
   <div class="modal fade" id="orderModal" ref="modal" tabindex="-1">
     <div
       class="modal-xl
@@ -74,7 +73,6 @@ export default {
         // 這邊要指定要放的內容，處理必填跟非必填
         is_paid: '', // Boolean
         total: '', // Number
-        //  TODO  需要有出貨狀態嗎？
         // 調整使用者資料
         user: {},
 
@@ -82,37 +80,25 @@ export default {
     };
   },
   methods: {
-    // 編輯產品的功能
+    // 編輯訂單的功能
     editCurrentOrder() {
       //  TODO  這邊網址要加上編輯該筆訂單的 id
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/order/`;
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/order/${this.tempOrder.id}`;
       this.axios.put(requestUrl, { data: this.tempOrder })
         .then((response) => {
-          console.log(response);
+          const { success, message } = response.data;
+          if (success) {
+            this.$swal(message);
+          }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          // error
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
-
-      //   data: {
-      //     "create_at": ...,
-      //     "is_paid": false,
-      //     "message": "...",
-      //     "payment_method": "...",
-      //     "products": [
-      //       ...
-      //     ],
-      //     "total": 100,
-      //     "user": {
-      //       ...
-      //     }
-      //   }
     },
   },
   mounted() {
     this.modal = new Modal(this.$refs.modal);
-    console.log(this.$refs.modal);
-    console.log(this.tempOrder, 'xxx');
   },
 };
 </script>

@@ -53,8 +53,8 @@ export default {
           } else {
             this.$swal(message);
           }
-        }).catch((error) => {
-          console.log(error, 'error');
+        }).catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

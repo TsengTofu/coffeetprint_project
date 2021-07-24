@@ -135,7 +135,6 @@ export default {
     // setStatus for modal
     setStatus(axiosMethod, data) {
       this.status = axiosMethod;
-      console.log(data);
       // 為什麼可以這樣寫？
       //  TODO  這邊要再改
       this.$refs.order_modal.tempOrder = JSON.parse(JSON.stringify(data));
@@ -161,20 +160,20 @@ export default {
       this.axios
         .delete(requestUrl)
         .then((response) => {
-          if (response.data.success) {
-            console.log('有正常刪除啦');
+          const { success } = response.data;
+          if (success) {
+            this.$swal('有正常刪除啦');
             this.$emit('getOrderList');
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'deleteProductAPIError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },
   mounted() {
-    console.log(this.$dayjs.unix(1625325764).format('YYYY-MM-DD'));
   },
 };
 </script>

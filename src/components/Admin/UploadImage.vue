@@ -29,17 +29,16 @@ export default {
       this.axios
         .post(requestUrl, formData)
         .then((response) => {
-          console.log(response.data, 'response.data');
-          if (response.data.success) {
-            console.log('成功上傳', response.data);
+          const { success } = response.data;
+          if (success) {
+            this.$swal('成功上傳');
             this.url = response.data.imageUrl;
-            console.log(this.url, '產生的網址');
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     copyImageUrl() {

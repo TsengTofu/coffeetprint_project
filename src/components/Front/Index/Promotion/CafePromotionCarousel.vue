@@ -90,15 +90,13 @@ export default {
     // 有必要的話，再把這支 function 放到外層，從外面傳資料進來
     getPostList() {
       // page 參數要記得加進來
-      console.log('有執行到我');
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/articles?page=1`;
       this.axios.get(requestUrl)
         .then((response) => {
-          console.log(response, 'response');
           this.post_list = response.data.articles;
         })
-        .catch((error) => {
-          console.log(error, 'error');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },
@@ -108,8 +106,6 @@ export default {
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 @keyframes typing
   from

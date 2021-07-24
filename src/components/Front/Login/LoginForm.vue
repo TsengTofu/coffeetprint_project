@@ -88,8 +88,8 @@ export default {
             this.errorMsg = `<span>${message}！請檢查帳號或密碼，重新登入。<br>${error.message}</span>`;
           }
         })
-        .catch((error) => {
-          console.log('LoginAPI 有錯誤', error);
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

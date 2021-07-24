@@ -117,18 +117,17 @@ export default {
       this.axios
         .post(requestUrl, { data })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             // 成功之後，就要告訴購物車的 Modal 要清空
             this.emitter.emit('updateCartList');
             const { orderId } = response.data;
-            console.log(`/order/${orderId}`);
             //  TODO  成功拿到資料之後，應該要可以把購物車清掉
-            // this.$router.push({ path: 'order', params: { data: response.data } });
             this.$router.push(`/order/${orderId}`);
           }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

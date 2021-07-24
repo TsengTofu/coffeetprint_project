@@ -191,8 +191,9 @@ const router = createRouter({
   //  TODO  這邊要回來設定
   linkActiveClass: '',
   // 觸發滾動行為
-  scrollBehavior(to, from, savedPosition) {
-    console.log(to, from, savedPosition);
+
+  // params: to, from, savedPosition
+  scrollBehavior() {
     // to, form 都是路由地址
     // savedPosition 可為空
     // 可以在這裡判斷在某些特定的頁面要 scroll 到特定位置
@@ -206,10 +207,8 @@ const router = createRouter({
 export default router;
 
 // 路由方法筆記：
-// 當前頁面的網址參數
-// console.log(this.$route);
-// 能夠使用的路由方法
-// console.log(this.$router);
+// 當前頁面的網址參數 this.$route
+// 能夠使用的路由方法 this.$router
 // 切換頁面的方法：
 // - push 包含歷史紀錄
 // 寫法：this.$router.push({

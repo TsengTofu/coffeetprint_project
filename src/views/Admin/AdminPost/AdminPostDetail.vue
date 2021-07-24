@@ -204,11 +204,14 @@ export default {
       this.axios
         .get(requestUrl)
         .then((response) => {
-          console.log('response', response.data.article.content);
-          this.tempArticle = response.data.article;
+          const { success } = response.data;
+          if (success) {
+            const { article } = response.data;
+            this.tempArticle = article;
+          }
         })
-        .catch((error) => {
-          console.log('error', error);
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     // 編輯文章
@@ -221,11 +224,11 @@ export default {
             // this.$emit('emit-data', this.tempArticle);
             // this.modal.hide();
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'deleteProductAPIError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

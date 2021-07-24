@@ -138,7 +138,6 @@ export default {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupon/${this.targetId}`;
       this.axios.delete(requestUrl)
         .then((response) => {
-          console.log(response.data, 'response');
           const { success, message } = response.data;
           if (success) {
             this.$swal(message);
@@ -146,13 +145,12 @@ export default {
             this.$emit('emit-get-coupons');
           }
         })
-        .catch((error) => {
-          console.log(error, 'error');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },
   mounted() {
-    console.log('優惠券列表清單', this.coupon_list);
   },
 };
 </script>

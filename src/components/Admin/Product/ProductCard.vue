@@ -285,11 +285,11 @@ export default {
             this.$emit('emit-data', this.tempProduct);
             this.modal.hide();
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'deleteProductAPIError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     editProduct() {
@@ -301,25 +301,20 @@ export default {
             this.$emit('emit-data', this.tempProduct);
             this.modal.hide();
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'deleteProductAPIError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },
   mounted() {
     this.modal = new Modal(this.$refs.modal);
-    // 從 cookie 取得 token
-    // const token =
-    // document.cookie.replace(/(?:(?:^|.*;\s*)HexSchoolAPIToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-    // this.axios.defaults.headers.common.Authorization = token;
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 @use '../theme.sass' as *
 .wrapper
