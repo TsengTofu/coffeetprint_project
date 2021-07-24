@@ -23,6 +23,7 @@
         <CafeCardComponent
           v-for="(cafe, key) in productData" :key="'cafe_'+ key"
           :singleCafe="cafe" :order="key"
+          :is_favorite="favorite_list.includes(cafe.id)"
         />
       </ul>
     </template>
@@ -31,6 +32,7 @@
         <CafeGridViewCardComponent
           v-for="(cafe, key) in productData" :key="'grid_'+ key"
           :singleCafe="cafe"
+          :is_favorite="favorite_list.includes(cafe.id)"
         />
         </ul>
     </template>
@@ -46,6 +48,7 @@
 import CafeCardComponent from '../Index/CafeProduct/CafeCard.vue';
 import CafeGridViewCardComponent from '../Index/CafeProduct/CafeGridViewCard.vue';
 import PaginationComponent from '../../Core/Modal/Pagination.vue';
+import LocalStorageSupport from '../../../Support/LocalStorageSupport';
 
 export default {
   name: 'CafeListComponent',
@@ -62,6 +65,7 @@ export default {
       pagination: {},
       // 切換狀態
       switch_status: 'grid',
+      favorite_list: [],
     };
   },
   methods: {
@@ -76,14 +80,38 @@ export default {
             this.productData = products;
             this.pagination = pagination;
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
-    // 處理不同變化的 cafeList
+    // 加到我的最愛
+    // TODO  但這不能用 父子傳遞嗎？？？
+    toggleFavorite(id) {
+      if (this.favorite_list.includes(id)) {
+        this.favorite_list.splice(this.favorite_list.indexOf(id), 1);
+        this.$swal('已成功移除我的最愛！');
+      } else {
+        this.favorite_list.push(id);
+        this.$swal('已成功加入我的最愛！');
+      }
+    },
+  },
+  created() {
+    this.favorite_list = LocalStorageSupport('CoffeetPrintFavorite').getItem() || [];
+    this.emitter.on('addToFavoriteList', (id) => {
+      this.toggleFavorite(id);
+    });
+  },
+  watch: {
+    favorite_list: {
+      handler() {
+        LocalStorageSupport('CoffeetPrintFavorite').saveItem(this.favorite_list);
+      },
+      deep: true,
+    },
   },
   mounted() {
     this.getCafeListData();

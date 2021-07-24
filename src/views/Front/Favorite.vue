@@ -1,33 +1,26 @@
 <template>
   <div class="wrapper container-fluid">
-    <p>加到最愛頁面</p>
     <button
       type="button"
       class="btn btn-primary"
+      v-if="final_cafe_list.length > 0"
+      @click="clearAllFavorite"
     >
       清除全部收藏
     </button>
-    <FavoriteCardListComponent
-      :final_cafe_list="final_cafe_list"
-    />
-    <!-- FIXME  寫一個新的卡片好了 -->
-    <!--  TODO  有考慮接看看 googleAPI，但需要找時間研究 -->
+    <template v-if="final_cafe_list.length > 0">
+      <FavoriteCardListComponent
+        :final_cafe_list="final_cafe_list"
+      />
+    </template>
+    <p v-else>目前收藏清單是空的</p>
+    <!--  TODO  考慮看看 googleAPI，找時間研究 -->
   </div>
 </template>
 
 <script>
 import FavoriteCardListComponent from '../../components/Front/Favorite/FavoriteCardList.vue';
-
-//  TODO  這段之後要抽出來處理 LocalStorage 的部分
-const localStorageMethods = {
-  save(favorite) {
-    const favoriteString = JSON.stringify(favorite);
-    localStorage.setItem('CoffeetPrintFavorite', favoriteString);
-  },
-  get() {
-    return JSON.parse(localStorage.getItem('CoffeetPrintFavorite'));
-  },
-};
+import LocalStorageSupport from '../../Support/LocalStorageSupport';
 
 export default {
   name: '',
@@ -52,17 +45,21 @@ export default {
             this.final_cafe_list = products.filter((cafe) => this.favorite_cafe_list
               .includes(cafe.id));
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
-    // 組合成一組
+    // work flow
     getFavoriteCafeList() {
-      this.favorite_cafe_list = localStorageMethods.get();
+      this.favorite_cafe_list = LocalStorageSupport('CoffeetPrintFavorite').getItem();
       this.getAllCafeList();
+    },
+    clearAllFavorite() {
+      LocalStorageSupport('CoffeetPrintFavorite').removeItem();
+      this.getFavoriteCafeList();
     },
   },
   mounted() {
@@ -70,13 +67,10 @@ export default {
   },
   created() {
     this.emitter.on('updateFavoriteList', (id) => {
-      // 從畫面上移除
-      // localStorage 也要更新
-      // console.log(id);
       const order = this.favorite_cafe_list.indexOf(id);
-      // console.log(id, this.favorite_cafe_list, order);
       this.favorite_cafe_list.splice(order, 1);
-      localStorageMethods.save(this.favorite_cafe_list);
+      LocalStorageSupport('CoffeetPrintFavorite').saveItem(this.favorite_cafe_list);
+      this.$swal('已成功移除此收藏！');
       this.getFavoriteCafeList();
     });
   },

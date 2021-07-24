@@ -14,8 +14,9 @@
           type="button"
           @click.stop="addToFavorite(singleCafe.id)"
         >
+          <!-- TODO  favorite_id 這個要改寫 -->
           <span
-            v-if="myFavorite.includes(singleCafe.id)"
+            v-if="is_favorite"
             class="material-icons-round">
             favorite
           </span>
@@ -73,24 +74,14 @@
   </li>
 </template>
 <script>
-const localStorageMethods = {
-  save(favorite) {
-    const favoriteString = JSON.stringify(favorite);
-    localStorage.setItem('CoffeetPrintFavorite', favoriteString);
-  },
-  get() {
-    return JSON.parse(localStorage.getItem('CoffeetPrintFavorite'));
-  },
-};
-
 export default {
   name: 'CafeCardComponent',
   props: {
     singleCafe: Object,
+    is_favorite: Boolean,
   },
   data() {
     return {
-      myFavorite: localStorageMethods.get() || [],
     };
   },
   methods: {
@@ -106,17 +97,18 @@ export default {
           },
         })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             //  TODO  options 樣式之後再回來設定
             this.$swal('成功加入購物車！');
             // 更新的 modal 的購物車
             this.emitter.emit('updateCartList');
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     // 加到我的最愛
@@ -185,7 +177,7 @@ li
           padding: 1px 8px
           border-radius: 20px
           border: 1px solid #000
-          font-size: 12%
+          font-size: 12px
           font-weight: normal
           margin: 0 0 0 8px
         .material-icons-round

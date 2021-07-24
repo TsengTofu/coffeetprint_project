@@ -1,10 +1,10 @@
 <template>
-  <li>
+  <li class="col">
     <div class="card"
-    @click="goToCafeDetail(singleCafe.id)"
+      @click="goToCafeDetail(singleCafe.id)"
       style="max-width: 540px;">
       <div class="row g-0">
-        <div class="col-md-6 image">
+        <div class="col image">
           <div
             class="cover_image"
             :style="{ backgroundImage: 'url(' + singleCafe.imageUrl + ')' }"
@@ -12,9 +12,9 @@
           <button
             class="btn btn-primary add_to_favorite d-flex"
             type="button"
-            @click.stop="toggleFavorite(singleCafe.id)"
+            @click.stop="addToFavorite(singleCafe.id)"
           >
-            <span v-if="favorite_list.includes(singleCafe.id)" class="material-icons-round">
+            <span v-if="is_favorite" class="material-icons-round">
               favorite
             </span>
             <span v-else class="material-icons-round">
@@ -22,7 +22,7 @@
             </span>
           </button>
         </div>
-        <div class="col-md-6">
+        <div class="col">
           <div class="card-body">
             <div class="d-flex title">
               <b class="category">
@@ -79,26 +79,15 @@
 </template>
 
 <script>
-// 功能都會跟原本的卡片一樣
-const localStorageMethods = {
-  save(favorite) {
-    const favoriteString = JSON.stringify(favorite);
-    localStorage.setItem('CoffeetPrintFavorite', favoriteString);
-  },
-  get() {
-    return JSON.parse(localStorage.getItem('CoffeetPrintFavorite'));
-  },
-};
-
 export default {
   name: 'CafeGridViewCardComponent',
   props: {
     singleCafe: Object,
+    is_favorite: Boolean,
   },
   components: {},
   data() {
     return {
-      favorite_list: [],
     };
   },
   methods: {
@@ -115,29 +104,23 @@ export default {
           },
         })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             //  TODO  options 樣式之後再回來設定
             this.$swal('成功加入購物車！');
             // 更新的 modal 的購物車
             this.emitter.emit('updateCartList');
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     // 加到我的最愛
-    toggleFavorite(id) {
-      if (this.favorite_list.includes(id)) {
-        this.favorite_list.splice(this.favorite_list.indexOf(id), 1);
-        this.$swal('已成功移除我的最愛！');
-      } else {
-        this.favorite_list.push(id);
-        this.$swal('已成功加入我的最愛！');
-      }
-      localStorageMethods.save(this.favorite_list);
+    addToFavorite(id) {
+      this.emitter.emit('addToFavoriteList', id);
     },
   },
   mounted() {},

@@ -1,10 +1,8 @@
 <template>
   <div class="order_summary_wrapper">
-    <p>訂單摘要</p>
     <ul class="list-unstyled">
       <li>
-        <p>商品總計</p>
-        <p>NT$ <span>{{ total }}</span></p>
+        <p>商品總計 NT$ <span>{{ total }}</span></p>
       </li>
       <li>
         <p>使用折價券折抵</p>
@@ -12,8 +10,7 @@
          <!--  TODO  這邊是否要顯示相關優惠券資訊呢？ -->
       </li>
       <li>
-        <p>結帳總金額</p>
-        <p>NT$ <span>{{ final_total }}</span></p>
+        <p>結帳總金額 NT$ <span>{{ final_total }}</span></p>
       </li>
     </ul>
   </div>

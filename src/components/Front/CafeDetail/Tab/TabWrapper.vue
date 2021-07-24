@@ -33,14 +33,14 @@
             :detail_data="detail_data"
           />
         </template>
-        <template v-slot:cafe_menu>
+        <!-- <template v-slot:cafe_menu> -->
           <!--  FIXME  餐廳菜單還沒處理 -->
-          餐廳菜單
-        </template>
-        <template v-slot:coupon_content>
+          <!-- 餐廳菜單 -->
+        <!-- </template> -->
+        <!-- <template v-slot:coupon_content> -->
           <!--  FIXME  折價券還沒處理 -->
-          折價券的內容
-        </template>
+          <!-- 折價券的內容 -->
+        <!-- </template> -->
         <template v-slot:cafe_reviews>
           網友評論的內容
           <ReviewListComponent
@@ -81,16 +81,16 @@ export default {
           selected: true, // 預設是 false
         },
         // 第二組
-        {
-          tab_name: 'cafe_menu',
-          tab_chinese_name: '餐廳菜單',
-          selected: false, // 預設是 false
-        },
-        {
-          tab_name: 'coupon_content',
-          tab_chinese_name: '折價券內容',
-          selected: false, // 預設是 false
-        },
+        // {
+        //   tab_name: 'cafe_menu',
+        //   tab_chinese_name: '餐廳菜單',
+        //   selected: false, // 預設是 false
+        // },
+        // {
+        //   tab_name: 'coupon_content',
+        //   tab_chinese_name: '折價券內容',
+        //   selected: false, // 預設是 false
+        // },
         {
           tab_name: 'cafe_reviews',
           tab_chinese_name: '網友評論',

@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid feature_wrapper">
     <ul class="list-unstyled">
-      <li class="row d-flex  align-items-center">
+      <li class="row d-flex  align-items-center mt-5">
         <div class="bg_cover feature_image img-fluid col-sm-6"></div>
         <div class="feature_describe col-sm-6">
           <p class="title">走！一起去咖啡廳吃早餐呀！</p>
@@ -83,7 +83,7 @@ export default {
       width: 100%
       height: 150px
       position: absolute
-      top: -130px
+      top: -100px
       z-index: 1
       left: 0px
   ul

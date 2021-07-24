@@ -30,7 +30,7 @@
         <div class="content col-3">
           <a
             type="button"
-            class="btn dot_button"
+            class="dot_button"
           ></a>
         </div>
         <div class="text_block">
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div
-        class="btn remove_button"
+        class="remove_button"
         type="button"
         @click.stop="removeFromFavoriteList(cafe.id)"
       >
@@ -73,16 +73,16 @@ export default {
           },
         })
         .then((response) => {
-          if (response.data.success) {
-            //  TODO  options 樣式之後再回來設定
+          const { success } = response.data;
+          if (success) {
             this.$swal('成功加入購物車！');
             this.emitter.emit('updateCartList');
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     removeFromFavoriteList(id) {
@@ -111,6 +111,7 @@ export default {
             transform: scale(1)
   .remove_button
     position: absolute
+    padding: 1rem
     right: 0px
     top: 0px
     color: #fff

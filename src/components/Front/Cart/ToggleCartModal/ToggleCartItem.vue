@@ -1,55 +1,58 @@
 <template>
-    <th scope="row">{{ order }}</th>
-    <td>
-      <div class="image">
-        <img :src="cart_item.product.imageUrl" alt="">
-      </div>
-      <div>
-        <p>
-          <span>{{ cart_item.product.category }}</span>
-          {{ cart_item.product.title }}
-        </p>
-        <!--  FIXME  導到產品詳細頁，另開分頁，或是 popupModal？ -->
-        <!-- <button
-          type="button"
-          class="btn btn-primary"
-          @click="showCafeDetail(cart_item.product.id)">
-          詳細內容
-        </button> -->
-        </div>
-    </td>
-    <td>NT$ {{ cart_item.product.price }}</td>
-    <td>
+  <div class="card mb-5">
+    <div class="card-header header_text d-flex align-items-center">
+      #{{ order }} <span>{{ cart_item.product.category }}</span>{{ cart_item.product.title }}
+    </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+      <!-- 這邊的 style 之後要改寫 scope -->
+      <img
+        :src="cart_item.product.imageUrl" alt=""
+        :style="'width: 100%; height: auto;'"
+      >
+    </div>
+    <div class="col">
+    <div class="card-text">
+         <!-- <button
+      @click="showCafeDetail(cart_item.product.id)"
+      type="button"
+      class="btn btn-primary">
+      詳細內容
+    </button> -->
+      <p>NT$ {{ (item_qty * cart_item.product.price).toLocaleString() }}</p>
       <div class="input-group">
-        <button class="btn btn-outline-secondary"
+        <button class="btn"
           type="button"
           @click="modifyNum('minus', cart_item.id)"
         ><span class="material-icons-round">remove</span></button>
         <input type="text" class="form-control" :value="item_qty"
           aria-label="數量">
-        <button class="btn btn-outline-secondary" type="button"
+        <button class="btn" type="button"
           @click="modifyNum('add', cart_item.id)"
         >
           <span class="material-icons-round">add</span>
         </button>
       </div>
-    </td>
-    <td>NT$ {{ (item_qty * cart_item.product.price).toLocaleString() }}</td>
-    <td>
-      <button
+    </div>
+    <!-- 刪除按鈕 -->
+     <button
         type="button"
-        class="btn"
+        class="btn btn-outline-secondary"
         @click="deleteCurrentCartItem(cart_item.id)"
       >
-        <span class="material-icons-round">delete</span>
+      刪除
+        <!-- <span class="material-icons-round">delete</span> -->
       </button>
-    </td>
-
+    </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'CartItemComponent',
+  name: 'ToggleCartItemComponent',
   props: {
     cart_item: Object,
     order: Number,
@@ -73,7 +76,6 @@ export default {
           this.$emit('getData');
         }
       }).catch(() => {
-        // error
         this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
       });
     },
@@ -96,10 +98,9 @@ export default {
       this.axios
         .put(requestUrl, { data })
         .then((response) => {
-          const { success } = response.data;
+          const { success, data: responseData } = response.data;
           if (success) {
-            this.$swal('更新成功');
-            this.cart_list = response.data.data.carts;
+            this.cart_list = responseData.carts;
           } else {
             this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
@@ -109,7 +110,7 @@ export default {
           this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
-    //  TODO  改成 popup 或是另開分頁的形式
+    //  TODO  這邊還沒撰寫，應該會改成 popup 或是另開分頁的形式
     // showCafeDetail(productId) {
     // },
   },
@@ -126,6 +127,14 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.header_text
+  span
+    display: flex
+    padding: .2rem .3rem
+    border: 1px solid #000
+    margin: 0 .5rem
+.card-text
+  text-align: justify
 td
   vertical-align: middle
   img

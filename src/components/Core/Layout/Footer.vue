@@ -1,13 +1,14 @@
 <template>
   <div class="footer_wrapper container-fluid">
-    <div class="row content">
+    <div class="row content d-flex align-items-center">
       <a
         class="navbar-brand logo col-sm-2"
         href="#"
       >
       </a>
       <p class="col-auto">Copyright © 2020 CoffeetPrint. 僅個人作品練習，無商業用途。</p>
-      <div class="detail col-sm-2">
+      <!-- 先藏起來 -->
+      <!-- <div class="detail col-sm-2">
         <ul class="list-unstyled row link">
           <li class="admin_login col-sm-1">
             <router-link to="/login" target="_blank">
@@ -25,7 +26,7 @@
             </a>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

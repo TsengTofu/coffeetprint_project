@@ -1,9 +1,19 @@
 <template>
-  <!-- TODO  toggleCart 的部分改成其他版型好了，明天優先處理這個 -->
   <div class="cart_list_wrapper">
     <!-- 表格開始 -->
-    <table class="table table-striped table-hover">
-      <!-- 表頭 -->
+    <template v-if="isMobile()">
+      <div
+        v-for="(item, key) in cart_list"
+            :key="'cart_' + key"
+      >
+        <ToggleCartItemComponent
+          :cart_item="item"
+          :order="parseInt(key) + 1"
+          @get-data="getCartList"
+        />
+      </div>
+    </template>
+    <table class="table table-striped table-hover" v-else>
       <thead>
         <tr>
           <th width="60" scope="col">#</th>
@@ -21,6 +31,7 @@
             v-for="(item, key) in cart_list"
             :key="'cart_' + key"
           >
+            <!-- 另一個 template -->
             <CartItemComponent
               :cart_item="item"
               :order="parseInt(key) + 1"
@@ -36,18 +47,22 @@
                 <div class="image col-1">
                   <img src="../../../../assets/images/empty_cart.svg" alt="">
                 </div>
-                <button type="button" class="btn btn-primary">繼續購物</button>
+                <button
+                  @click="$router.push('/products')"
+                  type="button" class="btn btn-primary"
+                >
+                  繼續購物
+                </button>
               </div>
             </td>
           </tr>
         </template>
       </tbody>
     </table>
-    <!-- FIXME  目前購物車裡面有多少個東西 -->
    <div class="summary_block">
       <p>購物車目前有 <span>{{ cart_list.length }}</span> 個產品</p>
     <button type="button"
-      class="btn btn-primary"
+      class="btn btn-outline-secondary"
       @click="clearAllCartList">
       清空購物車
     </button>
@@ -58,6 +73,7 @@
 
 <script>
 import CartItemComponent from './CartItem.vue';
+import ToggleCartItemComponent from '../ToggleCartModal/ToggleCartItem.vue';
 // 思考一下要在哪裡放 Coupon 的 input
 
 export default {
@@ -68,6 +84,7 @@ export default {
   },
   components: {
     CartItemComponent,
+    ToggleCartItemComponent,
   },
   data() {
     return {
@@ -80,21 +97,28 @@ export default {
       this.axios
         .delete(requestUrl)
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             this.$swal('已清空購物車');
             this.getCartList();
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          // error
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
+    isMobile() {
+      //  NOTE  偵測是不是手機版
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true;
+      }
+      return false;
+    },
   },
-  mounted() {
-    console.log(this.cart_list);
-  },
+  mounted() {},
 };
 </script>
 

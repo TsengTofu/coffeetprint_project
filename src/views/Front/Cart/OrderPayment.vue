@@ -1,6 +1,5 @@
 <template>
   <div class="order_payment_wrapper">
-    <p>要付款的畫面</p>
     <CheckoutStepComponent
       step="order_payment"
     />

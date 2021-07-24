@@ -124,11 +124,10 @@ export default {
   },
   methods: {
     // Swiper 相關的內容
-    onSwiper(swiper) {
-      console.log(swiper);
+    // params: swiper
+    onSwiper() {
     },
     onSlideChange() {
-      console.log('slide change');
     },
   },
   mounted() {},

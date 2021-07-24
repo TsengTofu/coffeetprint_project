@@ -1,4 +1,5 @@
 <template>
+  <!--  FIXME  這邊直接複製兩份版型來改 -->
   <div
     class="offcanvas offcanvas-end"
     tabindex="-1"
@@ -6,7 +7,7 @@
     aria-labelledby="offcanvasRightLabel"
   >
     <div class="offcanvas-header">
-      <h5 id="offcanvasRightLabel">
+      <h5 id="offcanvasRightLabel" class="d-flex">
         <span class="material-icons-round">shopping_cart</span>我的購物車
       </h5>
       <!-- 關閉按鈕 -->
@@ -19,30 +20,43 @@
     </div>
     <!-- offcanvas 裡面的內容 -->
     <div class="offcanvas-body">
+      <div class="summary_block d-flex">
+      <p>
+        購物車目前有 <span>{{ cart_list.length }}</span> 個產品
+      </p>
+       <button
+        type="button"
+        class="btn btn-primary"
+        v-if="cart_list.length > 0"
+        @click="directToPage('cart')">
+        查看購物車
+      </button>
+   </div>
       <div v-if="cart_list">
-        <CartListComponent
+        <ToggleCartItemComponent
           :cart_list="cart_list"
           :getCartList="getCartList"
         />
       </div>
       <button
         type="button"
-        class="btn btn-primary"
-        @click="directToPage('cart')">
-        訂單結帳
-      </button>
+        v-if="cart_list.length > 0"
+        class="btn btn-outline-secondary"
+        @click="clearAllCartList">
+      清空購物車
+    </button>
     </div>
   </div>
 </template>
 
 <script>
-import CartListComponent from '../../Front/Cart/Data/CartList.vue';
+import ToggleCartItemComponent from '../../Front/Cart/ToggleCartModal/ToggleCartList.vue';
 
 export default {
   name: 'ToggleCartComponent',
   props: {},
   components: {
-    CartListComponent,
+    ToggleCartItemComponent,
   },
   data() {
     return {
@@ -58,16 +72,34 @@ export default {
       this.axios
         .get(requestUrl)
         .then((response) => {
-          if (response.data.success) {
-            console.log('成功抓到購物車列表的資料', response.data.data);
-            //  TODO  單就購物車的列表，不包含總金額 total, final_total
-            this.cart_list = response.data.data.carts;
+          const { success } = response.data;
+          if (success) {
+            const { data } = response.data;
+            this.cart_list = data.carts;
           } else {
-            console.log('出了點錯誤，請稍後再嘗試，謝謝。');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error, 'getDataError');
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+        });
+    },
+    // 清除全部購物車列表
+    clearAllCartList() {
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/carts`;
+      this.axios
+        .delete(requestUrl)
+        .then((response) => {
+          const { success } = response.data;
+          if (success) {
+            this.$swal('已清空購物車');
+            this.getCartList();
+          } else {
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+          }
+        })
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },

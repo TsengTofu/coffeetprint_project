@@ -1,21 +1,48 @@
 <template>
-  <div class="card">
+  <div class="card col-md-6">
     <!-- 這邊要多一個功能，可以直接複製訂單編號 -->
     <div class="card">
       <!-- <img src="" class="card-img-top" alt="..."> -->
       <div class="card-body">
         <h5 class="card-title">訂單 {{ orderDetail.id }} 等待付款中！</h5>
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="copyOrderID"
+        >
+          複製訂單編號
+        </button>
+        <input
+          type="text"
+          ref="order_id"
+          v-model="orderDetail.id"
+          class="no_show"
+        >
         <!--  TODO  這邊要做日期的轉換 -->
-        <figcaption class="blockquote-footer">結帳時間：{{ order_time }}</figcaption>
+        <figcaption>結帳時間：{{ order_time }}</figcaption>
         <div class="card-text">
-          <!-- 這裡面是卡片的內容 -->
-          <!-- 是否已經付款 -->
-          <b v-if="orderDetail.is_paid">已付款</b>
-          <b v-else>未付款</b>
-          <hr>
+          <b
+            class="d-flex"
+            v-if="orderDetail.is_paid">
+            <span class="material-icons-round">verified</span>已付款
+          </b>
+          <b
+            class="d-flex"
+            v-else>
+            <span class="material-icons-round">clear</span>未付款
+          </b>
           <div>
             訂單總金額：NT$ <span>{{ Math.floor(orderDetail.total).toLocaleString() }}</span>
           </div>
+          <div class="card" v-for="(item, key) in product_list" :key="item + key">
+      <!-- 這個是產品本身 -->
+      <!-- 如果是使用 coupon -->
+      <p>{{ orderDetail.products[item].coupon }}</p>
+      <p>購買的資料：{{ orderDetail.products[item].product.title }}<br></p>
+      <!-- 這個是購買的數量 -->
+      <p>{{ orderDetail.products[item].qty }} 張</p>
+      <img :src="orderDetail.products[item].product.imageUrl" alt="">
+    </div>
           <!-- 使用者資料 -->
           <h5>使用者資料</h5>
           <div v-if="user">
@@ -27,25 +54,9 @@
         </div>
       </div>
     </div>
-    <!-- NOTE  -->
-
-    <!-- 訂單資料 -->
-    <!-- TODO  這邊要確認一下 API -->
-    <br>
-    <div class="card" v-for="(item, key) in product_list" :key="item + key">
-      <!-- 這個是產品本身 -->
-      <!-- 如果是使用 coupon -->
-      <p>{{ orderDetail.products[item].coupon }}</p>
-      <p>購買的資料：{{ orderDetail.products[item].product.title }}<br></p>
-      <!-- 這個是購買的數量 -->
-      <p>{{ orderDetail.products[item].qty }} 張</p>
-    </div>
-    <!-- 這樣可以拿到 key 值 -->
-    <!-- 可以拿到購買的品項 -->
-    <p>{{ product_list }}</p>
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-primary d-flex"
       v-if="!orderDetail.is_paid"
       @click="goToPayment">
       付款結帳
@@ -74,6 +85,12 @@ export default {
     };
   },
   methods: {
+    // 複製訂單號碼
+    copyOrderID() {
+      this.$refs.order_id.select();
+      this.$refs.order_id.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+    },
     // 取得剛成立的訂單
     getOrderDetail() {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order/${this.order_id}`;
@@ -88,11 +105,11 @@ export default {
             this.user = user;
             this.product_list = Object.keys(products);
           } else {
-            console.log('失敗');
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
     // 點擊付款按鈕
@@ -108,8 +125,8 @@ export default {
             this.getOrderDetail(oderId);
           }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
   },
@@ -121,5 +138,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-
+.no_show
+  opacity: 0
 </style>
