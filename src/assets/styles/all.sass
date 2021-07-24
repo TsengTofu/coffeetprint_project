@@ -7,3 +7,27 @@
 @import "./helpers/_variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap";
+
+// 自定義 class-name
+// 共用的背景設定
+.bg_cover
+  background-position: center
+  background-size: cover
+  background-repeat: no-repeat
+  top: 0px
+  left: 0px
+  right: 0px
+  bottom: 0px
+  position: relative
+  @include media-breakpoint-up(md)
+    background-attachment: fixed
+
+.bg_cover_no_fixed
+  background-position: center
+  background-size: cover
+  background-repeat: no-repeat
+  top: 0px
+  left: 0px
+  right: 0px
+  bottom: 0px
+  position: relative

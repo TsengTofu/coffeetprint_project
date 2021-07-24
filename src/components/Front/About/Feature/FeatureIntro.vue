@@ -2,7 +2,7 @@
   <div class="container-fluid feature_wrapper">
     <ul class="list-unstyled">
       <li class="row d-flex  align-items-center">
-        <div class="feature_image img-fluid col-sm-6"></div>
+        <div class="bg_cover feature_image img-fluid col-sm-6"></div>
         <div class="feature_describe col-sm-6">
           <p class="title">走！一起去咖啡廳吃早餐呀！</p>
           <p
@@ -43,7 +43,7 @@
             <span class="material-icons-round">chevron_right</span>
           </button>
         </div>
-        <div class="feature_image_second img-fluid col-sm-6"></div>
+        <div class="bg_cover feature_image_second img-fluid col-sm-6"></div>
       </li>
     </ul>
     <!-- <img src="" class="rounded float-start" alt="..."> -->
@@ -62,7 +62,6 @@ export default {
   },
   methods: {
     getCoupon() {
-      // 都先給固定的
       // ForYouMyLove
       // HereIsYourCoffee
       this.$swal('恭喜獲得折扣碼 - CodeWithCoffee');
@@ -99,15 +98,9 @@ export default {
     text-align: justify
 .feature_image
   background-image: url('../../../../../public/about/about_food.jpg')
-  background-size: cover
-  background-position: center
-  background-attachment: fixed
   height: 300px
 .feature_image_second
   background-image: url('../../../../../public/about/about_food_2.jpg')
-  background-size: cover
-  background-position: center
-  background-attachment: fixed
   height: 300px
 //  TODO  這邊先隨便寫，這要抽出來
 .special_button

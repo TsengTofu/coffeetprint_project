@@ -22,7 +22,7 @@
                 class="btn btn-secondary"
                 type="button"
                 id="button-addon2"
-                :disabled="subscribe_email === ''"
+                :disabled="subscribe_email === '' || errors.email"
                 @click="getSubscribe"
               >
                 <!-- 上面這個 id 要對應 aria-describedby -->
@@ -49,21 +49,32 @@ export default {
   data() {
     return {
       subscribe_email: '',
-      subscribe_email_list: LocalStorageSupport().getItem() || [],
+      subscribe_email_list: LocalStorageSupport('CoffeetPrintSubscribe').getItem() || [],
     };
   },
   methods: {
     getSubscribe() {
+      console.log(typeof this.subscribe_email_list);
       if (this.subscribe_email_list.includes(this.subscribe_email)) {
         this.$swal('已經加入訂閱，請輸入別的 E-mail');
       } else {
+        console.log(typeof this.subscribe_email_list, this.subscribe_email_list);
         this.subscribe_email_list.push(this.subscribe_email);
+        LocalStorageSupport('CoffeetPrintSubscribe').saveItem(this.subscribe_email);
         this.$swal('已成功加入訂閱！');
-        LocalStorageSupport().saveItem(this.subscribe_email);
       }
+      this.subscribe_email = '';
     },
   },
   mounted() {
+  },
+  watch: {
+    subscribe_email_list: {
+      handler() {
+        LocalStorageSupport('CoffeetPrintSubscribe').saveItem(this.subscribe_email_list);
+      },
+      deep: true,
+    },
   },
 };
 </script>
