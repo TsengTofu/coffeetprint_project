@@ -11,7 +11,9 @@ export default {
   components: {
     CafeListComponent,
   },
-  data() {},
+  data() {
+    return {};
+  },
   methods: {},
 };
 </script>

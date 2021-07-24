@@ -30,7 +30,7 @@
             <button
               type="button"
               class="btn special_button"
-              @click="getCoupon"
+              @click="$router.push('/products')"
             >
               探索自己的小角落
               <span class="material-icons-round">chevron_right</span>

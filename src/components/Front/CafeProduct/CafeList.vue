@@ -20,20 +20,26 @@
     <!--  TODO  思考一下要不要把 productData 換掉 -->
     <template v-if="switch_status === 'grid'">
       <ul class="list-unstyled row row-cols-1 row-cols-md-5 g-5">
-        <CafeCardComponent
+        <template
           v-for="(cafe, key) in productData" :key="'cafe_'+ key"
-          :singleCafe="cafe" :order="key"
-          :is_favorite="favorite_list.includes(cafe.id)"
-        />
+        >
+          <CafeCardComponent
+            :singleCafe="cafe" :order="key"
+            :is_favorite="favorite_list.includes(cafe.id)"
+          />
+        </template>
       </ul>
     </template>
     <template v-else>
       <ul class="list-unstyled row row-cols-1 row-cols-md-2 g-2">
-        <CafeGridViewCardComponent
+        <template
           v-for="(cafe, key) in productData" :key="'grid_'+ key"
-          :singleCafe="cafe"
-          :is_favorite="favorite_list.includes(cafe.id)"
-        />
+        >
+          <CafeGridViewCardComponent
+            :singleCafe="cafe"
+            :is_favorite="favorite_list.includes(cafe.id)"
+          />
+        </template>
         </ul>
     </template>
     <PaginationComponent
@@ -75,7 +81,8 @@ export default {
       this.axios
         .get(requestUrl)
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             const { products, pagination } = response.data;
             this.productData = products;
             this.pagination = pagination;

@@ -45,6 +45,7 @@
             {{ singleCafe.title }}
             </h5>
             <p class="d-flex stars">
+              <!-- NOTE  star_rate 必須填寫，沒有填寫的話會直接跑不出來 -->
               <span v-for="(n, index) in parseInt(singleCafe.star_rate)"
                 :key="'star_' + index" class="material-icons-round">star</span>
                 <span v-for="(n, index) in (5 - parseInt(singleCafe.star_rate))"
@@ -115,6 +116,8 @@ export default {
     addToFavorite(id) {
       this.emitter.emit('addToFavoriteList', id);
     },
+  },
+  mounted() {
   },
 };
 </script>
