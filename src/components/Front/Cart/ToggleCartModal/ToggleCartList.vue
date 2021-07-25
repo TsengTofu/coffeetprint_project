@@ -22,7 +22,12 @@
                     :style="'width: 100%; height: auto;'"
                   >
                 </div>
-                <button type="button" class="btn btn-primary">繼續購物</button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  @click="$router.push('/products')"
+                >
+                  繼續購物</button>
               </div>
           </div>
         </template>
