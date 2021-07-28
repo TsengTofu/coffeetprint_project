@@ -37,9 +37,9 @@
             <router-link to="/favorite" class="nav-link">收藏清單</router-link>
           </li>
           <!-- TODO  文章列表頁先拿掉 -->
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <router-link to="/posts" class="nav-link">文章列表</router-link>
-          </li> -->
+          </li>
           <li class="nav-item">
             <button
               class="btn btn-primary"

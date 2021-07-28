@@ -280,7 +280,8 @@ export default {
       this.axios
         .post(requestUrl, { data: this.tempProduct })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             // 要把資料傳遞出去
             this.$emit('emit-data', this.tempProduct);
             this.modal.hide();
@@ -297,7 +298,8 @@ export default {
       this.axios
         .put(requestUrl, { data: this.tempProduct })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             this.$emit('emit-data', this.tempProduct);
             this.modal.hide();
           } else {

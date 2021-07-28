@@ -187,7 +187,8 @@ export default {
       this.axios
         .post(requestUrl, { data: this.tempArticle })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             // 要把資料傳遞出去
             // this.$emit('emit-data', this.tempProduct);
             this.modal.hide();
