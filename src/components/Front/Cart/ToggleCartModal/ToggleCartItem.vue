@@ -13,7 +13,7 @@
       >
     </div>
     <div class="col">
-    <div class="card-text">
+    <div class="card-text card_text">
          <!-- <button
       @click="showCafeDetail(cart_item.product.id)"
       type="button"
@@ -21,7 +21,7 @@
       詳細內容
     </button> -->
       <p>NT$ {{ (item_qty * cart_item.product.price).toLocaleString() }}</p>
-      <div class="input-group">
+      <div class="input-group mb-3">
         <button class="btn"
           type="button"
           @click="modifyNum('minus', cart_item.id)"
@@ -34,9 +34,8 @@
           <span class="material-icons-round">add</span>
         </button>
       </div>
-    </div>
-    <!-- 刪除按鈕 -->
-     <button
+      <!-- 刪除按鈕 -->
+      <button
         type="button"
         class="btn btn-outline-secondary"
         @click="deleteCurrentCartItem(cart_item.id)"
@@ -44,6 +43,7 @@
       刪除
         <!-- <span class="material-icons-round">delete</span> -->
       </button>
+    </div>
     </div>
     </div>
   </div>
@@ -127,6 +127,10 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.card_text
+  display: flex
+  flex-direction: column
+  justify-content: space-between
 .header_text
   span
     display: flex

@@ -1,6 +1,6 @@
 <template>
   <!-- NOTE  這邊是直接複製一份喔 -->
-  <div class="cart_list_wrapper container">
+  <div class="cart_list_wrapper">
     <template v-if="cart_list.length > 0">
           <div
             v-for="(item, key) in cart_list"

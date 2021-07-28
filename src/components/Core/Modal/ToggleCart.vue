@@ -19,7 +19,7 @@
       ></button>
     </div>
     <!-- offcanvas 裡面的內容 -->
-    <div class="offcanvas-body">
+    <div class="offcanvas-body container">
       <div class="summary_block d-flex">
       <p>
         購物車目前有 <span>{{ cart_list.length }}</span> 個產品
@@ -114,4 +114,11 @@ export default {
 };
 </script>
 
-<style scoped lang="sass"></style>
+<style scoped lang="sass">
+.summary_block
+  align-items: center
+  justify-content: space-between
+  margin: 0 0 1rem
+  p
+    margin: 0px
+</style>

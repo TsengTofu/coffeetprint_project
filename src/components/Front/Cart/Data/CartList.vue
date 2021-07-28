@@ -1,5 +1,5 @@
 <template>
-  <div class="cart_list_wrapper">
+  <div class="cart_list_wrapper container">
     <!-- 表格開始 -->
     <template v-if="isMobile()">
       <div
