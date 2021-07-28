@@ -220,7 +220,8 @@ export default {
       this.axios
         .put(requestUrl, { data: this.tempArticle })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             // this.$emit('emit-data', this.tempArticle);
             // this.modal.hide();
           } else {
