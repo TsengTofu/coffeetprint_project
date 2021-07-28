@@ -3,9 +3,10 @@
     <!-- <BreadCrumbComponent /> -->
     <CafeInfoComponent :detail_data="productDetail" />
     <CafeContentComponent :detail_data="productDetail" />
-    <!-- 隨機的產品列表 -->
-    <!-- 不過他的資料要從哪裡來是個問題 -->
-    <RandomCafeListComponent />
+    <!-- 傳入當下的產品 id -->
+    <RandomCafeListComponent
+      :detail_data="productDetail"
+    />
     <!--  TODO  需要有使用說明嗎？ -->
   </div>
 </template>
@@ -38,8 +39,10 @@ export default {
       this.axios
         .get(requestUrl)
         .then((response) => {
-          if (response.data.success) {
-            this.productDetail = response.data.product;
+          const { success } = response.data;
+          if (success) {
+            const { product } = response.data;
+            this.productDetail = product;
           } else {
             this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
