@@ -81,6 +81,9 @@ export default {
   mounted() {
     this.getCartList();
   },
+  unmounted() {
+    this.emitter.off('updateCartList');
+  },
 };
 </script>
 <style lang="sass" scoped>

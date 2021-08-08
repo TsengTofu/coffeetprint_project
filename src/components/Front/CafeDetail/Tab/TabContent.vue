@@ -3,7 +3,8 @@
     class="tab-pane fade show active"
     :id="tab_name"
     role="tabpanel"
-    :aria-labelledby="tab_name + '-tab'">
+    :aria-labelledby="tab_name + '-tab'"
+  >
     <slot :name="tab_name"></slot>
   </div>
 </template>

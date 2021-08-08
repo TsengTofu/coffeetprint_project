@@ -5,11 +5,9 @@
     <!-- 這邊的版型需要再回頭調整 -->
     <div class="container">
       <template v-for="(review, key) in reviews_data" :key="'review_' + key">
-        <!-- 直接用一個新的元件管理 -->
         <SingleReviewComponent :single_review="review" />
       </template>
     </div>
-    <!-- 這邊撈的到資料 -->
   </div>
 </template>
 <script>

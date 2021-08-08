@@ -4,7 +4,7 @@
       <div class="container-sm row">
         <div class="content col-xl-4 col-md-4 col-sm-8 ms-auto">
           <p class="title">訂閱最新消息</p>
-          <Form v-slot="{ errors }">
+          <Form v-slot="{ errors }" ref="subscribe_form">
             <div class="input-group mb-5">
               <Field
                 id="email"
@@ -56,10 +56,12 @@ export default {
     getSubscribe() {
       if (this.subscribe_email_list.includes(this.subscribe_email)) {
         this.$swal('已經加入訂閱，請輸入別的 E-mail');
+        this.$refs.subscribe_form.resetForm();
       } else {
         this.subscribe_email_list.push(this.subscribe_email);
         LocalStorageSupport('CoffeetPrintSubscribe').saveItem(this.subscribe_email);
         this.$swal('已成功加入訂閱！');
+        this.$refs.subscribe_form.resetForm();
       }
       this.subscribe_email = '';
     },

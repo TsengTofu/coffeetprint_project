@@ -13,7 +13,11 @@
           :key="'pic_' + key"
         >
           <div class="main_pic">
-            <img :src="pic" alt="咖啡廳主圖" :style="'width: 100%; height: auto'" />
+            <img
+              :src="pic"
+              alt="咖啡廳主圖"
+              :style="'width: 100%; height: auto'"
+            />
           </div>
         </swiper-slide>
       </swiper>
@@ -30,7 +34,10 @@
           v-for="(pic, key) in pic_list"
           :key="'pic_' + key"
         >
-          <img :src="pic" alt="咖啡廳主圖" :style="'width: 100%; height: auto'" />
+          <img
+            :src="pic"
+            alt="咖啡廳主圖"
+            :style="'width: 100%; height: auto'" />
         </swiper-slide>
       </swiper>
   </div>

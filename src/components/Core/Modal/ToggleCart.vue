@@ -1,5 +1,4 @@
 <template>
-  <!--  FIXME  這邊直接複製兩份版型來改 -->
   <div
     class="offcanvas offcanvas-end"
     tabindex="-1"
@@ -16,22 +15,24 @@
         class="btn-close text-reset"
         data-bs-dismiss="offcanvas"
         aria-label="Close"
-      ></button>
+      >
+      </button>
     </div>
     <!-- offcanvas 裡面的內容 -->
     <div class="offcanvas-body container">
       <div class="summary_block d-flex">
-      <p>
-        購物車目前有 <span>{{ cart_list.length }}</span> 個產品
-      </p>
-       <button
-        type="button"
-        class="btn btn-primary"
-        v-if="cart_list.length > 0"
-        @click="directToPage('cart')">
-        查看購物車
-      </button>
-   </div>
+        <p>
+          購物車目前有 <span>{{ cart_list.length }}</span> 個產品
+        </p>
+        <button
+          type="button"
+          class="btn btn-primary"
+          v-if="cart_list.length > 0"
+          @click="directToPage('cart')"
+        >
+          查看購物車
+        </button>
+      </div>
       <div v-if="cart_list">
         <ToggleCartItemComponent
           :cart_list="cart_list"
@@ -42,9 +43,10 @@
         type="button"
         v-if="cart_list.length > 0"
         class="btn btn-outline-secondary"
-        @click="clearAllCartList">
-      清空購物車
-    </button>
+        @click="clearAllCartList"
+      >
+        清空購物車
+      </button>
     </div>
   </div>
 </template>
@@ -110,6 +112,9 @@ export default {
   },
   mounted() {
     this.getCartList();
+  },
+  unmounted() {
+    this.emitter.off('updateCartList');
   },
 };
 </script>

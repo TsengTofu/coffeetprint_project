@@ -1,20 +1,19 @@
 <template>
-  <!--  TODO  改變顯示方式 -->
   <div class="change_layout">
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click="switch_status = 'list'"
-      >
-        <span class="material-icons-round">view_list</span>
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click="switch_status = 'grid'"
-      >
-        <span class="material-icons-round">grid_view</span>
-      </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="switch_status = 'list'"
+    >
+      <span class="material-icons-round">view_list</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="switch_status = 'grid'"
+    >
+      <span class="material-icons-round">grid_view</span>
+    </button>
   </div>
   <div class="container-fluid cafe_list_wrapper">
     <!--  TODO  思考一下要不要把 productData 換掉 -->
@@ -122,6 +121,9 @@ export default {
   },
   mounted() {
     this.getCafeListData();
+  },
+  unmounted() {
+    this.emitter.off('addToFavoriteList');
   },
 };
 </script>

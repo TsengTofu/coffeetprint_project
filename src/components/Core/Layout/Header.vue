@@ -30,13 +30,11 @@
             <router-link to="/products" class="nav-link" aria-current="page">產品列表</router-link>
           </li>
           <li class="nav-item">
-            <!--  TODO  這邊跟寫 a 有什麼不一樣嗎？ -->
             <router-link to="/about" class="nav-link">關於我們</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/favorite" class="nav-link">收藏清單</router-link>
           </li>
-          <!-- TODO  文章列表頁先拿掉 -->
           <li class="nav-item">
             <router-link to="/posts" class="nav-link">文章列表</router-link>
           </li>
@@ -66,9 +64,6 @@ export default {
   components: {
     ToggleCartComponent,
   },
-  // props: {
-  //     msg: String,
-  // },
   data() {
     return {
       toggleIsShow: false,
@@ -84,7 +79,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 .header_wrapper
   background: #88664D

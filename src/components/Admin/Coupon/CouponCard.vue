@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="couponModal" ref="modal" tabindex="-1">
+  <div class="modal fade" id="couponModal" ref="modal" tabindex="-1">
     <div
       class="modal-xl
         modal-dialog
@@ -8,8 +8,7 @@
         wrapper"
     >
       <div
-        class="modal-content
-          product_card_wrapper"
+        class="modal-content product_card_wrapper"
       >
         <div class="modal-header header">
           <div class="left">
@@ -27,71 +26,91 @@
         <div class="modal-body outer">
           <div class="container">
             <div class="content">
-      <ul class="list-unstyled">
-        <!-- 優惠券標題 -->
-        <li class="single">
-          <input
-            id="coupon_title"
-            type="text"
-            placeholder="請輸入優惠券標題"
-            v-model="tempCoupon.title"
-          />
-          <label for="coupon_title" class="text">優惠券標題<span>*</span></label>
-        </li>
-        <!-- 優惠百分比 -->
-        <li class="single">
-          <input
-            id="coupon_percent"
-            type="number"
-            placeholder="請輸入優惠券百分比"
-            v-model="tempCoupon.percent"
-          />
-          <label for="coupon_percent" class="text">優惠券百分比<span>*</span></label>
-        </li>
-        <!-- 日期的部分 -->
-        <!-- 這邊要轉型別，就是會從字串 2021-01-02 轉 timestamp 才能加入 API -->
-        <!-- 或者，考慮用日期選取器 DatePicker？ -->
-        <!--  TODO  還是說放在優化？ -->
-        <li class="single">
-          <input
-            id="coupon_due_date"
-            type="date"
-            placeholder="請輸入優惠券到期日"
-            v-model="due_date"
-          />
-          <label for="coupon_due_date" class="text">優惠券到期日<span>*</span></label>
-          <span>格式請寫成：YYYY-MM-DD</span>
-        </li>
-        <!-- Code 折價券的填寫號碼 -->
-        <li class="single">
-          <input
-            id="coupon_code"
-            type="text"
-            placeholder="請輸入優惠券的代碼"
-            v-model="tempCoupon.code"
-            required
-          />
-          <label for="coupon_code" class="text">優惠券代碼<span>*</span></label>
-        </li>
-        <!--  TODO  是否啟用，複製那個 toggle 的部分 -->
-        <li class="checkbox">
-          <div class="switch">
-            <input
-              type="checkbox"
-              :checked="tempCoupon.is_enabled"
-              v-model="tempCoupon.is_enabled"
-            />
-            <span class="slider"></span>
-          </div>
-          <span>是否啟用此張優惠券</span>
-        </li>
-      </ul>
+              <ul class="list-unstyled">
+                <!-- 優惠券標題 -->
+                <li class="single">
+                  <input
+                    id="coupon_title"
+                    type="text"
+                    placeholder="請輸入優惠券標題"
+                    v-model="tempCoupon.title"
+                  />
+                  <label for="coupon_title" class="text">
+                    優惠券標題<span>*</span>
+                  </label>
+                </li>
+                <!-- 優惠百分比 -->
+                <li class="single">
+                  <input
+                    id="coupon_percent"
+                    type="number"
+                    placeholder="請輸入優惠券百分比"
+                    v-model="tempCoupon.percent"
+                  />
+                  <label for="coupon_percent" class="text">
+                    優惠券百分比<span>*</span>
+                  </label>
+                </li>
+                <!-- 日期的部分 -->
+                <!-- 這邊要轉型別，就是會從字串 2021-01-02 轉 timestamp 才能加入 API -->
+                <!-- 或者，考慮用日期選取器 DatePicker？ -->
+                <!--  TODO  還是說放在優化？ -->
+                <li class="single">
+                  <input
+                    id="coupon_due_date"
+                    type="date"
+                    placeholder="請輸入優惠券到期日"
+                    v-model="due_date"
+                  />
+                  <label for="coupon_due_date" class="text">
+                    優惠券到期日<span>*</span>
+                  </label>
+                  <span>格式請寫成：YYYY-MM-DD</span>
+                </li>
+                <!-- Code 折價券的填寫號碼 -->
+                <li class="single">
+                  <input
+                    id="coupon_code"
+                    type="text"
+                    placeholder="請輸入優惠券的代碼"
+                    v-model="tempCoupon.code"
+                    required
+                  />
+                  <label for="coupon_code" class="text">
+                    優惠券代碼<span>*</span>
+                  </label>
+                </li>
+                <!--  TODO  是否啟用，複製那個 toggle 的部分 -->
+                <li class="checkbox">
+                  <div class="switch">
+                    <input
+                      type="checkbox"
+                      :checked="tempCoupon.is_enabled"
+                      v-model="tempCoupon.is_enabled"
+                    />
+                    <span class="slider"></span>
+                  </div>
+                  <span>是否啟用此張優惠券</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-        <div class="modal-footer button_block">
-          <button class="cancel" data-bs-dismiss="modal" type="button">取消</button>
-          <button @click="addNewCoupon" type="button">ADD確認</button>
+        <div
+          class="modal-footer button_block"
+        >
+          <button
+            class="cancel"
+            data-bs-dismiss="modal"
+            type="button"
+          >
+            取消
+          </button>
+          <button
+            @click="addNewCoupon"
+            type="button">
+            ADD確認
+          </button>
           <!-- <button v-else @click="editCoupon" type="button">確認</button> -->
         </div>
       </div>

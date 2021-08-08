@@ -10,7 +10,7 @@
         <Field
           id="name"
           name="姓名"
-          type="name"
+          type="text"
           class="form-control"
           :class="{ 'is-invalid': errors['姓名'] }"
           placeholder="請輸入姓名"
