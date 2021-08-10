@@ -1,12 +1,20 @@
 <template>
   <div class="animation_text_wrapper">
-    <transition-group name="text"
+    <transition-group
+      name="text"
       appear
       @before-enter="beforeEnter"
       @enter="enter"
       :css="false"
-    ><span class="text" v-for="(letter, key) in letter_list" :key="key"
-      :data-index="key">{{ letter }}</span>
+    >
+      <span
+        class="text"
+        v-for="(letter, key) in letter_list"
+        :key="key"
+        :data-index="key"
+      >
+        {{ letter }}
+      </span>
     </transition-group>
   </div>
 </template>

@@ -1,36 +1,33 @@
 <template>
   <div class="container">
-    <p>這是要編輯的時候會用到的貼文詳細頁面</p>
+    <!-- TODO  上傳的 UI 介面優化 -->
     <UploadImageComponent />
-    <!-- 先暫時這樣寫 -->
-    <!-- 地區 -->
-    <!-- 靠近哪裏 -->
      <div class="mb-3">
       <label for="area" class="form-label">縣市</label>
       <input
-        type="text"
-        class="form-control"
         id="area"
-        v-model="tempArticle.area"
+        class="form-control"
+        type="text"
         placeholder="縣市"
+        v-model="tempArticle.area"
       />
     </div>
     <div class="mb-3">
       <label for="nearby" class="form-label">靠近地標</label>
       <input
-        type="text"
-        class="form-control"
         id="nearby"
-        v-model="tempArticle.nearby"
+        class="form-control"
+        type="text"
         placeholder="請輸入靠近地標"
+        v-model="tempArticle.nearby"
       />
     </div>
     <div class="mb-3">
       <label for="avatar" class="form-label">頭貼網址</label>
       <input
-        type="text"
-        class="form-control"
         id="avatar"
+        class="form-control"
+        type="text"
         v-model="tempArticle.avatar"
         placeholder="請輸入頭貼網址"
       />
@@ -38,21 +35,21 @@
     <div class="mb-3">
       <label for="cafe_name" class="form-label">主推薦店家名稱</label>
       <input
-        type="text"
-        class="form-control"
         id="cafe_name"
-        v-model="tempArticle.cafe_name"
+        class="form-control"
+        type="text"
         placeholder="請輸入主推薦店家名稱"
+        v-model="tempArticle.cafe_name"
       />
     </div>
     <div class="mb-3">
       <label for="suggestion" class="form-label">店家描述</label>
       <input
-        type="text"
-        class="form-control"
         id="suggestion"
-        v-model="tempArticle.suggestion"
+        class="form-control"
+        type="text"
         placeholder="店家描述"
+        v-model="tempArticle.suggestion"
       />
     </div>
     <div class="row">
@@ -60,31 +57,31 @@
         <div class="mb-3">
           <label for="title" class="form-label">標題</label>
           <input
-            type="text"
-            class="form-control"
             id="title"
-            v-model="tempArticle.title"
+            class="form-control"
+            type="text"
             placeholder="請輸入標題"
+            v-model="tempArticle.title"
           />
         </div>
         <div class="mb-3">
           <label for="image" class="form-label">輸入圖片網址</label>
           <input
-            type="text"
-            class="form-control"
             id="image"
-            v-model="tempArticle.imageUrl"
+            class="form-control"
+            type="text"
             placeholder="請輸入圖片連結"
+            v-model="tempArticle.imageUrl"
           />
         </div>
         <div class="mb-3">
           <label for="author" class="form-label">作者</label>
           <input
-            type="text"
-            class="form-control"
             id="author"
-            v-model="tempArticle.author"
+            class="form-control"
+            type="text"
             placeholder="請輸入標題"
+            v-model="tempArticle.author"
           />
         </div>
         <div class="mb-3">
@@ -98,11 +95,11 @@
           <div class="col-md-2 mb-1" v-for="(label, key) in tempArticle.tag" :key="key">
             <div class="input-group input-group-sm">
               <input
-                type="text"
-                class="form-control form-control"
                 id="tag"
-                v-model="tempArticle.tag[key]"
+                class="form-control form-control"
+                type="text"
                 placeholder="請輸入標籤"
+                v-model="tempArticle.tag[key]"
               />
               <button
                 type="button"
@@ -118,6 +115,7 @@
             v-if="tempArticle.tag[tempArticle.tag.length - 1] || !tempArticle.tag.length"
           >
             <button
+              type="button"
               class="btn btn-outline-primary btn-sm d-block w-100"
               @click="tempArticle.tag.push('')"
             >
@@ -128,28 +126,31 @@
         <div class="mb-3">
           <label for="description" class="form-label">文章描述</label>
           <textarea
-            type="text"
-            class="form-control"
             id="description"
-            v-model="tempArticle.description"
+            class="form-control"
+            type="text"
             placeholder="請輸入文章描述"
-          ></textarea>
+            v-model="tempArticle.description"
+          >
+          </textarea>
         </div>
         <div class="mb-3">
+          <!--  TODO  其實我也不懂為何這裡需要註解 -->
           <!-- <ckeditor
             :editor="editor"
             :config="editorConfig"
             class="test"
             v-model="tempArticle.content"
-          ></ckeditor> -->
+          >
+          </ckeditor> -->
         </div>
         <div class="mb-3">
           <div class="form-check">
             <input
+              id="isPublic"
               class="form-check-input"
               type="checkbox"
               v-model="tempArticle.isPublic"
-              id="isPublic"
             />
             <label class="form-check-label" for="isPublic">
               是否公開
@@ -159,17 +160,18 @@
       </div>
     </div>
     <ckeditor
-            :editor="editor"
-            :config="editorConfig"
-            class="test"
-            v-model="tempArticle.content"
-          ></ckeditor>
+      :editor="editor"
+      :config="editorConfig"
+      class="test"
+      v-model="tempArticle.content"
+    >
+    </ckeditor>
     <!-- 按鈕區域 -->
     <button
       type="button"
       @click="editPost"
     >
-    確認編輯
+      確認編輯
     </button>
   </div>
 </template>
@@ -220,7 +222,8 @@ export default {
       this.axios
         .put(requestUrl, { data: this.tempArticle })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             // this.$emit('emit-data', this.tempArticle);
             // this.modal.hide();
           } else {

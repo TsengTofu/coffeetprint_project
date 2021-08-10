@@ -33,7 +33,6 @@ const routes = [
         // ],
       },
       // 產品詳細頁
-      //  TODO  這邊是不是要改掉？
       {
         path: 'detail/:id',
         name: 'ProductDetail',
@@ -42,20 +41,19 @@ const routes = [
       // 購物車頁
       {
         path: 'cart',
-        name: '',
+        name: 'CartList',
         component: () => import('../views/Front/Cart/Cart.vue'),
       },
       // 填寫購物的人的資料
       {
-        //  FIXME  其實這邊我是希望 cart/form
         path: 'cart/form',
-        name: '',
+        name: 'CartOrderForm',
         component: () => import('../views/Front/Cart/OrderForm.vue'),
       },
       // 回傳的訂單資料，連結點了之後會往下付款
       {
         path: 'order/:id',
-        name: 'Order',
+        name: 'OrderPayment',
         component: () => import('../views/Front/Cart/OrderPayment.vue'),
       },
       // 關於我們
@@ -96,19 +94,18 @@ const routes = [
     path: '/admin',
     name: 'Dashboard',
     component: () => import('../views/Admin/Dashboard.vue'),
-    // 加入 Children 路由
     children: [
       // 子層不需要加上 /，直接指定路徑名稱
       //  FIXME  這支檔案要抽出來，我要在這邊放圖表
       {
         path: '',
-        name: 'Admin_Entry',
+        name: 'AdminEntry',
         component: () => import('../views/Admin/Entry.vue'),
       },
       // 產品
       {
         path: 'products',
-        name: '', //  TODO  name 這個參數是做什麼用的？
+        name: 'AdminProducts',
         component: () => import('../views/Admin/AdminProducts.vue'),
         // 如果下面這個是空的，但有這個參數，原本的 component 會被取代掉
         // components: {
@@ -122,25 +119,25 @@ const routes = [
       // 訂單列表頁
       {
         path: 'orders',
-        name: '',
+        name: 'AdminOrders',
         component: () => import('../views/Admin/AdminOrders.vue'),
       },
       // 優惠券
       {
         path: 'coupons',
-        name: '',
+        name: 'AdminCoupons',
         component: () => import('../views/Admin/AdminCoupons.vue'),
       },
       // 文章列表
       {
         path: 'posts',
-        name: '',
+        name: 'AdminPosts',
         component: () => import('../views/Admin/AdminPost/AdminPosts.vue'),
       },
       // 文章編輯頁面
       {
         path: 'post/detail/:id',
-        name: '',
+        name: 'AdminPostDetail',
         component: () => import('../views/Admin/AdminPost/AdminPostDetail.vue'),
       },
     ],
@@ -148,14 +145,14 @@ const routes = [
   // 錯誤頁面的做法 -> 404 頁面
   {
     path: '/:pathMatch(.*)*',
-    name: '',
+    name: 'ErrorPage',
     component: () => import('../views/Core/NotFound.vue'),
   },
   // 重新導向
   {
     path: '/[page_name]/:pathMatch(.*)*',
     redirect: {
-      name: '', // 導回首頁的話就是 'Home'
+      name: 'RedirectPage', // 導回首頁的話就是 'Home'
     },
   },
   // 動態路由

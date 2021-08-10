@@ -1,6 +1,8 @@
 <!-- 後台主要畫面，這邊會放後台固定會出現的東西 -->
 <template>
-  <AdminNavComponent @sign-out="signOut" />
+  <AdminNavComponent
+    @sign-out="signOut"
+  />
   <router-view v-if="isCheckPass"></router-view>
   <FooterComponent/>
 </template>

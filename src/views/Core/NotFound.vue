@@ -1,11 +1,10 @@
 <template>
   <HeaderComponent/>
   <div class="container-fluid">
-    <!-- <img src="../../assets/images/404/error.svg" alt=""> -->
     <div class="error_image"></div>
     <button
-      class="btn btn-primary"
       type="button"
+      class="btn btn-primary"
       @click="directToPage()"
     >
       回首頁

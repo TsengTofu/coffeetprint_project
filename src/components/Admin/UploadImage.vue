@@ -2,11 +2,24 @@
   <div>
     <p>上傳圖片區塊</p>
     <form enctype="multipart/form-data" method="post">
-      <input type="file" name="file-to-upload" @change="uploadImage" />
+      <input
+        type="file"
+        name="file-to-upload"
+        @change="uploadImage"
+      />
     </form>
     <p>網址位置</p>
-    <input type="text" v-model="url" ref="imageUrl">
-    <button type="button" @click="copyImageUrl">點我複製得到網址</button>
+    <input
+      type="text"
+      v-model="url"
+      ref="imageUrl"
+    >
+    <button
+      type="button"
+      @click="copyImageUrl"
+    >
+      點我複製網址
+    </button>
   </div>
 </template>
 

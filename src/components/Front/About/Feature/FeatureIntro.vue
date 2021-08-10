@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid feature_wrapper">
     <ul class="list-unstyled">
-      <li class="row d-flex  align-items-center mt-5">
+      <li class="row d-flex align-items-center mt-5">
         <div class="bg_cover feature_image img-fluid col-sm-6"></div>
         <div class="feature_describe col-sm-6">
           <p class="title">走！一起去咖啡廳吃早餐呀！</p>
@@ -22,7 +22,6 @@
           </button>
         </div>
       </li>
-      <!-- 第二組 -->
       <li class="row d-flex align-items-center">
         <div class="feature_describe col-sm-6">
           <p class="title">還沒睡醒嗎？那來份早午餐吧！</p>
@@ -46,7 +45,6 @@
         <div class="bg_cover feature_image_second img-fluid col-sm-6"></div>
       </li>
     </ul>
-    <!-- <img src="" class="rounded float-start" alt="..."> -->
   </div>
 </template>
 <script>

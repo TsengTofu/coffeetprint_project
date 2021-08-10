@@ -2,7 +2,6 @@
   <div class="container-fluid promotion_block">
     <div class="content">
       <TitleComponent title="＃編輯嚴選" />
-      <!-- bootstrap 的輪播 -->
       <div
         id="carouselExampleIndicators"
         class="carousel slide"
@@ -17,19 +16,22 @@
             class="active"
             aria-current="true"
             aria-label="Slide 1"
-          ></button>
+          >
+          </button>
           <button
             type="button"
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide-to="1"
             aria-label="Slide 2"
-          ></button>
+          >
+          </button>
           <button
             type="button"
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide-to="2"
             aria-label="Slide 3"
-          ></button>
+          >
+          </button>
         </div>
         <div class="carousel-inner">
           <!-- item 要記得加上 active -->
@@ -46,8 +48,8 @@
           </div>
         </div>
         <button
-          class="carousel-control-prev"
           type="button"
+          class="carousel-control-prev"
           data-bs-target="#carouselExampleIndicators"
           data-bs-slide="prev"
         >
@@ -55,8 +57,8 @@
           <span class="visually-hidden">Previous</span>
         </button>
         <button
-          class="carousel-control-next"
           type="button"
+          class="carousel-control-next"
           data-bs-target="#carouselExampleIndicators"
           data-bs-slide="next"
         >

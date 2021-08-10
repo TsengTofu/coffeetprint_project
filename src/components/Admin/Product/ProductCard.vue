@@ -8,8 +8,7 @@
         wrapper"
     >
       <div
-        class="modal-content
-          product_card_wrapper"
+        class="modal-content product_card_wrapper"
       >
         <div class="modal-header header">
           <div class="left">
@@ -36,7 +35,9 @@
                     placeholder="請輸入產品標題"
                     v-model="tempProduct.title"
                   />
-                  <label for="product_title" class="text">產品標題<span>*</span></label>
+                  <label for="product_title" class="text">
+                    產品標題<span>*</span>
+                  </label>
                 </li>
                 <li class="single">
                   <input
@@ -45,7 +46,9 @@
                     placeholder="請輸入鄰近的地標"
                     v-model="tempProduct.nearby"
                   />
-                  <label for="product_nearby" class="text">鄰近地標<span>*</span></label>
+                  <label for="product_nearby" class="text">
+                    鄰近地標<span>*</span>
+                  </label>
                 </li>
                 <li>
                   <div class="half">
@@ -55,7 +58,9 @@
                       placeholder="請輸入分類"
                       v-model="tempProduct.category"
                     />
-                    <label for="product_category">分類<span>*</span></label>
+                    <label for="product_category">
+                      分類<span>*</span>
+                    </label>
                   </div>
                   <div class="half">
                     <input
@@ -64,10 +69,11 @@
                       placeholder="請輸入單位"
                       v-model="tempProduct.unit"
                     />
-                    <label for="product_unit">單位<span>*</span></label>
+                    <label for="product_unit">
+                      單位<span>*</span>
+                    </label>
                   </div>
                 </li>
-                <!--  NOTE  新增的區域 -->
                 <li>
                   <div class="half">
                     <input
@@ -77,7 +83,9 @@
                       placeholder="請輸入星級評等"
                       v-model="tempProduct.star_rate"
                     />
-                    <label for="product_rate">星級評等<span>*</span></label>
+                    <label for="product_rate">
+                      星級評等<span>*</span>
+                    </label>
                   </div>
                   <!-- 價位、營業時間、定位 -->
                   <div class="half">
@@ -87,7 +95,9 @@
                       placeholder="請輸入官方網站網址"
                       v-model="tempProduct.website"
                     />
-                    <label for="product_website">官方網站<span>*</span></label>
+                    <label for="product_website">
+                      官方網站<span>*</span>
+                    </label>
                   </div>
                 </li>
                 <!-- 新增結束 -->
@@ -99,7 +109,9 @@
                       placeholder="請輸入地區"
                       v-model="tempProduct.area"
                     />
-                    <label for="product_area">地區<span>*</span></label>
+                    <label for="product_area">
+                      地區<span>*</span>
+                    </label>
                   </div>
                   <!-- 電話、地址、價位、營業時間、社群、幾顆星、定位 -->
                   <div class="half">
@@ -109,7 +121,9 @@
                       placeholder="請輸入電話"
                       v-model="tempProduct.phone"
                     />
-                    <label for="product_phone">電話<span>*</span></label>
+                    <label for="product_phone">
+                      電話<span>*</span>
+                    </label>
                   </div>
                 </li>
                 <li class="single">
@@ -119,7 +133,9 @@
                     placeholder="請輸入地址"
                     v-model="tempProduct.address"
                   />
-                  <label for="product_address" class="text">地址<span>*</span></label>
+                  <label for="product_address" class="text">
+                    地址<span>*</span>
+                  </label>
                 </li>
                 <li>
                   <div class="half">
@@ -130,7 +146,9 @@
                       placeholder="請輸入原價"
                       v-model.number="tempProduct.origin_price"
                     />
-                    <label for="origin_price">原價<span>*</span></label>
+                    <label for="origin_price">
+                      原價<span>*</span>
+                    </label>
                   </div>
                   <div class="half">
                     <input
@@ -140,7 +158,9 @@
                       placeholder="請輸入售價"
                       v-model.number="tempProduct.price"
                     />
-                    <label for="product_price">售價<span>*</span></label>
+                    <label for="product_price">
+                      售價<span>*</span>
+                    </label>
                   </div>
                 </li>
                 <li class="single">
@@ -150,7 +170,9 @@
                     placeholder="請輸入說明內容"
                     v-model="tempProduct.description"
                   ></textarea>
-                  <label for="product_description">咖啡廳描述</label>
+                  <label for="product_description">
+                    咖啡廳描述
+                  </label>
                 </li>
                 <li class="single">
                   <textarea
@@ -159,9 +181,10 @@
                     placeholder="請輸入說明內容"
                     v-model="tempProduct.content"
                   ></textarea>
-                  <label for="product_content">折價券內容</label>
+                  <label for="product_content">
+                    折價券內容
+                  </label>
                 </li>
-                <!-- 這邊加上一個存放 json 格式的檔案 -->
                 <li class="single">
                   <textarea
                     id="product_place_api"
@@ -169,7 +192,9 @@
                     placeholder="請輸入 GooglePlaceAPI json 資料"
                     v-model="tempProduct.place_json"
                   ></textarea>
-                  <label for="product_place_api">GooglePlaceAPI 的資料</label>
+                  <label for="product_place_api">
+                    GooglePlaceAPI 的資料
+                  </label>
                 </li>
                 <!--  TODO  記得回來修正 -->
                 <li class="checkbox">
@@ -183,7 +208,7 @@
                   <span>是否啟用此產品</span>
                 </li>
               </ul>
-              <!-- 圖片部分 -->
+              <!-- 圖片 -->
               <ul>
                 <li class="single">
                   <input
@@ -195,18 +220,34 @@
                   <label for="product_main_pic">主要圖片</label>
                 </li>
                 <li>
-                  <p><span class="material-icons-round">collections</span>多圖新增</p>
-                  <button class="add_new_pic_button" @click="addNewPic" type="button">新增圖片</button>
+                  <p>
+                    <span class="material-icons-round">collections</span>多圖新增
+                  </p>
+                  <button
+                    class="add_new_pic_button"
+                    @click="addNewPic" type="button"
+                  >
+                    新增圖片
+                  </button>
                 </li>
-                <template v-if="tempProduct.imagesUrl !== undefined
+                <template
+                  v-if="tempProduct.imagesUrl !== undefined
                   && tempProduct.imagesUrl.length > 0">
-                  <li class="single" v-for="(item, key) in tempProduct.imagesUrl" :key="key">
+                  <li
+                    class="single"
+                    v-for="(item, key) in tempProduct.imagesUrl"
+                    :key="key">
                     <img
                       v-if="tempProduct.imagesUrl[key]"
-                      :src="tempProduct.imagesUrl[key]" alt="" width="150" height="150" />
-                    <img v-else
+                      :src="tempProduct.imagesUrl[key]"
+                      alt="產品圖片"
+                      width="150" height="150" />
+                    <img
+                      v-else
                       src="../../../assets/images/default_img.png"
-                      alt="" width="150" height="150"
+                      alt="預設圖片"
+                      width="150"
+                      height="150"
                     />
                     <div class="edit_part">
                       <input
@@ -215,9 +256,13 @@
                         placeholder="請輸入圖片網址"
                         v-model="tempProduct.imagesUrl[key]"
                       />
-                      <label :for="`product_images_` + key">圖片網址</label>
-                      <button class="remove_pic_button"
-                        type="button" @click="removeCurrentPic(key)">
+                      <label :for="`product_images_` + key">
+                        圖片網址
+                      </label>
+                      <button
+                        class="remove_pic_button"
+                        type="button"
+                        @click="removeCurrentPic(key)">
                         <span class="material-icons-round">delete</span>
                       </button>
                     </div>
@@ -228,9 +273,24 @@
           </div>
         </div>
         <div class="modal-footer button_block">
-          <button class="cancel" data-bs-dismiss="modal" type="button">取消</button>
-          <button v-if="status === 'post'" @click="addNewProduct" type="button">確認</button>
-          <button v-else @click="editProduct" type="button">確認</button>
+          <button
+            class="cancel"
+            data-bs-dismiss="modal"
+            type="button">
+            取消
+          </button>
+          <button
+            v-if="status === 'post'"
+            @click="addNewProduct"
+            type="button">
+            確認
+          </button>
+          <button
+            v-else
+            @click="editProduct"
+            type="button">
+            確認
+          </button>
         </div>
       </div>
     </div>
@@ -247,6 +307,9 @@ export default {
   props: {
     status: String,
   },
+  emits: [
+    'emit-data',
+  ],
   data() {
     return {
       tempProduct: {
@@ -280,7 +343,8 @@ export default {
       this.axios
         .post(requestUrl, { data: this.tempProduct })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             // 要把資料傳遞出去
             this.$emit('emit-data', this.tempProduct);
             this.modal.hide();
@@ -297,7 +361,8 @@ export default {
       this.axios
         .put(requestUrl, { data: this.tempProduct })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             this.$emit('emit-data', this.tempProduct);
             this.modal.hide();
           } else {

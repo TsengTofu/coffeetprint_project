@@ -1,10 +1,9 @@
 <template>
-  <div class="cart_list_wrapper">
-    <!-- 表格開始 -->
+  <div class="cart_list_wrapper container">
     <template v-if="isMobile()">
       <div
         v-for="(item, key) in cart_list"
-            :key="'cart_' + key"
+        :key="'cart_' + key"
       >
         <ToggleCartItemComponent
           :cart_item="item"
@@ -18,7 +17,6 @@
         <tr>
           <th width="60" scope="col">#</th>
           <th width="400" scope="col">品名</th>
-          <!-- 搭配 Modal，到期日放在產品詳細裡面 -->
           <th width="200" scope="col">單價</th>
           <th width="200" scope="col">數量</th>
           <th width="200" scope="col">金額</th>
@@ -45,11 +43,15 @@
               <div class="content d-flex flex-column align-items-center">
                 <p>現在購物車沒有任何東西喔！</p>
                 <div class="image col-1">
-                  <img src="../../../../assets/images/empty_cart.svg" alt="">
+                  <img
+                    src="../../../../assets/images/empty_cart.svg"
+                    alt="空的購物車圖案"
+                  >
                 </div>
                 <button
+                  type="button"
+                  class="btn btn-primary"
                   @click="$router.push('/products')"
-                  type="button" class="btn btn-primary"
                 >
                   繼續購物
                 </button>
@@ -61,13 +63,14 @@
     </table>
    <div class="summary_block">
       <p>購物車目前有 <span>{{ cart_list.length }}</span> 個產品</p>
-    <button type="button"
+    <button
+      type="button"
       class="btn btn-outline-secondary"
-      @click="clearAllCartList">
+      @click="clearAllCartList"
+    >
       清空購物車
     </button>
    </div>
-    <!--  TODO  預備結帳 -->
   </div>
 </template>
 
@@ -118,7 +121,8 @@ export default {
       return false;
     },
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 

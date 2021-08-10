@@ -2,7 +2,8 @@
   <div class="container-md">
     <div class="row">
       <FavoriteCardComponent
-        v-for="(cafe, key) in final_cafe_list" :key="'cafe_' + key"
+        v-for="(cafe, key) in final_cafe_list"
+        :key="'cafe_' + key"
         :cafe="cafe"
       />
     </div>

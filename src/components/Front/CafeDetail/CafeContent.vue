@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- detail_data 也要一起傳進來嗎？ -->
     <TabWrapperComponent
       :reviews="reviews"
       :basic_info="basic_info"
@@ -11,7 +10,8 @@
       width="100%"
       height="450"
       style="border:0" loading="lazy" allowfullscreen
-      :src="map_source">
+      :src="map_source"
+    >
     </iframe>
   </div>
 </template>
@@ -50,6 +50,7 @@ export default {
   methods: {
   },
   mounted() {
+    // FIXME  感覺是這邊的 data
   },
   watch: {
     detail_data() {

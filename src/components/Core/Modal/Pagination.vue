@@ -1,7 +1,8 @@
 <template>
   <nav aria-label="Page navigation example" ref="pagination">
     <ul class="pagination">
-      <li class="page-item"
+      <li
+        class="page-item"
         :class="!pagination_object.has_pre ? 'disabled' : null"
         @click.prevent="onChangePage(pagination_object.current_page - 1)"
       >
@@ -19,7 +20,8 @@
         <!-- a 連結的預設反應，要取消掉 -->
         <a class="page-link" href="#">{{ key + 1 }}</a>
       </li>
-      <li class="page-item"
+      <li
+        class="page-item"
         :class="!pagination_object.has_next ? 'disabled' : null"
         @click.prevent="onChangePage(pagination_object.current_page + 1)"
       >
@@ -38,6 +40,9 @@ export default {
     pagination_object: Object,
     // 為什麼 emit 的方法不需要在 props 宣告？
   },
+  emits: [
+    'emit-change-page',
+  ],
   data() {
     return {
       current_page: this.pagination_object.current_page,
@@ -60,7 +65,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 .pagination
   margin: 0px

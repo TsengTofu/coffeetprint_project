@@ -2,7 +2,11 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <router-link to="/admin" class="nav-link">後台管理</router-link>
+        <router-link
+          to="/admin"
+          class="nav-link">
+          後台管理
+        </router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -24,14 +28,17 @@
               <router-link to="/admin/products" class="nav-link">產品</router-link>
             </li>
             <li class="nav-item">
-              <!--  NOTE  購買折價券的優惠券 -->
               <router-link to="/admin/coupons" class="nav-link">優惠券</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/admin/posts" class="nav-link">文章列表</router-link>
             </li>
             <li class="nav-item">
-              <button class="btn nav-link" @click="signOut" type="button">
+              <button
+                class="btn nav-link"
+                @click="signOut"
+                type="button"
+              >
                 <span class="material-icons-round">logout</span>登出
               </button>
             </li>
@@ -45,6 +52,9 @@
 export default {
   name: 'AdminNavComponent',
   props: {},
+  emits: [
+    'signOut',
+  ],
   components: {},
   data() {
     return {};

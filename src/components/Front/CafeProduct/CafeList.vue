@@ -1,30 +1,30 @@
 <template>
-  <!--  TODO  改變顯示方式 -->
   <div class="change_layout">
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click="switch_status = 'list'"
-      >
-        <span class="material-icons-round">view_list</span>
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click="switch_status = 'grid'"
-      >
-        <span class="material-icons-round">grid_view</span>
-      </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="switch_status = 'list'"
+    >
+      <span class="material-icons-round">view_list</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="switch_status = 'grid'"
+    >
+      <span class="material-icons-round">grid_view</span>
+    </button>
   </div>
   <div class="container-fluid cafe_list_wrapper">
-    <!--  TODO  思考一下要不要把 productData 換掉 -->
     <template v-if="switch_status === 'grid'">
       <ul class="list-unstyled row row-cols-1 row-cols-md-5 g-5">
         <template
-          v-for="(cafe, key) in productData" :key="'cafe_'+ key"
+          v-for="(cafe, key) in productData"
+          :key="'cafe_'+ key"
         >
           <CafeCardComponent
-            :singleCafe="cafe" :order="key"
+            :order="key"
+            :singleCafe="cafe"
             :is_favorite="favorite_list.includes(cafe.id)"
           />
         </template>
@@ -33,7 +33,8 @@
     <template v-else>
       <ul class="list-unstyled row row-cols-1 row-cols-md-2 g-2">
         <template
-          v-for="(cafe, key) in productData" :key="'grid_'+ key"
+          v-for="(cafe, key) in productData"
+          :key="'grid_'+ key"
         >
           <CafeGridViewCardComponent
             :singleCafe="cafe"
@@ -122,6 +123,9 @@ export default {
   },
   mounted() {
     this.getCafeListData();
+  },
+  unmounted() {
+    this.emitter.off('addToFavoriteList');
   },
 };
 </script>

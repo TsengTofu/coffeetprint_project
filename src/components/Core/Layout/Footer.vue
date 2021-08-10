@@ -7,7 +7,7 @@
       >
       </a>
       <p class="col-auto">Copyright © 2020 CoffeetPrint. 僅個人作品練習，無商業用途。</p>
-      <!-- 先藏起來 -->
+      <!-- img 標籤之後要加上 alt -->
       <!-- <div class="detail col-sm-2">
         <ul class="list-unstyled row link">
           <li class="admin_login col-sm-1">
@@ -34,13 +34,6 @@
 <script>
 export default {
   name: 'FooterComponent',
-  // props: {
-  //     msg: String,
-  // },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>
 <style scoped lang="sass">

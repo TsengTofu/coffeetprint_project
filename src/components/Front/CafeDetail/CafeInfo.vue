@@ -102,7 +102,8 @@ export default {
           },
         })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             //  TODO  options 樣式之後再回來設定
             this.$swal('成功加入購物車！');
             // 更新的 modal 的購物車

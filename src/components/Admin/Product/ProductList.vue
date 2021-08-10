@@ -20,12 +20,17 @@
     </div>
     <!-- 搜尋與篩選 -->
     <div class="tool_wrapper">
-      <p class="summary_text">此頁有 <span>{{ productData.length }}</span> 項產品</p>
+      <p class="summary_text">
+        此頁有 <span>{{ productData.length }}</span> 項產品
+      </p>
       <div class="filter_dropdown">
         <label for="category_filter">分類篩選：</label>
         <!--  TODO  分類篩選的資料 -->
         <select name="" id="category_filter">
-          <template v-for="(item, key) in category_list" :key="'item' + key">
+          <template
+            v-for="(item, key) in category_list"
+            :key="'item' + key"
+          >
             <option :value="item">{{ item }}</option>
           </template>
         </select>
@@ -33,7 +38,9 @@
       <!-- 搜尋 -->
       <div class="search_part">
         <input type="text" placeholder="請輸入關鍵字">
-        <button type="button"><span class="material-icons-round">search</span></button>
+        <button type="button">
+          <span class="material-icons-round">search</span>
+        </button>
       </div>
     </div>
     <div class="table_wrapper">
@@ -50,14 +57,23 @@
             <td width="50">刪除</td>
           </tr>
         </thead>
-        <tbody v-if="productData !== undefined &&
-          productData.length > 0">
-          <tr v-for="(item, key) in productData" :key="key">
+        <tbody
+          v-if="productData !== undefined &&
+          productData.length > 0"
+        >
+          <tr
+            v-for="(item, key) in productData"
+            :key="key"
+          >
             <td>{{ item.category }}</td>
             <td>{{ item.area }}</td>
             <td>{{ item.title }}</td>
-            <td><span>NT$</span> {{ item.origin_price.toLocaleString() }}</td>
-            <td><span>NT$</span> {{ item.price.toLocaleString() }}</td>
+            <td>
+              <span>NT$</span> {{ item.origin_price.toLocaleString() }}
+            </td>
+            <td>
+              <span>NT$</span> {{ item.price.toLocaleString() }}
+            </td>
             <td>
               <div class="switch">
                 <input
@@ -69,7 +85,8 @@
               </div>
             </td>
             <td>
-              <button class="icon_btn"
+              <button
+                class="icon_btn"
                 type="button"
                 @click="setStatus('put', item)"
                 data-bs-toggle="modal"
@@ -79,7 +96,8 @@
               </button>
             </td>
             <td>
-              <button class="icon_btn"
+              <button
+                class="icon_btn"
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#confirmModal"
@@ -107,21 +125,23 @@
     >
       <!-- 參考文章： https://medium.com/itsems-frontend/vue-slot-21e1ec9968f8 -->
       <!-- https://medium.com/unalai/%E8%A4%87%E7%94%A8%E5%85%83%E4%BB%B6%E7%9A%84%E5%A5%BD%E5%B9%AB%E6%89%8B-vue-slot-v-slot-scoped-slots-5364a0048ab7 -->
-      <template v-slot:delete_item>產品：{{ targetItem.title }}</template>
+      <template v-slot:delete_item>
+        產品：{{ targetItem.title }}
+      </template>
       <template v-slot:delete_content>
         <!-- TODO  這邊的版面要重新寫過 -->
         <div class="img_part"></div>
-          <div class="info_detail">
-            標題名稱：<p>{{ targetItem.title }}</p>
-            分類：<p>{{ targetItem.category }}</p>
-            說明內容：<p>{{ targetItem.content }}</p>
-            產品描述：<p>{{ targetItem.description }}</p>
-            單位：<p>{{ targetItem.unit }}</p>
-            原價：<p>{{ targetItem.origin_price }}</p>
-            售價：<p>{{ targetItem.price }}</p>
-            數量：<p>{{ targetItem.num }}</p>
-            是否啟用：<p>{{ targetItem.is_enable }}</p>
-          </div>
+        <div class="info_detail">
+          標題名稱：<p>{{ targetItem.title }}</p>
+          分類：<p>{{ targetItem.category }}</p>
+          說明內容：<p>{{ targetItem.content }}</p>
+          產品描述：<p>{{ targetItem.description }}</p>
+          單位：<p>{{ targetItem.unit }}</p>
+          原價：<p>{{ targetItem.origin_price }}</p>
+          售價：<p>{{ targetItem.price }}</p>
+          數量：<p>{{ targetItem.num }}</p>
+          是否啟用：<p>{{ targetItem.is_enable }}</p>
+        </div>
       </template>
     </ConfirmModalComponent>
     <!-- Pagination -->

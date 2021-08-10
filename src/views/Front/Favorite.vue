@@ -40,30 +40,25 @@ export default {
       this.axios
         .get(requestUrl)
         .then((response) => {
-          const { success, products } = response.data;
+          const { success } = response.data;
           if (success) {
+            const { products } = response.data;
             this.final_cafe_list = products.filter((cafe) => this.favorite_cafe_list
               .includes(cafe.id));
-          } else {
-            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
         })
         .catch(() => {
           this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
-    // work flow
     getFavoriteCafeList() {
-      this.favorite_cafe_list = LocalStorageSupport('CoffeetPrintFavorite').getItem();
+      this.favorite_cafe_list = LocalStorageSupport('CoffeetPrintFavorite').getItem() || [];
       this.getAllCafeList();
     },
     clearAllFavorite() {
       LocalStorageSupport('CoffeetPrintFavorite').removeItem();
       this.getFavoriteCafeList();
     },
-  },
-  mounted() {
-    this.getFavoriteCafeList();
   },
   created() {
     this.emitter.on('updateFavoriteList', (id) => {
@@ -73,6 +68,12 @@ export default {
       this.$swal('已成功移除此收藏！');
       this.getFavoriteCafeList();
     });
+  },
+  mounted() {
+    this.getFavoriteCafeList();
+  },
+  unmounted() {
+    this.emitter.off('updateFavoriteList');
   },
 };
 </script>

@@ -33,11 +33,29 @@
           </div>
         </div>
         <div class="modal-footer button_block">
-          <button class="cancel" data-bs-dismiss="modal" type="button">取消</button>
+          <button
+            class="cancel"
+            data-bs-dismiss="modal"
+            type="button"
+          >
+            取消
+          </button>
           <!--  TODO  下面這行應該不需要 -->
-          <button v-if="status === 'post'" @click="addNewProduct" type="button">確認</button>
+          <button
+            v-if="status === 'post'"
+            @click="addNewProduct"
+            type="button"
+          >
+            確認
+          </button>
           <!-- 編輯產品的功能 -->
-          <button v-else @click="editCurrentOrder" type="button">確認</button>
+          <button
+            v-else
+            @click="editCurrentOrder"
+            type="button"
+          >
+            確認
+          </button>
         </div>
       </div>
     </div>

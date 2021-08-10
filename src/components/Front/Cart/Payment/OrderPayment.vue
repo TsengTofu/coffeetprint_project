@@ -2,9 +2,10 @@
   <div class="card col-md-6">
     <!-- 這邊要多一個功能，可以直接複製訂單編號 -->
     <div class="card">
-      <!-- <img src="" class="card-img-top" alt="..."> -->
       <div class="card-body">
-        <h5 class="card-title">訂單 {{ orderDetail.id }} 等待付款中！</h5>
+        <h5 class="card-title">
+          訂單 {{ orderDetail.id }} 等待付款中！
+        </h5>
         <button
           type="button"
           class="btn btn-primary"
@@ -23,26 +24,31 @@
         <div class="card-text">
           <b
             class="d-flex"
-            v-if="orderDetail.is_paid">
+            v-if="orderDetail.is_paid"
+          >
             <span class="material-icons-round">verified</span>已付款
           </b>
           <b
             class="d-flex"
-            v-else>
+            v-else
+          >
             <span class="material-icons-round">clear</span>未付款
           </b>
           <div>
             訂單總金額：NT$ <span>{{ Math.floor(orderDetail.total).toLocaleString() }}</span>
           </div>
           <div class="card" v-for="(item, key) in product_list" :key="item + key">
-      <!-- 這個是產品本身 -->
-      <!-- 如果是使用 coupon -->
-      <p>{{ orderDetail.products[item].coupon }}</p>
-      <p>購買的資料：{{ orderDetail.products[item].product.title }}<br></p>
-      <!-- 這個是購買的數量 -->
-      <p>{{ orderDetail.products[item].qty }} 張</p>
-      <img :src="orderDetail.products[item].product.imageUrl" alt="">
-    </div>
+            <!-- 這個是產品本身 -->
+            <!-- 如果是使用 coupon -->
+            <p>{{ orderDetail.products[item].coupon }}</p>
+            <p>購買的資料：{{ orderDetail.products[item].product.title }}<br></p>
+            <!-- 這個是購買的數量 -->
+            <p>{{ orderDetail.products[item].qty }} 張</p>
+            <img
+              :src="orderDetail.products[item].product.imageUrl"
+              alt="購買品項的圖片"
+            >
+          </div>
           <!-- 使用者資料 -->
           <h5>使用者資料</h5>
           <div v-if="user">
@@ -58,7 +64,8 @@
       type="button"
       class="btn btn-primary d-flex"
       v-if="!orderDetail.is_paid"
-      @click="goToPayment">
+      @click="goToPayment"
+    >
       付款結帳
       <span class="material-icons-round">keyboard_arrow_right</span>
     </button>

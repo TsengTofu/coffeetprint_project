@@ -2,7 +2,10 @@
     <th scope="row">{{ order }}</th>
     <td>
       <div class="image">
-        <img :src="cart_item.product.imageUrl" alt="">
+        <img
+          :src="cart_item.product.imageUrl"
+          alt="購物車單一品項的圖片"
+        >
       </div>
       <div>
         <p>

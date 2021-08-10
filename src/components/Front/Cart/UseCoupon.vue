@@ -15,9 +15,9 @@
           aria-describedby="button-addon2"
         />
         <button
-          class="btn btn-secondary"
           type="button"
           id="button-addon2"
+          class="btn btn-secondary"
           :disabled="coupon_code === ''"
           @click="getDiscount"
         >

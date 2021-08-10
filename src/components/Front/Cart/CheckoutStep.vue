@@ -1,6 +1,5 @@
 <template>
   <!--  TODO  這邊還有一部分沒做完，而且現還沒補上去 -->
-  <!-- check_cart, order_info -->
   <div class="checkout_step_wrapper container">
     <ul class="row">
       <li

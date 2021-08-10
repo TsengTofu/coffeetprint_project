@@ -1,14 +1,11 @@
 <template>
   <div>
-    <!--  TODO  這邊要來改版型 -->
-    <div>
-      <FAQItemComponent
-        v-for="(faq, key) in FAQ_list_data"
-        :key="'faq_' + key"
-        :faq_data="faq"
-        :order="key"
-      />
-    </div>
+    <FAQItemComponent
+      v-for="(faq, key) in FAQ_list_data"
+      :key="'faq_' + key"
+      :faq_data="faq"
+      :order="key"
+    />
   </div>
 </template>
 <script>

@@ -1,25 +1,26 @@
 <template>
   <div>
     <p>貼文的清單</p>
-    <!-- 懶得做 UI 了 -->
-    {{ post_list }}
     <table class="table table-striped table-hover">
-       <thead>
-         <tr>
-           <th>訂單編號</th>
-           <th>建立時間</th>
-           <th>編輯</th>
-           <th>刪除</th>
-         </tr>
+      <thead>
+        <tr>
+          <th>訂單編號</th>
+          <th>建立時間</th>
+          <th>編輯</th>
+          <th>刪除</th>
+        </tr>
       </thead>
       <tbody>
         <template v-if="post_list.length > 0">
-          <tr v-for="(post, key) in post_list" :key="'post_' + key">
+          <tr
+            v-for="(post, key) in post_list"
+            :key="'post_' + key">
             <td>{{ post.id }}</td>
             <!-- <td>{{ $dayjs.unix(order.create_at).format('YYYY-MM-DD') }}</td> -->
             <!-- 編輯這邊改成換頁面 -->
             <td>
-              <button class="icon_btn"
+              <button
+                class="icon_btn"
                 type="button"
                 @click="directToCurrentPostEdit(post.id)"
               >
@@ -27,7 +28,8 @@
               </button>
             </td>
             <td>
-              <button class="icon_btn"
+              <button
+                class="icon_btn"
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#confirmModal"
@@ -40,15 +42,15 @@
         </template>
       </tbody>
     </table>
-    <!--  NOTE @@@  -->
-     <button class="add_new_product_button"
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#myModal"
-        @click="setStatus('post', {})"
-      >
-        <span class="material-icons-round">add</span> 新增產品
-      </button>
+    <button
+      class="add_new_product_button"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#myModal"
+      @click="setStatus('post', {})"
+    >
+      <span class="material-icons-round">add</span> 新增產品
+    </button>
     <PostCardComponent
       ref="modal"
       id="myModal"

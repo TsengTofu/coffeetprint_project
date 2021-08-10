@@ -4,13 +4,16 @@
       step="order_info"
     />
     <h4>填寫預訂資料</h4>
-    <Form v-slot="{ errors }" @submit="onSubmit">
+    <Form
+      v-slot="{ errors }"
+      @submit="onSubmit"
+    >
       <div class="mb-3">
         <label for="name" class="form-label">姓名</label>
         <Field
           id="name"
           name="姓名"
-          type="name"
+          type="text"
           class="form-control"
           :class="{ 'is-invalid': errors['姓名'] }"
           placeholder="請輸入姓名"
@@ -73,10 +76,12 @@
         ></textarea>
       </div>
       <button
+        type="submit"
         class="btn me-2 btn-outline-primary"
         :disabled="Object.keys(errors).length !== 0"
-        type="submit">
-        送出預定資料</button>
+      >
+        送出預定資料
+      </button>
     </Form>
     <!-- <label for="payment">交易方式</label>
     <select name="payment" id="payment">
@@ -137,9 +142,6 @@ export default {
 .user_order_info_wrapper
   padding: 80px 0px
   .container
-    // max-width: 350px
-    // width: 100%
-    // margin: 0 auto
     ul
       display: flex
       flex-direction: column

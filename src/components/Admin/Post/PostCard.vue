@@ -10,8 +10,7 @@
         wrapper"
     >
       <div
-        class="modal-content
-          product_card_wrapper"
+        class="modal-content product_card_wrapper"
       >
         <div class="modal-header header">
           <div class="left">
@@ -30,7 +29,9 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="mb-3">
-                <label for="title" class="form-label">標題</label>
+                <label for="title" class="form-label">
+                  標題
+                </label>
                 <input
                   type="text"
                   class="form-control"
@@ -40,7 +41,9 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="image" class="form-label">輸入圖片網址</label>
+                <label for="image" class="form-label">
+                  輸入圖片網址
+                </label>
                 <input
                   type="text"
                   class="form-control"
@@ -50,7 +53,9 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="author" class="form-label">作者</label>
+                <label for="author" class="form-label">
+                  作者
+                </label>
                 <input
                   type="text"
                   class="form-control"
@@ -60,7 +65,9 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="create_at">文章建立日期</label>
+                <label for="create_at">
+                  文章建立日期
+                </label>
                 <input
                   type="date"
                   class="form-control"
@@ -70,7 +77,9 @@
               </div>
             </div>
             <div class="col-sm-8">
-              <label for="tag" class="form-label">標籤</label>
+              <label for="tag" class="form-label">
+                標籤
+              </label>
               <div class="row gx-1 mb-3">
                 <div
                   class="col-md-2 mb-1"
@@ -110,7 +119,9 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label for="description" class="form-label">文章描述</label>
+                <label for="description" class="form-label">
+                  文章描述
+                </label>
                 <textarea
                   type="text"
                   class="form-control"
@@ -144,9 +155,24 @@
           <!-- 這段是正常的 -->
         </div>
         <div class="modal-footer button_block">
-          <button class="cancel" data-bs-dismiss="modal" type="button">取消</button>
-          <button v-if="status === 'post'" @click="addNewPost" type="button">確認</button>
-          <button v-else @click="editPost" type="button">確認</button>
+          <button
+            class="cancel"
+            data-bs-dismiss="modal"
+            type="button">
+            取消
+          </button>
+          <button
+            v-if="status === 'post'"
+            @click="addNewPost"
+            type="button">
+            確認
+          </button>
+          <button
+            v-else
+            @click="editPost"
+            type="button">
+            確認
+          </button>
         </div>
       </div>
     </div>
@@ -187,7 +213,8 @@ export default {
       this.axios
         .post(requestUrl, { data: this.tempArticle })
         .then((response) => {
-          if (response.data.success) {
+          const { success } = response.data;
+          if (success) {
             // 要把資料傳遞出去
             // this.$emit('emit-data', this.tempProduct);
             this.modal.hide();
