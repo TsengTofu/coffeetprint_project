@@ -10,65 +10,68 @@
     >
     新增優惠券
     </button>
-      <table class="table table-striped table-hover">
-       <thead>
-         <tr>
-           <!--  TODO  這邊有編輯跟刪除的 API -->
-           <th>編號</th>
-           <th>折扣碼</th>
-           <th>到期日</th>
-           <th>是否啟用</th>
-           <th>折扣百分比</th>
-           <th>標題</th>
-           <th>編輯</th>
-           <th>刪除</th>
-         </tr>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <!--  TODO  這邊有編輯跟刪除的 API -->
+          <th>編號</th>
+          <th>折扣碼</th>
+          <th>到期日</th>
+          <th>是否啟用</th>
+          <th>折扣百分比</th>
+          <th>標題</th>
+          <th>編輯</th>
+          <th>刪除</th>
+        </tr>
       </thead>
       <tbody>
-          <tr v-for="(coupon, key) in coupon_list" :key="'coupon_' + key">
-            <td>{{ coupon.id }}</td>
-            <td>{{ coupon.code }}</td>
-            <td>{{ $dayjs.unix(coupon.due_date).format('YYYY-MM-DD') }}</td>
-            <!-- 是否啟用 -->
-            <!--  FIXME  這邊要記得加上樣式 -->
-            <td>
-              <div class="checkbox">
-                <div class="switch">
-                  <input
-                    type="checkbox"
-                    :checked="coupon.is_enabled"
-                    disabled
-                  />
-                  <span class="slider"></span>
-                </div>
-                <span>是否啟用</span>
+        <tr
+          v-for="(coupon, key) in coupon_list"
+          :key="'coupon_' + key"
+        >
+          <td>{{ coupon.id }}</td>
+          <td>{{ coupon.code }}</td>
+          <td>{{ $dayjs.unix(coupon.due_date).format('YYYY-MM-DD') }}</td>
+          <!-- 是否啟用 -->
+          <!--  FIXME  這邊要記得加上樣式 -->
+          <td>
+            <div class="checkbox">
+              <div class="switch">
+                <input
+                  type="checkbox"
+                  :checked="coupon.is_enabled"
+                  disabled
+                />
+                <span class="slider"></span>
               </div>
-            </td>
-            <td>{{ coupon.percent }} %</td>
-            <td>{{ coupon.title }}</td>
-            <!-- 編輯跟刪除 -->
-            <td>
-              <button class="icon_btn"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#couponModal"
-                @click="setStatus('put', coupon)"
-              >
-                <span class="material-icons-round">edit</span>
-              </button>
-            </td>
-            <!-- 刪除按鈕 -->
-            <td>
-              <button class="icon_btn"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#confirmModal"
-                @click="targetItem = coupon"
-              >
-                <span class="material-icons-round">delete</span>
-              </button>
-            </td>
-          </tr>
+              <span>是否啟用</span>
+            </div>
+          </td>
+          <td>{{ coupon.percent }} %</td>
+          <td>{{ coupon.title }}</td>
+          <!-- 編輯跟刪除 -->
+          <td>
+            <button class="icon_btn"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#couponModal"
+              @click="setStatus('put', coupon)"
+            >
+              <span class="material-icons-round">edit</span>
+            </button>
+          </td>
+          <!-- 刪除按鈕 -->
+          <td>
+            <button class="icon_btn"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#confirmModal"
+              @click="targetItem = coupon"
+            >
+              <span class="material-icons-round">delete</span>
+            </button>
+          </td>
+        </tr>
         <!-- 如果列表是空的 -->
         <!-- <template v-else>
           目前的訂單列表是空的，請多推廣自己的網站
@@ -86,14 +89,12 @@
       id="confirmModal"
       @emit-delete="deleteCurrentCoupon"
     >
-      <template v-slot:delete_item>
-        <!-- 產品：{{  }} -->
-      </template>
+      <template v-slot:delete_item></template>
       <template v-slot:delete_content>
         <div class="img_part"></div>
-          <div class="info_detail">
-           <!-- 這邊是內容 -->
-          </div>
+        <div class="info_detail">
+          <!-- 這邊是內容 -->
+        </div>
       </template>
     </ConfirmModalComponent>
     <PaginationComponent
@@ -113,6 +114,9 @@ export default {
     pagination: Object,
     getCouponList: Function,
   },
+  emits: [
+    'emit-get-coupons',
+  ],
   components: {
     PaginationComponent,
     ConfirmModalComponent,

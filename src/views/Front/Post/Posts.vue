@@ -1,6 +1,7 @@
 <template>
   <div>
     <p>這個是給文章列表用的頁面</p>
+    <!--  TODO  單篇文章的資料 -->
     {{ post_list }}
   </div>
 </template>

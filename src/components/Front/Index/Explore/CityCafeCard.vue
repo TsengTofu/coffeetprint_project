@@ -1,13 +1,18 @@
 <template>
   <li>
     <div class="card">
-  <img src="../../../../assets/images/city/taipei.png" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"><span class="material-icons-round">place</span>台北</h5>
-  </div>
-</div>
+      <img
+        src="../../../../assets/images/city/taipei.png"
+        class="card-img-top"
+        alt="城市主圖"
+      >
+      <div class="card-body">
+        <h5 class="card-title">
+          <span class="material-icons-round">place</span>台北
+        </h5>
+      </div>
+    </div>
   </li>
-  <!-- <img src="../../../../assets/images/city/taipei.png" alt=""> -->
 </template>
 
 <script>

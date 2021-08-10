@@ -1,5 +1,5 @@
 <template>
-    <!-- NOTE  原來這邊不能多包一層 -->
+  <!-- NOTE  原來這邊不能多包一層 -->
   <div class="modal fade" id="orderModal" ref="modal" tabindex="-1">
     <div
       class="modal-xl
@@ -9,8 +9,7 @@
         wrapper"
     >
       <div
-        class="modal-content
-          product_card_wrapper"
+        class="modal-content product_card_wrapper"
       >
         <div class="modal-header header">
           <div class="left">
@@ -46,11 +45,26 @@
           </div>
         </div>
         <div class="modal-footer button_block">
-          <button class="cancel" data-bs-dismiss="modal" type="button">取消</button>
+          <button
+            class="cancel"
+            data-bs-dismiss="modal"
+            type="button">
+            取消
+          </button>
           <!--  TODO  下面這行應該不需要 -->
-          <button v-if="status === 'post'" @click="addNewProduct" type="button">確認</button>
+          <button
+            v-if="status === 'post'"
+            @click="addNewProduct"
+            type="button">
+            確認
+          </button>
           <!-- 編輯產品的功能 -->
-          <button v-else @click="editCurrentOrder" type="button">確認</button>
+          <button
+            v-else
+            @click="editCurrentOrder"
+            type="button">
+            確認
+          </button>
         </div>
       </div>
     </div>

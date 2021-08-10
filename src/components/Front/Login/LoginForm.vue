@@ -5,25 +5,33 @@
         <div class="content"></div>
         <div class="welcome_text">
           <p>WELCOME!</p>
-          <span>Please Login <span class="material-icons-round">double_arrow</span></span>
+          <span>
+            Please Login <span class="material-icons-round">double_arrow</span>
+          </span>
         </div>
       </div>
-      <!-- Form 表單 -->
       <form class="col-md-6 login_form" @submit="loginSystem">
         <!-- @submit 同時可以兼顧 @keyup.enter + 按鈕點擊 -->
         <ul>
           <li>
             <input
               id="email_account"
-              type="email" placeholder="請輸入帳號"
-              v-model="userEmailAccount" />
+              type="email"
+              placeholder="請輸入帳號"
+              v-model="userEmailAccount"
+            />
             <label for="email_account">
               <span class="material-icons-round">account_circle</span>帳號
               <p class="error_msg"></p>
             </label>
           </li>
           <li>
-            <input id="password_value" type="password" v-model="userPassword" placeholder="請輸入密碼" />
+            <input
+              id="password_value"
+              type="password"
+              placeholder="請輸入密碼"
+              v-model="userPassword"
+            />
             <label for="password_value">
               <span class="material-icons-round">lock</span> 密碼
             </label>
@@ -35,7 +43,12 @@
               </label>
           </li>
         </ul>
-        <button class="login_btn">登入</button>
+        <button
+          class="login_btn"
+          type="button"
+        >
+          登入
+        </button>
         <p class="error_msg" v-html="errorMsg"></p>
       </form>
     </div>
@@ -96,7 +109,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 .container
   max-width: 800px

@@ -1,12 +1,13 @@
 <template>
-  <!-- 我的最愛的卡片 -->
   <div class="col-md-4 mb-5">
     <div class="card" @click="addToCart(cafe.id)">
       <div class="card-body">
         <!-- 包一層 -->
-        <div class="image col-9"
+        <div
+          class="image col-9"
           :style="{ backgroundImage: 'url(' + cafe.imageUrl + ')' }"
-        ></div>
+        >
+        </div>
         <ul>
           <li></li>
           <li></li>
@@ -31,18 +32,22 @@
           <a
             type="button"
             class="dot_button"
-          ></a>
+          >
+          </a>
         </div>
         <div class="text_block">
-          <p><span class="material-icons-round">place</span> {{ cafe.area }}</p>
-          <h5 class="card_title d-flex align-items-center">{{ cafe.title }}
+          <p>
+            <span class="material-icons-round">place</span> {{ cafe.area }}
+          </p>
+          <h5 class="card_title d-flex align-items-center">
+            {{ cafe.title }}
             <span class="material-icons-round">add_circle</span>
           </h5>
         </div>
       </div>
       <div
-        class="remove_button"
         type="button"
+        class="remove_button"
         @click.stop="removeFromFavoriteList(cafe.id)"
       >
         <span class="material-icons-round">clear</span>

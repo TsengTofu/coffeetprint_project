@@ -4,11 +4,8 @@
       <div class="row">
         <div class="bg_cover_no_fixed landing_page col-md-7"></div>
         <div class="intro_block col-md-4 ms-md-10 mb-5">
-          <!-- 再包一層 -->
           <div class="intro_description">
-            <!-- 這邊再放一個小 tag -->
-            <!-- <span>Introduction</span> -->
-            <h3 class="">
+            <h3>
               <span class="material-icons-round">near_me</span>
               找到屬於自己的咖啡廳
             </h3>
@@ -39,7 +36,6 @@
         </div>
       </div>
     </div>
-    <!--  TODO  拆元件結尾 -->
     <FeatureIntroComponent />
     <!-- FAQ -->
     <FAQListComponent />
@@ -47,7 +43,7 @@
   <SubscribeComponent />
 </template>
 <script>
-import FeatureIntroComponent from '../../components/Front/About/Feature/FeatureIntro.vue';
+import FeatureIntroComponent from '@/components/Front/About/Feature/FeatureIntro.vue';
 // 引入常見問題的區塊
 import FAQListComponent from '../../components/Front/About/FAQ/FAQList.vue';
 import SubscribeComponent from '../../components/Front/About/Subscribe/Subscribe.vue';

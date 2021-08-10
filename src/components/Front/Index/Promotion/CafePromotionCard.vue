@@ -1,19 +1,19 @@
 <template>
-  <!-- 這段要改用資料的方式傳遞 -->
-    <div class="row">
-      <div class="image_wrapper col-sm-6">
-        <div class="image"
+  <div class="row">
+    <div class="image_wrapper col-sm-6">
+      <div
+        class="image"
         :style="{ backgroundImage: 'url(' + post_data.imageUrl + ')' }"
       >
       </div>
     </div>
     <div class="info_block col-sm-6">
-      <!-- 上半部 -->
       <div class="top_block d-flex flex-column align-items-start">
         <p class="main_title" v-html="post_data.title"></p>
         <div class="tags">
           <ul class="list-unstyled d-inline-flex">
-            <li v-for="(item, key) in post_data.tag"
+            <li
+              v-for="(item, key) in post_data.tag"
               :key="'tag_' + key"
             >
               #{{ item }}
@@ -28,7 +28,10 @@
           <!-- 頭像 -->
           <div class="user col-md-auto">
             <div class="avatar_image">
-              <img :src="post_data.avatar" alt="">
+              <img
+                :src="post_data.avatar"
+                alt="評論者大頭貼"
+              >
             </div>
             <span>{{ post_data.author }}</span>
           </div>
@@ -44,23 +47,23 @@
             <p>{{ post_data.suggestion }}</p>
             <figcaption>
               評論發表於
-              {{ $dayjs.unix(post_data.create_at).format('YYYY-MM-DD') }}</figcaption>
+              {{ $dayjs.unix(post_data.create_at).format('YYYY-MM-DD') }}
+            </figcaption>
             <button
-          class="btn btn-primary d-flex"
-          type="button"
-        >
-          點我看更多
-          <span class="material-icons-round">keyboard_arrow_right</span>
-        </button>
+              type="button"
+              class="btn btn-primary d-flex"
+            >
+              點我看更多
+              <span class="material-icons-round">keyboard_arrow_right</span>
+            </button>
           </div>
         </div>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
-//  TODO  不懂為何這邊要這樣處理
 // import { h } from 'vue';
 // import LoadingComponent from '../../../Core/Loading.vue';
 

@@ -1,22 +1,27 @@
 <template>
   <div>
     <table class="table table-striped table-hover">
-       <thead>
-         <tr>
-           <th>訂單編號</th>
-           <th>是否付款</th>
-           <th>付款日期</th>
-           <th>訂單總金額</th>
-           <!-- 訂購人跟訂購的產品資訊 -->
-           <th>詳細資訊</th>
-           <th>建立時間</th>
-           <th>編輯</th>
-           <th>刪除</th>
-         </tr>
+      <thead>
+        <tr>
+          <th>訂單編號</th>
+          <th>是否付款</th>
+          <th>付款日期</th>
+          <th>訂單總金額</th>
+          <!-- 訂購人跟訂購的產品資訊 -->
+          <th>詳細資訊</th>
+          <th>建立時間</th>
+          <th>編輯</th>
+          <th>刪除</th>
+        </tr>
       </thead>
       <tbody>
-        <template v-if="order_list.length > 0">
-          <tr v-for="(order, key) in order_list" :key="'order_' + key">
+        <template
+          v-if="order_list.length > 0"
+        >
+          <tr
+            v-for="(order, key) in order_list"
+            :key="'order_' + key"
+          >
             <td>{{ order.id }}</td>
             <td v-if="order.is_paid">
               <span class="material-icons-round">check_circle</span>已付款
@@ -24,7 +29,9 @@
             <td v-else>
               <span class="material-icons-round">do_not_disturb_on</span>未付款
             </td>
-            <td v-if="order.is_paid">{{ $dayjs.unix(order.paid_date).format('YYYY-MM-DD') }}</td>
+            <td v-if="order.is_paid">
+              {{ $dayjs.unix(order.paid_date).format('YYYY-MM-DD') }}
+            </td>
             <td v-else>/</td>
             <td>NT$ {{ order.total.toLocaleString() }}</td>
             <td>
@@ -72,18 +79,21 @@
     <ConfirmModalComponent
       ref="confirm_modal"
       id="confirmModal"
-      @emit-delete="deleteCurrentProduct(targetId)">
-       <template v-slot:delete_item>訂單：{{ targetItem.id }}</template>
-       <template v-slot:delete_content>
-       <div class="img_part"></div>
-          <div class="info_detail">
-            <p>還沒撈資料的部分</p>
-            <br>
-            是否已付款：<p>{{ targetItem.is_paid }}</p>
-            總金額：<p>{{ targetItem.total }}</p>
-            數量：<p>{{ targetItem.num }}</p>
-          </div>
-       </template>
+      @emit-delete="deleteCurrentProduct(targetId)"
+    >
+      <template v-slot:delete_item>
+         訂單：{{ targetItem.id }}
+      </template>
+      <template v-slot:delete_content>
+        <div class="img_part"></div>
+        <div class="info_detail">
+          <p>還沒撈資料的部分</p>
+          <br>
+          是否已付款：<p>{{ targetItem.is_paid }}</p>
+          總金額：<p>{{ targetItem.total }}</p>
+          數量：<p>{{ targetItem.num }}</p>
+        </div>
+      </template>
     </ConfirmModalComponent>
     <!-- TODO  這邊要放 emit -->
     <OrderCardComponent
@@ -116,6 +126,9 @@ export default {
     order_list: Array,
     pagination: Object,
   },
+  emits: [
+    'getOrderList',
+  ],
   components: {
     OrderCardComponent,
     ConfirmModalComponent,

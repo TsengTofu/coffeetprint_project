@@ -1,4 +1,3 @@
-<!-- 購物車的畫面 -->
 <template>
   <div class="container cart_wrapper">
     <CheckoutStepComponent
@@ -15,11 +14,14 @@
       :final_total="Math.floor(final_total)"
       :total="Math.floor(total)"
     />
-    <button type="button"
-      :disabled="cart_list.length === 0"
+    <button
+      type="button"
       class="btn btn-primary"
+      :disabled="cart_list.length === 0"
       @click="directToFormPage"
-    >填寫訂購資料</button>
+    >
+      填寫訂購資料
+    </button>
   </div>
 </template>
 

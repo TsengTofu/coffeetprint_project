@@ -16,7 +16,6 @@
   </div>
 </template>
 <script>
-// 引入 orderList
 import OrderListComponent from '../../components/Admin/Order/OrderList.vue';
 
 export default {
@@ -28,7 +27,6 @@ export default {
   data() {
     return {
       order_list: [],
-      // page
       pagination: {},
     };
   },

@@ -10,7 +10,6 @@
 </template>
 
 <script>
-// 按照順序排
 import LandingPageComponent from '../../components/Front/Index/LandingPage.vue';
 import CafePromotionCarouselComponent from '../../components/Front/Index/Promotion/CafePromotionCarousel.vue';
 import ExploreCafeComponent from '../../components/Front/Index/Explore/ExploreCafe.vue';

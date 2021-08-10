@@ -3,8 +3,8 @@
   <div class="container-fluid">
     <div class="error_image"></div>
     <button
-      class="btn btn-primary"
       type="button"
+      class="btn btn-primary"
       @click="directToPage()"
     >
       回首頁
