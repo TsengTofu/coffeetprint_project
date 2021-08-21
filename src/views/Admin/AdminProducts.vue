@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <p>我是後台的產品頁面!!!</p>
-    <span>mmmmmm</span>
+  <div class="container admin_products_wrapper">
     <ProductListComponent />
     <UploadImageComponent />
   </div>
@@ -22,3 +20,8 @@ export default {
 
 };
 </script>
+
+<style lang="sass" scoped>
+.admin_products_wrapper
+  padding: 0px 0px 120px
+</style>

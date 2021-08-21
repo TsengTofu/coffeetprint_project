@@ -41,6 +41,7 @@
                 class="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#orderDetailModal"
+                @click="setStatus('get', order)"
               >詳細內容</button>
             </td>
             <!-- 這段還要重新處理訂購的資料，因為他的 array object 有 key 值，要先把 key 值轉出來 -->
@@ -71,7 +72,6 @@
         </template>
         <!-- 如果訂單列表是空的 -->
         <template v-else>
-          <!-- TODO  這邊要在自己加上是空的圖片 -->
           目前的訂單列表是空的，請多推廣自己的網站
         </template>
       </tbody>
@@ -101,10 +101,11 @@
       id="orderModal"
       :status="status"
     />
-    <!-- 這是點開出現詳細的 popup -->
+    <!-- 點開詳細的 popup -->
     <OrderDetailCardComponent
       ref="order_detail_modal"
       id="orderDetailModal"
+      :status="status"
     />
     <!-- Pagination -->
     <PaginationComponent
@@ -148,11 +149,9 @@ export default {
     // setStatus for modal
     setStatus(axiosMethod, data) {
       this.status = axiosMethod;
-      // 為什麼可以這樣寫？
-      //  TODO  這邊要再改
       this.$refs.order_modal.tempOrder = JSON.parse(JSON.stringify(data));
+      this.$refs.order_detail_modal.currentOrder = JSON.parse(JSON.stringify(data));
     },
-    //  TODO  這邊可以這樣寫嗎？
     getData() {
       this.$emit('getOrderList');
     },

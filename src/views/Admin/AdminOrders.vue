@@ -1,9 +1,8 @@
 <template>
   <div>
-    <p>哈囉我是後台訂單列表頁</p>
     <button
       type="button"
-      class="btn-primary"
+      class="btn btn-primary"
       @click="clearAllOrders"
     >
       清除所有訂單
@@ -39,6 +38,7 @@ export default {
           const { success, message } = response.data;
           if (success) {
             this.$swal(message);
+            this.getOrderList();
           } else {
             this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }

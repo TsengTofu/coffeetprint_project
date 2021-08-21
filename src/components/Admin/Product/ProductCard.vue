@@ -113,11 +113,10 @@
                       地區<span>*</span>
                     </label>
                   </div>
-                  <!-- 電話、地址、價位、營業時間、社群、幾顆星、定位 -->
                   <div class="half">
                     <input
                       id="product_phone"
-                      type="text"
+                      type="tel"
                       placeholder="請輸入電話"
                       v-model="tempProduct.phone"
                     />
@@ -183,6 +182,17 @@
                   ></textarea>
                   <label for="product_content">
                     折價券內容
+                  </label>
+                </li>
+                <li class="single">
+                  <textarea
+                    id="product_note"
+                    type="text"
+                    placeholder="請輸入備註內容"
+                    v-model="tempProduct.note"
+                  ></textarea>
+                  <label for="product_note">
+                    備註
                   </label>
                 </li>
                 <li class="single">

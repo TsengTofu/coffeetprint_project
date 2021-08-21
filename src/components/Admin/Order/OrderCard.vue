@@ -1,5 +1,4 @@
 <template>
-  <!-- NOTE  原來這邊不能多包一層 -->
   <div class="modal fade" id="orderModal" ref="modal" tabindex="-1">
     <div
       class="modal-xl
