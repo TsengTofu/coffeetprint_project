@@ -1,28 +1,25 @@
 <template>
   <div class="container">
-    <!--  NOTE  這邊要用 swiper 處理品項嗎？ -->
-    <ul class="row list-unstyled">
+    <ul
+      class="row list-unstyled"
+      v-if="random_cafe_list.length > 0"
+    >
       <template
         v-for="(cafe, key) in random_cafe_list"
         :key="'random_cafe_' + key"
       >
-        <!-- 考慮要不要拆元件 -->
         <!--  FIXME  少傳是不是 favorite 的參數 -->
-        <CafeCardComponent
-          :singleCafe="cafe"
-        />
+        <CafeCardComponent :singleCafe="cafe" />
       </template>
     </ul>
   </div>
 </template>
 <script>
-//  TODO  這邊先不寫屬於隨機產品的卡片
 import CafeCardComponent from '../Index/CafeProduct/CafeCard.vue';
 
 export default {
   name: 'RandomCafeListComponent',
   props: {
-    detail_data: Object,
   },
   components: {
     CafeCardComponent,
@@ -33,9 +30,30 @@ export default {
       all_cafe_list: [],
       // 隨機的咖啡廳清單
       random_cafe_list: [],
+      // 分類
+      category: '',
     };
   },
   methods: {
+    // 取得現在的產品詳細內容
+    getCurrentCafeData(productID) {
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/product/${productID}`;
+      this.axios
+        .get(requestUrl)
+        .then((response) => {
+          const { success } = response.data;
+          if (success) {
+            const { product } = response.data;
+            this.category = product.category;
+            this.getAllCafeList();
+          } else {
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+          }
+        })
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+        });
+    },
     // 取得所有商品資料
     getAllCafeList() {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products/all`;
@@ -56,13 +74,11 @@ export default {
     },
     // 取得產品分類的項目
     getCategoryList() {
-      console.log('取得跟目前的產品分類相同的項目');
-      const { category } = this.detail_data;
-      const filterCafeList = this.all_cafe_list.filter((cafe) => cafe.category === category);
-      console.log(filterCafeList, '跟目前選擇的產品分類相同');
+      const filterCafeList = this.all_cafe_list.filter(
+        (cafe) => cafe.category === this.category,
+      );
       // 處理隨機取得產品
       const randomCafeSet = new Set([]);
-      console.log(randomCafeSet.size);
       // 取得隨機數字 Math.floor(Math.random() * max)
       for (let index = 0; randomCafeSet.size < 4; index + 1) {
         const num = Math.floor(Math.random() * filterCafeList.length);
@@ -74,10 +90,8 @@ export default {
     },
   },
   mounted() {
-    this.getAllCafeList();
+    this.getCurrentCafeData(this.$route.params.id);
   },
 };
 </script>
-<style lang="sass" scoped>
-
-</style>
+<style lang="sass" scoped></style>

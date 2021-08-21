@@ -5,10 +5,10 @@
         <div class="content col-xl-4 col-md-4 col-sm-8 ms-auto">
           <p class="title">訂閱最新消息</p>
           <Form v-slot="{ errors }" ref="subscribe_form">
-            <div class="input-group mb-5">
+            <div class="input-group mb-2">
               <Field
                 id="email"
-                name="email"
+                name="Email"
                 type="email"
                 class="form-control"
                 :class="{ 'is-invalid': errors['email'] }"
@@ -19,7 +19,7 @@
                 aria-describedby="button-addon2"
               />
               <button
-                class="btn btn-secondary"
+                class="btn btn-primary"
                 type="button"
                 id="button-addon2"
                 :disabled="subscribe_email === '' || errors.email"
@@ -30,7 +30,7 @@
               </button>
             </div>
             <div class="error_msg">
-              <error-message name="email" class="invalid-feedback"> </error-message>
+              <error-message name="Email" class="invalid-feedback"> </error-message>
             </div>
           </Form>
         </div>
@@ -44,8 +44,6 @@ import LocalStorageSupport from '../../../../Support/LocalStorageSupport';
 
 export default {
   name: 'SubscribeComponent',
-  props: {},
-  components: {},
   data() {
     return {
       subscribe_email: '',
@@ -94,9 +92,8 @@ export default {
         font-weight: bold
         letter-spacing: .1rem
 
-  // 這邊只是給測試用的
-  //  FIXME  這邊要調整位置
   .error_msg
     span
+      color: #fff
       display: block
 </style>

@@ -1,50 +1,52 @@
 <template>
   <div class="container-fluid feature_wrapper">
-    <ul class="list-unstyled">
-      <li class="row d-flex align-items-center mt-5">
-        <div class="bg_cover feature_image img-fluid col-sm-6"></div>
-        <div class="feature_describe col-sm-6">
-          <p class="title">走！一起去咖啡廳吃早餐呀！</p>
-          <p
-            class="describe"
-            v-html="feature_describe"
-          ></p>
-          <figcaption class="blockquote-footer">
-            CoffeetPrint Author<cite title="Source Title">Tofu Tseng</cite>
-          </figcaption>
-          <button
-            type="button"
-            class="btn special_button"
-            @click="getCoupon"
-          >
-            一起逛逛咖啡廳
-            <span class="material-icons-round">chevron_right</span>
-          </button>
-        </div>
-      </li>
-      <li class="row d-flex align-items-center">
-        <div class="feature_describe col-sm-6">
-          <p class="title">還沒睡醒嗎？那來份早午餐吧！</p>
-          <p
-            class="describe"
-            v-html="feature_describe_2"
-          >
-          </p>
-          <figcaption class="blockquote-footer">
-            CoffeetPrint Author<cite title="Source Title">Tofu Tseng</cite>
-          </figcaption>
-          <button
-            type="button"
-            class="btn special_button"
-            @click="getCoupon"
-          >
-            約朋友一起吃早餐
-            <span class="material-icons-round">chevron_right</span>
-          </button>
-        </div>
-        <div class="bg_cover feature_image_second img-fluid col-sm-6"></div>
-      </li>
-    </ul>
+    <div>
+      <ul class="list-unstyled container">
+        <li class="row d-flex align-items-center mt-5">
+          <div class="bg_cover feature_image img-fluid col-sm-6"></div>
+          <div class="feature_describe col-sm-6">
+            <p class="title">走！一起去咖啡廳吃早餐呀！</p>
+            <p
+              class="describe"
+              v-html="feature_describe"
+            ></p>
+            <figcaption class="blockquote-footer">
+              CoffeetPrint Author<cite title="Source Title">Tofu Tseng</cite>
+            </figcaption>
+            <button
+              type="button"
+              class="btn special_button"
+              @click="getCoupon"
+            >
+              一起逛逛咖啡廳
+              <span class="material-icons-round">chevron_right</span>
+            </button>
+          </div>
+        </li>
+        <li class="row d-flex align-items-center">
+          <div class="feature_describe col-sm-6">
+            <p class="title">還沒睡醒嗎？那來份早午餐吧！</p>
+            <p
+              class="describe"
+              v-html="feature_describe_2"
+            >
+            </p>
+            <figcaption class="blockquote-footer">
+              CoffeetPrint Author<cite title="Source Title">Tofu Tseng</cite>
+            </figcaption>
+            <button
+              type="button"
+              class="btn special_button"
+              @click="getCoupon"
+            >
+              約朋友一起吃早餐
+              <span class="material-icons-round">chevron_right</span>
+            </button>
+          </div>
+          <div class="bg_cover feature_image_second img-fluid col-sm-6"></div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>

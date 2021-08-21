@@ -46,6 +46,7 @@
         <button
           class="login_btn"
           type="button"
+          @click="loginSystem"
         >
           登入
         </button>

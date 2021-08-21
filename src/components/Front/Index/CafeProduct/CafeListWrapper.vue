@@ -1,12 +1,37 @@
 <template>
   <div class="container-fluid cafe_list_block">
-    <TitleComponent
-      title="＃發現咖啡廳"
-    />
-    <span class="material-icons-round">coffee</span>
-    <p>一起看看哪些咖啡廳有提供優惠券吧！</p>
-    <!-- TODO  用 Swiper，改成從這邊丟進去 Data -->
-    <CafeListComponent />
+    <div class="common_row_space_between container">
+      <div>
+        <TitleComponent
+          title="＃發現咖啡廳"
+        />
+        <p class="common_row_align">
+          <span class="material-icons-round">coffee</span>
+          一起看看哪些咖啡廳有提供優惠券吧！
+        </p>
+      </div>
+      <div class="change_layout">
+        <button
+          type="button"
+          class="btn btn-primary me-3"
+          @click="switch_status = 'list'"
+        >
+          <span class="material-icons-round">view_list</span>
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="switch_status = 'grid'"
+        >
+          <span class="material-icons-round">grid_view</span>
+        </button>
+      </div>
+    </div>
+   <div class="container">
+      <CafeListComponent
+        :switch_status="switch_status"
+      />
+   </div>
   </div>
 </template>
 
@@ -24,6 +49,8 @@ export default {
     return {
       productData: [],
       pagination: {},
+      // 切換狀態
+      switch_status: 'grid',
     };
   },
   methods: {
@@ -72,8 +99,4 @@ export default {
       position: absolute
       top: -130px
       z-index: -1
-  .list_wrap
-    width: 100%
-    max-width: 1200px
-    margin: 0 auto
 </style>

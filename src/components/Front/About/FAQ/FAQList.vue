@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="faq_wrapper">
     <FAQItemComponent
       v-for="(faq, key) in FAQ_list_data"
       :key="'faq_' + key"
@@ -64,4 +64,7 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+.faq_wrapper
+  font-size: 1rem
+</style>

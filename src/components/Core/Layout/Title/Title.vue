@@ -4,8 +4,10 @@
     class="title"
     :origin_text="title"
   />
-  <!-- 普通的標題文字 -->
-  <h4 class="title">{{ title }}</h4>
+  <h4
+    class="title"
+    :style="{ color: color }"
+  >{{ title }}</h4>
 </template>
 <script>
 import AnimationTextComponent from '../../Animation/AnimationText.vue';
@@ -15,6 +17,7 @@ export default {
   props: {
     title: String,
     isAnimation: Boolean,
+    color: String,
   },
   components: {
     AnimationTextComponent,
@@ -30,5 +33,6 @@ export default {
 .title
   font-weight: bold
   font-size: 2rem
-  padding: 0 2rem 2rem
+  line-height: 1.6
+  text-align: left
 </style>

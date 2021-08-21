@@ -1,7 +1,7 @@
 <template>
   <div class="card border-0">
     <div
-      class="card-header py-4 bg-white border border-bottom-0
+      class="card-header py-4 border border-bottom-0
         border-top border-start-0 border-end-0"
       :id="'headingTwo_' + order"
       data-bs-toggle="collapse"
@@ -12,18 +12,17 @@
         @click="toggleQuestion"
         :class="isOpen ? 'active' : ''"
       >
-        <h4 class="mb-0">Q{{ order + 1 }}. {{ faq_data.question }}</h4>
+        <h6 class="mb-0 justify">Q{{ order + 1 }}. {{ faq_data.question }}</h6>
         <span class="material-icons-round">expand_more</span>
       </div>
     </div>
-    <!--  NOTE  data-bs-parent 記得要設定 -->
     <div
       :id="'collapseTwo_' + order"
       class="collapse"
       :aria-labelledby="'headingTwo_' + order"
       :data-bs-parent="'#headingTwo_' + order"
     >
-      <div class="card-body pb-5">
+      <div class="card-body pb-5 justify">
         {{ faq_data.answer }}
       </div>
     </div>
@@ -55,6 +54,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.card
+  height: auto
+  background: none
+  .card-header
+    background: none
 .question_block
   .material-icons-round
     transform: rotate(0deg)

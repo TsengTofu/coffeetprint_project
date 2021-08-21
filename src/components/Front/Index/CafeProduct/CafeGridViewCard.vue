@@ -1,23 +1,31 @@
 <template>
   <li class="col">
-    <div class="card"
+    <div
+      class="card"
       @click="goToCafeDetail(singleCafe.id)"
-      style="max-width: 540px;">
+    >
       <div class="row g-0">
         <div class="col image">
           <div
             class="cover_image"
             :style="{ backgroundImage: 'url(' + singleCafe.imageUrl + ')' }"
-          ></div>
+          >
+          </div>
           <button
-            class="btn btn-primary add_to_favorite d-flex"
             type="button"
+            class="btn btn-primary add_to_favorite d-flex"
             @click.stop="addToFavorite(singleCafe.id)"
           >
-            <span v-if="is_favorite" class="material-icons-round">
+            <span
+              v-if="is_favorite"
+              class="material-icons-round"
+            >
               favorite
             </span>
-            <span v-else class="material-icons-round">
+            <span
+              v-else
+              class="material-icons-round"
+            >
               favorite_border
             </span>
           </button>
@@ -26,10 +34,16 @@
           <div class="card-body">
             <div class="d-flex title">
               <b class="category">
-                <span v-if="singleCafe.category === '餐廳'" class="material-icons-round"
-                  >restaurant</span
+                <span
+                  v-if="singleCafe.category === '餐廳'"
+                  class="material-icons-round"
                 >
-                <span v-else class="material-icons-round">
+                  restaurant
+                </span>
+                <span
+                  v-else
+                  class="material-icons-round"
+                >
                   free_breakfast
                 </span>
               </b>
@@ -40,21 +54,24 @@
                     v-for="(n, index) in parseInt(singleCafe.star_rate)"
                     :key="'star_' + index"
                     class="material-icons-round"
-                    >star</span
                   >
+                    star
+                  </span>
                   <span
                     v-for="(n, index) in 5 - parseInt(singleCafe.star_rate)"
                     :key="'star_' + index"
                     class="material-icons-round"
-                    >star_border</span
                   >
+                    star_border
+                  </span>
                 </p>
               </div>
             </div>
             <p class="card-text">
               <small class="text-muted location d-flex align-items-center">
                 <span class="material-icons-round">place</span>
-                台灣｜{{ singleCafe.area }}<b class="nearby">{{ singleCafe.nearby }}</b>
+                台灣｜{{ singleCafe.area }}
+                <b class="nearby">{{ singleCafe.nearby }}</b>
               </small>
             </p>
             <p class="card-text describe" v-html="singleCafe.description"></p>
@@ -64,6 +81,7 @@
                 <p>NT$ <span>{{ singleCafe.price.toLocaleString() }}</span></p>
               </div>
               <button
+                type="button"
                 class="btn btn-primary d-flex justify-content-center align-items-center add_to_cart"
                 @click.stop="addToCart(singleCafe.id)"
               >
@@ -88,6 +106,7 @@ export default {
   components: {},
   data() {
     return {
+      isProcess: false,
     };
   },
   methods: {
@@ -95,6 +114,10 @@ export default {
       this.$router.push(`/detail/${id}`);
     },
     addToCart(id) {
+      if (this.isProcess) {
+        return;
+      }
+      this.isProcess = true;
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
       this.axios
         .post(requestUrl, {
@@ -106,10 +129,10 @@ export default {
         .then((response) => {
           const { success } = response.data;
           if (success) {
-            //  TODO  options 樣式之後再回來設定
             this.$swal('成功加入購物車！');
             // 更新的 modal 的購物車
             this.emitter.emit('updateCartList');
+            this.isProcess = false;
           } else {
             this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }

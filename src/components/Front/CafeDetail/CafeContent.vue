@@ -17,7 +17,6 @@
 </template>
 
 <script>
-// 整個 Tab 區塊
 import TabWrapperComponent from './Tab/TabWrapper.vue';
 
 export default {
@@ -47,19 +46,12 @@ export default {
       map_source: '',
     };
   },
-  methods: {
-  },
-  mounted() {
-    // FIXME  感覺是這邊的 data
-  },
   watch: {
     detail_data() {
       // 先轉換資料
-      this.place_json = JSON.parse(this.detail_data.place_json);
       const {
         photos,
         reviews,
-        // 這個真的可以這樣寫嗎？
         price_level: priceLevel,
         rating,
         place_id: placeId,
@@ -67,11 +59,10 @@ export default {
         website,
         formatted_address: formattedAddress,
         formatted_phone_number: formattedPhoneNumber,
-      } = this.place_json.result;
+      } = this.detail_data;
       this.basic_info.photos = photos;
       this.basic_info.price_level = priceLevel;
       this.basic_info.rating = rating;
-      // 這邊型別怪怪的
       this.basic_info.opening_hours = openingHours.weekday_text.map((element) => {
         const openingData = element.replace(':', ' ').replace('星期', ' ').split('  ');
         return { days: openingData[0], time: openingData[1] };

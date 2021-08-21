@@ -1,14 +1,17 @@
 <template>
   <div class="container-fluid explore_cafe_wrapper">
-    <TitleComponent
-      title="＃探索城市"
-    />
-    <span class="material-icons-round">place</span>
-    <p>一起探索各地的咖啡廳吧！</p>
-    <!-- 區域選擇的清單 -->
-    <div class="area_block">
-      <ul class="list-unstyled d-flex">
-        <CityCafeCardComponent v-for="index in 4" :key="index"/>
+    <div class="container">
+      <TitleComponent
+        title="＃探索城市"
+        color="#FFFFFF"
+      />
+      <p class="common_row_align vice_title">
+        <span class="material-icons-round">place</span>
+        一起探索各地的咖啡廳吧！
+      </p>
+      <!-- 區域選擇的清單 -->
+      <ul class="list-unstyled d-flex row">
+        <CityCafeCardComponent />
       </ul>
     </div>
   </div>
@@ -18,7 +21,6 @@
 import CityCafeCardComponent from './CityCafeCard.vue';
 import TitleComponent from '../../../Core/Layout/Title/Title.vue';
 
-// 專門給探索區塊用的
 export default {
   name: 'ExploreCafeComponent',
   props: {},
@@ -39,8 +41,11 @@ export default {
 <style scoped lang="sass">
 .explore_cafe_wrapper
   background: #406B5A
-  padding: 20px 20px 150px
-  .area_block
-    max-width: 1200px
-    margin: 0 auto
+  padding: 20px 20px 180px
+  position: relative
+  top: -2px
+  z-index: 50
+  .vice_title
+    color: #ffffff
+    margin: 0 0 2rem
 </style>

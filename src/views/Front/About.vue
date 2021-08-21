@@ -13,17 +13,12 @@
               不論是工作討論、放鬆閒聊<br>
               擁有自己的小角落是重要的
             </h4>
-            <!-- 這邊可以考慮加一個底線 -->
             <p>
               每個人都有屬於自己放鬆的方式<br>
               有些人是自己靜靜的待著就行<br>
               有些人則是需要透過與生活互動<br><br>
               你是哪一種呢？<br><br>
-              <!-- 不一定是一直談話交流<br>
-              靜靜的待在陌生又熟悉的咖啡廳<br>
-              也是一種跟生活互動的方式<br> -->
             </p>
-            <!-- 探索更多的按鈕 -->
             <button
               type="button"
               class="btn special_button"
@@ -37,19 +32,20 @@
       </div>
     </div>
     <FeatureIntroComponent />
-    <!-- FAQ -->
-    <FAQListComponent />
+    <div class="container">
+      <FAQListComponent />
+    </div>
   </div>
   <SubscribeComponent />
 </template>
 <script>
-import FeatureIntroComponent from '@/components/Front/About/Feature/FeatureIntro.vue';
+import FeatureIntroComponent from '../../components/Front/About/Feature/FeatureIntro.vue';
 // 引入常見問題的區塊
 import FAQListComponent from '../../components/Front/About/FAQ/FAQList.vue';
 import SubscribeComponent from '../../components/Front/About/Subscribe/Subscribe.vue';
 
 export default {
-  name: '',
+  name: 'About',
   components: {
     FeatureIntroComponent,
     FAQListComponent,
@@ -64,6 +60,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.test
+  background: #000
+  display: block
 .special_button
   border: 1px solid #88664D
   background: none

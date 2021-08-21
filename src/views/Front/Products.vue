@@ -1,32 +1,37 @@
 <template>
-  <div class="cafe_outer">
-    <!--  TODO  分類的標籤，之後考慮要不要抽成元件 -->
-    <!-- 然後傳入的資料要改寫 -->
-    <!-- 先用按鈕的方式處理 -->
-    <button
-      type="button"
-      class="btn btn-primary"
-      @click="filterCategory('all')"
-    >
-      全部
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      @click="filterCategory('咖啡廳')"
-    >
-      咖啡廳
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      @click="filterCategory('餐廳')"
-    >
-      餐廳
-    </button>
-    <p>暫時的資料</p>
-    {{ temp_cafe_list }}
-    <CafeListComponent />
+  <div class="cafe_wrapper">
+    <div class="top_banner container-fluid">
+      <div class="describe">
+        <p>看看有哪些咖啡廳</p>
+        <span>找個喜歡的角落</span>
+      </div>
+    </div>
+    <div class="cafe_outer container">
+      <button
+        type="button"
+        class="btn btn-primary"
+        @click="filterCategory('all')"
+      >
+        全部
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        @click="filterCategory('咖啡廳')"
+      >
+        咖啡廳
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        @click="filterCategory('餐廳')"
+      >
+        餐廳
+      </button>
+      <p>暫時的資料</p>
+      {{ temp_cafe_list }}
+      <CafeListComponent />
+    </div>
   </div>
 </template>
 <script>
@@ -75,6 +80,37 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.cafe_wrapper
+  padding: 59px 0 0 0
+  background: #f7f5f4
 .cafe_outer
-  padding: 120px 0 0 0
+  position: relative
+  z-index: 5
+.top_banner
+  padding: 0px
+  height: 350px
+  background-image: url('../../../public/products.jpg')
+  background-size: cover
+  background-position: bottom
+  display: flex
+  align-items: center
+  justify-content: center
+  position: relative
+  &::after
+    content: ''
+    background-position: top
+    background-image: url('../../assets/images/wave.svg')
+    background-size: cover
+    display: block
+    width: 100%
+    height: 150px
+    position: absolute
+    bottom: -80px
+    z-index: 1
+  p
+    font-weight: bold
+    font-size: 2rem
+    margin: 0 0 .5rem
+  span
+    font-weight: 500
 </style>

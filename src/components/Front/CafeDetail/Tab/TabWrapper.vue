@@ -42,7 +42,6 @@
           <!-- 折價券的內容 -->
         <!-- </template> -->
         <template v-slot:cafe_reviews>
-          網友評論的內容
           <ReviewListComponent
             :reviews_data="reviews"
           />
@@ -110,7 +109,4 @@ export default {
 
 <style lang="sass" scoped>
 .tab_wrapper
-  // width: 100%
-  // max-width: 1200px
-  // margin: 0 auto
 </style>

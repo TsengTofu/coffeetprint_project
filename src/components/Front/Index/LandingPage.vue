@@ -1,13 +1,13 @@
 <template>
   <div class="bg_cover landing_page">
-    <div class="title_block col-md-auto">
+    <div class="title_block col-md-auto" data-aos="fade-down">
       <p class="main_title d-flex align-items-center">
         <span class="material-icons-round">near_me</span>尋找你的咖啡廳
       </p>
       <p class="vice_title">還在煩惱要去哪發呆、聚餐、放鬆嗎？</p>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary explore_btn"
         @click="directToPage('products')"
       >
         探索咖啡廳
@@ -48,4 +48,7 @@ export default {
       justify-content: center
     .vice_title
       font-size: 1rem
+.explore_btn
+  padding: .5rem 1rem
+  font-weight: bold
 </style>

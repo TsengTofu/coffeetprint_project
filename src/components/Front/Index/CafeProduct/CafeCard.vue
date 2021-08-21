@@ -2,27 +2,28 @@
   <!-- 這是共用的 CafeCardComponent -->
   <li class="col">
     <div class="card" @click="goToCafeDetail(singleCafe.id)">
-      <div
-        class="cafe_image"
-      >
+      <div class="cafe_image">
         <div
           class="cafe_cover"
           :style="{ backgroundImage: 'url(' + singleCafe.imageUrl + ')' }"
-        ></div>
+        >
+        </div>
         <button
-          class="btn btn-primary d-flex"
           type="button"
+          class="btn btn-primary d-flex"
           @click.stop="addToFavorite(singleCafe.id)"
         >
           <!-- TODO  favorite_id 這個要改寫 -->
           <span
             v-if="is_favorite"
-            class="material-icons-round">
+            class="material-icons-round"
+          >
             favorite
           </span>
           <span
             v-else
-            class="material-icons-round">
+            class="material-icons-round"
+          >
             favorite_border
           </span>
         </button>
@@ -33,12 +34,16 @@
           <b class="category">
             <span
               v-if="singleCafe.category === '餐廳'"
-              class="material-icons-round">restaurant</span>
-              <span
-                v-else
-                class="material-icons-round">
-                free_breakfast
-              </span>
+              class="material-icons-round"
+            >
+              restaurant
+            </span>
+            <span
+              v-else
+              class="material-icons-round"
+            >
+              free_breakfast
+            </span>
           </b>
           <div class="right_title">
             <h5>
@@ -46,17 +51,28 @@
             </h5>
             <p class="d-flex stars">
               <!-- NOTE  star_rate 必須填寫，沒有填寫的話會直接跑不出來 -->
-              <span v-for="(n, index) in parseInt(singleCafe.star_rate)"
-                :key="'star_' + index" class="material-icons-round">star</span>
-                <span v-for="(n, index) in (5 - parseInt(singleCafe.star_rate))"
-                :key="'star_' + index" class="material-icons-round">star_border</span>
+              <span
+                v-for="(n, index) in parseInt(singleCafe.star_rate)"
+                :key="'star_' + index"
+                class="material-icons-round"
+              >
+                star
+              </span>
+              <span
+                v-for="(n, index) in parseInt(5 - parseInt(singleCafe.star_rate))"
+                :key="'star_' + index"
+                class="material-icons-round"
+              >
+                star_border
+              </span>
             </p>
           </div>
         </div>
-        <!-- 星星跟地點 -->
         <p class="location d-flex align-items-center">
           <span class="material-icons-round">place</span>
-          台灣｜{{ singleCafe.area }}<b class="nearby">{{ singleCafe.nearby }}</b></p>
+          台灣｜{{ singleCafe.area }}
+          <b class="nearby">{{ singleCafe.nearby }}</b>
+        </p>
         <div class="d-flex justify-content-between bottom_block">
           <p class="rest_num">
             剩下 <span>{{ singleCafe.num }}</span> 張
@@ -66,8 +82,10 @@
           </p>
         </div>
         <button
+          type="button"
           class="btn btn-primary d-flex justify-content-center add_to_cart"
-          @click.stop="addToCart(singleCafe.id)">
+          @click.stop="addToCart(singleCafe.id)"
+        >
           <span class="material-icons-round">shopping_cart</span>加入購物車
         </button>
       </div>
@@ -83,6 +101,7 @@ export default {
   },
   data() {
     return {
+      isProcess: false,
     };
   },
   methods: {
@@ -90,6 +109,10 @@ export default {
       this.$router.push(`/detail/${id}`);
     },
     addToCart(id) {
+      if (this.isProcess) {
+        return;
+      }
+      this.isProcess = true;
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
       this.axios
         .post(requestUrl, {
@@ -100,10 +123,10 @@ export default {
         .then((response) => {
           const { success } = response.data;
           if (success) {
-            //  TODO  options 樣式之後再回來設定
             this.$swal('成功加入購物車！');
             // 更新的 modal 的購物車
             this.emitter.emit('updateCartList');
+            this.isProcess = false;
           } else {
             this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }
@@ -123,7 +146,6 @@ export default {
 </script>
 <style scoped lang="sass">
 li
-  // width: 25%
   padding: .5rem
   margin: .5rem 0
   .card

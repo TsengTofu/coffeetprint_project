@@ -4,60 +4,55 @@
       <h4>
         <a :href="basic_info.website" target="_blank">{{ detail_data.title }}</a>
       </h4>
-      <p class="d-flex stars">
-        <span
-          v-for="(n, index) in parseInt(basic_info.rating)"
-          :key="'star_' + index"
-          class="material-icons-round"
-          >star</span
-        >
-        <span
-          v-for="(n, index) in 5 - parseInt(basic_info.rating)"
-          :key="'star_' + index"
-          class="material-icons-round"
-          >star_border</span
-        >
-      </p>
-      <!-- FIXME 這個有可能有沒有的狀態 -->
-      <p>
-        價位等級：
-        <span v-for="(level, key) in basic_info.price_level" :key="'level_' + key">$</span>
-      </p>
-      <!-- 上面這裡要放 icon -->
-      <p>
-        <span class="material-icons-round">phone_in_talk</span>
-        電話：{{ basic_info.formatted_phone_number }}
-      </p>
-      <p>
-        <span class="material-icons-round">home</span>
-        地址：{{ basic_info.formatted_address }}
-      </p>
+      <div class="d-flex">
+        <div class="d-flex">
+          <p>網友評價</p>
+          <p class="d-flex stars">
+            <span
+              v-for="(n, index) in Math.floor(basic_info.rating)"
+              :key="'star_' + index"
+              class="material-icons-round"
+              >star
+            </span>
+            <span
+              v-for="(n, index) in parseInt(5 - Math.floor(basic_info.rating))"
+              :key="'star_' + index"
+              class="material-icons-round"
+              >star_border
+            </span>
+          </p>
+        </div>
+        <p>
+          價位等級
+          <span v-for="(level, key) in basic_info.price_level" :key="'level_' + key">$</span>
+        </p>
+      </div>
+     <div class="d-flex">
+        <p class="common_row_align">
+          <span class="material-icons-round">phone_in_talk</span>
+          電話：{{ basic_info.formatted_phone_number }}
+        </p>
+        <p class="common_row_align">
+          <span class="material-icons-round">home</span>
+          地址：{{ basic_info.formatted_address }}
+        </p>
+     </div>
       <p v-html="detail_data.description"></p>
-      <!--  TODO  這邊必須重新處理資料 -->
       <table class="table">
         <thead>
-          <tr>
-            <th
-              v-for="(hour, key) in basic_info.opening_hours" :key="'hour' + key"
-              >
-              {{ hour.days }}
-            </th>
-          </tr>
         </thead>
         <tbody>
-          <tr>
-            <th
-              v-for="(hour, key) in basic_info.opening_hours" :key="'hour' + key"
-              >{{ hour.time }}</th>
+          <tr v-for="(hour, key) in basic_info.opening_hours" :key="'hour' + key">
+            <td>
+              星期{{ hour.days }}
+            </td>
+            <td>
+              {{ hour.time }}
+            </td>
           </tr>
         </tbody>
       </table>
-      <!-- <p v-for="(hour, key) in basic_info.opening_hours" :key="'hour' + key">
-        <span>{{ hour.days }}</span>
-        <span>{{ hour.time }}</span>
-      </p> -->
     </div>
-    <!--  TODO  先在這邊引入 Swiper-->
     <div class="reviewer_swiper col-md-6">
       <!--  NOTE  這邊要注意一下 CallAPI 次數 -->
       <swiper
@@ -123,12 +118,8 @@ export default {
     };
   },
   methods: {
-    // Swiper 相關的內容
-    // params: swiper
-    onSwiper() {
-    },
-    onSlideChange() {
-    },
+    onSwiper() {},
+    onSlideChange() {},
   },
   mounted() {},
 };
@@ -137,12 +128,19 @@ export default {
 <style lang="sass" scoped>
 th
   font-size: 12px
+.info
+  display: flex
+  flex-direction: column
+  text-align: justify
+  padding: 1rem 2rem
+  h4
+    border-left: 5px solid #88664D
 .reviewer_swiper
   // width: 40%
   .reviewer_image
     background-size: cover
     background-position: center
-    height: 400px
+    height: 580px
     position: relative
     .credit_user
       background: rgba(0,0,0, .4)
