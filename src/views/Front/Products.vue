@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="cafe_outer container">
-      <button
+      <!-- <button
         type="button"
         class="btn btn-primary"
         @click="filterCategory('all')"
@@ -29,7 +29,7 @@
         餐廳
       </button>
       <p>暫時的資料</p>
-      {{ temp_cafe_list }}
+      {{ temp_cafe_list }} -->
       <CafeListComponent />
     </div>
   </div>
