@@ -74,6 +74,9 @@
         >
           清空購物車
         </button>
+        <button type="button" class="btn btn-secondary ms-2">
+          繼續購物
+        </button>
       </div>
       <OrderSummaryComponent
         :final_total="Math.floor(final_total)"
@@ -144,6 +147,8 @@ export default {
     text-align: justify
     display: flex
     justify-content: space-between
+    @media (max-width: 525px)
+      flex-direction: column
 .mobile
   display: none
 // 手機版的控制項

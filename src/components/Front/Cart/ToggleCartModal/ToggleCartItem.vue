@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-5">
+  <div class="card mb-3">
     <div class="card-header header_text d-flex align-items-center">
       #{{ order }} <span>{{ cart_item.product.category }}</span>{{ cart_item.product.title }}
     </div>

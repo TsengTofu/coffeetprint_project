@@ -133,8 +133,6 @@ th
   flex-direction: column
   text-align: justify
   padding: 1rem 2rem
-  h4
-    border-left: 5px solid #88664D
 .reviewer_swiper
   // width: 40%
   .reviewer_image

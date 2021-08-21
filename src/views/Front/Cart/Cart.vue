@@ -17,22 +17,17 @@
           :final_total="Math.floor(final_total)"
           :total="Math.floor(total)"
         />
+        <button
+          type="button"
+          class="btn btn-primary order_btn"
+          :disabled="cart_list.length === 0"
+          @click="directToFormPage"
+        >
+          填寫訂購資料
+        </button>
       </div>
-      <button
-        type="button"
-        class="btn btn-primary"
-        :disabled="cart_list.length === 0"
-        @click="directToFormPage"
-      >
-        填寫訂購資料
-      </button>
-      <!-- 追加一個繼續購物的按鈕 -->
-      <button type="button" class="btn btn-primary">
-        繼續購物
-        <!-- 這邊要加上 arrow -->
-      </button>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -97,6 +92,12 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
+.cart_container
+  display: flex
+  align-items: flex-end
+  flex-direction: column
+  .order_btn
+    width: fit-content
 .cart_content
   position: relative
   z-index: 5
@@ -104,7 +105,7 @@ export default {
   @media (max-width: 525px)
     padding: 0
 .cart_wrapper
-  padding: 59px 0 0 0
+  padding: 59px 0 50px 0
   background: #f7f5f4
 .describe
   text-align: justify

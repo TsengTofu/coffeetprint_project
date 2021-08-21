@@ -112,7 +112,7 @@ export default {
         width: 4.5rem
         height: 4.5rem
         line-height: 4rem
-        border: 3px solid #d2d2d2
+        border: 2px solid #d2d2d2
         font-size: 2rem
         text-align: center
         vertical-align: middle
@@ -126,6 +126,7 @@ export default {
     background: #88664D
 @media (max-width: 525px)
   .checkout_step_wrapper
+    margin: 0 0 2rem 0
     ul
       li
         padding: 0px
@@ -141,11 +142,11 @@ export default {
             display: block
             padding: 0px
             opacity: 0
-            font-size: .8rem
+            height: .8rem
         &:nth-child(odd)
           &:after
             content: var(--step)
-            padding: 0px
+            padding: 4px 0 0 0
             display: block
             font-weight: 500
             font-size: .8rem

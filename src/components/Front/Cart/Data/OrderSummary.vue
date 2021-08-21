@@ -3,16 +3,16 @@
     <ul class="list-unstyled">
       <li class="common_row_space_between">
         <p>商品總計</p>
-        <p>NT$ <span>{{ total }}</span></p>
+        <p>NT$ <span>{{ total.toLocaleString() }}</span></p>
       </li>
       <li class="common_row_space_between">
-        <p>折扣碼</p>
+        <p class="me-2">折扣代碼</p>
         <UseCouponComponent />
          <!--  TODO  這邊是否要顯示相關優惠券資訊呢？ -->
       </li>
       <li class="common_row_space_between">
-        <p>結帳總金額</p>
-        <p>NT$ <span>{{ final_total }}</span></p>
+        <p>總金額</p>
+        <p>NT$ <span>{{ final_total.toLocaleString() }}</span></p>
       </li>
     </ul>
   </div>
@@ -38,4 +38,7 @@ export default {
 
 <style scoped lang="sass">
 .order_summary_wrapper
+  li
+    p
+      font-weight: bold
 </style>

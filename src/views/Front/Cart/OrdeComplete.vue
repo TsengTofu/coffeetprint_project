@@ -6,7 +6,7 @@
         <span>手刀結帳，找朋友聚餐啦！</span>
       </div>
     </div>
-    <div class="order_complete_content">
+    <div class="order_complete_content container">
       <CheckoutStepComponent
         step="order_complete"
       />
@@ -38,7 +38,7 @@ export default {
 
 <style lang="sass" scoped>
 .order_complete_wrapper
-  padding: 59px 0 0 0
+  padding: 59px 0 50px 0
   background: #f7f5f4
 .order_complete_content
   position: relative
@@ -57,6 +57,8 @@ export default {
   align-items: center
   justify-content: center
   position: relative
+  @media (max-width: 525px)
+    background-image: url('../../../../public/cart_s.jpg')
   &::after
     content: ''
     background-position: top

@@ -56,6 +56,8 @@ export default {
   align-items: center
   justify-content: center
   position: relative
+  @media (max-width: 525px)
+    background-image: url('../../../../public/cart_s.jpg')
   &::after
     content: ''
     background-position: top

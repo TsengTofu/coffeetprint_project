@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <ul
-      class="row list-unstyled"
+      class="row list-unstyled row-cols-1 row-cols-md-5"
       v-if="random_cafe_list.length > 0"
     >
       <template
@@ -80,7 +80,7 @@ export default {
       // 處理隨機取得產品
       const randomCafeSet = new Set([]);
       // 取得隨機數字 Math.floor(Math.random() * max)
-      for (let index = 0; randomCafeSet.size < 4; index + 1) {
+      for (let index = 0; randomCafeSet.size < 5; index + 1) {
         const num = Math.floor(Math.random() * filterCafeList.length);
         randomCafeSet.add(num);
       }

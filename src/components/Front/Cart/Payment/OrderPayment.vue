@@ -1,77 +1,91 @@
 <template>
-  <div class="col-md-6">
-    <!--  TODO  需要回頭思考一下版面的問題 -->
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">
-          訂單 {{ orderDetail.id }}
-          <span v-if="orderDetail.is_paid">已完成</span>
-          <span v-else>等待付款中！</span>
+    <div class="card mt-4">
+      <div class="card-header common_row_space_between">
+        <h5 class="common_row_align">
+          <div
+            class="common_row_align"
+            v-if="orderDetail.is_paid"
+          >
+            <b class="me-2">
+              <span class="material-icons-round">verified</span>已付款
+            </b>
+            訂單 {{ orderDetail.id }}
+          </div>
+          <div
+            class="common_row_align"
+            v-else
+          >
+            <b class="me-2">
+              <span class="material-icons-round">clear</span>未付款
+            </b>
+            訂單{{ orderDetail.id }}
+          </div>
         </h5>
-        <button
-          type="button"
-          class="btn btn-primary"
-          @click="copyOrderID"
-        >
-          複製訂單編號
-        </button>
+        <div class="common_row_align">
+          <button
+            type="button"
+            class="btn btn-outline-secondary me-2"
+            @click="copyOrderID"
+          >
+            複製訂單編號
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary d-flex"
+            v-if="!orderDetail.is_paid"
+            @click="goToPayment"
+          >
+            付款結帳
+            <span class="material-icons-round">keyboard_arrow_right</span>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <h4>使用者資料</h4>
+              <div v-if="user">
+                <p>訂購人地址：{{ user.address }}</p>
+                <p>訂購人信箱：{{ user.email }}</p>
+                <p>訂購人姓名：{{ user.name }}</p>
+                <p>訂購人電話：{{ user.tel }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h4>訂單內容</h4>
+              <figcaption>結帳時間：{{ order_time }}</figcaption>
+              <p>
+                訂單總金額：NT$ <span>{{ Math.floor(orderDetail.total).toLocaleString() }}</span>
+              </p>
+              <div class="d-flex align-items-center mb-4"
+                v-for="(item, key) in product_list" :key="item + key">
+                <!-- 如果是使用 coupon -->
+                <div class="image col-3">
+                  <img
+                    :src="orderDetail.products[item].product.imageUrl"
+                    alt="購買品項的圖片"
+                  >
+                </div>
+                <div class="content">
+                  <p>
+                    <span>{{ orderDetail.products[item].product.category }}</span>
+                    {{ orderDetail.products[item].product.title }} 折價券
+                     x {{ orderDetail.products[item].qty }} 張
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <input
           type="text"
           ref="order_id"
           v-model="orderDetail.id"
           class="no_show"
         >
-        <!--  TODO  這邊要做日期的轉換 -->
-        <figcaption>結帳時間：{{ order_time }}</figcaption>
-        <div class="card-text">
-          <b
-            class="d-flex"
-            v-if="orderDetail.is_paid"
-          >
-            <span class="material-icons-round">verified</span>已付款
-          </b>
-          <b
-            class="d-flex"
-            v-else
-          >
-            <span class="material-icons-round">clear</span>未付款
-          </b>
-          <div>
-            訂單總金額：NT$ <span>{{ Math.floor(orderDetail.total).toLocaleString() }}</span>
-          </div>
-          <div class="card col-3" v-for="(item, key) in product_list" :key="item + key">
-            <!-- 這個是產品本身 -->
-            <!-- 如果是使用 coupon -->
-            <p>{{ orderDetail.products[item].coupon }}</p>
-            <p>購買的資料：{{ orderDetail.products[item].product.title }}<br></p>
-            <!-- 這個是購買的數量 -->
-            <p>{{ orderDetail.products[item].qty }} 張</p>
-            <img
-              :src="orderDetail.products[item].product.imageUrl"
-              alt="購買品項的圖片"
-            >
-          </div>
-          <!-- 使用者資料 -->
-          <h5>使用者資料</h5>
-          <div v-if="user">
-            <p>訂購人地址：{{ user.address }}</p>
-            <p>訂購人信箱：{{ user.email }}</p>
-            <p>訂購人姓名：{{ user.name }}</p>
-            <p>訂購人電話：{{ user.tel }}</p>
-          </div>
-        </div>
       </div>
     </div>
-    <button
-      type="button"
-      class="btn btn-primary d-flex"
-      v-if="!orderDetail.is_paid"
-      @click="goToPayment"
-    >
-      付款結帳
-      <span class="material-icons-round">keyboard_arrow_right</span>
-    </button>
-  </div>
 </template>
 
 <script>
@@ -151,4 +165,21 @@ export default {
 <style scoped lang="sass">
 .no_show
   opacity: 0
+  position: absolute
+  bottom: 0px
+.card
+  text-align: justify
+  position: relative
+  h5
+    margin: 0px
+.card-header
+  display: flex
+  @media (max-width: 525px)
+    flex-direction: column
+    font-size: 1rem
+.image
+  margin: 0 1rem 0 0
+  img
+    width: 100%
+    height: auto
 </style>

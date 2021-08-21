@@ -1,6 +1,7 @@
 <template>
   <!-- 這是共用的 CafeCardComponent -->
-  <li class="col-6">
+  <!-- col-6 -->
+  <li class="col">
     <div class="card" @click="goToCafeDetail(singleCafe.id)">
       <div class="cafe_image">
         <div

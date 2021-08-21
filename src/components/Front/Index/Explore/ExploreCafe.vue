@@ -9,7 +9,6 @@
         <span class="material-icons-round">place</span>
         一起探索各地的咖啡廳吧！
       </p>
-      <!-- 區域選擇的清單 -->
       <ul class="list-unstyled d-flex row">
         <CityCafeCardComponent />
       </ul>

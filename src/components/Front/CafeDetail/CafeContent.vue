@@ -4,8 +4,9 @@
       :reviews="reviews"
       :basic_info="basic_info"
       :detail_data="detail_data"
+      class="mb-4"
     />
-    <p>折價券使用須知</p>
+    <!-- <p>折價券使用須知</p> -->
     <iframe
       width="100%"
       height="450"

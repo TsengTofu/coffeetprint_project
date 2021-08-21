@@ -2,7 +2,6 @@
   <div class="col-md-4 mb-5">
     <div class="card" @click="addToCart(cafe.id)">
       <div class="card-body">
-        <!-- 包一層 -->
         <div
           class="image col-9"
           :style="{ backgroundImage: 'url(' + cafe.imageUrl + ')' }"
@@ -44,13 +43,12 @@
           </h5>
         </div>
       </div>
-      <div
-        type="button"
+      <a
         class="remove_button"
         @click.stop="removeFromFavoriteList(cafe.id)"
       >
         <span class="material-icons-round">clear</span>
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -126,6 +124,7 @@ export default {
     right: 0px
     top: 0px
     color: #fff
+    cursor: pointer
   .card-body
     position: relative
     &:before
