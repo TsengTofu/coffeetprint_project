@@ -127,9 +127,8 @@ export default {
           const { success } = response.data;
           if (success) {
             // 成功之後，就要告訴購物車的 Modal 要清空
-            this.emitter.emit('updateCartList');
+            this.emitter.emit('clearCartList');
             const { orderId } = response.data;
-            //  TODO  成功拿到資料之後，應該要可以把購物車清掉
             this.$router.push(`/order/${orderId}`);
           }
         })

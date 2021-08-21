@@ -132,8 +132,6 @@ export default {
           if (success) {
             this.$swal(message);
             this.getOrderDetail(oderId);
-            // 清空購物車
-            this.emitter.emit('clearCartList');
             // 導頁
             this.$router.push(`/order/complete/${oderId}`);
           }
