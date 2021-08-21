@@ -20,6 +20,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // sweetalert2
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+// AOS
+import AOS from 'aos';
+import '../node_modules/aos/dist/aos.css';
 import App from './App.vue';
 import router from './router';
 
@@ -41,12 +44,26 @@ Object.keys(rules).forEach((rule) => {
 
 setLocale('zh_TW');
 
+// AOS
+AOS.init({
+  duration: 1500,
+  once: true,
+});
+
+// SweetAlert2
+// https://sweetalert2.github.io/#frameworks-integrations
+const options = {
+  confirmButtonColor: '#88664D',
+  cancelButtonColor: '#ff7674',
+};
+
 const app = createApp(App);
 app.use(router);
 app.use(VueAxios, axios);
-app.use(VueSweetalert2);
+app.use(VueSweetalert2, options);
 app.use(CKEditor);
 app.use(VueLoading);
+app.use(AOS);
 app.config.globalProperties.$dayjs = dayjs;
 
 // 註冊 vee-validate 三個全域元件

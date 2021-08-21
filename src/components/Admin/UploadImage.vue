@@ -16,6 +16,7 @@
     >
     <button
       type="button"
+      class="btn btn-primary"
       @click="copyImageUrl"
     >
       點我複製網址

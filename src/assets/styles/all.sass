@@ -31,3 +31,33 @@
   right: 0px
   bottom: 0px
   position: relative
+
+// 共用的並列排版 e.g 按鈕與圖示
+@mixin common_flex_column
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+
+@mixin common_flex_row
+  display: flex
+  flex-direction: row
+  align-items: center
+
+.common_row_align
+  @include common_flex_row
+
+.common_row_space_between
+  @include common_flex_row
+  justify-content: space-between
+
+.common_column_align
+  @include common_flex_column
+// 共用的置中設定
+.center
+  text-align: center
+.justify
+  text-align: justify
+
+.btn_common
+  padding: .5rem 2rem
+  font-weight: bold
