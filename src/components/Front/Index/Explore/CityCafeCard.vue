@@ -1,6 +1,6 @@
 <template>
   <li
-    class="col-md-3"
+    class="col-md-3 col-6"
     v-for="(city, key) in area_data_list"
     :key="'city_' + key"
     data-aos="zoom-in"

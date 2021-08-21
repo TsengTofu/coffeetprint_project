@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid cafe_list_block">
-    <div class="common_row_space_between container">
+    <div class="common_row_space_between container top_operation">
       <div>
         <TitleComponent
           title="＃發現咖啡廳"
@@ -82,6 +82,10 @@ export default {
 </script>
 
 <style scoped lang="sass">
+@media (max-width: 525px)
+  .top_operation
+    flex-direction: column
+    align-items: flex-start
 .cafe_list_block
   background: #F0EBE6
   position: relative
@@ -89,14 +93,17 @@ export default {
   padding: 0px
   z-index: 50
   &::before
-      content: ''
-      background-position: top
-      background-image: url('../../../../assets/images/wave_coffee.svg')
-      background-size: cover
-      display: block
-      width: 100%
-      height: 150px
-      position: absolute
-      top: -130px
-      z-index: -1
+    content: ''
+    background-position: top
+    background-image: url('../../../../assets/images/wave_coffee.svg')
+    background-size: cover
+    display: block
+    width: 100%
+    height: 150px
+    position: absolute
+    top: -130px
+    z-index: -1
+  @media (max-width: 525px)
+    &::before
+      background-image: url('../../../../assets/images/wave_coffee_s.png')
 </style>

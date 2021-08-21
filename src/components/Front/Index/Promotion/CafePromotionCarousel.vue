@@ -33,7 +33,7 @@
           >
           </button>
         </div>
-        <div class="carousel-inner p-5" v-if="post_list.length > 0">
+        <div class="carousel-inner" v-if="post_list.length > 0">
           <div
             class="carousel-item"
             data-bs-interval="8000"
@@ -145,16 +145,20 @@ export default {
   padding: 0px
   z-index: 50
   &::before
-      content: ''
-      background-position: top
-      background-image: url('../../../../assets/images/wave.svg')
-      background-size: cover
-      display: block
-      width: 100%
-      height: 150px
-      position: absolute
-      top: -130px
-      z-index: 4
+    content: ''
+    background-position: top
+    background-image: url('../../../../assets/images/wave.svg')
+    background-size: cover
+    display: block
+    width: 100%
+    height: 150px
+    position: absolute
+    top: -130px
+    z-index: 4
+  @media (max-width: 525px)
+    &::before
+      top: -50px
+      background-image: url('../../../../assets/images/wave_s.png')
   &::after
     content: ''
     background: #406B5A
@@ -164,18 +168,18 @@ export default {
     position: absolute
     bottom: 0px
   .content
-      width: 100%
-      // max-width: 1200px
-      // margin: 0 auto
-      position: relative
-      z-index: 10
-      padding: 0 0 60px
-      .carousel-indicators
-        bottom: -50px
-      .carousel-inner
-        background: #F0EBE6
-        border-radius: 16px
-        // padding: 3rem
+    width: 100%
+    position: relative
+    z-index: 10
+    padding-bottom: 60px
+    .carousel-indicators
+      bottom: -50px
+    .carousel-inner
+      background: #F0EBE6
+      border-radius: 16px
+      padding: 3rem
+      @media (max-width: 525px)
+        padding: 1rem
 //  TODO  這邊以下沒有被用到
       ul
           display: flex

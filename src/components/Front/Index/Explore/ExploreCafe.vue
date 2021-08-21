@@ -45,6 +45,8 @@ export default {
   position: relative
   top: -2px
   z-index: 50
+  @media (max-width: 525px)
+    padding: 20px 0px 150px
   .vice_title
     color: #ffffff
     margin: 0 0 2rem

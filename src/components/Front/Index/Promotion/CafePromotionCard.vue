@@ -22,6 +22,15 @@
         </div>
         <p class="describe" v-html="post_data.description"></p>
       </div>
+      <!-- 手機版 -->
+      <button
+        type="button"
+        class="btn btn-primary btn_common common_row_align mobile"
+      >
+        點我看更多
+        <span class="material-icons-round">keyboard_arrow_right</span>
+      </button>
+      <!-- 手機版要藏起來 -->
       <div class="bottom_block container-fluid">
         <div class="row comment_block">
           <!-- 頭像 -->
@@ -96,6 +105,10 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.mobile
+  display: none
+  @media (max-width: 525px)
+    display: flex
 .nearby
   font-size: 0.875rem
   border: 1px solid
@@ -112,15 +125,21 @@ export default {
   background-position: 0% 80%
   background-size: cover
   border-radius: 16px
+  @media (max-width: 525px)
+    height: 200px
   img
     width: 100%
     height: auto
 .info_block
   .top_block
     border-bottom: 1px solid #695F55
+    @media (max-width: 525px)
+      border: none
     .main_title
       font-size: 2rem
       font-weight: 600
+      @media (max-width: 525px)
+        font-size: 1.5rem
     .tags
       ul
         li
@@ -132,12 +151,18 @@ export default {
           font-size: .875rem
           font-weight: bold
           margin: 0 .4rem 0 0
+          &:last-child
+            margin: 0
     .describe
       text-align: justify
       line-height: 2
+      @media (max-width: 525px)
+        line-height: 1.6
   .bottom_block
     text-align: justify
     padding: 1.4rem 0
+    @media (max-width: 525px)
+      display: none
     .comment_block
       .comment_detail
         p

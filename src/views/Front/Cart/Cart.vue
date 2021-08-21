@@ -101,11 +101,16 @@ export default {
   position: relative
   z-index: 5
   padding: 2rem 0 0 0
+  @media (max-width: 525px)
+    padding: 0
 .cart_wrapper
   padding: 59px 0 0 0
   background: #f7f5f4
 .describe
   text-align: justify
+  @media (max-width: 525px)
+    background: rgba(255, 255, 255, .8)
+    padding: 1rem
 .top_banner
   padding: 0px
   height: 350px
@@ -116,6 +121,8 @@ export default {
   align-items: center
   justify-content: center
   position: relative
+  @media (max-width: 525px)
+    background-image: url('../../../../public/cart_s.jpg')
   &::after
     content: ''
     background-position: top
@@ -127,6 +134,9 @@ export default {
     position: absolute
     bottom: -80px
     z-index: 1
+  @media (max-width: 525px)
+    &::after
+      background-image: url('../../../assets/images/wave_s.png')
   p
     font-weight: bold
     font-size: 2rem

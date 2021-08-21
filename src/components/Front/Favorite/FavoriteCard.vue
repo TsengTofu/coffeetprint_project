@@ -30,7 +30,6 @@
         </ul>
         <div class="content col-3">
           <a
-            type="button"
             class="dot_button"
           >
           </a>
@@ -187,7 +186,9 @@ export default {
         transition: all .5s
         mix-blend-mode: multiply
         position: absolute
+        will-change: opacity
         bottom: 1rem
+        cursor: pointer
     .text_block
       position: absolute
       bottom: 0px

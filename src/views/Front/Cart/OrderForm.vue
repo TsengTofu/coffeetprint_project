@@ -67,6 +67,9 @@ export default {
     position: absolute
     bottom: -80px
     z-index: 1
+  @media (max-width: 525px)
+    &::after
+      background-image: url('../../../assets/images/wave_s.png')
   p
     font-weight: bold
     font-size: 2rem

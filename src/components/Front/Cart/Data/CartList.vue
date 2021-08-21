@@ -1,6 +1,6 @@
 <template>
   <div class="cart_list_wrapper container">
-    <template>
+    <template v-if="cart_list.length > 0">
       <div
         v-for="(item, key) in cart_list"
         :key="'cart_' + key"
@@ -13,7 +13,10 @@
         />
       </div>
     </template>
-    <table class="table  table-hover desktop mt-4">
+    <div class="content d-flex flex-column align-items-center" v-else>
+      <p>現在購物車沒有任何東西喔！</p>
+    </div>
+    <table class="table table-hover desktop mt-4">
       <thead>
         <tr class="table-primary">
           <th width="60" scope="col">#</th>

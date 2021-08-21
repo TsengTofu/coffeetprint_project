@@ -38,9 +38,12 @@ export default {
   display: block
   width: 100%
   min-height: 100vh
+  @media (max-width: 525px)
+    background-image: url('../../../../public/index_bg_s.jpg')
+    min-height: 72vh
   .title_block
     color: #FFFFFF
-    padding: 200px 0 0 0px
+    padding: 160px 0 0 0px
     text-align: center
     .main_title
       font-size: 2rem

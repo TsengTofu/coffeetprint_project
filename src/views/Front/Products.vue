@@ -95,6 +95,8 @@ export default {
   align-items: center
   justify-content: center
   position: relative
+  @media (max-width: 525px)
+    background-image: url('../../../public/products_s.jpg')
   &::after
     content: ''
     background-position: top
@@ -106,6 +108,9 @@ export default {
     position: absolute
     bottom: -80px
     z-index: 1
+  @media (max-width: 525px)
+    &::after
+      background-image: url('../../assets/images/wave_s.png')
   p
     font-weight: bold
     font-size: 2rem

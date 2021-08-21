@@ -86,6 +86,9 @@ export default {
       top: -100px
       z-index: 1
       left: 0px
+  @media (max-width: 525px)
+    &::before
+      background-image: url('../../../../assets/images/wave_s.png')
   ul
     padding: 20px 0 0 0
 .feature_describe
