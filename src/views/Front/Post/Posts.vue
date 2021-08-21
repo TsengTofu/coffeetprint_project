@@ -11,7 +11,6 @@ export default {
   components: {},
   data() {
     return {
-      // 回傳的資料
       post_list: [],
       pagination: {},
     };
@@ -25,15 +24,13 @@ export default {
       this.axios.get(requestUrl)
         .then((response) => {
           const { success } = response.data;
-          console.log(response.data);
           if (success) {
             const { articles, pagination } = response.data;
             this.post_list = articles;
             this.pagination = pagination;
           }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
     },
   },

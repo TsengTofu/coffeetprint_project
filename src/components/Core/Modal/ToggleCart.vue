@@ -110,7 +110,6 @@ export default {
   },
   created() {
     this.emitter.on('updateCartList', () => {
-      console.log('有執行到我喔');
       this.getCartList();
     });
     this.emitter.on('clearCartList', () => {

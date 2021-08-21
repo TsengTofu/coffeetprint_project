@@ -70,7 +70,6 @@ export default {
     // 點擊之後 filter 資料
     filterCategory(categoryName) {
       this.temp_cafe_list = this.all_cafe_list.filter((item) => item.category === categoryName);
-      console.log(this.temp_cafe_list);
     },
   },
   mounted() {

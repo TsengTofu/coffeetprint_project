@@ -58,9 +58,7 @@ export default {
             this.$router.push('/login');
           }
         })
-        .catch((error) => {
-          console.log(error);
-          // error 之後要回來看錯誤訊息
+        .catch(() => {
           this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
