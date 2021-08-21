@@ -56,6 +56,12 @@ const routes = [
         name: 'OrderPayment',
         component: () => import('../views/Front/Cart/OrderPayment.vue'),
       },
+      // 訂單完成頁面，導購
+      {
+        path: 'order/complete/:id',
+        name: 'OrderComplete',
+        component: () => import('../views/Front/Cart/OrdeComplete.vue'),
+      },
       // 關於我們
       {
         path: '/about',
