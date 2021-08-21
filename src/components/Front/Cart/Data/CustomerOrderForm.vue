@@ -1,109 +1,102 @@
 <template>
   <div class="user_order_info_wrapper container">
-    <CheckoutStepComponent
-      step="order_info"
-    />
-    <h4>填寫預訂資料</h4>
+    <h4>填寫預定資料</h4>
     <Form
       v-slot="{ errors }"
       @submit="onSubmit"
     >
-      <div class="mb-3">
-        <label for="name" class="form-label">姓名</label>
-        <Field
-          id="name"
-          name="姓名"
-          type="text"
-          class="form-control"
-          :class="{ 'is-invalid': errors['姓名'] }"
-          placeholder="請輸入姓名"
-          rules="required"
-          v-model="form.user.name"
-        />
-        <error-message name="姓名" class="invalid-feedback"></error-message>
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">信箱</label>
-        <Field
-          id="email"
-          name="信箱"
-          type="email"
-          class="form-control"
-          :class="{ 'is-invalid': errors['信箱'] }"
-          placeholder="請輸入信箱"
-          rules="email|required"
-          v-model="form.user.email"
-        />
-        <error-message name="信箱" class="invalid-feedback"></error-message>
-      </div>
-      <div class="mb-3">
-        <label for="tel" class="form-label">手機號碼</label>
-        <Field
-          id="tel"
-          name="手機號碼"
-          type="tel"
-          class="form-control"
-          :class="{ 'is-invalid': errors['手機號碼'] }"
-          placeholder="請輸入手機號碼"
-          :rules="{ regex: /^(09)[0-9]{8}$/ }"
-          v-model="form.user.tel"
-        />
-        <error-message name="手機號碼" class="invalid-feedback"></error-message>
-      </div>
-      <div class="mb-3">
-        <label for="address" class="form-label">地址</label>
-        <Field
-          id="address"
-          name="地址"
-          type="text"
-          class="form-control"
-          :class="{ 'is-invalid': errors['地址'] }"
-          placeholder="請輸入地址"
-          rules="required"
-          v-model="form.user.address"
-        />
-        <error-message name="地址" class="invalid-feedback"></error-message>
-      </div>
-      <div class="mb-3">
-        <label for="message">留言</label>
-        <textarea
-          id="product_description"
-          type="text"
-          class="form-control"
-          rows="3"
-          placeholder="請輸入說明內容"
-          v-model="form.message"
-        ></textarea>
+      <div class="row">
+        <div class="mb-3 common_column_align justify">
+          <label for="name" class="form-label">姓名<span>*</span></label>
+          <Field
+            id="name"
+            name="姓名"
+            type="text"
+            class="form-control"
+            :class="{ 'is-invalid': errors['姓名'] }"
+            placeholder="請輸入姓名"
+            rules="required"
+            v-model="form.user.name"
+          />
+          <error-message name="姓名" class="invalid-feedback"></error-message>
+        </div>
+        <div class="mb-3 common_column_align justify">
+          <label for="email" class="form-label">信箱<span>*</span></label>
+          <Field
+            id="email"
+            name="信箱"
+            type="email"
+            class="form-control"
+            :class="{ 'is-invalid': errors['信箱'] }"
+            placeholder="請輸入信箱"
+            rules="email|required"
+            v-model="form.user.email"
+          />
+          <error-message name="信箱" class="invalid-feedback"></error-message>
+        </div>
+        <div class="mb-3 common_column_align justify">
+          <label for="tel" class="form-label">手機號碼<span>*</span></label>
+          <Field
+            id="tel"
+            name="手機號碼"
+            type="tel"
+            class="form-control"
+            :class="{ 'is-invalid': errors['手機號碼'] }"
+            placeholder="請輸入手機號碼"
+            :rules="{ regex: /^(09)[0-9]{8}$/ }"
+            v-model="form.user.tel"
+          />
+          <error-message name="手機號碼" class="invalid-feedback"></error-message>
+        </div>
+        <div class="mb-3 common_column_align justify">
+          <label for="address" class="form-label">地址<span>*</span></label>
+          <Field
+            id="address"
+            name="地址"
+            type="text"
+            class="form-control"
+            :class="{ 'is-invalid': errors['地址'] }"
+            placeholder="請輸入地址"
+            rules="required"
+            v-model="form.user.address"
+          />
+          <error-message name="地址" class="invalid-feedback"></error-message>
+        </div>
+        <div class="mb-3 common_column_align">
+          <label for="message">留言</label>
+          <textarea
+            id="product_description"
+            type="text"
+            class="form-control"
+            rows="3"
+            placeholder="請輸入說明內容"
+            v-model="form.message"
+          ></textarea>
+        </div>
       </div>
       <button
         type="submit"
         class="btn me-2 btn-outline-primary"
-        :disabled="Object.keys(errors).length !== 0"
+        :disabled="Object.keys(errors).length !== 0 || isEmpty"
       >
         送出預定資料
       </button>
     </Form>
-    <!-- <label for="payment">交易方式</label>
-    <select name="payment" id="payment">
-      <option value="atm">ATM</option>
-      <option value="credit_card">信用卡</option>
-      <option value="convenience_store">超商付款</option>
-    </select> -->
   </div>
 </template>
 
 <script>
-import CheckoutStepComponent from '../CheckoutStep.vue';
-
 export default {
   name: 'CustomerOrderFormComponent',
   // emits: [''],
   props: {},
   components: {
-    CheckoutStepComponent,
+    // CheckoutStepComponent,
   },
   data() {
     return {
+      // check
+      isEmpty: true,
       form: {
         user: {
           name: '',
@@ -116,6 +109,15 @@ export default {
     };
   },
   methods: {
+    // 檢查是否為空的
+    checkIsEmpty() {
+      const dataIsEmpty = Object.keys(this.form.user).filter((item) => this.form.user[item] === '');
+      if (dataIsEmpty.length === 0) {
+        this.isEmpty = false;
+      } else {
+        this.isEmpty = true;
+      }
+    },
     onSubmit() {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order`;
       const data = this.form;
@@ -136,11 +138,25 @@ export default {
         });
     },
   },
+  watch: {
+    form: {
+      handler() {
+        this.checkIsEmpty();
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    this.checkIsEmpty();
+  },
 };
 </script>
 <style lang="sass" scoped>
 .user_order_info_wrapper
-  padding: 80px 0px
+  padding: 3rem
+  border: 1px solid #d2d2d2
+  border-radius: 1rem
+  background: #fafafa
   .container
     ul
       display: flex

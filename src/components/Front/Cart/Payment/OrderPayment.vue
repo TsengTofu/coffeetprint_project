@@ -1,10 +1,12 @@
 <template>
-  <div class="card col-md-6">
-    <!-- 這邊要多一個功能，可以直接複製訂單編號 -->
+  <div class="col-md-6">
+    <!--  TODO  需要回頭思考一下版面的問題 -->
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">
-          訂單 {{ orderDetail.id }} 等待付款中！
+          訂單 {{ orderDetail.id }}
+          <span v-if="orderDetail.is_paid">已完成</span>
+          <span v-else>等待付款中！</span>
         </h5>
         <button
           type="button"
@@ -37,7 +39,7 @@
           <div>
             訂單總金額：NT$ <span>{{ Math.floor(orderDetail.total).toLocaleString() }}</span>
           </div>
-          <div class="card" v-for="(item, key) in product_list" :key="item + key">
+          <div class="card col-3" v-for="(item, key) in product_list" :key="item + key">
             <!-- 這個是產品本身 -->
             <!-- 如果是使用 coupon -->
             <p>{{ orderDetail.products[item].coupon }}</p>
@@ -130,6 +132,10 @@ export default {
           if (success) {
             this.$swal(message);
             this.getOrderDetail(oderId);
+            // 清空購物車
+            this.emitter.emit('clearCartList');
+            // 導頁
+            this.$router.push(`/order/complete/${oderId}`);
           }
         })
         .catch(() => {

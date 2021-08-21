@@ -1,48 +1,49 @@
 <template>
-  <div class="order_form_wrapper">
+  <div class="order_complete_wrapper">
     <div class="top_banner container-fluid">
       <div class="describe">
         <p>美食已在托盤上</p>
         <span>手刀結帳，找朋友聚餐啦！</span>
       </div>
     </div>
-    <div class="order_form_content">
+    <div class="order_complete_content">
       <CheckoutStepComponent
-        step="order_info"
+        step="order_complete"
       />
-      <div class="container d-flex mb-4 mt-4">
-        <CustomerOrderFormComponent />
-        <div class="col-md-6 test"></div>
-      </div>
+      <OrderPaymentComponent />
     </div>
   </div>
 </template>
+
 <script>
 import CheckoutStepComponent from '../../../components/Front/Cart/CheckoutStep.vue';
-import CustomerOrderFormComponent from '../../../components/Front/Cart/Data/CustomerOrderForm.vue';
+import OrderPaymentComponent from '../../../components/Front/Cart/Payment/OrderPayment.vue';
 
 export default {
-  name: '',
+  name: 'OrderComplete',
   props: {},
   components: {
-    CustomerOrderFormComponent,
     CheckoutStepComponent,
+    OrderPaymentComponent,
+  },
+  data() {
+    return {
+    };
+  },
+  methods: {},
+  mounted() {
   },
 };
 </script>
 
 <style lang="sass" scoped>
-.order_form_wrapper
+.order_complete_wrapper
   padding: 59px 0 0 0
   background: #f7f5f4
-.order_form_content
+.order_complete_content
   position: relative
   z-index: 5
   padding: 2rem 0 0 0
-.test
-  background: url('../../../../public/form.jpg')
-  background-size: cover
-  background-position: 0 80%
 // 上半部
 .describe
   text-align: justify

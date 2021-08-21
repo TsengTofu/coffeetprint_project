@@ -1,13 +1,12 @@
 <template>
   <div>
-    <Form v-slot="{ errors }">
+    <Form>
       <div class="input-group mb-3">
         <Field
           id="coupon_code"
           name="coupon_code"
           type="text"
           class="form-control"
-          :class="{ 'is-invalid': errors['coupon_code'] }"
           placeholder="請輸入折扣碼"
           rules="required"
           v-model="coupon_code"
@@ -23,9 +22,6 @@
         >
           套用
         </button>
-      </div>
-      <div class="error_msg">
-        <error-message name="email" class="invalid-feedback"> </error-message>
       </div>
     </Form>
   </div>

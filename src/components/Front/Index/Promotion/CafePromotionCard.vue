@@ -16,18 +16,17 @@
               v-for="(item, key) in post_data.tag"
               :key="'tag_' + key"
             >
-              #{{ item }}
+              # {{ item }}
             </li>
           </ul>
         </div>
         <p class="describe" v-html="post_data.description"></p>
       </div>
-      <div class="bottom_block">
-        <!-- <p>網友評論</p> -->
+      <div class="bottom_block container-fluid">
         <div class="row comment_block">
           <!-- 頭像 -->
-          <div class="user col-md-auto">
-            <div class="avatar_image">
+          <div class="user col-md-2">
+            <div class="avatar_image mb-2">
               <img
                 :src="post_data.avatar"
                 alt="評論者大頭貼"
@@ -36,26 +35,27 @@
             <span>{{ post_data.author }}</span>
           </div>
           <!-- 咖啡廳相關資訊介紹 -->
-          <div class="comment_detail col-md-auto">
-            <div class="comment_cafe_info row">
-              <span class="col-6">{{ post_data.cafe_name }}</span>
-              <div class="location col-6 d-flex">
+          <div class="comment_detail col-md-10">
+            <div class="comment_cafe_info common_row_align mb-2">
+              <div class="col-md-auto cafe_name me-5">{{ post_data.cafe_name }}</div>
+              <div class="location col-md-auto common_row_align">
                 <span class="material-icons-round">place</span>
-                {{ post_data.area }} <small>{{ post_data.nearby }}</small>
+                {{ post_data.area }} <span class="nearby">{{ post_data.nearby }}</span>
               </div>
             </div>
-            <p>{{ post_data.suggestion }}</p>
-            <figcaption>
-              評論發表於
-              {{ $dayjs.unix(post_data.create_at).format('YYYY-MM-DD') }}
-            </figcaption>
-            <button
-              type="button"
-              class="btn btn-primary d-flex"
-            >
-              點我看更多
-              <span class="material-icons-round">keyboard_arrow_right</span>
-            </button>
+            <p class="mb-2">{{ post_data.suggestion }}</p>
+            <div class="common_row_align">
+              <button
+                type="button"
+                class="btn btn-primary btn_common common_row_align"
+              >
+                點我看更多
+                <span class="material-icons-round">keyboard_arrow_right</span>
+              </button>
+              <!-- <span>
+                {{ $dayjs.unix(post_data.create_at).format('YYYY-MM-DD') }}
+              </span> -->
+            </div>
           </div>
         </div>
       </div>
@@ -96,11 +96,19 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.nearby
+  font-size: 0.875rem
+  border: 1px solid
+  border-radius: 1rem
+  padding: .05rem .5rem
+  margin: 0 0 0 .4rem
+.cafe_name
+  font-weight: bold
 .image
   display: block
   width: 100%
-  max-width: 562px
-  height: 425px
+  max-width: 585px
+  height: 420px
   background-position: 0% 80%
   background-size: cover
   border-radius: 16px
@@ -108,12 +116,11 @@ export default {
     width: 100%
     height: auto
 .info_block
-  padding: 1rem 2rem
   .top_block
     border-bottom: 1px solid #695F55
     .main_title
       font-size: 2rem
-      font-weight: 500
+      font-weight: 600
     .tags
       ul
         li
@@ -122,19 +129,27 @@ export default {
           background: #FFF
           border-radius: 16px
           padding: 4px 16px
+          font-size: .875rem
+          font-weight: bold
+          margin: 0 .4rem 0 0
     .describe
       text-align: justify
       line-height: 2
   .bottom_block
+    text-align: justify
+    padding: 1.4rem 0
     .comment_block
-      .comment_cafe_info
-        text-align: justify
+      .comment_detail
+        p
+          margin: 0 0 .5rem
+        .comment_cafe_info
+          text-align: justify
       .user
         text-align: center
         font-size: 14px
         .avatar_image
-          width: 80px
-          height: 80px
+          width: 100%
+          height: auto
           border-radius: 50%
           background: #FFF
           border: 2px solid #695F55

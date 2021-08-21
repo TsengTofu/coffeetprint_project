@@ -1,16 +1,18 @@
 <template>
   <div class="order_summary_wrapper">
     <ul class="list-unstyled">
-      <li>
-        <p>商品總計 NT$ <span>{{ total }}</span></p>
+      <li class="common_row_space_between">
+        <p>商品總計</p>
+        <p>NT$ <span>{{ total }}</span></p>
       </li>
-      <li>
-        <p>使用折價券折抵</p>
-         <UseCouponComponent />
+      <li class="common_row_space_between">
+        <p>折扣碼</p>
+        <UseCouponComponent />
          <!--  TODO  這邊是否要顯示相關優惠券資訊呢？ -->
       </li>
-      <li>
-        <p>結帳總金額 NT$ <span>{{ final_total }}</span></p>
+      <li class="common_row_space_between">
+        <p>結帳總金額</p>
+        <p>NT$ <span>{{ final_total }}</span></p>
       </li>
     </ul>
   </div>

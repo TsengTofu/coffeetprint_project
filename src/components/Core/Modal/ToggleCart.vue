@@ -1,6 +1,7 @@
 <template>
   <div
     class="offcanvas offcanvas-end"
+    ref="toggle_cart_offcanvas"
     tabindex="-1"
     id="offcanvasRight"
     aria-labelledby="offcanvasRightLabel"
@@ -52,6 +53,7 @@
 </template>
 
 <script>
+import { Offcanvas } from 'bootstrap';
 import ToggleCartItemComponent from '../../Front/Cart/ToggleCartModal/ToggleCartList.vue';
 
 export default {
@@ -62,12 +64,13 @@ export default {
   },
   data() {
     return {
-      cart_list: '',
+      cart_list: [],
     };
   },
   methods: {
     directToPage(pageName) {
       this.$router.push(`/${pageName}`);
+      this.toggleCartOffanvas.hide();
     },
     getCartList() {
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
@@ -107,11 +110,17 @@ export default {
   },
   created() {
     this.emitter.on('updateCartList', () => {
+      console.log('有執行到我喔');
       this.getCartList();
+    });
+    this.emitter.on('clearCartList', () => {
+      this.cart_list = [];
     });
   },
   mounted() {
+    this.toggleCartOffanvas = new Offcanvas(this.$refs.toggle_cart_offcanvas);
     this.getCartList();
+    // 偵測頁面
   },
   unmounted() {
     this.emitter.off('updateCartList');

@@ -13,7 +13,17 @@
         :final_cafe_list="final_cafe_list"
       />
     </template>
-    <p v-else>目前收藏清單是空的</p>
+    <template v-else>
+      <div>
+        <p>目前收藏清單是空的</p>
+        <button
+          type="button"
+          class="btn btn-primary"
+        >
+          去逛逛
+        </button>
+      </div>
+    </template>
     <!--  TODO  考慮看看 googleAPI，找時間研究 -->
   </div>
 </template>

@@ -3,51 +3,61 @@
     <div class="card-header header_text d-flex align-items-center">
       #{{ order }} <span>{{ cart_item.product.category }}</span>{{ cart_item.product.title }}
     </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col">
-      <!-- 這邊的 style 之後要改寫 scope -->
-      <img
-        :src="cart_item.product.imageUrl" alt=""
-        :style="'width: 100%; height: auto;'"
-      >
-    </div>
-    <div class="col">
-    <div class="card-text card_text">
-         <!-- <button
-      @click="showCafeDetail(cart_item.product.id)"
-      type="button"
-      class="btn btn-primary">
-      詳細內容
-    </button> -->
-      <p>NT$ {{ (item_qty * cart_item.product.price).toLocaleString() }}</p>
-      <div class="input-group mb-3">
-        <button class="btn"
-          type="button"
-          @click="modifyNum('minus', cart_item.id)"
-        ><span class="material-icons-round">remove</span></button>
-        <input type="text" class="form-control" :value="item_qty"
-          aria-label="數量">
-        <button class="btn" type="button"
-          @click="modifyNum('add', cart_item.id)"
-        >
-          <span class="material-icons-round">add</span>
-        </button>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <img
+            :src="cart_item.product.imageUrl"
+            alt="購物車單一品項的主圖"
+            :style="'width: 100%; height: auto;'"
+          >
+        </div>
+        <div class="col">
+          <div class="card-text card_text">
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="showCafeDetail(cart_item.product.id)"
+            >
+              詳細內容
+            </button>
+            <p>NT$ {{ (item_qty * cart_item.product.price).toLocaleString() }}</p>
+            <div class="input-group mb-3">
+              <button
+                type="button"
+                class="btn"
+                @click="modifyNum('minus', cart_item.id)"
+              >
+                <span class="material-icons-round">remove</span>
+              </button>
+              <input
+                type="text"
+                class="form-control center"
+                :value="item_qty"
+                aria-label="數量"
+              >
+              <button
+                class="btn"
+                type="button"
+                @click="modifyNum('add', cart_item.id)"
+              >
+                <span class="material-icons-round">add</span>
+              </button>
+            </div>
+            <!-- 刪除按鈕 -->
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              @click="deleteCurrentCartItem(cart_item.id)"
+            >
+            刪除
+              <!-- <span class="material-icons-round">delete</span> -->
+            </button>
+          </div>
+        </div>
       </div>
-      <!-- 刪除按鈕 -->
-      <button
-        type="button"
-        class="btn btn-outline-secondary"
-        @click="deleteCurrentCartItem(cart_item.id)"
-      >
-      刪除
-        <!-- <span class="material-icons-round">delete</span> -->
-      </button>
-    </div>
-    </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -57,7 +67,6 @@ export default {
     cart_item: Object,
     order: Number,
   },
-  //  TODO  但這行我不理解原因
   emits: ['getData'],
   components: {},
   data() {

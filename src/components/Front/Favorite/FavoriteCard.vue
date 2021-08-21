@@ -64,11 +64,17 @@ export default {
   },
   components: {},
   data() {
-    return {};
+    return {
+      isProcess: false,
+    };
   },
   methods: {
     // 加入購物車的按鈕
     addToCart(id) {
+      if (this.isProcess) {
+        return;
+      }
+      this.isProcess = true;
       const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
       this.axios
         .post(requestUrl, {
@@ -82,6 +88,7 @@ export default {
           if (success) {
             this.$swal('成功加入購物車！');
             this.emitter.emit('updateCartList');
+            this.isProcess = false;
           } else {
             this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
           }

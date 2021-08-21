@@ -1,4 +1,5 @@
 <template>
+  <!-- fixed-bottom -->
   <div class="footer_wrapper container-fluid">
     <div class="row content d-flex align-items-center">
       <a

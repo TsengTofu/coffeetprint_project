@@ -1,48 +1,56 @@
 <template>
-  <div class="container cart_wrapper">
-    <CheckoutStepComponent
-      step="check_cart"
-    />
-    <div class="cart_container">
-      <CartListComponent
-        :cart_list="cart_list"
-        :getCartList="getCartList"
-      />
+  <div class="cart_wrapper">
+    <div class="top_banner container-fluid">
+      <div class="describe">
+        <p>美食已在托盤上</p>
+        <span>手刀結帳，找朋友聚餐啦！</span>
+      </div>
     </div>
-    <!-- 在摘要這邊傳入資料，這邊不出裡任何資料流，只接收 -->
-    <OrderSummaryComponent
-      :final_total="Math.floor(final_total)"
-      :total="Math.floor(total)"
-    />
-    <button
-      type="button"
-      class="btn btn-primary"
-      :disabled="cart_list.length === 0"
-      @click="directToFormPage"
-    >
-      填寫訂購資料
-    </button>
+    <div class="container cart_content">
+      <CheckoutStepComponent
+        step="check_cart"
+      />
+      <div class="cart_container">
+        <CartListComponent
+          :cart_list="cart_list"
+          :getCartList="getCartList"
+          :final_total="Math.floor(final_total)"
+          :total="Math.floor(total)"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary"
+        :disabled="cart_list.length === 0"
+        @click="directToFormPage"
+      >
+        填寫訂購資料
+      </button>
+      <!-- 追加一個繼續購物的按鈕 -->
+      <button type="button" class="btn btn-primary">
+        繼續購物
+        <!-- 這邊要加上 arrow -->
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
 
 import CartListComponent from '../../../components/Front/Cart/Data/CartList.vue'; // 購物車的列表
-import OrderSummaryComponent from '../../../components/Front/Cart/Data/OrderSummary.vue'; // 購物車概要
 import CheckoutStepComponent from '../../../components/Front/Cart/CheckoutStep.vue'; // 步驟流程
 
 export default {
   name: 'Cart', // page 類型不需要加上後綴
   components: {
     CartListComponent,
-    OrderSummaryComponent,
     CheckoutStepComponent,
   },
   props: {},
   data() {
     return {
       isEmpty: '',
-      cart_list: '',
+      cart_list: [],
       // 總金額
       final_total: '',
       // 還沒放折扣的總金額
@@ -89,6 +97,40 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
+.cart_content
+  position: relative
+  z-index: 5
+  padding: 2rem 0 0 0
 .cart_wrapper
-  padding: 120px 0 0 0
+  padding: 59px 0 0 0
+  background: #f7f5f4
+.describe
+  text-align: justify
+.top_banner
+  padding: 0px
+  height: 350px
+  background-image: url('../../../../public/cart.jpg')
+  background-size: cover
+  background-position: bottom
+  display: flex
+  align-items: center
+  justify-content: center
+  position: relative
+  &::after
+    content: ''
+    background-position: top
+    background-image: url('../../../assets/images/wave.svg')
+    background-size: cover
+    display: block
+    width: 100%
+    height: 150px
+    position: absolute
+    bottom: -80px
+    z-index: 1
+  p
+    font-weight: bold
+    font-size: 2rem
+    margin: 0 0 .5rem
+  span
+    font-weight: 500
 </style>

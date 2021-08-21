@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid promotion_block">
-    <div class="content">
+    <div class="content container">
       <TitleComponent title="＃編輯嚴選" />
       <div
         id="carouselExampleIndicators"
-        class="carousel slide"
+        class="carousel slide wrapper"
         data-bs-ride="carousel"
         ref="carousel"
       >
@@ -33,8 +33,7 @@
           >
           </button>
         </div>
-        <div class="carousel-inner">
-          <!-- item 要記得加上 active -->
+        <div class="carousel-inner p-5" v-if="post_list.length > 0">
           <div
             class="carousel-item"
             data-bs-interval="8000"
@@ -116,6 +115,29 @@ export default {
   50%
     border-color: transparent
 
+.wrapper
+  position: relative
+  // &::before
+  //   display: block
+  //   content: ''
+  //   width: 180px
+  //   height: 180px
+  //   background-image: url('../../../../assets/images/cat/cat.svg')
+  //   background-size: cover
+  //   right: 0px
+  //   position: absolute
+  //   top: -145px
+  // &::after
+  //   display: block
+  //   content: ''
+  //   width: 80px
+  //   height: 50px
+  //   background-image: url('../../../../assets/images/cat/paws.svg')
+  //   background-size: contain
+  //   right: 60px
+  //   position: absolute
+  //   background-repeat: no-repeat
+  //   top: -10px
 .promotion_block
   background: #f7f5f4
   position: relative
@@ -143,8 +165,8 @@ export default {
     bottom: 0px
   .content
       width: 100%
-      max-width: 1200px
-      margin: 0 auto
+      // max-width: 1200px
+      // margin: 0 auto
       position: relative
       z-index: 10
       padding: 0 0 60px
@@ -153,7 +175,7 @@ export default {
       .carousel-inner
         background: #F0EBE6
         border-radius: 16px
-        padding: 3rem
+        // padding: 3rem
 //  TODO  這邊以下沒有被用到
       ul
           display: flex

@@ -1,6 +1,6 @@
 <template>
     <th scope="row">{{ order }}</th>
-    <td>
+    <td class="common_row_align">
       <div class="image">
         <img
           :src="cart_item.product.imageUrl"
@@ -13,24 +13,32 @@
           {{ cart_item.product.title }}
         </p>
         <!--  FIXME  導到產品詳細頁，另開分頁，或是 popupModal？ -->
-        <!-- <button
+        <button
           type="button"
           class="btn btn-primary"
           @click="showCafeDetail(cart_item.product.id)">
           詳細內容
-        </button> -->
-        </div>
+        </button>
+      </div>
     </td>
     <td>NT$ {{ cart_item.product.price }}</td>
     <td>
       <div class="input-group">
-        <button class="btn btn-outline-secondary"
+        <button
           type="button"
+          class="btn btn-outline-secondary"
           @click="modifyNum('minus', cart_item.id)"
-        ><span class="material-icons-round">remove</span></button>
-        <input type="text" class="form-control" :value="item_qty"
+        >
+          <span class="material-icons-round">remove</span>
+        </button>
+        <input
+          type="text"
+          class="form-control center"
+          :value="item_qty"
           aria-label="數量">
-        <button class="btn btn-outline-secondary" type="button"
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
           @click="modifyNum('add', cart_item.id)"
         >
           <span class="material-icons-round">add</span>
@@ -41,7 +49,7 @@
     <td>
       <button
         type="button"
-        class="btn"
+        class="btn delete_btn"
         @click="deleteCurrentCartItem(cart_item.id)"
       >
         <span class="material-icons-round">delete</span>
@@ -81,6 +89,7 @@ export default {
       });
     },
     modifyNum(operation, cartItemId) {
+      //  TODO  這邊是不是也要改成 switch？
       if (operation === 'add') {
         this.item_qty += 1;
       } else {
@@ -129,6 +138,9 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.delete_btn
+  &:hover
+    color: #88664D
 td
   vertical-align: middle
   img

@@ -1,9 +1,10 @@
 <template>
   <div class="cart_list_wrapper container">
-    <template v-if="isMobile()">
+    <template>
       <div
         v-for="(item, key) in cart_list"
         :key="'cart_' + key"
+        class="mobile"
       >
         <ToggleCartItemComponent
           :cart_item="item"
@@ -12,9 +13,9 @@
         />
       </div>
     </template>
-    <table class="table table-striped table-hover" v-else>
+    <table class="table  table-hover desktop mt-4">
       <thead>
-        <tr>
+        <tr class="table-primary">
           <th width="60" scope="col">#</th>
           <th width="400" scope="col">品名</th>
           <th width="200" scope="col">單價</th>
@@ -29,7 +30,6 @@
             v-for="(item, key) in cart_list"
             :key="'cart_' + key"
           >
-            <!-- 另一個 template -->
             <CartItemComponent
               :cart_item="item"
               :order="parseInt(key) + 1"
@@ -61,33 +61,42 @@
         </template>
       </tbody>
     </table>
-   <div class="summary_block">
-      <p>購物車目前有 <span>{{ cart_list.length }}</span> 個產品</p>
-    <button
-      type="button"
-      class="btn btn-outline-secondary"
-      @click="clearAllCartList"
-    >
-      清空購物車
-    </button>
-   </div>
+    <div class="summary_block">
+      <div>
+        <p>購物車目前有 <span>{{ cart_list.length }}</span> 個品項</p>
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          @click="clearAllCartList"
+        >
+          清空購物車
+        </button>
+      </div>
+      <OrderSummaryComponent
+        :final_total="Math.floor(final_total)"
+        :total="Math.floor(total)"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import CartItemComponent from './CartItem.vue';
 import ToggleCartItemComponent from '../ToggleCartModal/ToggleCartItem.vue';
-// 思考一下要在哪裡放 Coupon 的 input
+import OrderSummaryComponent from './OrderSummary.vue';
 
 export default {
   name: 'CartListComponent',
   props: {
     cart_list: Array,
     getCartList: Function,
+    final_total: Number,
+    total: Number,
   },
   components: {
     CartItemComponent,
     ToggleCartItemComponent,
+    OrderSummaryComponent,
   },
   data() {
     return {
@@ -113,13 +122,6 @@ export default {
           this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
-    isMobile() {
-      //  NOTE  偵測是不是手機版
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        return true;
-      }
-      return false;
-    },
   },
   mounted() {
   },
@@ -137,4 +139,14 @@ export default {
           height: auto
   .summary_block
     text-align: justify
+    display: flex
+    justify-content: space-between
+.mobile
+  display: none
+// 手機版的控制項
+@media (max-width: 525px)
+  .mobile
+    display: block
+  .desktop
+    display: none
 </style>
