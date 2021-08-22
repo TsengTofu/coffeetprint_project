@@ -111,7 +111,7 @@ export default {
     z-index: 1
   @media (max-width: 525px)
     &::after
-      background-image: url('../../assets/images/wave_s.png')
+      background-image: url('../../assets/images/wave_s.svg')
   p
     font-weight: bold
     font-size: 2rem

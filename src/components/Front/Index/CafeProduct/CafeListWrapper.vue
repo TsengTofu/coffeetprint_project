@@ -105,5 +105,5 @@ export default {
     z-index: -1
   @media (max-width: 525px)
     &::before
-      background-image: url('../../../../assets/images/wave_coffee_s.png')
+      background-image: url('../../../../assets/images/wave_coffee_s.svg')
 </style>
