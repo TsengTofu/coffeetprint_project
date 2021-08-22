@@ -1,11 +1,9 @@
 <template>
   <div class="cart_wrapper">
-    <div class="top_banner container-fluid">
-      <div class="describe">
-        <p>美食已在托盤上</p>
-        <span>手刀結帳，找朋友聚餐啦！</span>
-      </div>
-    </div>
+    <TopBannerComponent
+      main_title="美食已在托盤上"
+      vice_title="手刀結帳，找朋友聚餐啦！"
+    />
     <div class="container cart_content">
       <CheckoutStepComponent
         step="check_cart"
@@ -27,19 +25,20 @@
         </button>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
-
-import CartListComponent from '../../../components/Front/Cart/Data/CartList.vue'; // 購物車的列表
+import TopBannerComponent from '../../../components/Core/Layout/TopBanner.vue';
 import CheckoutStepComponent from '../../../components/Front/Cart/CheckoutStep.vue'; // 步驟流程
+import CartListComponent from '../../../components/Front/Cart/Data/CartList.vue'; // 購物車的列表
 
 export default {
   name: 'Cart', // page 類型不需要加上後綴
   components: {
-    CartListComponent,
+    TopBannerComponent,
     CheckoutStepComponent,
+    CartListComponent,
   },
   props: {},
   data() {
@@ -107,41 +106,4 @@ export default {
 .cart_wrapper
   padding: 59px 0 50px 0
   background: #f7f5f4
-.describe
-  text-align: justify
-  @media (max-width: 525px)
-    background: rgba(255, 255, 255, .8)
-    padding: 1rem
-.top_banner
-  padding: 0px
-  height: 350px
-  background-image: url('../../../../public/cart.jpg')
-  background-size: cover
-  background-position: bottom
-  display: flex
-  align-items: center
-  justify-content: center
-  position: relative
-  @media (max-width: 525px)
-    background-image: url('../../../../public/cart_s.jpg')
-  &::after
-    content: ''
-    background-position: top
-    background-image: url('../../../assets/images/wave.svg')
-    background-size: cover
-    display: block
-    width: 100%
-    height: 150px
-    position: absolute
-    bottom: -80px
-    z-index: 1
-  @media (max-width: 525px)
-    &::after
-      background-image: url('../../../assets/images/wave_s.png')
-  p
-    font-weight: bold
-    font-size: 2rem
-    margin: 0 0 .5rem
-  span
-    font-weight: 500
 </style>

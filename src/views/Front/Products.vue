@@ -1,5 +1,6 @@
 <template>
   <div class="cafe_wrapper">
+    <!-- 這個 TopBanner 的圖片用的不同，要想一下怎麼處理 -->
     <div class="top_banner container-fluid">
       <div class="describe">
         <p>看看有哪些咖啡廳</p>

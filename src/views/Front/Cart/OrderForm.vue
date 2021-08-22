@@ -1,11 +1,9 @@
 <template>
   <div class="order_form_wrapper">
-    <div class="top_banner container-fluid">
-      <div class="describe">
-        <p>美食已在托盤上</p>
-        <span>手刀結帳，找朋友聚餐啦！</span>
-      </div>
-    </div>
+    <TopBannerComponent
+      main_title="美食已在托盤上"
+      vice_title="手刀結帳，找朋友聚餐啦！"
+    />
     <div class="order_form_content">
       <CheckoutStepComponent
         step="order_info"
@@ -18,6 +16,7 @@
   </div>
 </template>
 <script>
+import TopBannerComponent from '../../../components/Core/Layout/TopBanner.vue';
 import CheckoutStepComponent from '../../../components/Front/Cart/CheckoutStep.vue';
 import CustomerOrderFormComponent from '../../../components/Front/Cart/Data/CustomerOrderForm.vue';
 
@@ -25,8 +24,9 @@ export default {
   name: '',
   props: {},
   components: {
-    CustomerOrderFormComponent,
+    TopBannerComponent,
     CheckoutStepComponent,
+    CustomerOrderFormComponent,
   },
 };
 </script>
@@ -43,39 +43,4 @@ export default {
   background: url('../../../../public/form.jpg')
   background-size: cover
   background-position: 0 80%
-// 上半部
-.describe
-  text-align: justify
-.top_banner
-  padding: 0px
-  height: 350px
-  background-image: url('../../../../public/cart.jpg')
-  background-size: cover
-  background-position: bottom
-  display: flex
-  align-items: center
-  justify-content: center
-  position: relative
-  @media (max-width: 525px)
-    background-image: url('../../../../public/cart_s.jpg')
-  &::after
-    content: ''
-    background-position: top
-    background-image: url('../../../assets/images/wave.svg')
-    background-size: cover
-    display: block
-    width: 100%
-    height: 150px
-    position: absolute
-    bottom: -80px
-    z-index: 1
-  @media (max-width: 525px)
-    &::after
-      background-image: url('../../../assets/images/wave_s.png')
-  p
-    font-weight: bold
-    font-size: 2rem
-    margin: 0 0 .5rem
-  span
-    font-weight: 500
 </style>
