@@ -40,7 +40,7 @@ export default {
   z-index: 5
   padding: 2rem 0 0 0
 .test
-  background: url('../../../../public/form.jpg')
+  background: url('../../../../public/images/form.jpg')
   background-size: cover
   background-position: 0 80%
 </style>

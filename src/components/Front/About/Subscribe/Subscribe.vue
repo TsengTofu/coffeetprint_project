@@ -82,7 +82,7 @@ export default {
   position: relative
   .subscribe_wrapper
     height: 400px
-    background-image: url('../../../../../public/subscribe_bg.jpg')
+    background-image: url('../../../../../public/images/subscribe_bg.jpg')
     background-position: center 25%
     .content
       color: #fff

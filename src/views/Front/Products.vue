@@ -39,7 +39,7 @@
 import CafeListComponent from '../../components/Front/CafeProduct/CafeList.vue';
 
 export default {
-  name: '',
+  name: 'Products',
   components: {
     CafeListComponent,
   },
@@ -89,7 +89,7 @@ export default {
 .top_banner
   padding: 0px
   height: 350px
-  background-image: url('../../../public/products.jpg')
+  background-image: url('../../../public/images/products.jpg')
   background-size: cover
   background-position: bottom
   display: flex
@@ -97,7 +97,7 @@ export default {
   justify-content: center
   position: relative
   @media (max-width: 525px)
-    background-image: url('../../../public/products_s.jpg')
+    background-image: url('../../../public/images/products_s.jpg')
   &::after
     content: ''
     background-position: top

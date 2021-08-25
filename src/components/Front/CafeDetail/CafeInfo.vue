@@ -11,16 +11,16 @@
           {{ detail_data.title }}
         </h2>
         <small>{{ detail_data.id }}</small>
-        <p class="d-flex stars">
+        <p class="d-flex stars" v-if="detail_data.star_rate">
           版主評價
           <span
-            v-for="(n, index) in Math.floor(detail_data.star_rate)"
+            v-for="(n, index) in parseInt(detail_data.star_rate)"
             :key="'star_' + index"
             class="material-icons-round"
             >star
           </span>
           <span
-            v-for="(n, index) in parseInt(5 - Math.floor(detail_data.star_rate))"
+            v-for="(n, index) in parseInt(5 - detail_data.star_rate)"
             :key="'star_' + index"
             class="material-icons-round"
             >star_border

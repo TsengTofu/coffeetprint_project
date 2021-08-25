@@ -77,7 +77,7 @@ export default {
   padding: 120px 0 0
   background: #EBEBEB
   .landing_page
-    background-image: url('../../../public/about_us_bg.jpg')
+    background-image: url('../../../public/images/about_us_bg.jpg')
     height: 500px
   .intro_block
     position: relative

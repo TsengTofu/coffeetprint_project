@@ -25,8 +25,7 @@
       </p>
       <div class="filter_dropdown">
         <label for="category_filter">分類篩選：</label>
-        <!--  TODO  分類篩選的資料 -->
-        <select name="" id="category_filter">
+        <select name="category_filter" id="category_filter">
           <template
             v-for="(item, key) in category_list"
             :key="'item' + key"

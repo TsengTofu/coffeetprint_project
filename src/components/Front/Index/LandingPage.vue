@@ -34,12 +34,12 @@ export default {
 <style scoped lang="sass">
 .landing_page
   z-index: 3
-  background-image: url('../../../../public/index_bg.png')
+  background-image: url('../../../../public/images/index_bg.png')
   display: block
   width: 100%
   min-height: 100vh
   @media (max-width: 525px)
-    background-image: url('../../../../public/index_bg_s.jpg')
+    background-image: url('../../../../public/images/index_bg_s.jpg')
     min-height: 72vh
   .title_block
     color: #FFFFFF
