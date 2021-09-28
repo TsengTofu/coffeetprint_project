@@ -26,8 +26,6 @@
           <div class="container">
             <div class="content">
               <ul>
-                <!--  TODO  新增一塊是給折價券名字的，例如：xxx 雙人優惠券 -->
-                <!-- 這邊會是咖啡廳的名稱 -->
                 <li class="single">
                   <input
                     id="product_title"
@@ -100,7 +98,6 @@
                     </label>
                   </div>
                 </li>
-                <!-- 新增結束 -->
                 <li>
                   <div class="half">
                     <input
@@ -204,6 +201,18 @@
                   ></textarea>
                   <label for="product_place_api">
                     GooglePlaceAPI 的資料
+                  </label>
+                </li>
+                <!--  FIXME  加上菜單的資料，直接放 JSON 格式 -->
+                <li class="single">
+                  <textarea
+                    id="product_menu"
+                    type="text"
+                    placeholder="請輸入菜單 json 資料"
+                    v-model="tempProduct.product_menu"
+                  ></textarea>
+                  <label for="product_menu">
+                    菜單 json 資料
                   </label>
                 </li>
                 <!--  TODO  記得回來修正 -->
@@ -327,6 +336,7 @@ export default {
         category: '',
         origin_price: 0,
         imagesUrl: [],
+        product_menu: {},
       },
       targetID: '',
     };

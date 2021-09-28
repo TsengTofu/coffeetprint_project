@@ -53,8 +53,13 @@ AOS.init({
 // SweetAlert2
 // https://sweetalert2.github.io/#frameworks-integrations
 const options = {
+  toast: true, // true 就是 toast
+  position: 'top-center',
   confirmButtonColor: '#88664D',
   cancelButtonColor: '#ff7674',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
 };
 
 const app = createApp(App);

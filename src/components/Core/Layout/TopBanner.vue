@@ -24,7 +24,7 @@ export default {
 .top_banner
   padding: 0px
   height: 350px
-  background-image: url('../../../../public/cart.jpg')
+  background-image: url('../../../../public/images/cart.jpg')
   background-size: cover
   background-position: bottom
   display: flex
@@ -32,7 +32,7 @@ export default {
   justify-content: center
   position: relative
   @media (max-width: 525px)
-    background-image: url('../../../../public/cart_s.jpg')
+    background-image: url('../../../../public/images/cart_s.jpg')
   &::after
     content: ''
     background-position: top

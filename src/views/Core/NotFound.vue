@@ -17,9 +17,7 @@ import HeaderComponent from '../../components/Core/Layout/Header.vue';
 import FooterComponent from '../../components/Core/Layout/Footer.vue';
 
 export default {
-  name: '',
-  props: {
-  },
+  name: 'NotFound',
   components: {
     HeaderComponent,
     FooterComponent,
@@ -28,8 +26,6 @@ export default {
     directToPage() {
       this.$router.push('/');
     },
-  },
-  mounted() {
   },
 };
 </script>
