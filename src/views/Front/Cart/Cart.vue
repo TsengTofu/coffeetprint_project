@@ -25,6 +25,26 @@
         </button>
       </div>
     </div>
+    <DetailModalComponent
+      id="detailModal"
+      ref="modal"
+    >
+      <template v-slot:cafe_coupon_name>
+        <span>{{ productDetail.category }}</span>
+        {{ productDetail.title }}
+      </template>
+      <template v-slot:cafe_content>
+        <!-- 可以利用這邊的資料做排版 -->
+        <p>餐廳地址：{{ productDetail.address }}</p>
+        <p>折價券內容：{{ productDetail.content }}</p>
+        <p>地區：{{ productDetail.area }}</p>
+        <p>備註：{{ productDetail.note }}</p>
+        <p>電話：{{ productDetail.phone }}</p>
+        <p>{{ productDetail.id }}</p>
+        <p>{{ productDetail.imageUrl }}</p>
+        {{ productDetail }}
+      </template>
+    </DetailModalComponent>
   </div>
 </template>
 
@@ -32,6 +52,7 @@
 import TopBannerComponent from '../../../components/Core/Layout/TopBanner.vue';
 import CheckoutStepComponent from '../../../components/Front/Cart/CheckoutStep.vue'; // 步驟流程
 import CartListComponent from '../../../components/Front/Cart/Data/CartList.vue'; // 購物車的列表
+import DetailModalComponent from '../../../components/Core/Modal/DetailModal.vue';
 
 export default {
   name: 'Cart', // page 類型不需要加上後綴
@@ -39,6 +60,7 @@ export default {
     TopBannerComponent,
     CheckoutStepComponent,
     CartListComponent,
+    DetailModalComponent,
   },
   props: {},
   data() {
@@ -49,6 +71,10 @@ export default {
       final_total: '',
       // 還沒放折扣的總金額
       total: '',
+      // 新增的部分
+      productDetail: {},
+      category: '',
+      place_json: {},
     };
   },
   methods: {
@@ -75,10 +101,36 @@ export default {
           this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
+    // 取得現在的產品詳細內容
+    getCurrentCafeData(productID) {
+      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/product/${productID}`;
+      this.axios
+        .get(requestUrl)
+        .then((response) => {
+          const { success } = response.data;
+          if (success) {
+            const { product } = response.data;
+            this.productDetail = product;
+            this.category = this.productDetail.category;
+            const test = JSON.parse(product.place_json);
+            this.place_json = { ...product, ...test.result };
+          } else {
+            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+          }
+        })
+        .catch(() => {
+          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+        });
+    },
   },
   created() {
-    // 但這是因為資料寫在外層，這邊的資料流要釐清
-    this.emitter.on('updateCartList', () => {
+    this.emitter.on('showCurrentCafe', (cafeID) => {
+      this.getCurrentCafeData(cafeID);
+    });
+
+    this.emitter.on('updateCartList', (num) => {
+      //  FIXME  這邊要先回來處理一下
+      console.log(num, 'num'); // 會是他的可以購買的數量
       this.getCartList();
     });
   },

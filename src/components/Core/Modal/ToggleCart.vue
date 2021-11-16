@@ -70,6 +70,7 @@ export default {
   methods: {
     directToPage(pageName) {
       this.$router.push(`/${pageName}`);
+      //  TODO  這邊關閉的設定要調整一下，應該是全部的頁面都要統一
       this.toggleCartOffanvas.hide();
     },
     getCartList() {
@@ -109,7 +110,8 @@ export default {
     },
   },
   created() {
-    this.emitter.on('updateCartList', () => {
+    this.emitter.on('updateCartList', (num) => {
+      console.log(num, 'num'); // 會是他的可以購買的數量
       this.getCartList();
     });
     this.emitter.on('clearCartList', () => {

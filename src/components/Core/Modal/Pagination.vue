@@ -67,5 +67,6 @@ export default {
 
 <style scoped lang="sass">
 .pagination
+  padding: 0px 0px 2rem
   margin: 0px
 </style>

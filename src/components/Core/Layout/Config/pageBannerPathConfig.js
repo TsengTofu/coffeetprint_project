@@ -1,8 +1,8 @@
 // 這個檔案是去控制圖片
 const pageBannerPathConfig = {
   cart: {
-    default: '/cart.jpg',
-    mobile: '/cart_s.jpg',
+    default: '/images/cart.jpg',
+    mobile: '/images/cart_s.jpg',
   },
   product: {
     default: '',

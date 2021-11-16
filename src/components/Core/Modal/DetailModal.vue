@@ -1,10 +1,13 @@
 <template>
-  <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true" ref="modal">
-    <div class="modal-dialog">
+  <!-- 這個是 PopUp -->
+  <!-- 用在哪邊要找一下 -->
+  <!-- 命名的話不需要針對 cafe，要改掉 -->
+  <div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true" ref="modal">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            確定要刪除此項<slot name="delete_item"></slot>嗎？
+            折價券名稱<slot name="cafe_coupon_name"></slot>
           </h5>
           <button
             class="btn-close"
@@ -15,17 +18,9 @@
         </div>
         <div class="modal-body">
           <p>品項相關資訊</p>
-          <slot name="delete_content"></slot>
+          <slot name="cafe_content"></slot>
         </div>
         <div class="modal-footer">
-          <button
-            class="btn btn-secondary"
-            type="button"
-            data-bs-dismiss="modal"
-            @click="confirm(false)"
-          >
-            取消
-          </button>
           <button
             type="button"
             class="btn btn-primary"
@@ -43,24 +38,8 @@
 import { Modal } from 'bootstrap';
 
 export default {
-  name: 'ConfirmModalComponent',
+  name: 'DetailModalComponent',
   props: {
-    target_item: Object,
-  },
-  emits: [
-    'emit-delete',
-  ],
-  data() {
-    return {};
-  },
-  methods: {
-    confirm(isDelete) {
-      if (isDelete) {
-        this.$emit('emit-delete');
-        this.modal.hide();
-      }
-      return false;
-    },
   },
   mounted() {
     this.modal = new Modal(this.$refs.modal);

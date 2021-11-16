@@ -74,7 +74,10 @@
         >
           清空購物車
         </button>
-        <button type="button" class="btn btn-secondary ms-2">
+        <button
+          type="button"
+          @click="$router.push('/products')"
+          class="btn btn-secondary ms-2">
           繼續購物
         </button>
       </div>

@@ -33,14 +33,17 @@
             :detail_data="detail_data"
           />
         </template>
-        <!-- <template v-slot:cafe_menu> -->
-          <!--  FIXME  餐廳菜單還沒處理 -->
-          <!-- 餐廳菜單 -->
-        <!-- </template> -->
-        <!-- <template v-slot:coupon_content> -->
-          <!--  FIXME  折價券還沒處理 -->
-          <!-- 折價券的內容 -->
-        <!-- </template> -->
+        <template v-slot:cafe_menu>
+          <!--  FIXME  這邊要改成菜單的呈現形式 -->
+          <!-- 改成元件處理好了 -->
+          <MenuContentComponent
+            :menu_data="detail_data.product_menu"
+          />
+        </template>
+        <template v-slot:coupon_content>
+        <!--  FIXME  折價券還沒處理 -->
+        <!-- 折價券的內容 -->
+        </template>
         <template v-slot:cafe_reviews>
           <ReviewListComponent
             :reviews_data="reviews"
@@ -54,6 +57,7 @@
 <script>
 import TabContentComponent from './TabContent.vue';
 import BasicInfoComponent from '../BasicInfo.vue';
+import MenuContentComponent from '../MenuContent.vue';
 import ReviewListComponent from '../Reviews/ReviewList.vue';
 
 export default {
@@ -66,6 +70,7 @@ export default {
   components: {
     TabContentComponent,
     BasicInfoComponent,
+    MenuContentComponent,
     ReviewListComponent,
   },
   data() {
@@ -80,22 +85,24 @@ export default {
           selected: true, // 預設是 false
         },
         // 第二組
-        // {
-        //   tab_name: 'cafe_menu',
-        //   tab_chinese_name: '餐廳菜單',
-        //   selected: false, // 預設是 false
-        // },
-        // {
-        //   tab_name: 'coupon_content',
-        //   tab_chinese_name: '折價券內容',
-        //   selected: false, // 預設是 false
-        // },
+        {
+          tab_name: 'cafe_menu',
+          tab_chinese_name: '餐廳菜單',
+          selected: false, // 預設是 false
+        },
+        {
+          tab_name: 'coupon_content',
+          tab_chinese_name: '折價券內容',
+          selected: false, // 預設是 false
+        },
         {
           tab_name: 'cafe_reviews',
           tab_chinese_name: '網友評論',
           selected: false, // 預設是 false
         },
       ],
+      // 測試
+      menu: {},
     };
   },
   methods: {
@@ -103,7 +110,8 @@ export default {
       this.tab_name = tabName;
     },
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 

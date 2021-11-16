@@ -73,7 +73,6 @@
           </div>
         </template>
         <!-- 如果已經沒有數量了，就要顯示無法購買 -->
-        <!-- 樣式要再調整 -->
         <template v-else>
           <div>
             <button type="button">貨到通知</button>
@@ -156,7 +155,7 @@ export default {
           if (success) {
             this.$swal('成功加入購物車！');
             // 更新的 modal 的購物車
-            this.emitter.emit('updateCartList');
+            this.emitter.emit('updateCartList', Number(this.this.detail_data.num));
             this.isProcess = false;
           } else {
             this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });

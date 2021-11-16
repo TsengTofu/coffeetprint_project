@@ -1,61 +1,61 @@
 <template>
-    <th scope="row">{{ order }}</th>
-    <td class="common_row_align">
-      <div class="image">
-        <img
-          :src="cart_item.product.imageUrl"
-          alt="購物車單一品項的圖片"
-        >
-      </div>
-      <div>
-        <p>
-          <span>{{ cart_item.product.category }}</span>
-          {{ cart_item.product.title }}
-        </p>
-        <!--  FIXME  導到產品詳細頁，另開分頁，或是 popupModal？ -->
-        <button
-          type="button"
-          class="btn btn-primary"
-          @click="showCafeDetail(cart_item.product.id)">
-          詳細內容
-        </button>
-      </div>
-    </td>
-    <td>NT$ {{ cart_item.product.price }}</td>
-    <td>
-      <div class="input-group">
-        <button
-          type="button"
-          class="btn btn-outline-secondary"
-          @click="modifyNum('minus', cart_item.id)"
-        >
-          <span class="material-icons-round">remove</span>
-        </button>
-        <input
-          type="text"
-          class="form-control center"
-          :value="item_qty"
-          aria-label="數量">
-        <button
-          type="button"
-          class="btn btn-outline-secondary"
-          @click="modifyNum('add', cart_item.id)"
-        >
-          <span class="material-icons-round">add</span>
-        </button>
-      </div>
-    </td>
-    <td>NT$ {{ (item_qty * cart_item.product.price).toLocaleString() }}</td>
-    <td>
+  <th scope="row">{{ order }}</th>
+  <td class="common_row_align">
+    <div class="image">
+      <img
+        :src="cart_item.product.imageUrl"
+        alt="購物車單一品項的圖片"
+      >
+    </div>
+    <div>
+      <p>
+        <span>{{ cart_item.product.category }}</span>
+        {{ cart_item.product.title }}
+      </p>
       <button
         type="button"
-        class="btn delete_btn"
-        @click="deleteCurrentCartItem(cart_item.id)"
-      >
-        <span class="material-icons-round">delete</span>
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#detailModal"
+        @click="showCafeDetail(cart_item.product.id)">
+        詳細內容
       </button>
-    </td>
-
+    </div>
+  </td>
+  <td>NT$ {{ cart_item.product.price }}</td>
+  <td>
+    <div class="input-group">
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        @click="modifyNum('minus', cart_item.id)"
+      >
+        <span class="material-icons-round">remove</span>
+      </button>
+      <input
+        type="text"
+        class="form-control center"
+        :value="item_qty"
+        aria-label="數量">
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        @click="modifyNum('add', cart_item.id)"
+      >
+        <span class="material-icons-round">add</span>
+      </button>
+    </div>
+  </td>
+  <td>NT$ {{ (item_qty * cart_item.product.price).toLocaleString() }}</td>
+  <td>
+    <button
+      type="button"
+      class="btn delete_btn"
+      @click="deleteCurrentCartItem(cart_item.id)"
+    >
+      <span class="material-icons-round">delete</span>
+    </button>
+  </td>
 </template>
 
 <script>
@@ -67,7 +67,8 @@ export default {
   },
   //  TODO  但這行我不理解原因
   emits: ['getData'],
-  components: {},
+  components: {
+  },
   data() {
     return {
       item_qty: '',
@@ -121,9 +122,10 @@ export default {
           this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
-    //  TODO  改成 popup 或是另開分頁的形式
-    // showCafeDetail(productId) {
-    // },
+    // 點擊要秀出餐廳的詳細資訊
+    showCafeDetail(productId) {
+      this.emitter.emit('showCurrentCafe', productId);
+    },
   },
   mounted() {
     // 先把初始值帶到畫面上

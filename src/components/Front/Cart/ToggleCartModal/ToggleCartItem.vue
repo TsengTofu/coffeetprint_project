@@ -1,7 +1,7 @@
 <template>
   <div class="card mb-3">
     <div class="card-header header_text d-flex align-items-center">
-      #{{ order }} <span>{{ cart_item.product.category }}</span>{{ cart_item.product.title }}
+      #{{ order }} <span>{{ cart_item.product.category }}</span>{{ cart_item.product.title }} 折價券
     </div>
     <div class="card-body">
       <div class="row">
@@ -14,13 +14,6 @@
         </div>
         <div class="col">
           <div class="card-text card_text">
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="showCafeDetail(cart_item.product.id)"
-            >
-              詳細內容
-            </button>
             <p>NT$ {{ (item_qty * cart_item.product.price).toLocaleString() }}</p>
             <div class="input-group mb-3">
               <button
@@ -119,9 +112,6 @@ export default {
           this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
         });
     },
-    //  TODO  這邊還沒撰寫，應該會改成 popup 或是另開分頁的形式
-    // showCafeDetail(productId) {
-    // },
   },
   mounted() {
     // 先把初始值帶到畫面上
