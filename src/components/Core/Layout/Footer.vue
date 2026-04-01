@@ -1,84 +1,17 @@
 <template>
-  <!-- fixed-bottom -->
-  <div class="footer_wrapper container-fluid">
-    <div class="row content d-flex align-items-center">
-      <a
-        class="navbar-brand logo col-sm-2"
-        href="#"
-      >
-      </a>
-      <p class="col-auto">Copyright © 2020 CoffeetPrint. 僅個人作品練習，無商業用途。</p>
-      <!-- img 標籤之後要加上 alt -->
-      <!-- <div class="detail col-sm-2">
-        <ul class="list-unstyled row link">
-          <li class="admin_login col-sm-1">
-            <router-link to="/login" target="_blank">
-              <span class="material-icons-round">account_circle</span>
-            </router-link>
-          </li>
-          <li class="col-sm-1">
-            <a href="https://github.com/TsengTofu" target="_blank">
-              <img src="../../../assets/images/icon/github.svg" alt="" />
-            </a>
-          </li>
-          <li class="col-sm-1">
-            <a href="">
-              <img src="../../../assets/images/icon/linkedin.svg" alt="" />
-            </a>
-          </li>
-        </ul>
-      </div> -->
+  <div class="w-full bg-[#535252] text-white">
+    <div class="flex items-center gap-4 p-4">
+      <a class="logo block w-[160px] h-[40px] bg-no-repeat bg-contain bg-center flex-shrink-0" href="#"></a>
+      <p class="m-0 text-sm">Copyright © 2020 CoffeetPrint. 僅個人作品練習，無商業用途。</p>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'FooterComponent',
-};
+<script setup>
 </script>
-<style scoped lang="sass">
-.footer_wrapper
-  background: #535252
-  // width: 100%
-  color: #fff
-  // display: flex
-  .content
-    // width: 100%
-    // max-width: 1200px
-    // margin: 0 auto
-    // display: flex
-    // justify-content: center
-    // flex-direction: column
-    padding: 1rem
-    .logo
-      // width: 160px
-      height: 40px
-      display: block
-      background-position: center
-      background-image: url('../../../assets/images/logo_coffeetprint.svg')
-      background-size: contain
-      background-repeat: no-repeat
-      margin: 0px
-    p
-      margin: 0px
-      font-size: 0.875rem
-    .detail
-      // justify-content: center
-      // margin: .5rem 0
-      .link
-        li
-          &.admin_login
-            a
-              // width: 100%
-              // display: flex
-              width: fit-content
-              // text-decoration: none
-          a
-            width: 20px
-            height: 20px
-            display: block
-            img
-              width: 100%
-              height: auto
+
+<style scoped>
+.logo {
+  background-image: url('@/assets/images/logo_coffeetprint.svg');
+}
 </style>

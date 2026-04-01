@@ -1,97 +1,49 @@
 <template>
-  <div class="container-fluid cafe_list_block">
-    <div class="common_row_space_between container top_operation">
+  <div class="cafe-list-block relative w-full p-0 z-[50]">
+    <div class="flex items-center justify-between max-w-6xl mx-auto px-4 py-6 flex-wrap gap-4">
       <div>
-        <TitleComponent
-          title="＃發現咖啡廳"
-        />
-        <p class="common_row_align">
+        <Title title="＃發現咖啡廳" />
+        <p class="flex items-center gap-1 m-0">
           <span class="material-icons-round">coffee</span>
           一起看看哪些咖啡廳有提供優惠券吧！
         </p>
       </div>
-      <div class="change_layout">
+      <div class="flex gap-2">
         <button
           type="button"
-          class="btn btn-primary me-3"
-          @click="switch_status = 'list'"
+          class="flex items-center px-3 py-2 rounded text-white"
+          :class="switchStatus === 'list' ? 'bg-[#4c443a]' : 'bg-[#88664D]'"
+          @click="switchStatus = 'list'"
         >
           <span class="material-icons-round">view_list</span>
         </button>
         <button
           type="button"
-          class="btn btn-primary"
-          @click="switch_status = 'grid'"
+          class="flex items-center px-3 py-2 rounded text-white"
+          :class="switchStatus === 'grid' ? 'bg-[#4c443a]' : 'bg-[#88664D]'"
+          @click="switchStatus = 'grid'"
         >
           <span class="material-icons-round">grid_view</span>
         </button>
       </div>
     </div>
-   <div class="container">
-      <CafeListComponent
-        :switch_status="switch_status"
-      />
-   </div>
+    <div class="max-w-6xl mx-auto px-4">
+      <CafeList :switch_status="switchStatus" />
+    </div>
   </div>
 </template>
 
-<script>
-import TitleComponent from '../../../Core/Layout/Title/Title.vue';
-import CafeListComponent from '../../CafeProduct/CafeList.vue';
+<script setup>
+import { ref } from 'vue';
+import Title from '@/components/Core/Layout/Title/Title.vue';
+import CafeList from '@/components/Front/CafeProduct/CafeList.vue';
 
-export default {
-  name: 'CafeListWrapperComponent',
-  components: {
-    TitleComponent,
-    CafeListComponent,
-  },
-  data() {
-    return {
-      productData: [],
-      pagination: {},
-      // 切換狀態
-      switch_status: 'grid',
-    };
-  },
-  methods: {
-    // 拿咖啡廳的資料
-    getCafeListData(/* queryPage */) {
-      // ${queryPage}
-      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/products?page=1`;
-      this.axios
-        .get(requestUrl)
-        .then((response) => {
-          const { success } = response.data;
-          if (success) {
-            const { products, pagination } = response.data;
-            this.productData = products;
-            this.pagination = pagination;
-          } else {
-            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
-          }
-        })
-        .catch(() => {
-          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
-        });
-    },
-  },
-  mounted() {
-    this.getCafeListData();
-  },
-};
+const switchStatus = ref('grid');
 </script>
 
-<style scoped lang="sass">
-@media (max-width: 525px)
-  .top_operation
-    flex-direction: column
-    align-items: flex-start
-.cafe_list_block
+<style lang="sass" scoped>
+.cafe-list-block
   background: #F0EBE6
-  position: relative
-  width: 100%
-  padding: 0px
-  z-index: 50
   &::before
     content: ''
     background-position: top

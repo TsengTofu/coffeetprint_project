@@ -1,52 +1,29 @@
 <template>
-  <div class="container-fluid explore_cafe_wrapper">
-    <div class="container">
-      <TitleComponent
-        title="＃探索城市"
-        color="#FFFFFF"
-      />
-      <p class="common_row_align vice_title">
+  <div class="explore-wrapper relative w-full z-[50] px-4 py-5 pb-[180px]">
+    <div class="max-w-6xl mx-auto">
+      <Title title="＃探索城市" color="#FFFFFF" />
+      <p class="flex items-center gap-1 text-white mb-8">
         <span class="material-icons-round">place</span>
         一起探索各地的咖啡廳吧！
       </p>
-      <ul class="list-unstyled d-flex row">
-        <CityCafeCardComponent />
+      <ul class="list-none flex flex-wrap m-0 p-0">
+        <CityCafeCard />
       </ul>
     </div>
   </div>
 </template>
 
-<script>
-import CityCafeCardComponent from './CityCafeCard.vue';
-import TitleComponent from '../../../Core/Layout/Title/Title.vue';
-
-export default {
-  name: 'ExploreCafeComponent',
-  props: {},
-  components: {
-    CityCafeCardComponent,
-    TitleComponent,
-  },
-  data() {
-    return {};
-  },
-  methods: {},
-  mounted() {
-
-  },
-};
+<script setup>
+import CityCafeCard from './CityCafeCard.vue';
+import Title from '@/components/Core/Layout/Title/Title.vue';
 </script>
 
-<style scoped lang="sass">
-.explore_cafe_wrapper
+<style lang="sass" scoped>
+.explore-wrapper
   background: #406B5A
-  padding: 20px 20px 180px
-  position: relative
   top: -2px
-  z-index: 50
   @media (max-width: 525px)
-    padding: 20px 0px 150px
-  .vice_title
-    color: #ffffff
-    margin: 0 0 2rem
+    padding-left: 0
+    padding-right: 0
+    padding-bottom: 150px
 </style>

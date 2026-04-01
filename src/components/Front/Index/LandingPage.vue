@@ -1,15 +1,15 @@
 <template>
-  <div class="bg_cover landing_page">
-    <div class="title_block col-md-auto" data-aos="fade-down">
-      <div class="main_title d-flex align-items-center">
+  <div class="landing-page">
+    <div class="title-block" data-aos="fade-down">
+      <div class="main-title flex items-center justify-center">
         <div class="pin"></div>
         <div class="pulse"></div>
         尋找你的咖啡廳
-        </div>
-      <p class="vice_title">還在煩惱要去哪發呆、聚餐、放鬆嗎？</p>
+      </div>
+      <p class="text-white text-base mt-2">還在煩惱要去哪發呆、聚餐、放鬆嗎？</p>
       <button
         type="button"
-        class="btn btn-primary explore_btn"
+        class="mt-4 px-4 py-2 bg-[#88664D] text-white font-bold rounded hover:bg-[#4c443a] transition-colors"
         @click="directToPage('products')"
       >
         探索咖啡廳
@@ -18,45 +18,37 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'LandingPageComponent',
-  components: {},
-  data() {
-    return {};
-  },
-  methods: {
-    directToPage(pageName) {
-      this.$router.push(`/${pageName}`);
-    },
-  },
-};
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function directToPage(pageName) {
+  router.push(`/${pageName}`);
+}
 </script>
 
 <style scoped lang="sass">
-.landing_page
+.landing-page
   z-index: 3
   background-image: url('../../../../public/images/index_bg.png')
   display: block
   width: 100%
   min-height: 100vh
+  background-size: cover
+  background-position: center
   @media (max-width: 525px)
     background-image: url('../../../../public/images/index_bg_s.jpg')
     min-height: 72vh
-  .title_block
+  .title-block
     color: #FFFFFF
     padding: 160px 0 0 0px
     text-align: center
-    .main_title
+    .main-title
       font-size: 2.5rem
       font-weight: 700
-      justify-content: center
       padding: 2rem 0 0 0
-    .vice_title
-      font-size: 1rem
-.explore_btn
-  padding: .5rem 1rem
-  font-weight: bold
+      position: relative
 
 .pin
   width: 30px
@@ -80,6 +72,7 @@ export default {
     background: #67442f
     position: absolute
     border-radius: 50%
+
 .pulse
   background: rgba(0,0,0,0.2)
   border-radius: 50%
@@ -88,7 +81,6 @@ export default {
   position: absolute
   left: calc(50% - 12px)
   top: 54%
-  // margin: 11px 0px 0px -12px
   transform: rotateX(55deg)
   z-index: -2
   &:after
@@ -99,7 +91,6 @@ export default {
     left: -12px
     top: -12px
     position: absolute
-    // margin: -13px 0 0 -13px
     animation: pulsate 1s ease-out
     animation-iteration-count: infinite
     opacity: 0.0

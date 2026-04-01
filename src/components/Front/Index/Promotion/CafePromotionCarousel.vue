@@ -1,149 +1,59 @@
 <template>
-  <div class="container-fluid promotion_block">
-    <div class="content container">
-      <TitleComponent title="＃編輯嚴選" />
-      <div
-        id="carouselExampleIndicators"
-        class="carousel slide wrapper"
-        data-bs-ride="carousel"
-        ref="carousel"
+  <div class="promotion-block relative w-full p-0 z-[50]">
+    <div class="max-w-6xl mx-auto px-4 relative z-[10] pb-16">
+      <Title title="＃編輯嚴選" />
+      <swiper
+        v-if="postList.length > 0"
+        :slides-per-view="1"
+        :loop="true"
+        :pagination="{ clickable: true }"
+        :navigation="true"
+        :autoplay="{ delay: 8000, disableOnInteraction: false }"
+        class="promotion-swiper rounded-2xl bg-[#F0EBE6] p-4 md:p-12"
       >
-        <div class="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          >
-          </button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          >
-          </button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          >
-          </button>
-        </div>
-        <div class="carousel-inner" v-if="post_list.length > 0">
-          <div
-            class="carousel-item"
-            data-bs-interval="8000"
-            v-for="(post, key) in post_list"
-            :class="key === 0 ? 'active' : ''"
-            :key="'post_' + key"
-          >
-            <CafePromotionComponent
-              :post_data="post"
-            />
-          </div>
-        </div>
-        <button
-          type="button"
-          class="carousel-control-prev"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          type="button"
-          class="carousel-control-next"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+        <swiper-slide v-for="(post, key) in postList" :key="'post_' + key">
+          <CafePromotionCard :post_data="post" />
+        </swiper-slide>
+      </swiper>
     </div>
   </div>
 </template>
 
 <script>
-import { Carousel } from 'bootstrap';
-import CafePromotionComponent from './CafePromotionCard.vue';
-import TitleComponent from '../../../Core/Layout/Title/Title.vue';
-
-export default {
-  name: 'CafePromotionCarouselComponent',
-  components: {
-    TitleComponent,
-    CafePromotionComponent,
-  },
-  data() {
-    return {
-      // 貼文的資料
-      post_list: [],
-    };
-  },
-  methods: {
-    //  FIXME  取得文章列表資料
-    // 有必要的話，再把這支 function 放到外層，從外面傳資料進來
-    getPostList() {
-      // page 參數要記得加進來
-      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/articles?page=1`;
-      this.axios.get(requestUrl)
-        .then((response) => {
-          this.post_list = response.data.articles;
-        })
-        .catch(() => {
-          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
-        });
-    },
-  },
-  mounted() {
-    this.carousel = new Carousel(this.$refs.carousel);
-    this.getPostList();
-  },
-};
+import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper/core';
+SwiperCore.use([Navigation, Pagination, Autoplay]);
 </script>
-<style scoped lang="sass">
-@keyframes typing
-  from
-    width: 0
-@keyframes blink
-  50%
-    border-color: transparent
 
-.wrapper
-  position: relative
-  // &::before
-  //   display: block
-  //   content: ''
-  //   width: 180px
-  //   height: 180px
-  //   background-image: url('../../../../assets/images/cat/cat.svg')
-  //   background-size: cover
-  //   right: 0px
-  //   position: absolute
-  //   top: -145px
-  // &::after
-  //   display: block
-  //   content: ''
-  //   width: 80px
-  //   height: 50px
-  //   background-image: url('../../../../assets/images/cat/paws.svg')
-  //   background-size: contain
-  //   right: 60px
-  //   position: absolute
-  //   background-repeat: no-repeat
-  //   top: -10px
-.promotion_block
+<script setup>
+import { ref, onMounted } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.min.css';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import Title from '@/components/Core/Layout/Title/Title.vue';
+import CafePromotionCard from './CafePromotionCard.vue';
+
+const postList = ref([]);
+
+function getPostList() {
+  const url = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/articles?page=1`;
+  axios.get(url)
+    .then((response) => {
+      postList.value = response.data.articles;
+    })
+    .catch(() => {
+      Swal.fire({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+    });
+}
+
+onMounted(() => {
+  getPostList();
+});
+</script>
+
+<style lang="sass" scoped>
+.promotion-block
   background: #f7f5f4
-  position: relative
-  width: 100%
-  padding: 0px
-  z-index: 50
   &::before
     content: ''
     background-position: top
@@ -167,17 +77,4 @@ export default {
     height: 200px
     position: absolute
     bottom: 0px
-  .content
-    width: 100%
-    position: relative
-    z-index: 10
-    padding-bottom: 60px
-    .carousel-indicators
-      bottom: -50px
-    .carousel-inner
-      background: #F0EBE6
-      border-radius: 16px
-      padding: 3rem
-      @media (max-width: 525px)
-        padding: 1rem
 </style>

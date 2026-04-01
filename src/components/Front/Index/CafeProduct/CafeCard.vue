@@ -1,88 +1,47 @@
 <template>
-  <li class="col-6">
-    <div class="card" @click="goToCafeDetail(singleCafe.id)">
-      <div class="cafe_image">
+  <!-- Grid 視圖（垂直卡片） -->
+  <li v-if="view === 'grid'" class="p-2 my-2 w-1/2">
+    <div class="card rounded-2xl cursor-pointer" @click="goToCafeDetail(singleCafe.id)">
+      <div class="relative w-full h-[200px] overflow-hidden rounded-t-2xl">
         <div
-          class="cafe_cover"
+          class="w-full h-full bg-top bg-cover scale-100 hover:scale-110 transition-transform duration-500"
           :style="{ backgroundImage: 'url(' + singleCafe.imageUrl + ')' }"
-        >
-        </div>
+        ></div>
         <button
           type="button"
-          class="btn btn-primary d-flex"
+          class="absolute top-2.5 right-2.5 flex items-center px-2 py-1 bg-[#88664D] text-white rounded"
           @click.stop="addToFavorite(singleCafe.id)"
         >
-          <!-- TODO  favorite_id 這個要改寫 -->
-          <span
-            v-if="is_favorite"
-            class="material-icons-round"
-          >
-            favorite
-          </span>
-          <span
-            v-else
-            class="material-icons-round"
-          >
-            favorite_border
-          </span>
+          <span class="material-icons-round">{{ isFavorite ? 'favorite' : 'favorite_border' }}</span>
         </button>
       </div>
-      <div class="card-body">
-        <div
-          class="card-title d-flex align-items-start flex-wrap justify-content-start">
-          <b class="category">
-            <span
-              v-if="singleCafe.category === '餐廳'"
-              class="material-icons-round"
-            >
-              restaurant
-            </span>
-            <span
-              v-else
-              class="material-icons-round"
-            >
-              free_breakfast
+      <div class="p-3">
+        <div class="flex items-start flex-wrap mb-1">
+          <b class="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-[#212529] text-white mr-2 flex-shrink-0">
+            <span class="material-icons-round text-[18px]">
+              {{ singleCafe.category === '餐廳' ? 'restaurant' : 'free_breakfast' }}
             </span>
           </b>
-          <div class="right_title">
-            <h5>
-            {{ singleCafe.title }}
-            </h5>
-            <p class="d-flex stars">
-              <!-- NOTE  star_rate 必須填寫，沒有填寫的話會直接跑不出來 -->
-              <span
-                v-for="(n, index) in parseInt(singleCafe.star_rate)"
-                :key="'star_' + index"
-                class="material-icons-round"
-              >
-                star
-              </span>
-              <span
-                v-for="(n, index) in parseInt(5 - parseInt(singleCafe.star_rate))"
-                :key="'star_' + index"
-                class="material-icons-round"
-              >
-                star_border
-              </span>
+          <div>
+            <h5 class="text-left m-0 text-[16px] font-bold">{{ singleCafe.title }}</h5>
+            <p class="flex m-0">
+              <span v-for="(n, i) in parseInt(singleCafe.star_rate)" :key="'s_' + i" class="material-icons-round text-[18px]">star</span>
+              <span v-for="(n, i) in 5 - parseInt(singleCafe.star_rate)" :key="'e_' + i" class="material-icons-round text-[18px]">star_border</span>
             </p>
           </div>
         </div>
-        <p class="location d-flex align-items-center">
-          <span class="material-icons-round">place</span>
+        <p class="flex items-center text-sm m-0">
+          <span class="material-icons-round text-[12px]">place</span>
           台灣｜{{ singleCafe.area }}
-          <b class="nearby">{{ singleCafe.nearby }}</b>
+          <b class="ml-2 px-2 py-0 border border-black rounded-full text-xs font-normal">{{ singleCafe.nearby }}</b>
         </p>
-        <div class="d-flex justify-content-between bottom_block">
-          <p class="rest_num">
-            剩下 <span>{{ singleCafe.num }}</span> 張
-          </p>
-          <p class="price">
-            NT$<span>{{ singleCafe.price.toLocaleString() }}</span>
-          </p>
+        <div class="flex justify-between text-xs my-2">
+          <p class="m-1">剩下 <span class="font-bold text-base text-[#88664D]">{{ singleCafe.num }}</span> 張</p>
+          <p class="m-1">NT$<span class="font-bold text-base text-[#88664D]">{{ singleCafe.price.toLocaleString() }}</span></p>
         </div>
         <button
           type="button"
-          class="btn btn-primary d-flex justify-content-center add_to_cart"
+          class="w-full flex justify-center items-center gap-1 py-2 bg-[#88664D] text-white rounded"
           @click.stop="addToCart(singleCafe.id)"
         >
           <span class="material-icons-round">shopping_cart</span>加入購物車
@@ -90,141 +49,108 @@
       </div>
     </div>
   </li>
-</template>
-<script>
-export default {
-  name: 'CafeCardComponent',
-  props: {
-    singleCafe: Object,
-    is_favorite: Boolean,
-  },
-  data() {
-    return {
-      isProcess: false,
-    };
-  },
-  methods: {
-    goToCafeDetail(id) {
-      this.$router.push(`/detail/${id}`);
-    },
-    addToCart(id) {
-      if (this.isProcess) {
-        return;
-      }
-      this.isProcess = true;
-      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/cart`;
-      this.axios
-        .post(requestUrl, {
-          data: {
-            product_id: id, qty: 1,
-          },
-        })
-        .then((response) => {
-          const { success } = response.data;
-          if (success) {
-            this.$swal('成功加入購物車！');
-            // 更新的 modal 的購物車
-            this.emitter.emit('updateCartList');
-            this.isProcess = false;
-          } else {
-            this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
-          }
-        })
-        .catch(() => {
-          this.$swal({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
-        });
-    },
-    // 加到我的最愛
-    addToFavorite(id) {
-      this.emitter.emit('addToFavoriteList', id);
-    },
-  },
-  mounted() {
-  },
-};
-</script>
-<style scoped lang="sass">
-li
-  padding: .5rem
-  margin: .5rem 0
-  .card
-    border-radius: 16px
-    .cafe_image
-      position: relative
-      width: 100%
-      height: 200px
-      overflow: hidden
-      border-radius: 16px 16px 0 0
-      .cafe_cover
-        width: 100%
-        height: 200px
-        background-position: top
-        background-size: cover
-        transform: scale(1)
-        transition: all .5s
-        &:hover
-          transform: scale(1.15)
-      button
-        position: absolute
-        top: 10px
-        right: 10px
-    .card-body
-      .card-title
-        h5
-          text-align: left
-          margin: 0px
-          font-size: 16px
-          font-weight: bold
-        .category
-          padding: .2rem .5rem
-          font-size: 12px
-          background: #212529
-          margin: 0px
-          border-radius: 50%
-          color: #fff
-          width: 38px
-          height: 38px
-          display: flex
-          justify-content: center
-          align-items: center
-          margin: 0 8px 0 0
-          span
-            font-size: 18px
-        .stars
-          margin: 0px
-          .material-icons-round
-            font-size: 18px
-      .location
-        font-size: 14px
-        margin: 0px
-        .nearby
-          padding: 1px 8px
-          border-radius: 20px
-          border: 1px solid #000
-          font-size: 12px
-          font-weight: normal
-          margin: 0 0 0 8px
-        .material-icons-round
-          font-size: 12px
-      .card-text
-        text-align: justify
-        overflow: hidden
-        text-overflow: ellipsis
-        display: -webkit-box
-        -webkit-line-clamp: 2
-        -webkit-box-orient: vertical
 
-    .add_to_cart
-      width: 100%
-      position: relative
-      bottom: 0px
-      left: 0px
-.bottom_block
-  font-size: 12px
-  p
-    margin: .5rem
-    span
-      font-weight: bold
-      font-size: 16px
-      color: #88664D
-</style>
+  <!-- List 視圖（水平卡片） -->
+  <li v-else class="w-full">
+    <div class="card cursor-pointer" @click="goToCafeDetail(singleCafe.id)">
+      <div class="flex">
+        <div class="relative flex-1 overflow-hidden min-h-[180px]">
+          <div
+            class="w-full h-full bg-top bg-cover scale-100 hover:scale-110 transition-transform duration-500 absolute inset-0"
+            :style="{ backgroundImage: 'url(' + singleCafe.imageUrl + ')' }"
+          ></div>
+          <button
+            type="button"
+            class="absolute top-2.5 left-2.5 flex items-center px-2 py-1 bg-[#88664D] text-white rounded"
+            @click.stop="addToFavorite(singleCafe.id)"
+          >
+            <span class="material-icons-round">{{ isFavorite ? 'favorite' : 'favorite_border' }}</span>
+          </button>
+        </div>
+        <div class="flex-1 p-3">
+          <div class="flex items-center mb-2">
+            <b class="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-[#212529] text-white mr-2 flex-shrink-0">
+              <span class="material-icons-round text-[18px]">
+                {{ singleCafe.category === '餐廳' ? 'restaurant' : 'free_breakfast' }}
+              </span>
+            </b>
+            <div>
+              <h5 class="m-0 text-[16px] font-bold">{{ singleCafe.title }}</h5>
+              <p class="flex m-0">
+                <span v-for="(n, i) in parseInt(singleCafe.star_rate)" :key="'s_' + i" class="material-icons-round text-[18px]">star</span>
+                <span v-for="(n, i) in 5 - parseInt(singleCafe.star_rate)" :key="'e_' + i" class="material-icons-round text-[18px]">star_border</span>
+              </p>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 flex items-center mb-1">
+            <span class="material-icons-round text-[12px]">place</span>
+            台灣｜{{ singleCafe.area }}
+            <b class="ml-2 px-2 border border-black rounded-full text-xs font-normal">{{ singleCafe.nearby }}</b>
+          </p>
+          <p class="text-sm text-justify overflow-hidden line-clamp-2 mb-2" v-html="singleCafe.description"></p>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="m-0 text-sm">剩下 <span class="font-bold text-[#88664D]">{{ singleCafe.num }}</span> 張</p>
+              <p class="m-0 text-sm">NT$ <span class="font-bold text-[#88664D]">{{ singleCafe.price.toLocaleString() }}</span></p>
+            </div>
+            <button
+              type="button"
+              class="flex items-center gap-1 px-3 py-2 bg-[#88664D] text-white rounded"
+              @click.stop="addToCart(singleCafe.id)"
+            >
+              <span class="material-icons-round">shopping_cart</span>我要購買
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { emitter } from '@/emitter';
+
+const props = defineProps({
+  singleCafe: Object,
+  isFavorite: Boolean,
+  view: {
+    type: String,
+    default: 'grid',
+  },
+});
+
+const router = useRouter();
+const isProcess = ref(false);
+
+function goToCafeDetail(id) {
+  router.push(`/detail/${id}`);
+}
+
+function addToCart(id) {
+  if (isProcess.value) return;
+  isProcess.value = true;
+  const url = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/cart`;
+  axios.post(url, { data: { product_id: id, qty: 1 } })
+    .then((response) => {
+      if (response.data.success) {
+        Swal.fire({ title: '成功加入購物車！', toast: true, position: 'top-center', showConfirmButton: false, timer: 3000, timerProgressBar: true });
+        emitter.emit('updateCartList');
+      } else {
+        Swal.fire({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+      }
+      isProcess.value = false;
+    })
+    .catch(() => {
+      Swal.fire({ title: '出了點錯誤，請稍後再嘗試，謝謝。', icon: 'error' });
+      isProcess.value = false;
+    });
+}
+
+function addToFavorite(id) {
+  emitter.emit('addToFavoriteList', id);
+}
+</script>

@@ -1,27 +1,21 @@
 <template>
-  <!--  TODO  這裡可以加上 Step，或者考慮可以換圖 -->
-  <div class="top_banner container-fluid">
+  <div class="top-banner">
     <div class="describe">
       <p>{{ main_title }}</p>
       <span>{{ vice_title }}</span>
     </div>
   </div>
 </template>
-<script>
-export default {
-  name: 'TopBannerComponent',
-  props: {
-    main_title: String,
-    vice_title: String,
-  },
-  data() {
-    return {};
-  },
-  methods: {},
-};
+
+<script setup>
+defineProps({
+  main_title: String,
+  vice_title: String,
+});
 </script>
+
 <style lang="sass" scoped>
-.top_banner
+.top-banner
   padding: 0px
   height: 350px
   background-image: url('../../../../public/images/cart.jpg')

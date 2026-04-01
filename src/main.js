@@ -15,9 +15,9 @@ import { localize, setLocale } from '@vee-validate/i18n';
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import mitt from 'mitt';
 import dayjs from 'dayjs';
 import 'bootstrap';
+import { emitter } from './emitter';
 // sweetalert2
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -28,8 +28,6 @@ import 'aos/dist/aos.css';
 import './assets/styles/main.css';
 import App from './App.vue';
 import router from './router';
-
-const emitter = mitt();
 
 // 定義驗證規則
 defineRule('required', required);
