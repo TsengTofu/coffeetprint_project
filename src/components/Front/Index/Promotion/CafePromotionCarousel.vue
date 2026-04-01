@@ -91,7 +91,7 @@ export default {
     // 有必要的話，再把這支 function 放到外層，從外面傳資料進來
     getPostList() {
       // page 參數要記得加進來
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/articles?page=1`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/articles?page=1`;
       this.axios.get(requestUrl)
         .then((response) => {
           this.post_list = response.data.articles;

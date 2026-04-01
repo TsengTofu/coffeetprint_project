@@ -146,7 +146,7 @@ export default {
       this.tempCoupon.due_date = dayjs(this.due_date).unix();
       this.tempCoupon.percent = Number(this.tempCoupon.percent);
       this.tempCoupon.is_enabled = Number(this.tempCoupon.is_enabled);
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupon`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/coupon`;
       this.axios
         .post(requestUrl, { data: this.tempCoupon })
         .then((response) => {
@@ -164,7 +164,7 @@ export default {
     // 編輯優惠券的部分
     editCoupon() {
       // id 的部分還沒找到
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupon/${this.tempCoupon.id}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/coupon/${this.tempCoupon.id}`;
       this.axios
         .put(requestUrl, { data: this.tempCoupon })
         .then((response) => {

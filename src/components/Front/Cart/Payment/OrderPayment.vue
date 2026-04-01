@@ -116,7 +116,7 @@ export default {
     },
     // 取得剛成立的訂單
     getOrderDetail() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order/${this.order_id}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/order/${this.order_id}`;
       this.axios
         .get(requestUrl)
         .then((response) => {
@@ -138,7 +138,7 @@ export default {
     // 點擊付款按鈕
     goToPayment() {
       const oderId = this.$route.params.id;
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/pay/${oderId}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/pay/${oderId}`;
       this.axios
         .post(requestUrl)
         .then((response) => {

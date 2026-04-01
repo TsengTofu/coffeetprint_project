@@ -27,7 +27,7 @@ export default {
     verifyToken() {
       const token = document.cookie.replace(/(?:(?:^|.*;\s*)HexSchoolAPIToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
       if (token) {
-        const requestUrl = `${process.env.VUE_APP_API}/api/user/check`;
+        const requestUrl = `${import.meta.env.VITE_API}/api/user/check`;
         this.axios.defaults.headers.common.Authorization = token;
         this.axios
           .post(requestUrl).then((response) => {
@@ -48,7 +48,7 @@ export default {
       }
     },
     signOut() {
-      const requestUrl = `${process.env.VUE_APP_API}/logout`;
+      const requestUrl = `${import.meta.env.VITE_API}/logout`;
       this.axios
         .post(requestUrl)
         .then((response) => {

@@ -168,7 +168,7 @@ export default {
       this.orderList.splice(newIndex, 1);
     },
     deleteProductAPI() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/order/${this.targetId}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/order/${this.targetId}`;
       this.axios
         .delete(requestUrl)
         .then((response) => {

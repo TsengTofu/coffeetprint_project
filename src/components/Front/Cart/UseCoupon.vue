@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     getDiscount() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/coupon`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/coupon`;
       this.axios.post(requestUrl, { data: { code: this.coupon_code } })
         .then((response) => {
           const { success, message } = response.data;

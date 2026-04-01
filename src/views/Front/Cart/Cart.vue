@@ -82,7 +82,7 @@ export default {
       this.$router.push('/cart/form');
     },
     getCartList() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/cart`;
       this.axios
         .get(requestUrl)
         .then((response) => {
@@ -103,7 +103,7 @@ export default {
     },
     // 取得現在的產品詳細內容
     getCurrentCafeData(productID) {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/product/${productID}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/product/${productID}`;
       this.axios
         .get(requestUrl)
         .then((response) => {

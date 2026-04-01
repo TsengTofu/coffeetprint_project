@@ -52,7 +52,7 @@ export default {
   methods: {
     // 取得所有咖啡廳的資料
     getAllCafeList() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products/all`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/products/all`;
       this.axios
         .get(requestUrl)
         .then((response) => {

@@ -39,7 +39,7 @@ export default {
       const file = e.target.files[0];
       const formData = new FormData();
       formData.append('file-to-upload', file);
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/upload`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/upload`;
       this.axios
         .post(requestUrl, formData)
         .then((response) => {

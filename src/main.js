@@ -6,7 +6,9 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import {
   Field, Form, ErrorMessage, defineRule, configure,
 } from 'vee-validate';
-import rules, { required, email, min } from '@vee-validate/rules';
+import * as rules from '@vee-validate/rules';
+
+const { required, email, min } = rules;
 // 匯入多國語系的功能
 import { localize, setLocale } from '@vee-validate/i18n';
 // 匯入繁體中文語系檔案
@@ -15,14 +17,15 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import mitt from 'mitt';
 import dayjs from 'dayjs';
-import 'bootstrap'; // 參考 Yiren 的說法
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
 // sweetalert2
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 // AOS
 import AOS from 'aos';
-import '../node_modules/aos/dist/aos.css';
+import 'aos/dist/aos.css';
+// Tailwind CSS
+import './assets/styles/main.css';
 import App from './App.vue';
 import router from './router';
 
@@ -51,9 +54,8 @@ AOS.init({
 });
 
 // SweetAlert2
-// https://sweetalert2.github.io/#frameworks-integrations
 const options = {
-  toast: true, // true 就是 toast
+  toast: true,
   position: 'top-center',
   confirmButtonColor: '#88664D',
   cancelButtonColor: '#ff7674',

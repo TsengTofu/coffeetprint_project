@@ -74,7 +74,7 @@ export default {
       this.reviews = reviews;
       this.place_id = placeId;
       // iframe 的來源網址
-      this.map_source = `https://www.google.com/maps/embed/v1/place?q=place_id:${this.place_id}&key=${process.env.VUE_APP_GOOGLE_MAP_API_KEY}`;
+      this.map_source = `https://www.google.com/maps/embed/v1/place?q=place_id:${this.place_id}&key=${import.meta.env.VITE_GOOGLE_MAP_API_KEY}`;
     },
   },
 };

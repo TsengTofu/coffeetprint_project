@@ -20,7 +20,7 @@ export default {
     getAllPostList() {
       // 一樣要做 pagination 的切換
       //  TODO  後面的 queryPage 要改成參數
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/articles?page=1`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/articles?page=1`;
       this.axios.get(requestUrl)
         .then((response) => {
           const { success } = response.data;

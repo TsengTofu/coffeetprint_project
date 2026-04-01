@@ -209,7 +209,7 @@ export default {
     //  TODO  所以還要取得一次 content，單筆文章的資料
     // 新增一篇文章
     addNewPost() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/article`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/article`;
       this.axios
         .post(requestUrl, { data: this.tempArticle })
         .then((response) => {

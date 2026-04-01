@@ -202,7 +202,7 @@ export default {
   },
   methods: {
     getSinglePostContent() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/article/${this.$route.params.id}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/article/${this.$route.params.id}`;
       this.axios
         .get(requestUrl)
         .then((response) => {
@@ -218,7 +218,7 @@ export default {
     },
     // 編輯文章
     editPost() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/article/${this.tempArticle.id}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/article/${this.tempArticle.id}`;
       this.axios
         .put(requestUrl, { data: this.tempArticle })
         .then((response) => {

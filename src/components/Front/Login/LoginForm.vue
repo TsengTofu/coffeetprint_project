@@ -85,7 +85,7 @@ export default {
     },
     // SendLoginRequest
     sendLoginRequest(data) {
-      const requestUrl = `${process.env.VUE_APP_API}/admin/signin`;
+      const requestUrl = `${import.meta.env.VITE_API}/admin/signin`;
       this.axios
         .post(requestUrl, data)
         .then((response) => {

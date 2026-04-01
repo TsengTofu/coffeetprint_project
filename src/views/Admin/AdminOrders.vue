@@ -32,7 +32,7 @@ export default {
   methods: {
     // 刪除全部訂單
     clearAllOrders() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/orders/all`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/orders/all`;
       this.axios.delete(requestUrl)
         .then((response) => {
           const { success, message } = response.data;
@@ -51,7 +51,7 @@ export default {
     // 取得訂單列表
     getOrderList() {
       //  TODO  page 先給值 1
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/orders?page=1`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/orders?page=1`;
       this.axios.get(requestUrl)
         .then((response) => {
           const { success, pagination, orders } = response.data;

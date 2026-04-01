@@ -96,7 +96,7 @@ export default {
     // 編輯訂單的功能
     editCurrentOrder() {
       //  TODO  這邊網址要加上編輯該筆訂單的 id
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/order/${this.tempOrder.id}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/order/${this.tempOrder.id}`;
       this.axios.put(requestUrl, { data: this.tempOrder })
         .then((response) => {
           const { success, message } = response.data;
@@ -116,7 +116,6 @@ export default {
 };
 </script>
 <style scoped lang="sass">
-@use '../theme.sass' as *
 .wrapper
   .product_card_wrapper
     background: #fafafa

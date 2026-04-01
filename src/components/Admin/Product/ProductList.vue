@@ -191,7 +191,7 @@ export default {
     },
     // 取得所有產品的資料
     getAllCafeData() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products/all`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/products/all`;
       this.axios.get(requestUrl).then((response) => {
         const { success, products } = response.data;
         // 如果成功
@@ -209,7 +209,7 @@ export default {
     },
     getData(queryPage = 1 /* 預設值 */) {
       //  TODO  待查：這邊寫小駝峰會報錯，為何？
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/products?page=${queryPage}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/products?page=${queryPage}`;
       this.axios
         .get(requestUrl)
         .then((response) => {
@@ -241,7 +241,7 @@ export default {
       this.productData.splice(newIndex, 1);
     },
     deleteProductAPI() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.targetId}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/product/${this.targetId}`;
       this.axios
         .delete(requestUrl)
         .then((response) => {
@@ -265,7 +265,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@use '../theme.sass' as *
 .product_list_wrapper
   background: #fafafa
   padding: 0px 32px 32px

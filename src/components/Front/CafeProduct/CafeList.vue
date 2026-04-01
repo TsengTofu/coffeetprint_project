@@ -61,7 +61,7 @@ export default {
   methods: {
     // 取得產品列表的 funciton
     getCafeListData(queryPage) {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/products?page=${queryPage}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/products?page=${queryPage}`;
       this.axios
         .get(requestUrl)
         .then((response) => {

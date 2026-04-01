@@ -30,7 +30,7 @@ export default {
     // 全部的優惠券列表
     getCouponList() {
       //  TODO  頁碼要改 ${page};
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupons?page=1`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/coupons?page=1`;
       this.axios.get(requestUrl).then((response) => {
         const { success } = response.data;
         if (success) {

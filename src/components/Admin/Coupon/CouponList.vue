@@ -139,7 +139,7 @@ export default {
     // FIXME  查一下原本這支 function：deleteCurrentProduct 有必要的話再加回來
     deleteCurrentCoupon() {
       this.targetId = this.targetItem.id;
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/coupon/${this.targetId}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/coupon/${this.targetId}`;
       this.axios.delete(requestUrl)
         .then((response) => {
           const { success, message } = response.data;

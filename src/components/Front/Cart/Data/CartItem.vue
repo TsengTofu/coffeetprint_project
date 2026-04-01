@@ -77,7 +77,7 @@ export default {
   methods: {
     // 刪除購物車其中一個
     deleteCurrentCartItem(cartItemId) {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${cartItemId}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/cart/${cartItemId}`;
       this.axios.delete(requestUrl).then((response) => {
         const { success } = response.data;
         if (success) {
@@ -104,7 +104,7 @@ export default {
       this.updateCartItemNum(cartItemId);
     },
     updateCartItemNum(cartItemId) {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart/${cartItemId}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/cart/${cartItemId}`;
       const data = { product_id: cartItemId, qty: this.item_qty };
       this.axios
         .put(requestUrl, { data })

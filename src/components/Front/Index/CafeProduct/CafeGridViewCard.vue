@@ -118,7 +118,7 @@ export default {
         return;
       }
       this.isProcess = true;
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/cart`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/cart`;
       this.axios
         .post(requestUrl, {
           data: {

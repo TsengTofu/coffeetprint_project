@@ -114,7 +114,7 @@ export default {
   methods: {
     // 清除全部購物車列表
     clearAllCartList() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/carts`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/carts`;
       this.axios
         .delete(requestUrl)
         .then((response) => {

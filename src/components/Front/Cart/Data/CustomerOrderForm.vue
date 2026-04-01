@@ -119,7 +119,7 @@ export default {
       }
     },
     onSubmit() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/order`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/order`;
       const data = this.form;
       this.axios
         .post(requestUrl, { data })

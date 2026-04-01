@@ -86,7 +86,7 @@ export default {
     getPostList() {
       //  TODO  這邊要記得放 page，page 的參數要改掉
       // 取得文章列表
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/articles?page=1`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/articles?page=1`;
       this.axios.get(requestUrl)
         .then((response) => {
           const { success } = response.data;

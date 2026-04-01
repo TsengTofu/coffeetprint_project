@@ -359,7 +359,7 @@ export default {
     },
     // 最後新增一個產品
     addNewProduct() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/product`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/product`;
       this.axios
         .post(requestUrl, { data: this.tempProduct })
         .then((response) => {
@@ -377,7 +377,7 @@ export default {
         });
     },
     editProduct() {
-      const requestUrl = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_API_PATH}/admin/product/${this.tempProduct.id}`;
+      const requestUrl = `${import.meta.env.VITE_API}/api/${import.meta.env.VITE_API_PATH}/admin/product/${this.tempProduct.id}`;
       this.axios
         .put(requestUrl, { data: this.tempProduct })
         .then((response) => {
@@ -401,7 +401,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@use '../theme.sass' as *
 .wrapper
   .product_card_wrapper
     background: #fafafa

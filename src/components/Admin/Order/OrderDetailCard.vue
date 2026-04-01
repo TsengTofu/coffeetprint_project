@@ -96,7 +96,6 @@ export default {
 };
 </script>
 <style scoped lang="sass">
-@use '../theme.sass' as *
 .wrapper
   .product_card_wrapper
     background: #fafafa
